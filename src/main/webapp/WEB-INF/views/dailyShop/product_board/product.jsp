@@ -79,7 +79,7 @@
                             <a class="aa-product-img"  href="productDetail?product_idx=${allList.product_idx }"><img src="<c:url value='/resources/img/man/polo-shirt-2.png' />" alt="polo shirt img"></a>
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
-                              <h4 class="aa-product-title"><a href="#">${allList.product_name }</a></h4>
+                              <h4 class="aa-product-title"><a href="productDetail?product_idx=${allList.product_idx }">${allList.product_name }</a></h4>
                               <span class="aa-product-price">$ ${allList.product_price }</span><span class="aa-product-price"><del>${allList.product_price }</del></span>
                             </figcaption>
                           </figure>                        
@@ -106,9 +106,9 @@
 						<c:forEach var="sitrusList" items="${sitrusList }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="#"><img src="<c:url value='/resources/img/women/girl-1.png'/>" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail?product_idx=${sitrusList.product_idx }"><img src="<c:url value='/resources/img/women/girl-1.png'/>" alt="polo shirt img"></a>
                             <figcaption>
-                              <h4 class="aa-product-title"><a href="#">${sitrusList.product_name }</a></h4>
+                              <h4 class="aa-product-title"><a href="productDetail?product_idx=${sitrusList.product_idx }">${sitrusList.product_name }</a></h4>
                               <span class="aa-product-price">$ ${sitrusList.product_price }</span><span class="aa-product-price"><del>$ ${sitrusList.product_price }</del></span>
                             </figcaption>
                           </figure>                         
@@ -131,9 +131,9 @@
                        <c:forEach var="aquaList" items="${aquaList }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="#"><img src="<c:url value='/resources/img/women/girl-1.png'/>" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail?product_idx=${aquaList.product_idx }"><img src="<c:url value='/resources/img/women/girl-1.png'/>" alt="polo shirt img"></a>
                             <figcaption>
-                              <h4 class="aa-product-title"><a href="#">${aquaList.product_name }</a></h4>
+                              <h4 class="aa-product-title"><a href="productDetail?product_idx=${aquaList.product_idx }">${aquaList.product_name }</a></h4>
                               <span class="aa-product-price">$ ${aquaList.product_price }</span><span class="aa-product-price"><del>$ ${aquaList.product_price }</del></span>
                             </figcaption>
                           </figure>                         

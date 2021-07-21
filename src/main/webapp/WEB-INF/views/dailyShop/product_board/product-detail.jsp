@@ -39,7 +39,7 @@
  
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-   <img src="../img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+   <img src="<c:url value='/resources/img/fashion/fashion-header-bg-8.jpg'/>" alt="fashion img">
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
@@ -91,8 +91,8 @@
 <!--                     <h4>Size</h4> -->
 					<!-- 제품 용량 -->
                     <div class="aa-prod-view-size">
-                      ${pd.product_size } <br>
-                 	   ${pd.product_category }
+                     제품 사이즈 : ${pd.product_size } ml <br>
+                 	 제품 카테고리 : ${pd.product_category }
                     </div>
                     
 
@@ -121,7 +121,7 @@
                 <li><a href="#information" data-toggle="tab">상품구매안내</a></li>            
               </ul>
 
-              <!-- 상세정보 사진 부분 -->
+              <!-- 상세 정보 사진 부분 -->
               <div class="tab-content">
                 <div class="tab-pane fade in active" id="description">
                 
@@ -130,6 +130,7 @@
                 </div>
                 <div class="tab-pane fade in active2" id="information">
                 
+                <!-- 상품 구매 안내 부분 -->
                  ${pd.product_detail_image }
                 
                 </div>
@@ -145,9 +146,9 @@
                           <div class="media-body">
                           <div class="media-lef=">
                             <a href="#">
-                            <!-- 상품 이미지 300px, 300px -->
-                              <img class="media-object" src="../img/testimonial-img-3.jpg" alt="girl image">
-                              <img class="media-object" src="../img/testimonial-img-3.jpg" alt="girl image">
+                            <!-- 리뷰 작성시 올린 상품 이미지 300px, 300px -->
+                              <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
+                              <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
                             </a>
                           </div>
                          

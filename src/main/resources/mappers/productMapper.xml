@@ -17,7 +17,7 @@
   </select>
   
   <select id="getProductDetail" parameterType="int" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_idx=${product_idx}
+  	select * from product where product_idx= #{product_idx}
   </select>
   
 </mapper>

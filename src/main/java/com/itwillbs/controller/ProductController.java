@@ -42,10 +42,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productDetail", method = RequestMethod.GET)
-	public void view(@RequestParam("product_idx") int product_idx, Model model) {
+	public String view(@RequestParam("product_idx") int product_idx, Model model) {
 		ProductBean pd = productService.view(product_idx);
 		
 		model.addAttribute("pd", pd);
+		
+		return "/dailyShop/product_board/product-detail";
 		
 	}
 }
