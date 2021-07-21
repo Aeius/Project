@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mapper.ProductMapper">
+
+  <select id="getProductAllList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product
+  </select>
+  
+  <select id="getProductSitrusList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category='시트러스'
+  </select>
+  
+  <select id="getProductAquaList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category='아쿠아'
+  </select>
+  
+  <select id="getProductDetail" parameterType="int" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_idx=${product_idx}
+  </select>
+  
+</mapper>
