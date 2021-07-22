@@ -20,6 +20,7 @@ public class MemberController {
 
 //	가상주소  http://localhost:8080/myweb2/member/insert
 		
+	//---------------------------------------------------------------  로그인 ------------------------------------------------------------
 	@RequestMapping(value = "/login.sh", method = RequestMethod.GET)
 	public String login() {
 		return "/dailyShop/member/login";
@@ -37,6 +38,8 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
+	
+	//---------------------------------------------------------------  내 정보 & 수정 ------------------------------------------------------------
 	@RequestMapping(value = "/update.sh", method = RequestMethod.GET)
 	public String update(HttpSession session, Model model) {
 		String member_email = (String)session.getAttribute("member_email");
@@ -59,4 +62,24 @@ public class MemberController {
 		return "redirect:/update.sh";
 	}
 	
+	//---------------------------------------------------------------  회원가입 ------------------------------------------------------------
+	@RequestMapping(value = "/account.sh", method = RequestMethod.GET)
+	public String account() {
+		//  /WEB-INF/views/member/insertForm.jsp 이동
+		return "/dailyShop/member/account";
+	}
+	
+	@RequestMapping(value = "/memberJoinPro.sh", method = RequestMethod.POST)
+	public String memberJoinPro(MemberBean mb) {
+		// 의존관계 주입(DI) :스프링에서 객체생성 방식
+		// root-context.xml에서 MemberServiceImpl을 객체생성 
+		// 필요로 하는 MemberController에 set메서드 통해서 
+		// MemberService memberService 부모인터페이스 멤버변수 전달(주입)
+		
+//		MemberService memberService=new MemberServiceImpl();
+		// 회원가입 메서드 호출
+		memberService.insertMember(mb);
+		//  /member/login 가상주소 이동
+		return "redirect:/login.sh";
+	}
 }

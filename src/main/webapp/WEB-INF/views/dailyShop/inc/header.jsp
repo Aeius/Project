@@ -64,7 +64,7 @@
                   <li class="hidden-xs"><a href="../member/cart.jsp">Basket</a></li>
                   <li class="hidden-xs"><a href="../member/checkout.jsp">Checkout</a></li>
                   <li class="hidden-xs"><a href="login.sh">login</a></li>
-                  <li class="hidden-xs"><a href="../member/account.jsp">sign in</a></li>
+                  <li class="hidden-xs"><a href="account.sh">sign in</a></li>
                 </ul>
               </div>
             </div>
@@ -83,7 +83,7 @@
               <!-- logo  -->
               <div class="aa-logo">
                 <!-- Text based logo -->
-                <a href="/">
+                <a href="">
                   <span class="fa fa-shopping-cart"></span>
     <!---------------------------------------------------------------- 로고 제목 수정 가능 ------------------------------------------------------------->
                   <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>

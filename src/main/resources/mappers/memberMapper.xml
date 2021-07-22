@@ -13,7 +13,26 @@
   </select>
   
   <insert id="insertMember">
-  	insert into member(id,pass,name,date) values(#{id},#{pass},#{name},#{date})
+  	insert into member(member_email,
+  	member_password,
+  	member_name,
+  	member_phone,
+  	member_post,
+  	member_address,
+  	member_extraAddress,
+  	member_extraAddress2,
+  	member_date) 
+  	
+  	values(#{member_email},
+  	#{member_password},
+  	#{member_name},
+  	#{member_phone},
+  	#{member_post},
+  	#{member_address},
+  	#{member_extraAddress},
+  	#{member_extraAddress2},
+  	#{member_date})
+  	
   </insert>
   
   <update id="updateMember">
