@@ -24,7 +24,7 @@ public class ProductController {
 
 //	가상주소  http://localhost:8080/myweb2/member/insert
 		
-	@RequestMapping(value = "/productList", method = RequestMethod.GET)
+	@RequestMapping(value = "/productList.sh", method = RequestMethod.GET)
 	public String list(HttpSession session, Model model) {
 		
 		// member 정보 전체를 조회
@@ -41,7 +41,7 @@ public class ProductController {
 		return "/dailyShop/product_board/product";
 	}
 	
-	@RequestMapping(value = "/productDetail", method = RequestMethod.GET)
+	@RequestMapping(value = "/productDetail.sh", method = RequestMethod.GET)
 	public String view(@RequestParam("product_idx") int product_idx, Model model) {
 		ProductBean pd = productService.view(product_idx);
 		

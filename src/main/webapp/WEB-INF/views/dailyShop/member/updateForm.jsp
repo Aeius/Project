@@ -48,7 +48,7 @@
           <div class="aa-myaccount-register">       
                     <br>
                  <h2>내 정보</h2>
-                 <form action="<c:url value='/member/updatePro'/>" class="aa-login-form" method="post">
+                 <form action="<c:url value='updatePro.sh'/>" class="aa-login-form" method="post">
                     <label for="">Email<span>*</span></label>
                     <input type="text" placeholder="이메일을 입력해주세요" value="${member.member_email}" name="member_email">
                     <label for="">비밀번호<span>*</span></label>

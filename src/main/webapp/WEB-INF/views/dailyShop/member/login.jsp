@@ -59,7 +59,7 @@
               <div class="col-md-6">
                 <div class="aa-myaccount-login">
                 <h4>로그인</h4>
-                 <form action="<c:url value='/member/loginPro'/>" class="aa-login-form" method="post">
+                 <form action="<c:url value='loginPro.sh'/>" class="aa-login-form" method="post">
                   <label for="board_email">Email<span>*</span></label>
                    <input type="text" placeholder="Username or email" name="member_email">
                    <label for="">Password<span>*</span></label>
