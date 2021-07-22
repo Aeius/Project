@@ -42,6 +42,11 @@ public class MemberDAOImpl implements MemberDAO{
 		sqlSession.update(namespace + ".updateMember", memberBean);
 	}
 	
-	
+	@Override
+	public void deleteMember(MemberBean memberBean) {
+		System.out.println("MemberDAOImpl - deleteMember");
+		sqlSession.delete(namespace + ".deleteMember", memberBean);
+		
+	}
 
 }

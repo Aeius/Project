@@ -82,4 +82,31 @@ public class MemberController {
 		//  /member/login 가상주소 이동
 		return "redirect:/login.sh";
 	}
+	//-----------------------------------------------------------------  회원삭제 ----------------------------------------------------
+	@RequestMapping(value = "/delete.sh", method = RequestMethod.GET)
+	public String delete() {
+		return "/dailyShop/member/deleteForm";
+	}
+	
+	@RequestMapping(value = "/deletePro.sh", method = RequestMethod.POST)
+	public String deletePro(MemberBean memberBean, HttpSession session, Model model) {
+		
+	
+		MemberBean memberBean2 = memberService.userCheck(memberBean);
+		
+		if(memberBean2!=null) {
+			System.out.println("memberController - deleteMember");
+			memberService.deleteMember(memberBean);
+			
+			// 회원 탈퇴 후 세션값 초기화
+			session.invalidate();
+			return "redirect:/dailyShop/member/login";
+		}else {
+	
+			model.addAttribute("msg","입력하신 정보는 틀립니다.");
+	
+			return "dailyShop/member/msg";
+		}
+		
+	}
 }

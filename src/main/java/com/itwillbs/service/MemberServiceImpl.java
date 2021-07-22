@@ -47,6 +47,10 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.updateMember(memberBean);
 	}
 	
-	
+	@Override
+	public void deleteMember(MemberBean memberBean) {
+		System.out.println("MemberService - deleteMember");
+		memberDAO.deleteMember(memberBean);
+	}
 
 }

@@ -40,7 +40,7 @@
   </update>
   
   <delete id="deleteMember">
-  
+  	delete from member where member_email=#{member_email}
   </delete>
   
 </mapper>
