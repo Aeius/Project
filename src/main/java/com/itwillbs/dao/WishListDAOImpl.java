@@ -1,9 +1,16 @@
 package com.itwillbs.dao;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.WishListBean;
+
+@Repository
 public class WishListDAOImpl implements WishListDAO {
 	
 	@Inject
@@ -24,6 +31,11 @@ public class WishListDAOImpl implements WishListDAO {
 	@Override
 	public boolean checkWishList(String member_email, int product_idx) {
 		return sqlSession.selectOne(namespace+"", member_email);
+	}
+
+	@Override
+	public ArrayList<WishListBean> getMyWishList() {
+		return (ArrayList)sqlSession.selectList(namespace+".myWishList");
 	}
 }
 

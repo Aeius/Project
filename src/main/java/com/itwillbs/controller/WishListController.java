@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.ProductBean;
-import com.itwillbs.service.MemberService;
-import com.itwillbs.service.ProductService;
+import com.itwillbs.domain.WishListBean;
 import com.itwillbs.service.WishListService;
 
 @Controller
@@ -37,19 +35,19 @@ public class WishListController {
 			wishListService.deleteWishList(product_idx, member_email);
 		} else {
 			wishListService.insertWishList(product_idx, member_email);
-			
 		}
-		
 		
 	}
 	
 	@RequestMapping(value = "/myWishList.sh", method = RequestMethod.GET)
-	public String myWishList(HttpSession session) {
+	public String myWishList(HttpSession session, Model model) {
 		
+		ArrayList<WishListBean> myWishList = wishListService.getMyWishList();
 		
+		model.addAttribute("myWishList" , myWishList);
 		
 		return "/dailyShop/member/wishlist";
-		
+			
 		
 	}
 	

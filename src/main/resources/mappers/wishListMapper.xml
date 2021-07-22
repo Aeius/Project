@@ -24,7 +24,21 @@
   </select>
   
   <select id="myWishList">
-  	SELECT * FROM wishList WHERE wishList_member_email=#{wishList_member_email}
+  	SELECT 
+	member_email,
+	wishList_member_email,
+	wishList_product_idx,
+	product_name,    
+	product_stock
+	
+	FROM member, wishList, product
+	WHERE 
+	product_idx=wishList_product_idx 
+	AND
+	member_email=(SELECT member_email
+				FROM member
+				WHERE member_email=#{member_email})
+
   </select>
   
 </mapper>

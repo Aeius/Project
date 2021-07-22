@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,14 +62,16 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <c:forEach var="myWishList" items="${myWishList}">
                       <tr>
                         <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
                         <td><a href="#"><img src="../img/man/polo-shirt-1.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">향수이름1</a></td>
+                        <td><a class="aa-cart-title" href="#">${myWishList.wishlist_proudct_idx}</a></td>
                         <td>가격1</td>
                         <td>재고 있음</td>
                         <td><a href="#" class="aa-add-to-cart-btn">장바구니에 담기</a></td>
                       </tr>
+                      </c:forEach>
                       <tr>
                         <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
                         <td><a href="#"><img src="../img/man/polo-shirt-2.png" alt="img"></a></td>
