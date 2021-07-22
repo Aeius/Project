@@ -40,34 +40,12 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
-	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
-	public String login() {
-		//  /WEB-INF/views/member/loginForm.jsp 이동
-		return "/member/loginForm";
-	}
 	
-	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
-	public String loginPro(MemberBean mb, HttpSession session, Model model) {
-		
-		// 로그인 메서드 호출
-		MemberBean mb2=memberService.userCheck(mb);
-		if(mb2!=null) {
-			//아이디 비밀번호 일치 세션값 생성
-			session.setAttribute("id", mb.getId());
-		}else {
-			// 불일치 메시지 뒤로이동
-			model.addAttribute("msg","입력하신 정보는 틀립니다.");
-		//  /WEB-INF/views/member/msg.jsp 이동
-			return "/member/msg";
-		}
-		//  /member/main 가상주소 이동
-		return "redirect:/member/main";
-	}
 	
 	@RequestMapping(value = "/member/main", method = RequestMethod.GET)
 	public String main() {
 		//  /WEB-INF/views/member/main.jsp 이동
-		return "/member/main";
+		return "/dailyShop/member/index";
 	}
 	
 	@RequestMapping(value = "/member/logout", method = RequestMethod.GET)
@@ -81,9 +59,9 @@ public class MemberController {
 	@RequestMapping(value = "/member/info", method = RequestMethod.GET)
 	public String info(HttpSession session, Model model) {
 		// 세션 값가져오기
-		String id = (String)session.getAttribute("id");
+		String member_email = (String)session.getAttribute("member_email");
 		// 세션값에 해당하는 member정보를 조회
-		MemberBean mb = memberService.getMember(id);
+		MemberBean mb = memberService.getMember(member_email);
 		
 		//Model mb.mb 데이터 담아 가기
 		model.addAttribute("mb" , mb);
@@ -97,6 +75,45 @@ public class MemberController {
 	public String index() {
 		//  /WEB-INF/views/member/insertForm.jsp 이동
 		return "/dailyShop/member/index";
+	}
+	
+	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
+	public String login() {
+		return "/dailyShop/member/login";
+	}
+	
+	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
+	public String loginPro(MemberBean mb, HttpSession session, Model model) {
+		
+		MemberBean mb2=memberService.userCheck(mb);
+		if(mb2!=null) {
+			session.setAttribute("member_email", mb.getMember_email());
+		}else {
+			model.addAttribute("msg","입력하신 정보는 틀립니다.");
+			return "/member/msg";
+		}
+		return "redirect:/member/main";
+	}
+	@RequestMapping(value = "/member/update", method = RequestMethod.GET)
+	public String update(HttpSession session, Model model) {
+		String member_email = (String)session.getAttribute("member_email");
+		MemberBean memberBean = memberService.getMember(member_email);
+		System.out.println(memberBean);
+		model.addAttribute("member", memberBean);
+		return "/dailyShop/member/updateForm";
+	}
+	
+	@RequestMapping(value = "/member/updatePro", method = RequestMethod.POST)
+	public String updatePro(MemberBean memberBean, Model model) {
+		MemberBean memberBean2 = memberService.userCheck(memberBean);
+		if(memberBean2 != null) {
+			System.out.println("memberController - updateMember");
+			memberService.updateMember(memberBean);
+		}else {
+			model.addAttribute("msg","입력하신 정보가 일치하지 않습니다.");
+			return "/member/msg";
+		}
+		return "redirect:/member/update";
 	}
 	
 }

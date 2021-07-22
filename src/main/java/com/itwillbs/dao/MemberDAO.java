@@ -10,4 +10,6 @@ public interface MemberDAO {
 
 	public MemberBean getMember(String id);
 
+	public void updateMember(MemberBean memberBean);
+
 }

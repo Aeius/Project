@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,17 +48,17 @@
           <div class="aa-myaccount-register">       
                     <br>
                  <h2>내 정보</h2>
-                 <form action="" class="aa-login-form">
+                 <form action="<c:url value='/member/updatePro'/>" class="aa-login-form" method="post">
                     <label for="">Email<span>*</span></label>
-                    <input type="text" placeholder="이메일을 입력해주세요">
-                    <label for="">Password<span>*</span></label>
-                    <input type="password" placeholder="비밀번호를 입력해주세요">
-                    <label for="">Password check<span>*</span></label>
-                    <input type="password" placeholder="비밀번호 확인">
+                    <input type="text" placeholder="이메일을 입력해주세요" value="${member.member_email}" name="member_email">
+                    <label for="">비밀번호<span>*</span></label>
+                    <input type="password" placeholder="비밀번호를 입력해주세요" name="member_password">
                     <label for="">이름<span>*</span></label>
-                    <input type="text" placeholder="이름">
+                    <input type="text" placeholder="이름" value="${member.member_name}" name="member_name">
+                    <label for="">전화번호<span>*</span></label>
+                    <input type="text" placeholder="000-0000-0000" value="${member.member_phone}" name="member_phone">
                     <label for="">주소<span>*</span></label>
-                    <input type="text" placeholder="주소">
+                    <input type="text" placeholder="주소" value="${member.member_address} ${member.member_extraAddress} ${member.member_extraAddress2}" name="member_address">
                     <button type="submit" class="aa-browse-btn">수정!</button>                    
                   </form>
                 </div>

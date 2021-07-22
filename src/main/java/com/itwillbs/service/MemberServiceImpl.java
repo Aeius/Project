@@ -1,5 +1,6 @@
 package com.itwillbs.service;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void insertMember(MemberBean mb) {
 		// 날짜 처리
-		mb.setDate(new Timestamp(System.currentTimeMillis()));
+		mb.setMember_date(new Date(System.currentTimeMillis()));
 		// MemberDAOImpl 메서드 호출
 		
 		// MemberDAOImpl 메서드 호출
@@ -28,11 +29,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberBean userCheck(MemberBean mb) {
+	public MemberBean userCheck(MemberBean memberBean) {
 		System.out.println("userCheck");
-		
-		
-		return memberDAO.userCheck(mb);
+		return memberDAO.userCheck(memberBean);
 	}
 
 	@Override
@@ -41,5 +40,13 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.getMember(id);
 	}
+
+	@Override
+	public void updateMember(MemberBean memberBean) {
+		System.out.println("MemberService - updateMember");
+		memberDAO.updateMember(memberBean);
+	}
+	
+	
 
 }
