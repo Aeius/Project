@@ -14,4 +14,5 @@ public interface ProductDAO {
 	
 	public ProductBean view(int product_idx);
 
+
 }

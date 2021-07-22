@@ -13,4 +13,5 @@ public interface ProductService {
 	public ArrayList<ProductBean> getProductAquaList();
 
 	public ProductBean view(int product_idx);
+
 }

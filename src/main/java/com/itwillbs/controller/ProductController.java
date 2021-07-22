@@ -23,7 +23,8 @@ public class ProductController {
 	private ProductService productService;
 
 //	가상주소  http://localhost:8080/myweb2/member/insert
-		
+	
+	//-------------------------------------------------------------- 상품 리스트 --------------------------------------------------------
 	@RequestMapping(value = "/productList.sh", method = RequestMethod.GET)
 	public String list(HttpSession session, Model model) {
 		
@@ -41,6 +42,7 @@ public class ProductController {
 		return "/dailyShop/product_board/product";
 	}
 	
+	//-------------------------------------------------------------- 상품 상세 페이지 --------------------------------------------------------
 	@RequestMapping(value = "/productDetail.sh", method = RequestMethod.GET)
 	public String view(@RequestParam("product_idx") int product_idx, Model model) {
 		ProductBean pd = productService.view(product_idx);
@@ -50,4 +52,7 @@ public class ProductController {
 		return "/dailyShop/product_board/product-detail";
 		
 	}
+	
+	
+	
 }

@@ -104,7 +104,7 @@
                     <div class="aa-prod-view-bottom">
                       <a class="aa-add-to-cart-btn" href="#">바로구매</a>
                       <a class="aa-add-to-cart-btn" href="#">장바구니 담기</a>
-                      <a class="aa-add-to-cart-btn" href="#">찜</a>
+                      <a class="aa-add-to-cart-btn" href="pushWishList.sh?product_idx=${pd.product_idx }"> 찜 ${pd.product_likecount }</a>
 <!--                       <a class="aa-add-to-cart-btn" href="#">Compare</a> -->
                     </div>
                     

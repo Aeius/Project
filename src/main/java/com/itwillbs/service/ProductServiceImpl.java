@@ -39,6 +39,9 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.view(product_idx);
 	}
 
+
+	
+
 	
 
 }

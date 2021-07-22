@@ -39,6 +39,6 @@ public class ProductDAOImpl implements ProductDAO {
 	public ProductBean view(int product_idx) {
 		return sqlSession.selectOne(namespace+".getProductDetail", product_idx);
 	}
-
+	
 	
 }

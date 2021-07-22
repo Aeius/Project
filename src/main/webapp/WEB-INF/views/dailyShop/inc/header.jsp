@@ -60,7 +60,7 @@
                 <ul class="aa-head-top-nav-right">
 <!--                 <li><a href="../../../AdminLTE-master/pages/chart.jsp">관리자 페이지</a></li> -->
                   <li><a href="update.sh">MyPage</a></li>
-                  <li class="hidden-xs"><a href="../member/wishlist.jsp">WishList</a></li>
+                  <li class="hidden-xs"><a href="myWishList.sh">WishList</a></li>
                   <li class="hidden-xs"><a href="../member/cart.jsp">Basket</a></li>
                   <li class="hidden-xs"><a href="../member/checkout.jsp">Checkout</a></li>
                   <li class="hidden-xs"><a href="login.sh">login</a></li>
