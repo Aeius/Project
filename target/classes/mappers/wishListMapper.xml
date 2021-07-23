@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mapper.WishListMapper">
+
+  <select id="myWishList"  resultType="com.itwillbs.domain.WishListBean">
+  	SELECT 
+	wishList_member_email,
+	wishList_product_idx,
+	product_name,
+	product_price,
+	product_stock
+	
+	FROM wishList, product
+	WHERE 
+	wishList_product_idx = product_idx
+	AND
+	wishList_member_email=#{wishList_member_email}
+  </select>
+  
+</mapper>

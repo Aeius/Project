@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mapper.FaqBoardMapper">
+
+<!-- FAQ 메인 글목록 보기 (완료) -->
+   <select id="getFaqBoardList" resultType="com.itwillbs.domain.FaqBoardBean">
+  	select * from faq
+  </select>
+  
+<!--   아래 SQL구문들 모두 정상동작 확인완료 _0722(주하) -->
+  
+<!--   FAQ 글쓰기 (관리자권한있어야함) -->
+<!--   <insert id="insertFaqBoard"> -->
+<!--   	insert into faq values(null,#{faq_question},#{faq_answer},#{faq_date}) -->
+<!--   </insert> -->
+  
+<!--   FAQ 관리자권한 체크 -->
+<!-- 	<select id="adminCheck" resultType="com.itwillbs.domain.MemberBean"> -->
+<!--     select * from admin where admin_id=#{id} and admin_password=#{pass} -->
+<!--   </select> -->
+  
+  <!--   FAQ 글수정(글번호로 수정) -->
+<!--   <update id="updateFaqBoard"> -->
+<!--   	update faq set faq_question=#{faq_question}, faq_answer=#{faq_answer}, faq_date=#{faq_date} where faq_idx=#{faq_idx} -->
+<!--   </update> -->
+  
+  <!--   FAQ 글삭제(글번호로 삭제) -->
+<!--   <delete id="deleteFaqBoard"> -->
+<!--   	delete from faq where faq_idx=#{id} -->
+<!--   </delete> -->
+  
+  
+
+</mapper>

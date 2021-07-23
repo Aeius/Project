@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mapper.NoticeMapper">
+
+<!--   아래 SQL구문들 모두 정상동작 확인완료 _0722(주하) -->
+
+<!-- Notice 메인 글목록 보기 (완료) -->
+   <select id="getNoticeList" resultType="com.itwillbs.domain.NoticeBean">
+  	select * from notice
+  </select>
+
+<!--   Notice 글쓰기 (관리자권한있어야함) -->
+<!--   <insert id="insertNotice"> -->
+<!--   	insert into notice values(null,'관리자',#{notice_subject},#{notice_content},#{notice_file_original},,#{notice_file_real},#{notice_readcount},#{notice_date}) -->
+<!--   </insert> -->
+  
+<!--   Notice 관리자권한 체크 -->
+<!-- 	<select id="adminCheck" resultType="com.itwillbs.domain.MemberBean"> -->
+<!--     select * from admin where admin_id=#{id} and admin_password=#{pass} -->
+<!--   </select> -->
+  
+<!--   Notice 글수정 -->  
+<!--   <update id="updateNotice"> -->
+<!--   	update notice set notice_subject=#{notice_subject}, notice_content=#{notice_content} where notice_idx = #{notice_idx} -->
+<!--   </update> -->
+
+<!--   Notice 글삭제 -->
+<!--   <delete id="deleteNotice"> -->
+<!--   	delete from notice where notice_idx=#{notice_idx} -->
+<!--   </delete> -->
+  
+
+</mapper>
