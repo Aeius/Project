@@ -6,11 +6,10 @@ public class OrderBean {
 	private int order_idx;
 	private String order_member_email;
 	private String order_receiver_name;
-	private String receiver_name;
-	private String receiver_phone;
-	private int receiver_post;
+	private String order_receiver_phone;
+	private int order_receiver_post;
 	private String order_receiver_address;
-	private String order_reveiver_extraAddress;
+	private String order_receiver_extraAddress;
 	private String order_receiver_extraAddress2;
 	private int order_amount;
 	private int order_coupon;
@@ -38,23 +37,17 @@ public class OrderBean {
 	public void setOrder_receiver_name(String order_receiver_name) {
 		this.order_receiver_name = order_receiver_name;
 	}
-	public String getReceiver_name() {
-		return receiver_name;
+	public String getOrder_receiver_phone() {
+		return order_receiver_phone;
 	}
-	public void setReceiver_name(String receiver_name) {
-		this.receiver_name = receiver_name;
+	public void setOrder_receiver_phone(String order_receiver_phone) {
+		this.order_receiver_phone = order_receiver_phone;
 	}
-	public String getReceiver_phone() {
-		return receiver_phone;
+	public int getOrder_receiver_post() {
+		return order_receiver_post;
 	}
-	public void setReceiver_phone(String receiver_phone) {
-		this.receiver_phone = receiver_phone;
-	}
-	public int getReceiver_post() {
-		return receiver_post;
-	}
-	public void setReceiver_post(int receiver_post) {
-		this.receiver_post = receiver_post;
+	public void setOrder_receiver_post(int order_receiver_post) {
+		this.order_receiver_post = order_receiver_post;
 	}
 	public String getOrder_receiver_address() {
 		return order_receiver_address;
@@ -62,11 +55,11 @@ public class OrderBean {
 	public void setOrder_receiver_address(String order_receiver_address) {
 		this.order_receiver_address = order_receiver_address;
 	}
-	public String getOrder_reveiver_extraAddress() {
-		return order_reveiver_extraAddress;
+	public String getOrder_receiver_extraAddress() {
+		return order_receiver_extraAddress;
 	}
-	public void setOrder_reveiver_extraAddress(String order_reveiver_extraAddress) {
-		this.order_reveiver_extraAddress = order_reveiver_extraAddress;
+	public void setOrder_receiver_extraAddress(String order_receiver_extraAddress) {
+		this.order_receiver_extraAddress = order_receiver_extraAddress;
 	}
 	public String getOrder_receiver_extraAddress2() {
 		return order_receiver_extraAddress2;
@@ -116,4 +109,5 @@ public class OrderBean {
 	public void setOrder_tracking_num(int order_tracking_num) {
 		this.order_tracking_num = order_tracking_num;
 	}
+	
 }

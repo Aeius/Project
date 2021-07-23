@@ -19,6 +19,11 @@ public class OrderServiceImpl implements OrderService {
 	public ArrayList<OrderBean> getOrderAllList() {
 		return (ArrayList)orderDAO.getOrderAllList();
 	}
+
+	@Override
+	public OrderBean getOrderDetail(int order_idx) {
+		return orderDAO.getOrderDetail(order_idx);
+	}
 	
 	
 	

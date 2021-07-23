@@ -21,7 +21,8 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>주문 목록</h1>
+          <h1>주문 목록</h1><br>
+          주문번호 클릭 시 상세 조회 페이지로 이동합니다
         </section>
         
 
@@ -66,7 +67,7 @@
                       
                       <c:forEach var="allList" items="${allList }">
                       	<tr>
-                      		<td>${allList.order_idx }</td>
+                      		<td onClick="location.href='orderDetail.ad?order_idx=${allList.order_idx }'" style="cursor:pointer;">${allList.order_idx }</td>
                       		<td>${allList.order_member_email }</td>
                       		<td>${allList.order_status }</td>
                       		<td>${allList.order_tracking_num }</td>
