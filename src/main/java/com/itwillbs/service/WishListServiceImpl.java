@@ -34,8 +34,8 @@ public class WishListServiceImpl implements WishListService {
 		}
 
 		@Override
-		public ArrayList<WishListBean> getMyWishList() {
-			return wishListDAO.getMyWishList();
+		public ArrayList<WishListBean> getMyWishList(String wishList_member_email) {
+			return wishListDAO.getMyWishList(wishList_member_email);
 		}
 
 }

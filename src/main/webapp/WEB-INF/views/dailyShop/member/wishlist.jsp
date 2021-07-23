@@ -66,28 +66,12 @@
                       <tr>
                         <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
                         <td><a href="#"><img src="../img/man/polo-shirt-1.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">${myWishList.wishlist_proudct_idx}</a></td>
-                        <td>가격1</td>
-                        <td>재고 있음</td>
+                        <td><a class="aa-cart-title" href="#">${myWishList.product_name}</a></td>
+                        <td>${myWishList.product_price} 원</td>
+                        <td>${myWishList.product_stock} 개</td>
                         <td><a href="#" class="aa-add-to-cart-btn">장바구니에 담기</a></td>
                       </tr>
                       </c:forEach>
-                      <tr>
-                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="#"><img src="../img/man/polo-shirt-2.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">향수이름2</a></td>
-                        <td>가격2</td>
-                        <td>재고 있음</td>
-                        <td><a href="#" class="aa-add-to-cart-btn">장바구니에 담기</a></td>
-                      </tr>
-                      <tr>
-                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="#"><img src="../img/man/polo-shirt-3.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">향수이름3</a></td>
-                        <td>가격3</td>
-                        <td>재고 있음</td>
-                        <td><a href="#" class="aa-add-to-cart-btn">장바구니에 담기</a></td>
-                      </tr>                     
                       </tbody>
                   </table>
                 </div>

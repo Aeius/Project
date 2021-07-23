@@ -13,6 +13,6 @@ public interface WishListService {
 
 	public void insertWishList(int product_idx, String member_email);
 
-	public ArrayList<WishListBean> getMyWishList();
+	public ArrayList<WishListBean> getMyWishList(String wishList_member_email);
 
 }

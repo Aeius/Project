@@ -12,5 +12,6 @@ public interface WishListDAO {
 	
 	public boolean checkWishList(String member_email, int product_idx);
 	
-	public ArrayList<WishListBean> getMyWishList();
+	public ArrayList<WishListBean> getMyWishList(String member_email);
+	
 }

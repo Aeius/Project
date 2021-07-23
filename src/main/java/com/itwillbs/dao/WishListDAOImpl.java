@@ -34,8 +34,8 @@ public class WishListDAOImpl implements WishListDAO {
 	}
 
 	@Override
-	public ArrayList<WishListBean> getMyWishList() {
-		return (ArrayList)sqlSession.selectList(namespace+".myWishList");
+	public ArrayList<WishListBean> getMyWishList(String wishList_member_email) {
+		return (ArrayList)sqlSession.selectList(namespace+".myWishList", wishList_member_email);
 	}
 }
 

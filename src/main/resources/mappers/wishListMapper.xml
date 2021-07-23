@@ -4,41 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.mapper.WishListMapper">
 
-  <select id="checkWishList" resultType="com.itwillbs.domain.WishListBean">
-    SELECT m.member_email, w.wishList_member_email, w.wishList_product_idx
-	FROM member m JOIN wishList w
-	ON m.member_email = w.wishList_member_email
-	WHERE m.member_email = #{wishlist_member_email} AND w.wishList_product_idx= #{wishlist_product_idx}
-  </select>
-  
-  <delete id="deleteWishList">
-  	DELETE FROM wishList WHERE wishList_member_email=? AND wishList_product_idx
-  </delete>
-  
-  <insert id="insertWishList">
-	  INSERT INTO wishList SET wishList_member_email=#{wishlist_member_email}, wishList_product_idx=#{wishlist_product_idx}
-  </insert>
-  
-  <select id="countWishList">
-  	SELECT COUNT(*) FROM wishList WHERE wishList_product_idx=#{wishlist_product_idx}
-  </select>
-  
-  <select id="myWishList">
+  <select id="myWishList"  resultType="com.itwillbs.domain.WishListBean">
   	SELECT 
-	member_email,
 	wishList_member_email,
 	wishList_product_idx,
-	product_name,    
+	product_name,
+	product_price,
 	product_stock
 	
-	FROM member, wishList, product
+	FROM wishList, product
 	WHERE 
-	product_idx=wishList_product_idx 
+	wishList_product_idx = product_idx
 	AND
-	member_email=(SELECT member_email
-				FROM member
-				WHERE member_email=#{member_email})
-
+	wishList_member_email=#{wishList_member_email}
   </select>
   
 </mapper>
