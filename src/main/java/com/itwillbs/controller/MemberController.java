@@ -100,7 +100,7 @@ public class MemberController {
 			
 			// 회원 탈퇴 후 세션값 초기화
 			session.invalidate();
-			return "redirect:/dailyShop/member/login";
+			return "redirect:/index.sh";
 		}else {
 	
 			model.addAttribute("msg","입력하신 정보는 틀립니다.");
