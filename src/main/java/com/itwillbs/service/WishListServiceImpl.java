@@ -19,23 +19,33 @@ public class WishListServiceImpl implements WishListService {
 		private WishListDAO wishListDAO;
 
 		@Override
-		public void insertWishList(int product_idx, String member_email) {
-			wishListDAO.insertWishList(member_email, product_idx);
+		public void insertWishList(WishListBean wishListBean) {
+//			System.out.println("serviceImpl - insertWishList()");
+			wishListDAO.insertWishList(wishListBean);
+			wishListDAO.updateWishList(wishListBean.getProduct_idx());
 		}
 		
 		@Override
-		public void deleteWishList(int product_idx, String member_email) {
-			wishListDAO.deleteWishList(member_email, product_idx);
+		public void deleteWishList(WishListBean wishListBean) {
+//			System.out.println("serviceImpl - deleteWishList()");
+			wishListDAO.deleteWishList(wishListBean);
+			wishListDAO.updateWishList(wishListBean.getProduct_idx());
 		}
 	
 		@Override
-		public boolean checkWishList(int product_idx, String member_email) {
-			return wishListDAO.checkWishList(member_email, product_idx);
+		public void updateWishList(int product_idx) {
+			wishListDAO.updateWishList(product_idx);
 		}
 
 		@Override
 		public ArrayList<WishListBean> getMyWishList(String wishList_member_email) {
 			return wishListDAO.getMyWishList(wishList_member_email);
+		}
+
+		@Override
+		public WishListBean checkWishList(WishListBean wishListBean) {
+//			System.out.println("serviceImpl - checkWishList()");
+			return wishListDAO.checkWishList(wishListBean);
 		}
 
 }

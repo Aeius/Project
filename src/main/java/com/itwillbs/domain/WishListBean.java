@@ -7,13 +7,29 @@ public class WishListBean {
 	
 	private String wishList_product_idx;
 	
+	private int product_idx;
+	
 	private String product_name;
 	
 	private String product_price;
 	
 	private String product_stock;
 	
+	private String wishListCount;
 	
+	
+	public String getWishlistcount() {
+		return wishListCount;
+	}
+	public void setWishlistcount(String wishListCount) {
+		this.wishListCount = wishListCount;
+	}
+	public int getProduct_idx() {
+		return product_idx;
+	}
+	public void setProduct_idx(int product_idx) {
+		this.product_idx = product_idx;
+	}
 	public String getWishList_member_email() {
 		return wishList_member_email;
 	}

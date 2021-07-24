@@ -6,13 +6,15 @@ import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.WishListBean;
 
 public interface WishListService {
+	
+	public void insertWishList(WishListBean wishListBean);
 
-	public void deleteWishList(int product_idx, String member_email);
+	public void deleteWishList(WishListBean wishListBean);
 
-	public boolean checkWishList(int product_idx, String member_email);
-
-	public void insertWishList(int product_idx, String member_email);
+	public void updateWishList(int product_idx);
 
 	public ArrayList<WishListBean> getMyWishList(String wishList_member_email);
+
+	public WishListBean checkWishList(WishListBean wishListBean);
 
 }

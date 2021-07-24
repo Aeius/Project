@@ -19,4 +19,23 @@
 	wishList_member_email=#{wishList_member_email}
   </select>
   
+  <insert id="insertWishList">
+	  INSERT INTO wishList SET wishList_member_email=#{wishList_member_email}, wishList_product_idx=#{product_idx}
+  </insert>
+  
+  <delete id="deleteWishList">
+	  DELETE FROM wishList WHERE wishList_member_email=#{wishList_member_email} AND wishList_product_idx=#{product_idx}
+  </delete>
+  
+  <update id="updateWishList">
+	  UPDATE product 
+	  SET product_likecount = 
+	  (SELECT COUNT(*) FROM wishlist WHERE wishList_product_idx=#{product_idx}) 
+	  WHERE product_idx=#{product_idx};
+  </update>
+  
+  <select id="checkWishList"  resultType="com.itwillbs.domain.WishListBean">
+  	SELECT COUNT(*) as wishListCount FROM wishlist WHERE wishList_product_idx=#{product_idx} AND wishList_member_email=#{wishList_member_email}
+  </select>
+  
 </mapper>

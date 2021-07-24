@@ -6,12 +6,14 @@ import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.WishListBean;
 
 public interface WishListDAO {
-	public void insertWishList(String member_email, int product_idx);
+	public void insertWishList(WishListBean wishListBean);
 	
-	public void deleteWishList(String member_email, int product_idx);
+	public void deleteWishList(WishListBean wishListBean);
 	
-	public boolean checkWishList(String member_email, int product_idx);
+	public void updateWishList(int product_idx);
 	
-	public ArrayList<WishListBean> getMyWishList(String member_email);
+	public ArrayList<WishListBean> getMyWishList(String wishlist_member_email);
+
+	public WishListBean checkWishList(WishListBean wishListBean);
 	
 }
