@@ -122,6 +122,61 @@ public class MemberController {
 		model.addAttribute("couponInfoList", couponInfoList);
 		return "/dailyShop/member/myCoupon";
 	}
+	
+	//----------------------------------------------계정찾기 페이지로 이동--------------------------------------------------
+	
+	@RequestMapping(value = "/find.sh", method = RequestMethod.GET)
+	public String find() {
+		//  /WEB-INF/views/member/find.jsp 이동
+		return "/dailyShop/member/find";
+	}
+	
+	
+	//----------------------------------------------아이디(이메일) 찾기-------------------------------------------------
+	
+	@RequestMapping(value = "/findEmail.sh", method = RequestMethod.POST)
+	public String findEmail(MemberBean mb, HttpSession session, Model model) {
+		String email= memberService.emailCheck(mb);
+		System.out.println("memberController - findEmail");
+		 
+		
+		if(email != null) {
+		//	session.setAttribute("member_email", mb.getMember_email());
+			System.out.println("memberController - email: " + email);
+			session.setAttribute("email", email);
+			
+		}else {
+			model.addAttribute("msg","입력하신 정보와 일치하는 계정이 없습니다.");
+			return "/dailyShop/member/msg";
+		}
+		return "/dailyShop/member/findEmailResult";
+	}
+	
+	
+	//----------------------------------------------비밀번호 찾기---------------------------------------------------------
+	
+	
 
+	
+	
+	//----------------------------------------------메인 페이지로 이동--------------------------------------------------
+	
+	@RequestMapping(value = "/main.sh", method = RequestMethod.GET)
+	public String main() {
+		//  /WEB-INF/views/member/main.jsp 이동
+		return "/dailyShop/member/index";
+	}
+	
+	
+	//-------------------------------------------------- 로그아웃-------------------------------------------------------
+	
+	
+	@RequestMapping(value = "/logout.sh", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		return "redirect:/main.sh";
+		
+	}
 
 }

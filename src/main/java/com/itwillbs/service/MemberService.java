@@ -16,6 +16,8 @@ public interface MemberService {
 	public void updateMember(MemberBean memberBean);
 	
 	public void deleteMember(MemberBean memberBean);
+	
+	public String emailCheck(MemberBean mb);
 
 	public ArrayList<CouponBean> getCouponList(String member_email);
 

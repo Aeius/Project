@@ -14,10 +14,12 @@ public interface MemberDAO {
 	public void updateMember(MemberBean memberBean);
 	
 	public void deleteMember(MemberBean memberBean);
+	
+	public String emailCheck(MemberBean mb);
+	//이메일 찾기
 
 	public String getCouponList(String member_email);
 
 	public CouponBean getCouponInfo(int coupon_idx);
-
 
 }

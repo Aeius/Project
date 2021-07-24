@@ -50,6 +50,13 @@ public class MemberDAOImpl implements MemberDAO{
 		sqlSession.delete(namespace + ".deleteMember", memberBean);
 		
 	}
+	
+	@Override
+	public String emailCheck(MemberBean mb) {
+		System.out.println("MemberDAOImpl - emailCheck");
+		//이메일찾기
+		return sqlSession.selectOne(namespace + ".emailCheck",mb);
+	}
 
 
 	@Override

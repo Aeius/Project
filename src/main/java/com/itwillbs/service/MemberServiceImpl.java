@@ -56,6 +56,13 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.deleteMember(memberBean);
 	}
 
+	@Override
+	public String emailCheck(MemberBean mb) {
+		//
+		System.out.println("userCheck");
+		return memberDAO.emailCheck(mb);
+	}
+
 
 	@Override
 	public ArrayList<CouponBean> getCouponList(String member_email) {

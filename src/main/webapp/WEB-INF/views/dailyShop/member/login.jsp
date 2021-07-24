@@ -48,7 +48,6 @@
    </div>
   </section>
   <!-- / catg header banner section -->
-
  <!-- Cart view section -->
  <section id="aa-myaccount">
    <div class="container">
@@ -61,13 +60,13 @@
                 <h4>로그인</h4>
                  <form action="<c:url value='loginPro.sh'/>" class="aa-login-form" method="post">
                   <label for="board_email">Email<span>*</span></label>
-                   <input type="text" placeholder="Username or email" name="member_email">
+                   <input type="text" placeholder="email" name="member_email">
                    <label for="">Password<span>*</span></label>
                     <input type="password" placeholder="Password" name="member_password">
                     <button type="submit" class="aa-browse-btn">로그인</button>
                     <button type="button" class="aa-browse-btn">회원가입</button>
                     <br><br><br>
-                    <p class="aa-lost-password"><a href="find.jsp">아이디/비밀번호 찾기</a></p>
+                    <p class="aa-lost-password"><a href="<c:url value="find.sh" />">아이디/비밀번호 찾기</a></p>
                   </form>
                 </div>
               </div>
@@ -78,11 +77,8 @@
    </div>
  </section>
  <!-- / Cart view section -->
-
   <!-- footer -->  
  <jsp:include page="../inc/footer.jsp"></jsp:include>
   <!-- / footer -->
-
-
   </body>
 </html>

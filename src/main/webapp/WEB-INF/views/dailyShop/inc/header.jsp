@@ -23,7 +23,7 @@
     <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
     <!-- Top Slider CSS -->
     <link href="<c:url value='/resources/member/css/sequence-theme.modern-slide-in.css'/>" rel="stylesheet" media="all">
-
+ 
     <!-- Main style sheet -->
     <link href="<c:url value='/resources/member/css/style.css'/>" rel="stylesheet">    
 
@@ -58,13 +58,24 @@
               <!-- / header top left -->
               <div class="aa-header-top-right">
                 <ul class="aa-head-top-nav-right">
-<!--                 <li><a href="../../../AdminLTE-master/pages/chart.jsp">관리자 페이지</a></li> -->
-                  <li><a href="update.sh">MyPage</a></li>
-                  <li class="hidden-xs"><a href="myWishList.sh">WishList</a></li>
-                  <li class="hidden-xs"><a href="../member/cart.jsp">Basket</a></li>
-                  <li class="hidden-xs"><a href="../member/checkout.jsp">Checkout</a></li>
-                  <li class="hidden-xs"><a href="login.sh">login</a></li>
-                  <li class="hidden-xs"><a href="account.sh">sign in</a></li>
+<!--                 <c:if test="${ sessionScope.id eq 'admin' }"> <li><a href="../../../AdminLTE-master/pages/chart.jsp">관리자 페이지</a></li></c:if> -->
+                  
+                  <c:if test="${ ! empty sessionScope }">
+                  <li class="hidden-xs"><a href="../member/cart.jsp">My Cart</a></li>
+<!--              <li class="hidden-xs"><a href="../member/checkout.jsp">Checkout</a></li> -->                  
+                  <li class="hidden-xs"><a href="myWishList.sh">Wish list</a></li>
+				  <li><a href="update.sh">My page</a></li>
+				  <li class="hidden-xs"><a href="logout.sh">Logout</a></li>
+				  </c:if>
+                  
+                   
+                   <c:if test="${empty sessionScope }">   
+                   <li class="hidden-xs"><a href="login.sh">Login</a></li>
+                   <li class="hidden-xs"><a href="account.sh">sign in</a></li>
+                   </c:if> 
+                  
+                   
+                  
                 </ul>
               </div>
             </div>

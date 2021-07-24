@@ -58,4 +58,8 @@
 	FROM coupon WHERE coupon_idx = #{coupon_idx};
   </select>
   
+   <select id="emailCheck" resultType="string">
+    select member_email from member where member_name = #{member_name} and member_phone = #{member_phone}
+   </select>
+  
 </mapper>

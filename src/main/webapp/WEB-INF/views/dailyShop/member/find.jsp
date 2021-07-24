@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,8 +14,8 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  
+    <![endif]  -->
+    
 
   </head>
   <body> 
@@ -57,14 +58,19 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="aa-myaccount-login">
-                <h4>아이디 찾기</h4>
-                 <form action="" class="aa-login-form">
+                
+                
+                <h4>아이디(Email) 찾기</h4>
+                
+                 <form action="<c:url value='findEmail.sh' />" class="aa-login-form" method="post">
                   <label for="name">이름<span>*</span></label>
-                   <input type="text" placeholder="Username" name="board_email">
+                   <input type="text" placeholder="Username" name="member_name">
                    <label for="phone">연락처<span>*</span></label>
-                    <input type="text" placeholder="01012345678">
-                    <button type="submit" class="aa-browse-btn">아이디 찾기</button>
+                    <input type="text" placeholder="ex)010-1234-5678" name="member_phone">
+                    <button type="submit" class="aa-browse-btn">아이디(Email)찾기</button>
                   </form>
+                  
+                   
                 </div>
               </div>
               <div class="col-md-6">
@@ -74,9 +80,9 @@
                   <label for="board_email">아이디<span>*</span></label>
                    <input type="text" placeholder="UserID" name="board_email">
                    <label for="name">이름<span>*</span></label>
-                   <input type="text" placeholder="Username" name="board_email">
+                   <input type="text" placeholder="Username" name="member_name">
                    <label for="phone">연락처<span>*</span></label>
-                    <input type="text" placeholder="01012345678">
+                    <input type="text" placeholder="ex) 010-1234-5678" name="member_phone">
                     <button type="submit" class="aa-browse-btn">비밀번호 찾기</button>
                   </form>
                 </div>
@@ -95,4 +101,3 @@
 
 
   </body>
-</html>
