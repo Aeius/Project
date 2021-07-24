@@ -23,7 +23,7 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	
-	@RequestMapping(value = "/notice", method = RequestMethod.GET)
+	@RequestMapping(value = "/notice.sh", method = RequestMethod.GET)
 	public String NoticeList(HttpSession session, Model model) {
 		
 //		member전체의 정보를 조회 (리턴값 List배열 MemberBean형으로 정의)

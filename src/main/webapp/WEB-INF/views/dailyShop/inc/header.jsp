@@ -140,7 +140,7 @@
             <!-- Left nav -->
             <ul class="nav navbar-nav">
               <li><a href="/">Home</a></li>
-              <li><a href="#">Shop <span class="caret"></span></a>
+              <li><a href="productList.sh">Shop <span class="caret"></span></a>
                 <ul class="dropdown-menu">                
                   <li><a href="productList.sh">30ml</a></li>
                   <li><a href="productList.sh">50ml</a></li>
@@ -150,7 +150,7 @@
               <li><a href="../member/aboutus.jsp">about</a></li>
               <li><a href="#">Furniture</a></li>            
               <!--  블로그 부분 삭제! -->
-              <li><a href="notice">Service</a></li>
+              <li><a href="notice.sh">Service</a></li>
               <li><a href="#">Pages <span class="caret"></span></a>
                 <ul class="dropdown-menu">                
                   <li><a href="productList.sh">Shop Page</a></li>
