@@ -6,30 +6,48 @@
 
 	<insert id="insertProduct">
 		insert into product(
-			product_name,
-			product_category,
-			product_detail1,
-			product_detail2,
-			product_main_image,
-			product_detail_image,
-			product_price,
-			product_size,
-			product_stock,
-		) values(
-			#{product_name},
-			#{product_category},
-			#{product_detail1},
-			#{product_detail2},
-			#{product_main_image},
-			#{product_detail_image},
-			#{product_price},
-			#{product_size},
-			#{product_stock}
+		product_name,
+		product_category,
+		product_detail1,
+		product_detail2,
+		product_main_image,
+		product_detail_image,
+		product_price,
+		product_size,
+		product_stock,
+		)
+		values(
+		#{product_name},
+		#{product_category},
+		#{product_detail1},
+		#{product_detail2},
+		#{product_main_image},
+		#{product_detail_image},
+		#{product_price},
+		#{product_size},
+		#{product_stock}
 		)
 	</insert>
-	
-	
-	
-	
-	
+
+	<insert id="insertNotice">
+		insert into notice
+		values
+		(
+		#{notice_idx},
+		#{notice_name},
+		#{notice_subject},
+		#{notice_content},
+		#{notice_file_original},
+		#{notice_file_real},
+		#{notice_readcount},
+		now()
+		)
+	</insert>
+
+	<select id="getNoticeList"
+		resultType="com.itwillbs.domain.NoticeBean">
+		select * from notice
+	</select>
+
+
 </mapper>

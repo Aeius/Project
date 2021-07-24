@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -24,17 +25,17 @@
                   <h1 class="box-title">공지사항 등록하기</h1>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form">
+                  <form role="form" action="<c:url value='/noticeWritePro.ad'/>" method="post">
+                  <input type="hidden" name="notice_name" id="notice_name" value="관리자">
                     <!-- text input -->
                     <div class="form-group">
                       <label>제목 입력</label>
-                      <input type="text" class="form-control" placeholder="제목을 입력하세요"/>
+                      <input type="text" class="form-control" name="notice_subject" id="notice_subject" placeholder="제목을 입력하세요"/>
                     </div>
-                    
                     <!-- textarea -->
                     <div class="form-group">
                       <label>내용 입력</label>
-                      <textarea class="form-control" rows="15" placeholder="내용을 입력하세요"></textarea>
+                      <textarea class="form-control" rows="15" name="notice_content" id="notice_content" placeholder="내용을 입력하세요"></textarea>
                     </div>
 					  
 					<div class="box-footer">

@@ -8,8 +8,8 @@ public class NoticeBean {
 	private String notice_subject;
 	private String notice_content;
 	private String notice_file_original;
-	private String noice_file_real;
-	private int notece_readcount;
+	private String notice_file_real;
+	private int notice_readcount;
 	private Timestamp notice_date;
 	
 	
@@ -43,17 +43,17 @@ public class NoticeBean {
 	public void setNotice_file_original(String notice_file_original) {
 		this.notice_file_original = notice_file_original;
 	}
-	public String getNoice_file_real() {
-		return noice_file_real;
+	public String getNotice_file_real() {
+		return notice_file_real;
 	}
-	public void setNoice_file_real(String noice_file_real) {
-		this.noice_file_real = noice_file_real;
+	public void setNotice_file_real(String notice_file_real) {
+		this.notice_file_real = notice_file_real;
 	}
-	public int getNotece_readcount() {
-		return notece_readcount;
+	public int getNotice_readcount() {
+		return notice_readcount;
 	}
-	public void setNotece_readcount(int notece_readcount) {
-		this.notece_readcount = notece_readcount;
+	public void setNotice_readcount(int notice_readcount) {
+		this.notice_readcount = notice_readcount;
 	}
 	public Timestamp getNotice_date() {
 		return notice_date;
