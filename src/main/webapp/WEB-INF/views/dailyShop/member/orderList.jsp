@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -59,26 +60,34 @@
                     </thead>
                     <!-- 상품 목록 나열 -->
                     <tbody>
+                     <c:forEach var="orderList" items="${orderList}">
                       <tr>
-                        <td>20210716007</td>
-                        <td>향수5 30ml</td>
-                        <td>배송준비중</td>
-                        <td><input type="button" value="주문취소"></td>
-<!--                         <td><a href="#" class="aa-add-to-cart-btn">장바구니에 담기</a></td> -->
-                      </tr>
-                      <tr>
-                        <td>20210716008</td>
-                        <td>향수6 50ml</td>
-                        <td>배송중</td>
-                        <td><input type="button" value="배송조회"></td>
-                      </tr>
-                      <tr>
-                        <td>20210716009</td>
-                        <td>향수10 50ml</td>
-                        <td>배송완료</td>
-                        <td>
-                        <input type="button" value="리뷰쓰기">
+                        <td>${orderList.order_idx}</td>
+                        <td>${orderList.product_name}</td>
+                        <td>${orderList.order_status}</td>
+                        <td><input type="button" value="${orderList.order_status}">
+                        <input type="button" value="리뷰쓰기" onclick="review(${product.product_idx})">
                         <input type="button" value="반품신청">
+                        </td>
+               
+                        
+                      </tr>
+                      </c:forEach>
+                      
+                
+                        <script type="text/javascript">
+// 						replyNum 값을 이벤트 처리시 전달 받아 값을 처리
+						
+						function reply(${product.product_idx}) {
+							// 답변 기능
+							// 댓글 번호를 새로운 윈도우 창으로 가져가 댓글 번호 정보 비교
+								window.name="parentForm";
+								document.open("/reviewForm?product_idx="+${product.product_idx}+"replyForm","width=750, height=200");
+	  					}
+						</script>
+                        
+                        
+                        
                         </td>
                       </tr>
                     </tbody>

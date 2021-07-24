@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mapper.OrderListMapper">
+
+	<select id="getOrderList" resultType="com.itwillbs.domain.OrderListBean" >
+		SELECT 
+			order_idx,    
+			product_name,
+		    order_status
+			
+			FROM orderlist, order_detail, product
+			WHERE 
+			order_idx = order_detail_order_idx
+		    AND
+		    order_member_email = #{order_member_email}
+	</select>	
+	
+	
+	
+</mapper>

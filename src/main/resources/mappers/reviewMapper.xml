@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mapper.ReviewMapper">
+
+  <insert id="insertReview">
+  	insert into review 
+  	(review_email,
+  	review_idx,
+  	review_product_idx,
+  	review_subject,
+  	review_content,
+  	review_image,
+  	review_star,
+  	review_date
+  	) 
+  	
+  	values
+  	(#{review_email},
+  	#{member_password},
+  	#{review_idx},
+  	#{review_product_idx},
+  	#{review_subject},
+  	#{review_content},
+  	#{review_image},
+  	#{review_star},
+  	#{review_date})
+  </insert>
+  
+</mapper>
