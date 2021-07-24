@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +18,13 @@
   
 
   </head>
-  <body> 
+  <body>
+<!--   session 값 없을 때 로그인 페이지로 이동 -->
+<%--   <c:choose> --%>
+<%-- 	<c:when test="${ empty sessionScope }"> --%>
+<%-- 		<c:redirect url="login"></c:redirect> --%>
+<%-- 	</c:when> --%>
+<%-- `</c:choose>  --%>
    <!-- wpf loader Two -->
     <div id="wpf-loader-two">          
       <div class="wpf-loader-two-inner">
@@ -68,24 +75,14 @@
                     </thead>
                     <!-- 쿠폰 목록 나열 -->
                     <tbody>
-                      <tr>
-                        <td>WELCOME</td>
-                        <td>3000원</td>
-                        <td>2021.07.13</td>
-                        <td>2021.07.20</td>
-                      </tr>
-                      <tr>
-                        <td>SUMMERSUMMER</td>
-                        <td>2000원</td>
-                        <td>2021.07.15</td>
-                        <td>2021.08.05</td>
-                      </tr>
-                      <tr>
-                        <td>LOVEPURFUME</td>
-                        <td>1000원</td>
-                        <td>2021.07.10</td>
-                        <td>2021.07.31</td>
-                      </tr>
+                    	<c:forEach var="couponInfoList" items="${couponInfoList}">
+	                      <tr>
+	                        <td>${couponInfoList.coupon_name}</td>
+	                        <td>${couponInfoList.coupon_price}원</td>
+	                        <td>${couponInfoList.coupon_date}</td>
+	                        <td>${couponInfoList.coupon_expireDate}</td>
+	                      </tr>
+                     	</c:forEach>
                     </tbody>
                   </table>
             </div>

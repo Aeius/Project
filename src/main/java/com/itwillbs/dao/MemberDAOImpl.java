@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
 
 @Repository
@@ -41,6 +42,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public void updateMember(MemberBean memberBean) {
 		sqlSession.update(namespace + ".updateMember", memberBean);
 	}
+
 	
 	@Override
 	public void deleteMember(MemberBean memberBean) {
@@ -48,5 +50,18 @@ public class MemberDAOImpl implements MemberDAO{
 		sqlSession.delete(namespace + ".deleteMember", memberBean);
 		
 	}
+
+
+	@Override
+	public String getCouponList(String member_email) {
+		return sqlSession.selectOne(namespace + ".getCouponList", member_email);
+	}
+
+	@Override
+	public CouponBean getCouponInfo(int coupon_idx) {
+		return sqlSession.selectOne(namespace + ".getCouponInfo", coupon_idx);
+	}
+
+
 
 }

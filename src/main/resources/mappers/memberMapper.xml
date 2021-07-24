@@ -36,11 +36,26 @@
   </insert>
   
   <update id="updateMember">
-  	update member set member_name = #{member_name}, member_phone = #{member_phone}, member_post = #{member_post}, member_address = #{member_address} WHERE member_email = #{member_email}
+  	update member set 
+	  	member_name = #{member_name}, 
+	  	member_phone = #{member_phone},
+		member_post = #{member_post}, 
+		member_address = #{member_address} 
+	WHERE member_email = #{member_email}
   </update>
   
   <delete id="deleteMember">
   	delete from member where member_email=#{member_email}
   </delete>
+  
+  <select id="getCouponList" resultType="String">
+  	select member_coupon from member where member_email = #{member_email}
+  </select>
+  
+  <select id="getCouponInfo" resultType="com.itwillbs.domain.CouponBean">
+  	SELECT coupon_idx, coupon_name, coupon_price, coupon_status, coupon_date, 
+  		   DATE_ADD(coupon_date, INTERVAL coupon_expire DAY) as "coupon_expireDate"
+	FROM coupon WHERE coupon_idx = #{coupon_idx};
+  </select>
   
 </mapper>

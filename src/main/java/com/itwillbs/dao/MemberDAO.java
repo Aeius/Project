@@ -1,5 +1,6 @@
 package com.itwillbs.dao;
 
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
 
 public interface MemberDAO {
@@ -13,4 +14,10 @@ public interface MemberDAO {
 	public void updateMember(MemberBean memberBean);
 	
 	public void deleteMember(MemberBean memberBean);
+
+	public String getCouponList(String member_email);
+
+	public CouponBean getCouponInfo(int coupon_idx);
+
+
 }

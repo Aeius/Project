@@ -1,5 +1,7 @@
 package com.itwillbs.controller;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MemberServiceImpl;
@@ -34,7 +37,7 @@ public class MemberController {
 			session.setAttribute("member_email", mb.getMember_email());
 		}else {
 			model.addAttribute("msg","입력하신 정보는 틀립니다.");
-			return "/member/msg";
+			return "dailyShop/member/msg";
 		}
 		return "redirect:/";
 	}
@@ -44,7 +47,6 @@ public class MemberController {
 	public String update(HttpSession session, Model model) {
 		String member_email = (String)session.getAttribute("member_email");
 		MemberBean memberBean = memberService.getMember(member_email);
-		System.out.println(memberBean);
 		model.addAttribute("member", memberBean);
 		return "/dailyShop/member/updateForm";
 	}
@@ -57,7 +59,7 @@ public class MemberController {
 			memberService.updateMember(memberBean);
 		}else {
 			model.addAttribute("msg","입력하신 정보가 일치하지 않습니다.");
-			return "/member/msg";
+			return "dailyShop/member/msg";
 		}
 		return "redirect:/update.sh";
 	}
@@ -82,6 +84,7 @@ public class MemberController {
 		//  /member/login 가상주소 이동
 		return "redirect:/login.sh";
 	}
+
 	//-----------------------------------------------------------------  회원삭제 ----------------------------------------------------
 	@RequestMapping(value = "/delete.sh", method = RequestMethod.GET)
 	public String delete() {
@@ -109,4 +112,16 @@ public class MemberController {
 		}
 		
 	}
+
+	
+	//---------------------------------------------------------------  쿠폰내역 ------------------------------------------------------------
+	@RequestMapping(value = "/coupon.sh", method = RequestMethod.GET)
+	public String coupon(HttpSession session, Model model) {
+		String member_email = (String)session.getAttribute("member_email");
+		ArrayList<CouponBean> couponInfoList = memberService.getCouponList(member_email);
+		model.addAttribute("couponInfoList", couponInfoList);
+		return "/dailyShop/member/myCoupon";
+	}
+
+
 }

@@ -2,12 +2,14 @@ package com.itwillbs.service;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.dao.MemberDAO;
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
 
 @Service
@@ -46,11 +48,27 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("MemberService - updateMember");
 		memberDAO.updateMember(memberBean);
 	}
+
 	
 	@Override
 	public void deleteMember(MemberBean memberBean) {
 		System.out.println("MemberService - deleteMember");
 		memberDAO.deleteMember(memberBean);
 	}
+
+
+	@Override
+	public ArrayList<CouponBean> getCouponList(String member_email) {
+		String couponList = memberDAO.getCouponList(member_email);
+		String[] arrCouponList = couponList.split("/");
+		ArrayList<CouponBean> couponInfoList = new ArrayList<CouponBean>();
+		for(int i = 0; i < arrCouponList.length; i++) {
+			couponInfoList.add(memberDAO.getCouponInfo(Integer.parseInt(arrCouponList[i])));
+			System.out.println(couponInfoList.toString());
+		}
+		return couponInfoList;
+	}
+	
+
 
 }
