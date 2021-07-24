@@ -34,6 +34,8 @@ public class WishListController {
 		wishListBean.setProduct_idx(product_idx);  // 현재 접근한 상세페이지의 상품번호 (product_idx) 파라미터 가져오기
 		wishListBean.setWishList_member_email((String)session.getAttribute("member_email")); // 세션에있는(로그인되어있는) 회원이메일정보 불러오기 
 		
+		// SQL구문 만능문자에 가져갈 데이터를 Bean에 담아서 전달하는 과정 
+		
 		WishListBean checkWishList =  wishListService.checkWishList(wishListBean);
 //		System.out.println("WishListController - chekcWishList() 리턴 값 : " + checkWishList);
 		int wishListCount = Integer.parseInt(checkWishList.getWishlistcount());  
