@@ -22,12 +22,12 @@
 		alert("찜버튼");
 		$.ajax('<c:url value="/pushWishList.sh" />',{
 			success:function(rdata){
-				if(rdata == "하트생성"){
+				if(rdata == "onHeart"){
 					rdata = "♥";
 				} else {
 					rdata = "♡";
 				}
-				$('#wishlistbtn').val("찜"+rdata);
+				$('#wishlistbtn').val(rdata);
 			}
 		});		 
 	 });
@@ -122,7 +122,7 @@
                       <a class="aa-add-to-cart-btn" href="#">바로구매</a>
                       <a class="aa-add-to-cart-btn" href="#">장바구니 담기</a>
                       <input type="button" class="aa-add-to-cart-btn" value="찜" name="wishlistbtn" id="wishlistbtn">
-<%--                       <a class="aa-add-to-cart-btn" href="pushWishList.sh?product_idx=${pd.product_idx }" > 찜 ${pd.product_likecount }</a> --%>
+                      <a class="aa-add-to-cart-btn" href="pushWishList.sh?product_idx=${pd.product_idx }" > 찜 ${pd.product_likecount }</a>
 <!--                       <a class="aa-add-to-cart-btn" href="#">Compare</a> -->
                     </div>
                     

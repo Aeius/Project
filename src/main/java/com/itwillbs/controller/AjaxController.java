@@ -53,13 +53,13 @@ public class AjaxController {
 				if(wishListCount > 0) {
 //				System.out.println("checkWishList > 0 true 일때");
 					wishListService.deleteWishList(wishListBean);
-					result = "하트해제";
+					result = "offHeart";
 				} else {
 //				System.out.println("checkWishList > 0 false 일때");
 					wishListService.insertWishList(wishListBean);
-					result = "하트생성";
+					result = "onHeart";
 				}
-				
+				System.out.println(result);
 				entity = new ResponseEntity<String>(result, HttpStatus.OK);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
