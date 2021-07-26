@@ -3,17 +3,19 @@ package com.itwillbs.controller;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
 import com.itwillbs.service.MemberService;
-import com.itwillbs.service.MemberServiceImpl;
 
 @Controller
 public class MemberController {
@@ -22,6 +24,11 @@ public class MemberController {
 	private MemberService memberService;
 
 //	가상주소  http://localhost:8080/myweb2/member/insert
+	//---------------------------------------------------------------  메인 페이지 ------------------------------------------------------------
+	@RequestMapping(value = "/main.sh", method = RequestMethod.GET)
+	public String main() {
+		return "/dailyShop/member/index";
+	}
 		
 	//---------------------------------------------------------------  로그인 ------------------------------------------------------------
 	@RequestMapping(value = "/login.sh", method = RequestMethod.GET)
@@ -37,7 +44,9 @@ public class MemberController {
 			session.setAttribute("member_email", mb.getMember_email());
 		}else {
 			model.addAttribute("msg","입력하신 정보는 틀립니다.");
-			return "dailyShop/member/msg";
+
+			return "/dailyShop/member/msg";
+
 		}
 		return "redirect:/";
 	}
@@ -58,8 +67,10 @@ public class MemberController {
 			System.out.println("memberController - updateMember");
 			memberService.updateMember(memberBean);
 		}else {
-			model.addAttribute("msg","입력하신 정보가 일치하지 않습니다.");
-			return "dailyShop/member/msg";
+
+			model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
+			return "/dailyShop/member/msg";
+
 		}
 		return "redirect:/update.sh";
 	}
@@ -72,7 +83,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/memberJoinPro.sh", method = RequestMethod.POST)
-	public String memberJoinPro(MemberBean mb) {
+	public String memberJoinPro(MemberBean memberBean, HttpServletResponse response) {
 		// 의존관계 주입(DI) :스프링에서 객체생성 방식
 		// root-context.xml에서 MemberServiceImpl을 객체생성 
 		// 필요로 하는 MemberController에 set메서드 통해서 
@@ -80,7 +91,10 @@ public class MemberController {
 		
 //		MemberService memberService=new MemberServiceImpl();
 		// 회원가입 메서드 호출
-		memberService.insertMember(mb);
+		boolean isRegisted = memberService.insertMember(memberBean);
+		if(isRegisted) {
+			return "redirect:/welcomeMail.sh/" + memberBean.getMember_email();
+		}
 		//  /member/login 가상주소 이동
 		return "redirect:/login.sh";
 	}
@@ -113,16 +127,6 @@ public class MemberController {
 		
 	}
 
-	
-	//---------------------------------------------------------------  쿠폰내역 ------------------------------------------------------------
-	@RequestMapping(value = "/coupon.sh", method = RequestMethod.GET)
-	public String coupon(HttpSession session, Model model) {
-		String member_email = (String)session.getAttribute("member_email");
-		ArrayList<CouponBean> couponInfoList = memberService.getCouponList(member_email);
-		model.addAttribute("couponInfoList", couponInfoList);
-		return "/dailyShop/member/myCoupon";
-	}
-	
 	//----------------------------------------------계정찾기 페이지로 이동--------------------------------------------------
 	
 	@RequestMapping(value = "/find.sh", method = RequestMethod.GET)
@@ -159,24 +163,47 @@ public class MemberController {
 
 	
 	
-	//----------------------------------------------메인 페이지로 이동--------------------------------------------------
-	
-	@RequestMapping(value = "/main.sh", method = RequestMethod.GET)
-	public String main() {
-		//  /WEB-INF/views/member/main.jsp 이동
-		return "/dailyShop/member/index";
-	}
 	
 	
 	//-------------------------------------------------- 로그아웃-------------------------------------------------------
-	
 	
 	@RequestMapping(value = "/logout.sh", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
 		return "redirect:/main.sh";
-		
+	}
+
+	//---------------------------------------------------------------  쿠폰 목록 조회 ------------------------------------------------------------
+	@RequestMapping(value = "/coupon.sh", method = RequestMethod.GET)
+	public String coupon(HttpSession session, Model model) {
+		String member_email = (String)session.getAttribute("member_email");
+		MemberBean memberBean = memberService.getMember(member_email);
+		model.addAttribute("member", memberBean);
+		ArrayList<CouponBean> couponInfoList = memberService.getMemberCouponList(member_email);
+		model.addAttribute("couponInfoList", couponInfoList);
+		return "/dailyShop/member/myCoupon";
+	}
+	
+	//---------------------------------------------------------------  쿠폰 등록 ------------------------------------------------------------
+	@RequestMapping(value = "/couponPro.sh", method = RequestMethod.POST)
+	public String couponPro(HttpSession session, HttpServletRequest request, Model model) {
+		String inputCouponCode = request.getParameter("inputCouponCode");
+		String member_email = (String)session.getAttribute("member_email");
+		boolean isRegisted = memberService.registMemberCoupon(inputCouponCode, member_email);
+		if(!isRegisted) {
+			model.addAttribute("msg","쿠폰 등록 실패.");
+			return "/dailyShop/member/msg";
+		}
+		return "redirect:/coupon.sh";
+	}
+	
+	//---------------------------------------------------------------  가입 축하 메일 ------------------------------------------------------------
+	@RequestMapping(value = "/welcomeMail.sh/{member_email}", method = RequestMethod.GET)
+	public String welcomeMail(@PathVariable String member_email) {
+		MemberBean memberBean = memberService.getMember(member_email);
+		memberService.sendWelcomeMail(memberBean);
+		return "redirect:/main.sh";
 	}
 
 }

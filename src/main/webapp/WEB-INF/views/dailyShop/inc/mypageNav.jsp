@@ -9,7 +9,7 @@
 </head>
 <body>
  <section id="aa-catg-head-banner">
-    <img src="<C:url value='/resources/img/fashion/조말론5.gif'/>" alt="fashion img">
+    <img src="<c:url value='/resources/img/fashion/조말론5.gif'/>" alt="fashion img">
     <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
@@ -19,8 +19,8 @@
           <li><a href="./orderList.jsp">주문내역</a></li>
           <li><a href="./wishlist.jsp">찜목록</a></li> 
           <li><a href="./myReview.jsp">내 리뷰</a></li>    
-          <li><a href="./myCoupon.jsp">혜택</a></li> 
-          <li><a href="./updateForm.jsp">내 정보</a></li>    
+          <li><a href="<c:url value='/coupon.sh'/>">혜택</a></li> 
+          <li><a href="<c:url value='/update.sh'/>">내 정보</a></li>    
           <li><a href="./subscribe.jsp">구독 정보</a></li>   
         </ol>
       </div>

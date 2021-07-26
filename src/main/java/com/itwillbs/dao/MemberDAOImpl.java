@@ -1,7 +1,12 @@
 package com.itwillbs.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import javax.inject.Inject;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -18,11 +23,11 @@ public class MemberDAOImpl implements MemberDAO{
 	private static final String namespace = "com.itwillbs.mapper.MemberMapper";
 
 	@Override
-	public void insertMember(MemberBean mb) {
+	public int insertMember(MemberBean mb) {
 		System.out.println("MemberDAOImpl insertMember");
 //		sqlSession.insert(sql 구문, 값);
-		sqlSession.insert(namespace + ".insertMember", mb);
-		
+		int insertCount = sqlSession.insert(namespace + ".insertMember", mb);
+		return insertCount;
 	}
 
 	@Override
@@ -65,10 +70,29 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
+	public String getMemberCouponList(String member_email) {
+		return sqlSession.selectOne(namespace + ".getMemberCouponList", member_email);
+	}
+
+	@Override
 	public CouponBean getCouponInfo(int coupon_idx) {
 		return sqlSession.selectOne(namespace + ".getCouponInfo", coupon_idx);
 	}
 
+	@Override
+	public List<CouponBean> getCouponList() {
+		return sqlSession.selectList(namespace + ".getCouponList");
+	}
 
-
+	@Override
+	public void registMemberCoupon(String member_email, int coupon_idx) {
+		System.out.println("MemberDAOImpl - registMemberCoupon");
+		String strCouponIdx = Integer.toString(coupon_idx);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("member_email", member_email);
+		map.put("coupon_idx",strCouponIdx);
+		System.out.println(map);
+		sqlSession.update(namespace + ".updateMemberCoupon", map);
+	}
+	
 }

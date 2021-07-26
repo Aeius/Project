@@ -2638,6 +2638,7 @@ img {
 .aa-login-form label {
   font-weight: normal;
   margin-top: 8px;
+  display: block;
 }
 .aa-login-form label span {
   color: red;

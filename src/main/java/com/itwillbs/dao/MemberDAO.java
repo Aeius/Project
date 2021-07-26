@@ -1,11 +1,13 @@
 package com.itwillbs.dao;
 
+import java.util.List;
+
 import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
 
 public interface MemberDAO {
 
-	public void insertMember(MemberBean mb);
+	public int insertMember(MemberBean mb);
 
 	public MemberBean userCheck(MemberBean mb);
 
@@ -20,6 +22,12 @@ public interface MemberDAO {
 
 	public String getCouponList(String member_email);
 
+	public String getMemberCouponList(String member_email);
+
 	public CouponBean getCouponInfo(int coupon_idx);
+
+	public List<CouponBean> getCouponList();
+
+	public void registMemberCoupon(String member_email, int coupon_idx);
 
 }

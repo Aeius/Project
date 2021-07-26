@@ -25,6 +25,9 @@
 <%-- 		<c:redirect url="login"></c:redirect> --%>
 <%-- 	</c:when> --%>
 <%-- `</c:choose>  --%>
+<%-- <c:if test="${empty sessionScope.member_email}"> --%>
+<%-- 	<c:redirect url="/login.sh"></c:redirect> --%>
+<%-- </c:if> --%>
    <!-- wpf loader Two -->
     <div id="wpf-loader-two">          
       <div class="wpf-loader-two-inner">
@@ -56,21 +59,34 @@
           <!-- 쿠폰 등록 추가 -->
           <!-- 페이징 지우기 -->
           <h2>혜택</h2>
-            <h3>나의 보유 포인트 : <%=1000 %></h3>
+            <h3>나의 보유 포인트 : ${member.member_point}</h3>
             <div class="aa-product-catg-body">
-            <form action="#" method="post">
-            <input type="text" value="" name="coupon" placeholder="쿠폰번호를 입력">
+            <form action="<c:url value='/couponPro.sh'/>" method="post">
+            <input type="text" name="inputCouponCode" placeholder="쿠폰번호를 입력">
             <input type="submit" value="쿠폰등록"> 
             </form>
             
             <br>
                   <table id="example1" class="table table-bordered table-striped">
-                   <thead>
-                      <tr>
-                        <th>쿠폰코드</th>
-                        <th>할인액</th>
-                        <th>발급일</th>
-                        <th>만료일</th>
+                  <tr>
+                  	<td>쿠폰명</td>
+                  	<td>할인금액</td>
+                  	<td>사용기한</td>
+                  	<td>사용여부</td>
+					</tr>
+						<c:forEach var="couponInfoList" items="${couponInfoList}" varStatus="status">
+                   		<tr>
+							<td>${couponInfoList.coupon_name}</td>
+							<td>${couponInfoList.coupon_price}원</td>
+							<td>${couponInfoList.coupon_date} ~ ${couponInfoList.coupon_expireDate}</td>
+							<td><c:choose>
+								    <c:when test="${couponInfoList.coupon_status eq false}">
+								    	사용 완료
+								    </c:when>         
+								    <c:otherwise>
+								    	사용 가능
+								    </c:otherwise>
+							 	</c:choose></td>
                       </tr>
                     </thead>
                     <!-- 쿠폰 목록 나열 -->
@@ -84,6 +100,7 @@
 	                      </tr>
                      	</c:forEach>
                     </tbody>
+					</c:forEach>
                   </table>
             </div>
           </div>
