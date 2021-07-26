@@ -115,7 +115,7 @@
 
 					<!-- 제품 수량 -->
                     <div class="aa-prod-quantity">
-                    수량 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:<input class="aa-prod-category" type="number" value="1" min="1">
+                    수량 :<input class="aa-prod-category" type="number" value="1" min="1">
                     </div>
             
                     <div class="aa-prod-view-bottom">
@@ -153,25 +153,28 @@
                 
                 </div>
                 
-                <!-- 리뷰 -->
+                    <!-- 리뷰 -->
                 <div class="tab-pane fade in active3" id="review">
                  <div class="aa-product-review-area">
                  <!-- 총 리뷰 총수 -->
 <!--                    <h4>[2 Reviews for T-Shirt]</h4>  -->
                    <ul class="aa-review-nav">
+                   
+<%--                     <c:forEach var="reviewList" items="${reviewList}">  --%>
                      <li>
                         <div class="media">
                           <div class="media-body">
                           <div class="media-lef=">
                             <a href="#">
-                            <!-- 리뷰 작성시 올린 상품 이미지 300px, 300px -->
-                              <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
+                            <!-- 상품 이미지 300px, 300px -->
+                                <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
                               <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
                             </a>
                           </div>
                          
                          <!-------------------------------  리뷰 작성자, 작성일  --------------------------------------->
-                            <h4 class="media-heading"><strong>리뷰작성자</strong> - <span>March 26, 2016 작성일</span></h4>
+                         	<h4 class="media-heading"><strong>제목 : ${reviewList.review_subject}</strong></h4>
+                            <h4 class="media-heading"><strong>작성자 : ${reviewList.review_email}</strong> - <span>작성일 : ${reviewList.review_date}</span></h4>
                             <div class="aa-product-rating">
                            <!-------------------------------  별점  --------------------------------------->
                               <span class="fa fa-star"></span>
@@ -181,19 +184,20 @@
                               <span class="fa fa-star-o"></span>
                             </div>
                           <!-------------------------------  리뷰내용  --------------------------------------->
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> 
-                                  
+<%--                             <p>${reviewList.review_content}</p> --%>
+							
+                            <p><textarea rows="10px" cols="55px" name="review_content" readonly="readonly">${reviewList.review_content}</textarea></p>
+                        
                             <a href="#" class="reply-btn">삭제</a>
                             <a href="#" class="reply-btn">수정</a>
                           </div>
+                          
                         </div>
                       </li>
+<%--                     </c:forEach> --%>
                    </ul>
-                   </div>
-                   </div>
+                  </div>
+                </div>
                     <!-- 페이징 부분 -->
                  <div class="aa-blog-archive-pagination" align="center">
                       <nav>

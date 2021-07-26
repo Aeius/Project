@@ -15,7 +15,17 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  
+    
+    
+      				<script type="text/javascript">
+						
+						function review(product_idx){
+							
+							// 댓글 번호를 새로운 윈도우 창으로 가져가 댓글 번호 정보 비교
+								window.name="parentForm"
+								document.open("<c:url value='/reviewForm.sh?product_idx="+product_idx+"'/>","replyForm","width=720, height=800");
+	  					}
+						</script>
 
   </head>
   <body> 
@@ -48,8 +58,9 @@
           <div class="aa-product-catg-content">
           <br><br>
             <div class="aa-product-catg-body">
-                  <table id="example1" class="table table-bordered table-striped">
+            <form method="post" name="orderListForm" enctype="multipart/form-data">
                   <h2>주문내역</h2>
+                  <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>주문번호</th>
@@ -67,14 +78,19 @@
                         <td>${orderList.order_status}</td>
                         <td><input type="button" value="${orderList.order_status}">
                         <input type="button" value="리뷰쓰기" onclick="review(${product.product_idx})">
+                        <input type="button" value="리뷰쓰기" onclick="review( ${orderList.product_idx} )">
                         <input type="button" value="반품신청">
+                       
                         </td>
                
                         
                       </tr>
                       </c:forEach>
                       
-                
+                	<c:forEach var="" items="">
+                	  <tr>
+                	    <td>
+                	
                         <script type="text/javascript">
 // 						replyNum 값을 이벤트 처리시 전달 받아 값을 처리
 						
@@ -85,13 +101,14 @@
 								document.open("/reviewForm?product_idx="+${product.product_idx}+"replyForm","width=750, height=200");
 	  					}
 						</script>
-                        
-                        
-                        
+						
                         </td>
-                      </tr>
+                       </tr>
+                      </c:forEach>
+                        
                     </tbody>
                   </table>
+                  </form>
         		 <div class="aa-blog-archive-pagination" align="center">
                       <nav>
                         <ul class="pagination">

@@ -16,16 +16,55 @@
   	review_date
   	) 
   	
-  	values
-  	(#{review_email},
-  	#{member_password},
-  	#{review_idx},
+  	values(
+  	#{review_email},
   	#{review_product_idx},
   	#{review_subject},
   	#{review_content},
   	#{review_image},
   	#{review_star},
-  	#{review_date})
+  	#{review_date}
+  	)
   </insert>
   
+  <select id="getReviewList" resultType="com.itwillbs.domain.ReviewBean" >
+		SELECT 
+			order_member_email,
+			order_idx,    
+			product_name,
+		    order_status,
+            product_idx,
+            review_idx,
+			review_email,
+			review_product_idx,
+			review_subject,
+			review_content,
+            review_image,
+			review_star,
+			review_date
+ 
+			FROM orderlist, order_detail, product, review
+			WHERE 
+			product_idx = order_detail_product_idx
+		    AND
+		    order_member_email = #{review_email}
+	</select>
+	
+	 <select id="getReview" resultType="com.itwillbs.domain.ReviewBean" >
+		SELECT * FROM review WHERE review_product_idx = #{review_product_idx}
+	</select>
+	
+	<update id="updateReview">
+		UPDATE review SET
+			review_subject = #{review_subject},
+		    review_content = #{review_content},
+		    review_image = #{review_image},
+		    review_star = #{review_star}
+		WHERE review_product_idx = #{review_product_idx}
+	</update>
+	
+	<delete id="deleteReview">
+		DELETE FROM review where review_product_idx = #{review_product_idx}
+	</delete>
+
 </mapper>

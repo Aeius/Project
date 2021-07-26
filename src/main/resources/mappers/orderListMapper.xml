@@ -8,7 +8,10 @@
 		SELECT 
 			order_idx,    
 			product_name,
-		    order_status
+		    order_status,
+		    product_idx,
+		    order_detail_order_idx,
+		    order_member_email
 			
 			FROM orderlist, order_detail, product
 			WHERE 
@@ -16,7 +19,5 @@
 		    AND
 		    order_member_email = #{order_member_email}
 	</select>	
-	
-	
 	
 </mapper>
