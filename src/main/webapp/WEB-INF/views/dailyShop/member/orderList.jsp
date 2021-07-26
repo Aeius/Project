@@ -77,33 +77,12 @@
                         <td>${orderList.product_name}</td>
                         <td>${orderList.order_status}</td>
                         <td><input type="button" value="${orderList.order_status}">
-                        <input type="button" value="리뷰쓰기" onclick="review(${product.product_idx})">
                         <input type="button" value="리뷰쓰기" onclick="review( ${orderList.product_idx} )">
                         <input type="button" value="반품신청">
                        
                         </td>
-               
-                        
                       </tr>
-                      </c:forEach>
-                      
-                	<c:forEach var="" items="">
-                	  <tr>
-                	    <td>
-                	
-                        <script type="text/javascript">
-// 						replyNum 값을 이벤트 처리시 전달 받아 값을 처리
-						
-						function reply(${product.product_idx}) {
-							// 답변 기능
-							// 댓글 번호를 새로운 윈도우 창으로 가져가 댓글 번호 정보 비교
-								window.name="parentForm";
-								document.open("/reviewForm?product_idx="+${product.product_idx}+"replyForm","width=750, height=200");
-	  					}
-						</script>
-						
-                        </td>
-                       </tr>
+                      	
                       </c:forEach>
                         
                     </tbody>

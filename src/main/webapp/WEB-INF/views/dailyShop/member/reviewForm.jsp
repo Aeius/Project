@@ -111,7 +111,7 @@
                 <div class="aa-myaccount-register">                 
                  <h4>리뷰등록</h4>
                  
-                 <form action='<c:url value="reviewWritePro.sh" />' id="fr" class="aa-login-form" method="post">
+                 <form action='<c:url value="reviewWritePro.sh " />' id="fr" class="aa-login-form" method="post" enctype="multipart/form-data">
                  	<input type="hidden" name="review_product_idx" value="${product_idx}">
 	  				
                    <label for="name">평점</label>

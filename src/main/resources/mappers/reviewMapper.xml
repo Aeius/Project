@@ -7,7 +7,6 @@
   <insert id="insertReview">
   	insert into review 
   	(review_email,
-  	review_idx,
   	review_product_idx,
   	review_subject,
   	review_content,
