@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -25,6 +25,7 @@
         
 
         <!-- Main content -->
+        
         <section class="content">
           <div class="row">
             <div class="col-xs-12">
@@ -46,8 +47,8 @@
                         <td>${nb.notice_idx}</td>
                         <td>${nb.notice_subject}</td>
                         <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
+                     <input type="button" value="보기 및 수정" onclick="location.href='<c:url value="/noticeInfo.ad?notice_idx=${nb.notice_idx}"/>'">
+					 <input type="button" value="삭제" onclick="location.href='<c:url value="/deleteNoticePro.ad?notice_idx=${nb.notice_idx}"/>'">					
                         </td>
                       </tr>
                       </c:forEach> 

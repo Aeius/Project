@@ -49,5 +49,19 @@
 		select * from notice
 	</select>
 
+	<delete id="deleteNotice">
+		delete from notice where notice_idx=#{notice_idx}
+	</delete>
+
+	<select id="getNotice"
+		resultType="com.itwillbs.domain.NoticeBean">
+		select notice_subject, notice_content from notice where notice_idx = #{notice_idx}
+	</select>
+
 
 </mapper>
+
+
+
+
+

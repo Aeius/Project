@@ -3,6 +3,7 @@ package com.itwillbs.dao;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -30,7 +31,18 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<NoticeBean> getNoticeList() {
-		return sqlSession.selectList(namespace+".getNoticeList");
+		return sqlSession.selectList(namespace + ".getNoticeList");
 	}
+
+	@Override
+	public void deleteNotice(int notice_idx) {
+		sqlSession.delete(namespace + ".deleteNotice", notice_idx);
+	}
+
+	@Override
+	public NoticeBean getNotice(int notice_idx) {
+		return sqlSession.selectOne(namespace + ".getNotice", notice_idx);
+	}
+	
 	
 }

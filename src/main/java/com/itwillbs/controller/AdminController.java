@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.security.Provider.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -95,25 +96,44 @@ public class AdminController {
 	}
 
 	// ------------------ 공지사항 등록 ---------------------
-	@RequestMapping(value = "/noticeWrite.ad", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/noticeWrite.ad", method = RequestMethod.GET)
 	public String noticeWrite() {
 		return "/AdminLTE-master/pages/noticeWrite";
 	}
 
-	@RequestMapping(value = "/noticeWritePro.ad", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/noticeWritePro.ad", method = RequestMethod.POST)
 	public String noticeWritePro(NoticeBean noticeBean) {
 		adminService.insertNotice(noticeBean);
 		return "redirect:/noticeList.ad";
 	}
+	// pages/noticeWrite.jsp -> input 태그 hidden 속성으로 notice_name = "관리자" 들어가 있습니다.
 
-	// ------------------ 공지사항 목록 ---------------------
-
+	// ------------------ 공지사항 목록 출력 ---------------------
 	@RequestMapping(value = "/noticeList.ad", method = RequestMethod.GET)
 	public String NoticeList(HttpSession session, Model model) {
 
 		List<NoticeBean> nb = adminService.getNoticeList();
 		model.addAttribute("NoticeList", nb);
 		return "/AdminLTE-master/pages/noticeList";
+	}
+
+	// ------------------ 공지사항 삭제 ---------------------
+	@RequestMapping(value = "/deleteNoticePro.ad", method = RequestMethod.GET)
+	public String deleteNoticePro(HttpServletRequest request) {
+		int notice_idx = Integer.parseInt(request.getParameter("notice_idx"));
+		adminService.deleteNotice(notice_idx);
+		return "redirect:/noticeList.ad";
+	}
+
+	// ------------------ 공지사항 상세 조회 및 수정(미완성) ---------------------
+	@RequestMapping(value = "/noticeInfo.ad", method = RequestMethod.GET)
+	public String noticeInfo(Model model, HttpServletRequest request) {
+
+		int notice_idx = Integer.parseInt(request.getParameter("notice_idx"));
+		NoticeBean nb = adminService.getNotice(notice_idx);
+		model.addAttribute("nb", nb);
+		System.out.println(notice_idx);
+		return "/AdminLTE-master/pages/noticeInfo";
 	}
 
 }

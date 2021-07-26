@@ -3,8 +3,10 @@ package com.itwillbs.service;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.itwillbs.dao.AdminDAO;
 import com.itwillbs.domain.NoticeBean;
@@ -29,6 +31,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<NoticeBean> getNoticeList() {
 		return adminDAO.getNoticeList();
+	}
+
+	@Override
+	public void deleteNotice(int notice_idx) {
+		adminDAO.deleteNotice(notice_idx);
+	}
+
+	@Override
+	public NoticeBean getNotice(int notice_idx) {
+		return adminDAO.getNotice(notice_idx);
 	}
 
 
