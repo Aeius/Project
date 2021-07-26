@@ -43,24 +43,25 @@ public class AdminController {
 	private ProductService productService;
 
 	// ------------------ 상품등록 ---------------------
-	// -> 아직 안됨 / 수업시간에 파일 등록 배운 뒤 적용 예정
-	@RequestMapping(value = "/productAdd.ad", method = RequestMethod.GET)
-	public String productAdd() {
-		return "/AdminLTE-master/pages/productAdd";
-	}
+		// -> 아직 안됨 / 수업시간에 파일 등록 배운 뒤 적용 예정
+		@RequestMapping(value = "/productAdd.ad", method = RequestMethod.GET)
+		public String productAdd() {
+			return "/AdminLTE-master/pages/productAdd";
+		}
 
-	@RequestMapping(value = "/productAddPro.ad", method = RequestMethod.POST)
-	public String productAddPro(ProductBean productBean) {
-		adminService.insertProduct(productBean);
-		return "redirect:/productList.ad";
-	}
+		@RequestMapping(value = "/productAddPro.ad", method = RequestMethod.POST)
+		public String productAddPro(ProductBean productBean) {
+			adminService.insertProduct(productBean);
+			return "redirect:/productList.ad";
+		}
 
-	// ------------------ 상품목록 ---------------------
-	@RequestMapping(value = "/productList.ad", method = RequestMethod.GET)
-	public String productList() {
-		// (임시 확인용)
-		return "/AdminLTE-master/pages/productList";
-	}
+		// ------------------ 상품목록 ---------------------
+		@RequestMapping(value = "/productList.ad", method = RequestMethod.GET)
+		public String productList(Model model) {
+			ArrayList<ProductBean> allList = productService.getProductAllList();
+			model.addAttribute("allList", allList);
+			return "/AdminLTE-master/pages/productList";
+		}
 
 	// ------------------ 주문목록 ---------------------
 	@RequestMapping(value = "/orderList.ad", method = RequestMethod.GET)
@@ -94,6 +95,36 @@ public class AdminController {
 
 		return "/AdminLTE-master/pages/orderDetail";
 	}
+	
+	// ------------------ 주문 상태 변경 ---------------------
+		@RequestMapping(value = "/orderStatusChange.ad", method = RequestMethod.POST)
+		public String orderStatusChange(HttpServletRequest request) {
+
+			int order_idx = Integer.parseInt(request.getParameter("idx"));
+			String order_status = request.getParameter("status");
+
+			OrderBean orderBean = orderService.getOrderInfo(order_idx);
+			orderBean.setOrder_status(order_status);
+			
+			orderService.updateOrderStatus(orderBean);
+
+			return "redirect:/orderList.ad";
+		}
+	
+	// ------------------ 매출 조회 ---------------------
+		@RequestMapping(value = "/chartList.ad", method = RequestMethod.GET)
+		public String chartList(Model model) {
+			ArrayList<ProductBean> allList = productService.getProductAllList();
+			model.addAttribute("allList", allList);
+			return "/AdminLTE-master/pages/chartList";
+		}
+		// ------------------ 매출 차트 ---------------------
+		@RequestMapping(value = "/chart.ad", method = RequestMethod.GET)
+		public String chart() {
+			// 차트 아직 구현 안됨 (이동 확인용)
+			return "/AdminLTE-master/pages/chart";
+		}
+
 
 	// ------------------ 공지사항 등록 ---------------------
 	@RequestMapping(value = "/noticeWrite.ad", method = RequestMethod.GET)

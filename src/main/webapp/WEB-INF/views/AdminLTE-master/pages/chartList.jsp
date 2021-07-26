@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> <!-- 포맷 설정 -->
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -33,33 +35,22 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+                      	<th>상품번호</th>
                         <th>상품명</th>
-                        <th>판매수량(개)</th>
-                        <th>판매액(만원)</th>
+                        <th>판매수량</th>
+                        <th>판매액</th>
                       </tr>
                     </thead>
                     <!-- 상품 목록 나열 -->
                     <tbody>
+                    <c:forEach var="list" items="${allList }" varStatus="status">
                       <tr>
-                        <td>향수1</td>
-                        <td>4000</td>
-                        <td>20000</td>
+                      	<td>${list.product_idx }</td>
+                        <td>${list.product_name }</td>
+                        <td>${list.product_sellcount }개</td>
+                        <td><fmt:formatNumber value="${list.product_sellcount * list.product_price}" pattern="#,###,###,###,###"/>원</td>
                       </tr>
-                      <tr>
-                        <td>향수2</td>
-                        <td>300</td>
-                        <td>1500</td>
-                      </tr>
-                      <tr>
-                        <td>향수3</td>
-                        <td>500</td>
-                        <td>2500</td>
-                      </tr>
-                      <tr>
-                        <td>향수4</td>
-                        <td>1000</td>
-                        <td>5000</td>
-                      </tr>
+                    </c:forEach>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->

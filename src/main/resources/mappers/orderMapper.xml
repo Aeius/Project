@@ -8,4 +8,12 @@
 		select * from orderlist
 	</select>	
 	
+	<select id="getOrderInfo" resultType="com.itwillbs.domain.OrderBean">
+		select * from orderlist where order_idx=#{order_idx}
+	</select>
+	
+	<update id="updateOrderStatus">
+		update orderlist set order_status=#{order_status} where order_idx=#{order_idx}
+	</update>
+	
 </mapper>

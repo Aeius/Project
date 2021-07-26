@@ -6,6 +6,13 @@
 <html>
   <!-- head -->
   <jsp:include page="../inc/head.jsp" />
+  <head>
+  <script type="text/javascript">
+  function addStatus() {
+	document.getElementById("select-body").innerHTML = "<select name="status" > <option value="">선택하세요</option> </select>"
+  }
+  </script>
+  </head>
   
   <body class="skin-blue">
     <!-- Site wrapper -->
@@ -45,36 +52,29 @@
                     </thead>
                     <!-- 상품 목록 나열 -->
                     <tbody>
-<!--                       <tr> -->
-<!--                         <td onClick="location.href='orderDetail.jsp'" style="cursor:pointer;">6</td> -->
-<!--                         <td>회원아이디6</td> -->
-<!--                         <td>배송완료</td> -->
-<!--                         <td>송장번호</td> -->
-<!--                         <td> -->
-<!--                         <select name="status" > -->
-<!-- 						    <option value="">선택하세요</option> -->
-<!-- 						    <option value="배송준비">배송준비</option> -->
-<!-- 						    <option value="배송중">배송중</option> -->
-<!-- 						    <option value="배송완료">배송완료</option> -->
-<!-- 						    <option value="반품준비">반품준비</option> -->
-<!-- 						    <option value="반품완료">반품완료</option> -->
-<!-- 						    <option value="주문취소">주문취소</option> -->
-<!-- 						</select> -->
-<!--                         <input type="button" value="확정"> -->
-<!--                         <input type="button" value="취소"> -->
-<!--                         </td> -->
-<!--                       </tr> -->
-                      
-                      <c:forEach var="allList" items="${allList }">
+                      <c:forEach var="list" items="${allList }" varStatus="status">
                       	<tr>
-                      		<td onClick="location.href='orderDetail.ad?order_idx=${allList.order_idx }'" style="cursor:pointer;">${allList.order_idx }</td>
-                      		<td>${allList.order_member_email }</td>
-                      		<td>${allList.order_status }</td>
-                      		<td>${allList.order_tracking_num }</td>
-                      		<td><input type="button" value="상태변경"></td>
+                      		<td onClick="location.href='orderDetail.ad?order_idx=${list.order_idx }'" style="cursor:pointer;">${list.order_idx }</td>
+                      		<td>${list.order_member_email }</td>
+                      		<td>${list.order_status }</td>
+                      		<td>${list.order_tracking_num }</td>
+                      		<td>
+		                    	<form action="orderStatusChange.ad" method="post">	
+  		                        <select name="status" >
+								    <option value="">선택하세요</option>
+								    <option value="배송준비">배송준비</option>
+								    <option value="배송중">배송중</option>
+								    <option value="배송완료">배송완료</option>
+								    <option value="반품준비">반품준비</option>
+								    <option value="반품완료">반품완료</option>
+								    <option value="주문취소">주문취소</option>
+								</select>	
+								<input type="hidden" name="idx" value="${list.order_idx }">
+                      			<input type="submit" value="변경">
+	                    		</form>	
+                      		</td>
                       	</tr>
                       </c:forEach>
-                      
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->

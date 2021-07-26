@@ -27,4 +27,14 @@ public class OrderDAOImpl implements OrderDAO {
 		return sqlSession.selectOne(namespace + ".getOrderDetail", order_idx);
 	}
 
+	@Override
+	public void updateOrderStatus(OrderBean orderBean) {
+		sqlSession.update(namespace + ".updateOrderStatus", orderBean);
+	}
+
+	@Override
+	public OrderBean getOrderInfo(int order_idx) {
+		return sqlSession.selectOne(namespace + ".getOrderInfo", order_idx);
+	}
+
 }

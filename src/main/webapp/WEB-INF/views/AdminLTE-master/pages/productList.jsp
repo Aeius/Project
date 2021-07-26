@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -22,7 +23,6 @@
           <h1>상품 목록</h1>
         </section>
         
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -38,155 +38,26 @@
                         <th>용량</th>
                         <th>가격</th>
                         <th>재고</th>
+                        <th>좋아요 수</th>
                         <th>관리</th>
-                        <!-- 좋아요 수 추가 -->
                       </tr>
                     </thead>
                     <!-- 상품 목록 나열 -->
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>페이지 개수 셀렉트박스랑</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>검색 박스랑 </td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>이전/다음 버튼이</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>js에 포함된 기능같은데</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>알아서 적용이 되네요</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>6</td>
-                        <td>향수이름</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>7</td>
-                        <td>향수이름</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>8</td>
-                        <td>향수이름</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>9</td>
-                        <td>향수이름</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                  	  <tr>
-                        <td>10</td>
-                        <td>향수이름</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>11</td>
-                        <td>향수이름</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>12</td>
-                        <td>향수이름</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>13</td>
-                        <td>향수이름</td>
-                        <td>30ml</td>
-                        <td>50000</td>
-                        <td>100</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
+                      <c:forEach var="list" items="${allList }" varStatus="status">
+	                      <tr>
+	                        <td>${list.product_idx }</td>
+	                        <td>${list.product_name }</td>
+	                        <td>${list.product_size }ml</td>
+	                        <td>${list.product_price }원</td>
+	                        <td>${list.product_stock }개</td>
+	                        <td>${list.product_likecount } ♥</td>
+	                        <td>
+	                        <input type="button" value="수정">
+	                        <input type="button" value="삭제">
+	                        </td>
+	                      </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
