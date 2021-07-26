@@ -13,72 +13,62 @@
   </select>
   
   <insert id="insertMember">
-  	insert into member(member_email,
-  	member_password,
-  	member_name,
-  	member_phone,
-  	member_post,
-  	member_address,
-  	member_extraAddress,
-  	member_extraAddress2,
-  	member_date) 
-  	
-  	values(#{member_email},
-  	#{member_password},
-  	#{member_name},
-  	#{member_phone},
-  	#{member_post},
-  	#{member_address},
-  	#{member_extraAddress},
-  	#{member_extraAddress2},
-  	#{member_date})
+     insert into member(member_email,
+     member_password,
+     member_name,
+     member_phone,
+     member_post,
+     member_address,
+     member_extraAddress,
+     member_extraAddress2,
+     member_date) 
+     
+     values(#{member_email},
+     #{member_password},
+     #{member_name},
+     #{member_phone},
+     #{member_post},
+     #{member_address},
+     #{member_extraAddress},
+     #{member_extraAddress2},
+     #{member_date})
   </insert>
   
   <update id="updateMember">
-  	update member set 
-	  	member_name = #{member_name}, 
-	  	member_phone = #{member_phone},
-		member_post = #{member_post}, 
-		member_address = #{member_address},
-		member_extraAddress = #{member_extraAddress}, 
-		member_extraAddress2 = #{member_extraAddress2} 
-	WHERE member_email = #{member_email}
+     update member set 
+        member_name = #{member_name}, 
+        member_phone = #{member_phone},
+      member_post = #{member_post}, 
+      member_address = #{member_address},
+      member_extraAddress = #{member_extraAddress}, 
+      member_extraAddress2 = #{member_extraAddress2} 
+   WHERE member_email = #{member_email}
   </update>
   
   <delete id="deleteMember">
-  	delete from member where member_email=#{member_email}
+     delete from member where member_email=#{member_email}
   </delete>
-  
-  <select id="getCouponList" resultType="String">
-  	select member_coupon from member where member_email = #{member_email}
-  </select>
-  
-  <select id="getCouponInfo" resultType="com.itwillbs.domain.CouponBean">
-  	SELECT coupon_idx, coupon_name, coupon_price, coupon_status, coupon_date, 
-  		   DATE_ADD(coupon_date, INTERVAL coupon_expire DAY) as "coupon_expireDate"
-	FROM coupon WHERE coupon_idx = #{coupon_idx};
-  </select>
   
    <select id="emailCheck" resultType="string">
     select member_email from member where member_name = #{member_name} and member_phone = #{member_phone}
    </select>
    
   <select id="getMemberCouponList" resultType="String">
-  	select member_coupon from member where member_email = #{member_email}
+     select member_coupon from member where member_email = #{member_email}
   </select>
   
   <select id="getCouponInfo" resultType="com.itwillbs.domain.CouponBean">
-  	SELECT coupon_idx, coupon_name, coupon_price, coupon_status, coupon_date, 
-  		   DATE_ADD(coupon_date, INTERVAL coupon_expire DAY) as "coupon_expireDate"
-	FROM coupon WHERE coupon_idx = #{coupon_idx};
+     SELECT coupon_idx, coupon_name, coupon_price, coupon_status, coupon_date, 
+           DATE_ADD(coupon_date, INTERVAL coupon_expire DAY) as "coupon_expireDate"
+   FROM coupon WHERE coupon_idx = #{coupon_idx};
   </select>
   
   <select id="getCouponList" resultType="com.itwillbs.domain.CouponBean">
-  	select * from coupon
+     select * from coupon
   </select>
   
   <update id="updateMemberCoupon" parameterType="HashMap">
-  	UPDATE member SET member_coupon=CONCAT(member_coupon, CONCAT(#{coupon_idx},'/')) WHERE member_email=#{member_email}
+     UPDATE member SET member_coupon=CONCAT(member_coupon, CONCAT(#{coupon_idx},'/')) WHERE member_email=#{member_email}
   </update>
   
 </mapper>
