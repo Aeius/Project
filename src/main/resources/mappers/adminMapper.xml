@@ -55,9 +55,14 @@
 
 	<select id="getNotice"
 		resultType="com.itwillbs.domain.NoticeBean">
-		select notice_subject, notice_content from notice where notice_idx = #{notice_idx}
+		select notice_subject, notice_content, notice_idx from
+		notice where notice_idx = #{notice_idx}
 	</select>
 
+	<update id="noticeUpdate">
+		update notice set notice_subject=#{notice_subject},
+		notice_content=#{notice_content} where notice_idx = #{notice_idx}
+	</update>
 
 </mapper>
 

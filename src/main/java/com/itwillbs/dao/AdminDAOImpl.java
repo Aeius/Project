@@ -43,6 +43,11 @@ public class AdminDAOImpl implements AdminDAO {
 	public NoticeBean getNotice(int notice_idx) {
 		return sqlSession.selectOne(namespace + ".getNotice", notice_idx);
 	}
+
+	@Override
+	public void noticeUpdate(NoticeBean nb) {
+		sqlSession.update(namespace + ".noticeUpdate", nb);
+	}
 	
 	
 }

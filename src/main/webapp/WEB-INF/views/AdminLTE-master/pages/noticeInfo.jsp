@@ -25,11 +25,12 @@
                   <h1 class="box-title">공지사항 수정하기</h1>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" action="<c:url value='/updateNotice.ad'/>" method="post">
+                  <form role="form" action="<c:url value='/noticeUpdate.ad'/>" method="POST">
                  	 <input type="hidden" name="notice_name" id="notice_name" value="관리자">
                     <!-- text input -->
                     <div class="form-group">
                       <label>제목 입력</label>
+                      <input type="hidden" value="${nb.notice_idx}" class="form-control" name="notice_idx" id="notice_idx"/>
                       <input type="text" value="${nb.notice_subject}" class="form-control" name="notice_subject" id="notice_subject"/>
                     </div>
                     <!-- textarea -->

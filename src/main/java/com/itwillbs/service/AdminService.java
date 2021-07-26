@@ -21,5 +21,8 @@ public interface AdminService {
 
 	public NoticeBean getNotice(int notice_idx);
 
+	public void noticeUpdate(NoticeBean nb);
+
+
 	
 }

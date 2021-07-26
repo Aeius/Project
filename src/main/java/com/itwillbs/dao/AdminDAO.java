@@ -22,5 +22,7 @@ public interface AdminDAO {
 
 	public NoticeBean getNotice(int notice_idx);
 
+	public void noticeUpdate(NoticeBean nb);
+
 
 }

@@ -43,5 +43,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.getNotice(notice_idx);
 	}
 
+	@Override
+	public void noticeUpdate(NoticeBean nb) {
+		adminDAO.noticeUpdate(nb);
+	}
+
 
 }
