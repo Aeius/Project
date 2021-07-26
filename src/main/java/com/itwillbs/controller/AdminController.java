@@ -105,6 +105,9 @@ public class AdminController {
 
 		OrderBean orderBean = orderService.getOrderInfo(order_idx);
 		orderBean.setOrder_status(order_status);
+		if(order_status.equals("주문취소")) {
+			orderService.sendEmail(orderBean); // 메일 발송
+		}
 
 		orderService.updateOrderStatus(orderBean);
 

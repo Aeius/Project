@@ -6,13 +6,6 @@
 <html>
   <!-- head -->
   <jsp:include page="../inc/head.jsp" />
-  <head>
-  <script type="text/javascript">
-  function addStatus() {
-	document.getElementById("select-body").innerHTML = "<select name="status" > <option value="">선택하세요</option> </select>"
-  }
-  </script>
-  </head>
   
   <body class="skin-blue">
     <!-- Site wrapper -->

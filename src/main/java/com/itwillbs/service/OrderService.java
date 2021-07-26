@@ -14,4 +14,6 @@ public interface OrderService {
 
 	public void updateOrderStatus(OrderBean orderBean);
 
+	public void sendEmail(OrderBean orderBean);
+
 }
