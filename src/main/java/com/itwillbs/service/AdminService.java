@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.ReviewBean;
 
 public interface AdminService {
 
@@ -22,6 +23,10 @@ public interface AdminService {
 	public NoticeBean getNotice(int notice_idx);
 
 	public void noticeUpdate(NoticeBean nb);
+
+	public List<ReviewBean> getReviewList();
+
+	public void deleteReview(int review_idx);
 
 
 	

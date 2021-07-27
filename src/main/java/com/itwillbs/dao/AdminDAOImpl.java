@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.ReviewBean;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -47,6 +48,16 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void noticeUpdate(NoticeBean nb) {
 		sqlSession.update(namespace + ".noticeUpdate", nb);
+	}
+
+	@Override
+	public List<ReviewBean> getReviewList() {
+		return sqlSession.selectList(namespace + ".getReviewList");
+	}
+
+	@Override
+	public void deleteReview(int review_idx) {
+		sqlSession.delete(namespace + ".deleteReview", review_idx);
 	}
 	
 	

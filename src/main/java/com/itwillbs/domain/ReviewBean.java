@@ -13,11 +13,11 @@ public class ReviewBean {
 	private String review_image;
 	private int review_star;
 	private Date member_date;
+	private String product_name;
 	
 	private Date review_date;
 	private String order_member_email;
 	private int order_idx;
-	private String product_name;
 	private String order_status;
 	private int product_idx;
 	
@@ -87,12 +87,6 @@ public class ReviewBean {
 	public void setOrder_idx(int order_idx) {
 		this.order_idx = order_idx;
 	}
-	public String getProduct_name() {
-		return product_name;
-	}
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
-	}
 	public String getOrder_status() {
 		return order_status;
 	}
@@ -105,7 +99,17 @@ public class ReviewBean {
 	public void setProduct_idx(int product_idx) {
 		this.product_idx = product_idx;
 	}
+	public String getProduct_name() {
+		return product_name;
+	}
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+
 	
+
+
 
 	
 }

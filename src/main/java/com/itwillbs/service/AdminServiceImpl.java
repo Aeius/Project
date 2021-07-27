@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import com.itwillbs.dao.AdminDAO;
 import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.ReviewBean;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -46,6 +47,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void noticeUpdate(NoticeBean nb) {
 		adminDAO.noticeUpdate(nb);
+	}
+
+	@Override
+	public List<ReviewBean> getReviewList() {
+		return adminDAO.getReviewList();
+	}
+
+	@Override
+	public void deleteReview(int review_idx) {
+		adminDAO.deleteReview(review_idx);
 	}
 
 

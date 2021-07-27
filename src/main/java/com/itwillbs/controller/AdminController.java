@@ -21,6 +21,7 @@ import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.OrderBean;
 import com.itwillbs.domain.OrderDetailBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.ReviewBean;
 import com.itwillbs.service.AdminService;
 import com.itwillbs.service.NoticeService;
 import com.itwillbs.service.OrderDetailService;
@@ -176,9 +177,6 @@ public class AdminController {
 
 	@RequestMapping(value = "/noticeUpdate.ad", method = RequestMethod.POST)
 	public String noticeUpdate(HttpServletRequest request) {
-//	      System.out.println(noticeBean.getNotice_idx());
-//	      System.out.println(noticeBean.getNotice_subject().toString());
-//	      System.out.println(noticeBean.getNotice_content().toString());
 		int notice_idx = Integer.parseInt(request.getParameter("notice_idx"));
 		NoticeBean nb = adminService.getNotice(notice_idx); // idx로 기존 정보 가져오기
 
@@ -188,8 +186,23 @@ public class AdminController {
 //	      System.out.println(nb.getNotice_content());
 
 		adminService.noticeUpdate(nb);
-
 		return "redirect:/noticeList.ad";
 	}
 
+	// ------------------ 리뷰 목록 출력 ---------------------
+	@RequestMapping(value = "/reviewList.ad", method = RequestMethod.GET)
+	public String reviewList(HttpSession session, Model model) {
+		List<ReviewBean> review = adminService.getReviewList();
+		model.addAttribute("review", review);
+		return "/AdminLTE-master/pages/reviewList";
+	}
+
+	// ------------------ 리뷰 삭제 ------------------------
+		@RequestMapping(value = "/deleteReview.ad", method = RequestMethod.GET)
+		public String deleteReview(HttpServletRequest request) {
+			int review_idx = Integer.parseInt(request.getParameter("review_idx"));
+//			System.out.println(review_idx);
+			adminService.deleteReview(review_idx);
+			return "redirect:/reviewList.ad";
+		}
 }

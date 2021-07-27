@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -39,33 +40,21 @@
                         <th>관리</th>
                       </tr>
                     </thead>
+                    
                     <!-- 리뷰 목록 나열 -->
                     <tbody>
-                      <tr>
-                        <td>향수1</td>
-                        <td>향이좋네요향이좋네요향이좋네요향이좋네요</td>
-                        <td>회원1</td>
-                        <td>
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>향수2</td>
-                        <td>향이좋네요향이좋네요향이좋네요향이좋네요</td>
-                        <td>회원2</td>
-                        <td>
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>향수3</td>
-                        <td>향이좋네요향이좋네요향이좋네요향이좋네요</td>
-                        <td>회원3</td>
-                        <td>
-                        <input type="button" value="삭제">
-                        </td>
-                      </tr>
+         			  <c:forEach var="review" items="${review}">
+	                      <tr>
+	                        <td>${review.product_name}</td>
+	                        <td>${review.review_content}</td>
+	                        <td>${review.review_email}<td>
+	                        <td>
+	                        <input type="button" value="삭제" onclick="location.href='<c:url value="/deleteReview.ad?review_idx=${review.review_idx}"/>'">
+	                        </td>
+	                      </tr>
+ 				      </c:forEach>
                     </tbody>
+                    
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
