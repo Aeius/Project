@@ -8,4 +8,6 @@ public interface FaqBoardDAO {
 
 	List<FaqBoardBean> getFaqList();
 
+	void insertfaqBoard(FaqBoardBean fbb);
+
 }

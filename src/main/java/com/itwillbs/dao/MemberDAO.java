@@ -17,6 +17,8 @@ public interface MemberDAO {
    
    public void deleteMember(MemberBean memberBean);
    
+   public List<MemberBean> getMemberList();
+   
    public String emailCheck(MemberBean mb);
    //이메일 찾기
 

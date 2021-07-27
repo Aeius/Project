@@ -24,12 +24,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.itwillbs.domain.CouponBean;
+import com.itwillbs.domain.FaqBoardBean;
+import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.OrderBean;
 import com.itwillbs.domain.OrderDetailBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.ReviewBean;
 import com.itwillbs.service.AdminService;
+import com.itwillbs.service.FaqBoardService;
+import com.itwillbs.service.MemberService;
 import com.itwillbs.service.NoticeService;
 import com.itwillbs.service.OrderDetailService;
 import com.itwillbs.service.OrderService;
@@ -49,6 +53,12 @@ public class AdminController {
 
 	@Inject
 	private ProductService productService;
+	
+	@Inject
+	private MemberService memberService;
+	
+	@Inject
+	private FaqBoardService faqBoardService;
 	
 	@Resource(name = "uploadPath") //=> servlet-context.xml 에 업로드 폴더 경로 지정된거 불러옴
 	private String uploadPath; // 파일 업로드 경로
@@ -160,6 +170,56 @@ public class AdminController {
 		return "redirect:/orderList.ad";
 	}
 
+	// ------------------ 관리자 로그아웃 ------------------------
+	@RequestMapping(value = "/logout.ad", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "/dailyShop/member/index";
+	}
+	
+	// ------------------ 관리자 메인페이지 이동 ------------------------
+	@RequestMapping(value = "/index.sh", method = RequestMethod.GET)
+	public String index(HttpSession session) {
+		//세션 값가져오기
+		String member_email=(String)session.getAttribute("member_email");
+		return "/dailyShop/member/index";
+	}
+	
+	// ------------------ 회원관리 > 전체회원 ----------------------
+	@RequestMapping(value = "/memberList.ad", method = RequestMethod.GET)
+	public String memberList(HttpSession session, Model model) {
+		//  member정보 전체를 조회
+		List<MemberBean> mbList=memberService.getMemberList();
+		//Model mbList,mbList 데이터 담아 가기
+		model.addAttribute("mbList", mbList);
+		return "/AdminLTE-master/pages/memberList";
+	}
+	
+	// ------------------ 회원관리 > 구독자 ---------------------
+//		@RequestMapping(value = "/subscribeList.ad", method = RequestMethod.GET)
+//		public String subscribeList(HttpSession session, Model model) {
+//			//  member정보 전체를 조회
+//			List<MemberBean> mbList=memberService.getMemberList();
+//			//Model mbList,mbList 데이터 담아 가기
+//			model.addAttribute("mbList", mbList);
+//			return "/AdminLTE-master/pages/subscribeList";
+//		}
+	
+	// ------------------ 공지관리 > FAQ 등록 ------------------
+	@RequestMapping(value = "/faqWrite.ad", method = RequestMethod.GET)
+	public String faqWrite() {
+		//  /WEB-INF/views/pages/faqWrite.jsp 이동
+		return "/AdminLTE-master/pages/faqWrite";
+	}
+	
+	@RequestMapping(value = "/board/faqWritePro", method = RequestMethod.POST)
+	public String faqWritePro(FaqBoardBean fbb) {
+		// 글쓰기 메서드 호출
+		faqBoardService.insertfaqBoard(fbb);
+		//  /board/list 가상주소 이동
+		return "redirect:/faqList.ad";
+	}
+
 	// ------------------ 매출 조회 ---------------------
 	@RequestMapping(value = "/chartList.ad", method = RequestMethod.GET)
 	public String chartList(Model model) {
@@ -168,7 +228,7 @@ public class AdminController {
 		return "/AdminLTE-master/pages/chartList";
 	}
 
-	// ------------------ 매출 차트 ---------------------
+	// ------------------ 매출 차트(메인화면) ---------------------
 	@RequestMapping(value = "/chart.ad", method = RequestMethod.GET)
 	public String chart() {
 		// 차트 아직 구현 안됨 (이동 확인용)

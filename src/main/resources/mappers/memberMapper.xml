@@ -49,6 +49,10 @@
      delete from member where member_email=#{member_email}
   </delete>
   
+    <select id="getMemberList" resultType="com.itwillbs.domain.MemberBean">
+  	SELECT * FROM member
+  </select>
+  
    <select id="emailCheck" resultType="string">
     select member_email from member where member_name = #{member_name} and member_phone = #{member_phone}
    </select>

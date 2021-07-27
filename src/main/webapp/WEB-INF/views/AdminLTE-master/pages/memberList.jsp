@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -33,63 +35,40 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>아이디</th>
+                        <th>회원번호</th>
+                        <th>이메일</th>
+                        <th>비밀번호</th>
                         <th>이름</th>
                         <th>연락처</th>
+                        <th>우편번호</th>
                         <th>주소</th>
-                        <th>상세주소</th>
-                        <th>SMS수신</th>
-                        <th>카톡수신</th>
-                        <th>메일수신</th>
+                        <th>상세주소1</th>
+                        <th>싱세주소2</th>
+                        <th>가입날짜</th>
+                        <th>쿠폰</th>
+                        <th>좋아요</th>
                         <th>구독자</th>
+                        <th>포인트</th>
                       </tr>
                     </thead>
                     <!-- 회원 목록 나열 -->
                     <tbody>
-                      <tr>
-                        <td>hongildon@naver.com</td>
-                        <td>홍길동</td>
-                        <td>010-0000-1111</td>
-                        <td>서울특별시 뒷산 변방</td>
-                        <td>2층</td>
-                        <td>X</td>
-                        <td>O</td>
-                        <td>X</td>
-                        <td>O</td>
-                      </tr>
-                      <tr>
-                         <td>hongildon@naver.com</td>
-                        <td>홍길동</td>
-                        <td>110-0000-1111</td>
-                        <td>서울특별시 뒷산 변방</td>
-                        <td>3층</td>
-                        <td>X</td>
-                        <td>X</td>
-                        <td>X</td>
-                        <td>X</td>
-                      </tr>
-                      <tr>
-                        <td>hongildon@naver.com</td>
-                        <td>홍길동</td>
-                        <td>210-0000-1111</td>
-                        <td>서울특별시 뒷산 변방</td>
-                        <td>4층</td>
-                        <td>O</td>
-                        <td>X</td>
-                        <td>O</td>
-                        <td>X</td>
-                      </tr>
-                      <tr>
-                        <td>hongildon@naver.com</td>
-                        <td>홍길동</td>
-                        <td>310-0000-1111</td>
-                        <td>서울특별시 뒷산 변방</td>
-                        <td>5층</td>
-                        <td>X</td>
-                        <td>O</td>
-                        <td>X</td>
-                        <td>O</td>
-                      </tr>
+                      <c:forEach var="mb" items="${mbList }">
+						<tr><td>${mb.member_idx }</td>
+			    	      <td>${mb.member_email }</td>
+			    	      <td>${mb.member_password }</td>
+			    	      <td>${mb.member_name }</td>
+			              <td>${mb.member_phone }</td>
+			              <td>${mb.member_post }</td>
+			              <td>${mb.member_address }</td>
+			              <td>${mb.member_extraAddress }</td>
+			              <td>${mb.member_extraAddress2 }</td>
+			              <td>${mb.member_date }</td>
+			              <td>${mb.member_coupon }</td>
+			              <td>${mb.member_like }</td>
+			              <td>${mb.member_subscribe }</td>
+			              <td>${mb.member_point }</td></tr>
+					</c:forEach> 
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->

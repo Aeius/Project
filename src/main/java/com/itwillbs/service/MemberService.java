@@ -1,6 +1,7 @@
 package com.itwillbs.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
@@ -16,6 +17,8 @@ public interface MemberService {
    public void updateMember(MemberBean memberBean);
    
    public void deleteMember(MemberBean memberBean);
+   
+   public List<MemberBean> getMemberList();
    
    public String emailCheck(MemberBean mb);
 

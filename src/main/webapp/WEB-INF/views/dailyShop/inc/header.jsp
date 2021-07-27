@@ -59,7 +59,12 @@
               <div class="aa-header-top-right">
                 <ul class="aa-head-top-nav-right">
 <!--                 <c:if test="${ sessionScope.id eq 'admin' }"> <li><a href="../../../AdminLTE-master/pages/chart.jsp">관리자 페이지</a></li></c:if> -->
-                  
+                  <%-- 관리자 로그인 --%>
+					<%-- admin 으로 로그인 시 admin page 보임 --%>
+					<c:if test="${ sessionScope.member_email eq 'admin' }">
+						<li><a href='<c:url value="/chart.ad" />'>Admin Page</a></li>
+					</c:if>
+					
                   <c:if test="${ ! empty sessionScope }">
                   <li class="hidden-xs"><a href="../member/cart.jsp">My Cart</a></li>
 <!--              <li class="hidden-xs"><a href="../member/checkout.jsp">Checkout</a></li> -->                  

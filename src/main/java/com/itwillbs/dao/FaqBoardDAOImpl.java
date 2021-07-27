@@ -11,6 +11,7 @@ import com.itwillbs.domain.FaqBoardBean;
 
 @Repository
 public class FaqBoardDAOImpl implements FaqBoardDAO {
+	
 	@Inject
 	private SqlSession sqlSession;
 	
@@ -19,6 +20,12 @@ public class FaqBoardDAOImpl implements FaqBoardDAO {
 	@Override
 	public List<FaqBoardBean> getFaqList() {
 		return sqlSession.selectList(namespace+".getFaqBoardList");
+	}
+
+	@Override
+	public void insertfaqBoard(FaqBoardBean fbb) {
+		System.out.println("FaqBoardDAOImpl - insertfaqBoard()");
+		sqlSession.insert(namespace+".insertFaqBoard", fbb);
 	}
 	
 	

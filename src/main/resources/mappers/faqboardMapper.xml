@@ -12,6 +12,13 @@
 <!--   아래 SQL구문들 모두 정상동작 확인완료 _0722(주하) -->
   
 <!--   FAQ 글쓰기 (관리자권한있어야함) -->
+  <insert id="insertFaqBoard">
+  	insert into faq values(null,#{faq_question},#{faq_answer},#{faq_date})
+  </insert>
+  
+<!--   아래 SQL구문들 모두 정상동작 확인완료 _0722(주하) -->
+  
+<!--   FAQ 글쓰기 (관리자권한있어야함) -->
 <!--   <insert id="insertFaqBoard"> -->
 <!--   	insert into faq values(null,#{faq_question},#{faq_answer},#{faq_date}) -->
 <!--   </insert> -->

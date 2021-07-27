@@ -56,6 +56,12 @@ public class MemberDAOImpl implements MemberDAO{
    }
    
    @Override
+	public List<MemberBean> getMemberList() {
+		System.out.println("MemberDAOImpl - getMemberList()");
+		return sqlSession.selectList(namespace+".getMemberList");
+	}
+   
+   @Override
    public String emailCheck(MemberBean mb) {
       System.out.println("MemberDAOImpl - emailCheck");
       //이메일찾기

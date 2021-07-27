@@ -68,6 +68,12 @@ public class MemberServiceImpl implements MemberService {
       System.out.println("MemberService - deleteMember");
       memberDAO.deleteMember(memberBean);
    }
+   
+	@Override
+	public List<MemberBean> getMemberList() {
+		System.out.println("MemberService - getMemberList()");
+		return memberDAO.getMemberList();
+	}
 
    @Override
    public String emailCheck(MemberBean mb) {

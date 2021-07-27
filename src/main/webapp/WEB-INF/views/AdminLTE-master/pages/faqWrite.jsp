@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -24,7 +25,7 @@
                   <h1 class="box-title">FAQ 등록하기</h1>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form">
+                  <form role="form" action='<c:url value="pages/faqWritePro" />' method="post">
                     <!-- textarea -->
                     <div class="form-group">
                       <label>질문 입력</label>
