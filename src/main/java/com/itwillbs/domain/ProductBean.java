@@ -4,10 +4,9 @@ public class ProductBean {
 	private int product_idx; 
 	private String product_name;   
 	private String product_category ;
-	private String product_detail1; 
-	private String product_detail2; 
+	private String product_detail; 
 	private String	product_main_image; 
-	private String	product_detail_image; 
+	private String	product_detail_image; // 디테일 하나로 변경
 	private int product_price; 
 	private int	product_size; 
 	private int	product_stock ;
@@ -32,17 +31,11 @@ public class ProductBean {
 	public void setProduct_category(String product_category) {
 		this.product_category = product_category;
 	}
-	public String getProduct_detail1() {
-		return product_detail1;
+	public String getProduct_detail() {
+		return product_detail;
 	}
-	public void setProduct_detail1(String product_detail1) {
-		this.product_detail1 = product_detail1;
-	}
-	public String getProduct_detail2() {
-		return product_detail2;
-	}
-	public void setProduct_detail2(String product_detail2) {
-		this.product_detail2 = product_detail2;
+	public void setProduct_detail(String product_detail) {
+		this.product_detail = product_detail;
 	}
 	public String getProduct_main_image() {
 		return product_main_image;

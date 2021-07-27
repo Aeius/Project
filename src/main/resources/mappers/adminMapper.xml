@@ -4,31 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.mapper.AdminMapper">
 
-	<insert id="insertProduct">
-		insert into product(
-		product_name,
-		product_category,
-		product_detail1,
-		product_detail2,
-		product_main_image,
-		product_detail_image,
-		product_price,
-		product_size,
-		product_stock,
-		)
-		values(
-		#{product_name},
-		#{product_category},
-		#{product_detail1},
-		#{product_detail2},
-		#{product_main_image},
-		#{product_detail_image},
-		#{product_price},
-		#{product_size},
-		#{product_stock}
-		)
-	</insert>
-
 	<insert id="insertNotice">
 		insert into notice
 		values

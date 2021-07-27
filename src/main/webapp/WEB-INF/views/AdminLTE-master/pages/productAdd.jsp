@@ -23,14 +23,7 @@
                   <h1 class="box-title">상품 등록하기</h1>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" action='<c:url value="/productAddPro.ad" />' method="post">
-                    <!-- text input -->
-                    <!-- 상품번호 자동 등록 -->
-<!--                     <div class="form-group"> -->
-<!--                       <label>상품 번호 입력</label> -->
-<!--                       <input type="text" class="form-control" placeholder="상품 번호를 입력하세요"/> -->
-<!--                     </div> -->
-                    
+                  <form role="form" action='<c:url value="/productAddPro.ad" />' method="post" enctype="multipart/form-data">
 					<!-- text input -->
                     <div class="form-group">
                       <label>상품 이름 입력</label>
@@ -40,45 +33,36 @@
                     <!-- text input -->
                     <div class="form-group">
                       <label>상품 용량 입력</label>
-                      <input type="text" id="product_size" name="product_size" class="form-control" placeholder="상품 용량을 입력하세요"/>
+                      <input type="text" id="product_size" name="product_size" class="form-control" placeholder="상품 용량을 입력하세요 (숫자만 입력)"/>
                     </div>
                     
                     <!-- text input -->
                     <div class="form-group">
-                      <label>상품 가격 입력</label>
-                      <input type="text" id="product_price" name="product_price" class="form-control" placeholder="상품 가격을 입력하세요"/>
+                      <label>상품 가격 입력</label> 
+                      <input type="text" id="product_price" name="product_price" class="form-control" placeholder="상품 가격을 입력하세요 (숫자만 입력)"/>
                     </div>
                     
                     <!-- text input -->
                     <div class="form-group">
                       <label>상품 재고 입력</label>
-                      <input type="text" id="product_stock" name="product_stock" class="form-control" placeholder="상품 재고를 입력하세요"/>
+                      <input type="text" id="product_stock" name="product_stock" class="form-control" placeholder="상품 재고를 입력하세요 (숫자만 입력)"/>
                     </div>
                     
                     <!-- file -->
                     <div class="form-group">
                       <label for="exampleInputFile">상품 메인 사진</label>
-                      <input type="file" id="product_main_image" name="product_main_image">
+                      <input multiple="multiple" type="file" id="product_main_image" name="file">
                     </div>
-                    <!-- 확대사진 DB 컬럼 추가 후 -->
-<!--                     <div class="form-group"> -->
-<!--                       <label for="exampleInputFile">상품 확대 사진</label> -->
-<!--                       <input type="file" id="exampleInputFile1"> -->
-<!--                     </div> -->
+                    <!-- 다중 파일 업로드시 multiple="multiple" 추가 / name="file" 이어야함 -->
                     <div class="form-group">
                       <label for="exampleInputFile">상품 상세 사진</label>
-                      <input type="file" id="product_detail_image" name="product_detail_image">
+                      <input multiple="multiple" type="file" id="product_detail_image" name="file">
                     </div>
                     
                     <!-- textarea -->
                     <div class="form-group">
-                      <label>상품 상세 내용1 입력</label>
-                      <textarea class="form-control" id="product_detail1" name="product_detail1" rows="5" placeholder="상품 상세 내용을 입력하세요"></textarea>
-                    </div>
-                    <!-- textarea -->
-                    <div class="form-group">
-                      <label>상품 상세 내용2 입력</label>
-                      <textarea class="form-control" id="product_detail2" name="product_detail2" rows="5" placeholder="상품 상세 내용을 입력하세요"></textarea>
+                      <label>상품 상세 내용 입력</label>
+                      <textarea class="form-control" id="product_detail" name="product_detail" rows="5" placeholder="상품 상세 내용을 입력하세요"></textarea>
                     </div>
                     
                     <!-- checkbox -->

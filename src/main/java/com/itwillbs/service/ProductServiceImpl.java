@@ -44,6 +44,11 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.view(product_idx);
 	}
 
+	@Override
+	public void insertProduct(ProductBean productBean) {
+		productDAO.insertProduct(productBean);
+	}
+
 
 
 	

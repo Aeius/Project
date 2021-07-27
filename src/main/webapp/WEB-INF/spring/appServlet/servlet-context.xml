@@ -21,18 +21,16 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- 업로드프로그램 설정 -->
+	<!-- 파일 업로드 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+											<!-- 50MB = 1024*1024*50 = 52428800 -->
 		<beans:property name="maxUploadSize" value="52428800"></beans:property>
 	</beans:bean>
-	
 		<!-- upload 폴더 위치 설정 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-<!-- 		<beans:constructor-arg value="D:\\workspace_sts3\\SpringProject2\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg> -->
-		<beans:constructor-arg value="D:\\팀프로젝트\\Project\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg>
+		<beans:constructor-arg value="D:\\workspace_sts3\\Project\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg>
 	</beans:bean>
 	
-
 	<context:component-scan base-package="com.itwillbs.myweb2" />
 	<context:component-scan base-package="com.itwillbs.controller" />
 	<context:component-scan base-package="com.itwillbs.service" />

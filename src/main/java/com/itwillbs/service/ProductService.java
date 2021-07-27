@@ -16,4 +16,6 @@ public interface ProductService {
 
 	public ProductBean view(int product_idx);
 
+	public void insertProduct(ProductBean productBean);
+
 }

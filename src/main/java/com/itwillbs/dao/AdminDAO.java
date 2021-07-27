@@ -14,8 +14,6 @@ import com.itwillbs.domain.ReviewBean;
 
 public interface AdminDAO {
 	
-	public void insertProduct(ProductBean productBean);
-
 	public void insertNotice(NoticeBean noticeBean);
 
 	public List<NoticeBean> getNoticeList();

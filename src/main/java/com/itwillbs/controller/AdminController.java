@@ -1,11 +1,14 @@
 package com.itwillbs.controller;
 
+import java.io.File;
 import java.security.Provider.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,9 +16,12 @@ import javax.servlet.http.HttpSession;
 //import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.NoticeBean;
@@ -43,17 +49,55 @@ public class AdminController {
 
 	@Inject
 	private ProductService productService;
+	
+	@Resource(name = "uploadPath") //=> servlet-context.xml 에 업로드 폴더 경로 지정된거 불러옴
+	private String uploadPath; // 파일 업로드 경로
 
 	// ------------------ 상품등록 ---------------------
-	// -> 아직 안됨 / 수업시간에 파일 등록 배운 뒤 적용 예정
 	@RequestMapping(value = "/productAdd.ad", method = RequestMethod.GET)
 	public String productAdd() {
 		return "/AdminLTE-master/pages/productAdd";
 	}
-
 	@RequestMapping(value = "/productAddPro.ad", method = RequestMethod.POST)
-	public String productAddPro(ProductBean productBean) {
-		adminService.insertProduct(productBean);
+	public String productAddPro(MultipartHttpServletRequest request, @RequestParam MultipartFile[] file) throws Exception {
+							// 여러 파일 MultipartHttpServletRequest, @RequestParam MultipartFile[] 배열
+		UUID uid = UUID.randomUUID(); // 랜덤문자열
+		String saveName = ""; // upload 폴더에 저장되는 파일명
+		
+		// ProductBean에 입력값 담기
+		ProductBean productBean = new ProductBean();
+		productBean.setProduct_name(request.getParameter("product_name"));
+		productBean.setProduct_detail(request.getParameter("product_detail"));
+		productBean.setProduct_price(Integer.parseInt(request.getParameter("product_price")));
+		productBean.setProduct_size(Integer.parseInt(request.getParameter("product_size")));
+		productBean.setProduct_stock(Integer.parseInt(request.getParameter("product_stock")));
+		// 체크박스 다중값 담기
+		String[] category = request.getParameterValues("product_category");
+		String selectedCategory = "";
+		for(int i=0; i<category.length; i++) { // 체크한 갯수만큼 반복
+			 selectedCategory += category[i] + "/"; // => "/"기호로 구분
+		}
+		productBean.setProduct_category(selectedCategory);
+		// 파일 담기
+		for(int i=0; i<file.length; i++) { // 파일 갯수만큼 반복
+			// 저장되는 파일명 = 랜덤문자열_원래파일이름 => 같은 상품은 같은 랜덤문자열 
+													//=> for문 안에서 UUID 선언시 각 파일마다 랜덤문자열 달라짐
+			saveName = uid.toString() + "_" + file[i].getOriginalFilename(); 
+			
+			// upload 폴더로 복사 => webapp > resources > upload 폴더 있어야함
+			File target = new File(uploadPath, saveName);
+			FileCopyUtils.copy(file[i].getBytes(), target);
+			
+			// jsp 파일 폼 태그 순서대로 저장됨
+			if(i==0) { // 첫번째 파일 = 메인 이미지
+				productBean.setProduct_main_image(saveName);
+			} else if(i==1) { // 두번째파일 = 디테일 이미지
+				productBean.setProduct_detail_image(saveName);
+			}
+		}
+		
+		productService.insertProduct(productBean); // adminService -> productService 로 변경했음
+		
 		return "redirect:/productList.ad";
 	}
 

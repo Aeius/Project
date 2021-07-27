@@ -15,4 +15,7 @@ public interface ProductDAO {
 	public ArrayList<ProductBean> getProductBestList();
 
 	public ProductBean view(int product_idx);
+
+	public void insertProduct(ProductBean productBean);
+	
 }

@@ -44,5 +44,10 @@ public class ProductDAOImpl implements ProductDAO {
 	public ProductBean view(int product_idx) {
 		return sqlSession.selectOne(namespace+".getProductDetail", product_idx);
 	}
+
+	@Override
+	public void insertProduct(ProductBean productBean) {
+		sqlSession.insert(namespace + ".insertProduct", productBean);
+	}
 	
 }

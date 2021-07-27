@@ -21,11 +21,6 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDAO adminDAO;
 	
 	@Override
-	public void insertProduct(ProductBean productBean) {
-		adminDAO.insertProduct(productBean);
-	}
-
-	@Override
 	public void insertNotice(NoticeBean noticeBean) {
 		adminDAO.insertNotice(noticeBean);
 	}

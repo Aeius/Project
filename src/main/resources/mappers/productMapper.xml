@@ -24,4 +24,27 @@
   	select * from product where product_idx= #{product_idx}
   </select>
   
+  <insert id="insertProduct">
+  	insert into product(
+		product_name,
+		product_category,
+		product_detail,
+		product_main_image,
+		product_detail_image,
+		product_price,
+		product_size,
+		product_stock
+	)
+		values(
+		#{product_name},
+		#{product_category},
+		#{product_detail},
+		#{product_main_image},
+		#{product_detail_image},
+		#{product_price},
+		#{product_size},
+		#{product_stock}
+	)
+  </insert>
+  
 </mapper>

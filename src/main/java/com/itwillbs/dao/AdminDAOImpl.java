@@ -22,11 +22,6 @@ public class AdminDAOImpl implements AdminDAO {
 	private static final String namespace = "com.itwillbs.mapper.AdminMapper";
 
 	@Override
-	public void insertProduct(ProductBean productBean) {
-		sqlSession.insert(namespace + ".insertProduct", productBean);
-	}
-
-	@Override
 	public void insertNotice(NoticeBean noticeBean) {
 		sqlSession.insert(namespace + ".insertNotice", noticeBean);
 	}
