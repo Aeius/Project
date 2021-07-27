@@ -38,6 +38,7 @@
                         <th>할인액</th>
                         <th>발급일</th>
                         <th>만료일</th>
+                        <th>상태 (false = 쿠폰 만료 상태)</th>
                         <th>관리</th>
                       </tr>
                     </thead>
@@ -49,8 +50,10 @@
                         <td>${coupon.coupon_price}</td>
                         <td>${coupon.coupon_date}</td>
                         <td>${coupon.coupon_expire}</td>
+                        <td>${coupon.coupon_status}</td>
                         <td>
-                        <input type="button" value="만료">
+                        <input type="button" value="쿠폰 활성화" onclick="location.href='<c:url value="/unexpireCoupon.ad?coupon_idx=${coupon.coupon_idx}"/>'">
+                        <input type="button" value="쿠폰 비활성화" onclick="location.href='<c:url value="/expireCoupon.ad?coupon_idx=${coupon.coupon_idx}"/>'">
                         </td>
                       </tr>
                       </c:forEach>

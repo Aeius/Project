@@ -60,6 +60,16 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<CouponBean> getCouponList() {
 		return sqlSession.selectList(namespace + ".getCouponList");
 	}
+
+	@Override
+	public void expireCoupon(int coupon_idx) {
+		sqlSession.update(namespace + ".expireCoupon", coupon_idx);
+	}
+
+	@Override
+	public void unexpireCoupon(int coupon_idx) {
+		sqlSession.update(namespace + ".unexpireCoupon", coupon_idx);
+	}
 	
 	
 }

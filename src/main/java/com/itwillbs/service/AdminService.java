@@ -29,6 +29,10 @@ public interface AdminService {
 
 	public List<CouponBean> getCouponList();
 
+	public void expireCoupon(int coupon_idx);
+
+	public void unexpireCoupon(int coupon_idx);
+
 
 	
 }

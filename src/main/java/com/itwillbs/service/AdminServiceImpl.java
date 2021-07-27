@@ -60,5 +60,15 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.getCouponList();
 	}
 
+	@Override
+	public void expireCoupon(int coupon_idx) {
+		adminDAO.expireCoupon(coupon_idx);
+	}
+
+	@Override
+	public void unexpireCoupon(int coupon_idx) {
+		adminDAO.unexpireCoupon(coupon_idx);
+	}
+
 
 }

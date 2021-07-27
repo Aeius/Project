@@ -54,6 +54,14 @@
 		select * from coupon
 	</select>
 
+	<update id="expireCoupon">
+		update coupon set coupon_status = 0 where coupon_idx = #{coupon_idx}
+	</update>
+	
+	<update id="unexpireCoupon">
+		update coupon set coupon_status = 1 where coupon_idx = #{coupon_idx}
+	</update>
+	
 </mapper>
 
 

@@ -1,12 +1,9 @@
 package com.itwillbs.controller;
 
 import java.io.File;
-import java.security.Provider.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -34,7 +31,6 @@ import com.itwillbs.domain.ReviewBean;
 import com.itwillbs.service.AdminService;
 import com.itwillbs.service.FaqBoardService;
 import com.itwillbs.service.MemberService;
-import com.itwillbs.service.NoticeService;
 import com.itwillbs.service.OrderDetailService;
 import com.itwillbs.service.OrderService;
 import com.itwillbs.service.ProductService;
@@ -386,6 +382,22 @@ public class AdminController {
 		return "/AdminLTE-master/pages/couponList";
 	}
 	
+	// ------------------ 쿠폰 만료, 재활성화 ------------------------
+	@RequestMapping(value = "/expireCoupon.ad", method = RequestMethod.GET)
+	public String expireCoupon(HttpServletRequest request) {
+		int coupon_idx = Integer.parseInt(request.getParameter("coupon_idx"));
+//		System.out.println(coupon_idx);
+		adminService.expireCoupon(coupon_idx); // coupon_idx 추출 테스트
+		return "redirect:/couponList.ad";
+	}
+
+	@RequestMapping(value = "/unexpireCoupon.ad", method = RequestMethod.GET)
+	public String unexpireCoupon(HttpServletRequest request) {
+		int coupon_idx = Integer.parseInt(request.getParameter("coupon_idx"));
+//		System.out.println(coupon_idx);
+		adminService.unexpireCoupon(coupon_idx); // coupon_idx 추출 테스트
+		return "redirect:/couponList.ad";
+	}
 	
 }
 
