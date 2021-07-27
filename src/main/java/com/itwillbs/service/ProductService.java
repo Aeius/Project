@@ -12,6 +12,8 @@ public interface ProductService {
 
 	public ArrayList<ProductBean> getProductAquaList();
 
+	public ArrayList<ProductBean> getProductBestList();
+
 	public ProductBean view(int product_idx);
 
 }

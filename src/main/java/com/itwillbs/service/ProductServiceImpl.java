@@ -35,9 +35,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public ArrayList<ProductBean> getProductBestList() {
+		return (ArrayList)productDAO.getProductBestList();
+	}
+	
+	@Override
 	public ProductBean view(int product_idx) {
 		return productDAO.view(product_idx);
 	}
+
 
 
 	

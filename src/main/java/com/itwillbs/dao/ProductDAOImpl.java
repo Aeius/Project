@@ -34,11 +34,15 @@ public class ProductDAOImpl implements ProductDAO {
 	public ArrayList<ProductBean> getProductAquaList() {
 		return (ArrayList)sqlSession.selectList(namespace+".getProductAquaList");
 	}
-
+	
+	@Override
+	public ArrayList<ProductBean> getProductBestList() {
+		return (ArrayList)sqlSession.selectList(namespace+".getProductBestList");
+	}
+	
 	@Override
 	public ProductBean view(int product_idx) {
 		return sqlSession.selectOne(namespace+".getProductDetail", product_idx);
 	}
-	
 	
 }
