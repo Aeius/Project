@@ -28,9 +28,9 @@ public class ProductController {
 
 //	가상주소  http://localhost:8080/myweb2/member/insert
 	
-	//-------------------------------------------------------------- 상품 리스트 --------------------------------------------------------
+	//-------------------------------------------------------------- 30ml 상품 리스트 --------------------------------------------------------
 	@RequestMapping(value = "/productList.sh", method = RequestMethod.GET)
-	public String list(HttpSession session, Model model) {
+	public String list30(HttpSession session, Model model) {
 		
 		// member 정보 전체를 조회
 		ArrayList<ProductBean> allList = productService.getProductAllList();
@@ -45,6 +45,24 @@ public class ProductController {
 		
 		return "/dailyShop/product_board/product";
 	}
+	
+	//-------------------------------------------------------------- 50ml 상품 리스트 --------------------------------------------------------
+		@RequestMapping(value = "/productList50.sh", method = RequestMethod.GET)
+		public String list50(HttpSession session, Model model) {
+			
+			// member 정보 전체를 조회
+			ArrayList<ProductBean> allList = productService.getProductAllList50();
+			ArrayList<ProductBean> sitrusList = productService.getProductSitrusList50();
+			ArrayList<ProductBean> aquaList = productService.getProductAquaList50();
+			//Model mb.mb 데이터 담아 가기
+			model.addAttribute("allList" , allList);
+			model.addAttribute("sitrusList" , sitrusList);
+			model.addAttribute("aquaList" , aquaList);
+			
+			//  /WEB-INF/views/member/info.jsp 이동
+			
+			return "/dailyShop/product_board/product";
+		}
 	
 	//-------------------------------------------------------------- 상품 상세 페이지 --------------------------------------------------------
 	@RequestMapping(value = "/productDetail.sh", method = RequestMethod.GET)

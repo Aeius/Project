@@ -66,7 +66,7 @@
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2>T-Shirt</h2>
+        <h2></h2>
       </div>
      </div>
    </div>
@@ -88,7 +88,7 @@
                     <div id="demo-1" class="simpleLens-gallery-container">
                       <div class="simpleLens-container">
                       <!-- 돋보기로 확대될 사진 넣는 곳 -->
-                        <div class="simpleLens-big-image-container"><a data-lens-image="<c:url value='/resources/img/view-slider/large/polo-shirt-1.png'/>" class="simpleLens-lens-image"><img src="<c:url value='/resources/img/view-slider/medium/polo-shirt-1.png'/>" class="simpleLens-big-image"></a></div>
+                        <div class="simpleLens-big-image-container"><a data-lens-image="<c:url value='/resources/upload/${pd.product_main_image }'/>" class="simpleLens-lens-image"><img src="<c:url value='/resources/upload/${pd.product_main_image }'/>" class="simpleLens-big-image"></a></div>
                       </div>
                     </div>
                   </div>
@@ -106,8 +106,8 @@
                       <p class="aa-product-avilability">재고상태 : <span>${pd.product_stock } 개</span></p>
                     </div>
                     <!-- 제품 간단 설명 -->
-                    <p>${pd.product_detail1 }</p>
-                    <p>${pd.product_detail2 }</p>
+                    <p>${pd.product_detail }</p>
+                    
                     <p>좋아요 수 : ${pd.product_likecount }</p>
                    
                  
@@ -156,7 +156,7 @@
               <div class="tab-content">
                 <div class="tab-pane fade in active" id="description">
                 
-                 ${pd.product_main_image }
+                 <img src='<c:url value="/resources/upload/${pd.product_detail_image }"/>'>
                   
                 </div>
                 <div class="tab-pane fade in active2" id="information">

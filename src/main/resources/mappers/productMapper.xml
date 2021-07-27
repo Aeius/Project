@@ -5,15 +5,27 @@
 <mapper namespace="com.itwillbs.mapper.ProductMapper">
 
   <select id="getProductAllList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product
+  	select * from product where product_size=30
   </select>
   
   <select id="getProductSitrusList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category='시트러스'
+  	select * from product where product_category like'%시트러스%' AND product_size=30
   </select>
   
   <select id="getProductAquaList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category='아쿠아'
+  	select * from product where product_category like '%아쿠아%' AND product_size=30
+  </select>
+  
+  <select id="getProductAllList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_size=50
+  </select>
+  
+  <select id="getProductSitrusList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like '%시트러스%' AND product_size=50
+  </select>
+  
+  <select id="getProductAquaList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like '%아쿠아%' AND product_size=50
   </select>
   
   <select id="getProductBestList" resultType="com.itwillbs.domain.ProductBean">

@@ -8,9 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <title>Daily Shop | Home</title>
-    
-
-    
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -140,7 +137,7 @@
                         <c:forEach var="bestList" items="${bestList}">
                         <li>
                           <figure>
-                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${bestList.product_idx }"><img src="<c:url value='/resources/img/man/polo-shirt-2.png' />" alt="polo shirt img"></a>
+                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${bestList.product_idx }"><img src="<c:url value='/resources/upload/${bestList.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${bestList.product_idx }">${bestList.product_name }</a></h4>

@@ -33,6 +33,21 @@ public class ProductServiceImpl implements ProductService {
 	public ArrayList<ProductBean> getProductAquaList() {
 		return (ArrayList)productDAO.getProductAquaList();
 	}
+	
+	@Override
+	public ArrayList<ProductBean> getProductAllList50() {
+		return (ArrayList)productDAO.getProductAllList();
+	}
+
+	@Override
+	public ArrayList<ProductBean> getProductSitrusList50() {
+		return (ArrayList)productDAO.getProductSitrusList();
+	}
+
+	@Override
+	public ArrayList<ProductBean> getProductAquaList50() {
+		return (ArrayList)productDAO.getProductAquaList();
+	}
 
 	@Override
 	public ArrayList<ProductBean> getProductBestList() {

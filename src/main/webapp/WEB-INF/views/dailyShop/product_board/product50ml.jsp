@@ -43,7 +43,7 @@
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2>30ml</h2>
+        <h2>50ml</h2>
 <!--         <ol class="breadcrumb"> -->
 <!--           <li><a href="index.html">Home</a></li>          -->
 <!--           <li class="active">Women</li> -->
@@ -77,32 +77,32 @@
                         <c:forEach var="allList" items="${allList }">
                          <script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
 						  <script type="text/javascript">
-// 							  $(document).ready(function(){
-// 								  alert('찜클릭')
-// 								  $('#wishlistbtn'+${allList.product_idx }).click(function(){
-// 									$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
-// 										data:{product_idx:${allList.product_idx }},
-// 										success:function(rdata){
-// 											var heart = rdata;
-// 											$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
-// 												data:{product_idx:${allList.product_idx }},
-// 												success:function(wishCount){
-// 													if(heart == "offHeart"){
-// 														heart = "찜♡ "+ wishCount;
-// 													} else {
-// 														heart = "찜♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
-// 													}
-// 													$('#wish'+${allList.product_idx }).html(heart);
-// 												}
-// 											});		 
-// 										};
-// 									});	
-// 								 });
-// 							  });
+							  $(document).ready(function(){
+								  alert('찜클릭')
+								  $('#wishlistbtn'+${allList.product_idx }).click(function(){
+									$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
+										data:{product_idx:${allList.product_idx }},
+										success:function(rdata){
+											var heart = rdata;
+											$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
+												data:{product_idx:${allList.product_idx }},
+												success:function(wishCount){
+													if(heart == "offHeart"){
+														heart = "찜♡ "+ wishCount;
+													} else {
+														heart = "찜♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
+													}
+													$('#wish'+${allList.product_idx }).html(heart);
+												}
+											});		 
+										};
+									});	
+								 });
+							  });
 						  </script>
                         <li>
                           <figure>
-                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${allList.product_idx }"><img src="<c:url value='/resources/upload/${allList.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${allList.product_idx }"><img src="<c:url value='/resources/upload/${allList.product_main_image }' />" alt="polo shirt img"></a>
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${allList.product_idx }">${allList.product_name }</a></h4>
@@ -141,7 +141,7 @@
 						<c:forEach var="sitrusList" items="${sitrusList }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="productDetail.sh?product_idx=${sitrusList.product_idx }"><img src="<c:url value='/resources/upload/${sitrusList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail.sh?product_idx=${sitrusList.product_idx }"><img src="<c:url value='/resources/upload/${sitrusList.product_main_image }'/>" alt="polo shirt img"></a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${sitrusList.product_idx }">${sitrusList.product_name }</a></h4>
                               <span class="aa-product-price">$ ${sitrusList.product_price }</span><span class="aa-product-price"><del>$ ${sitrusList.product_price }</del></span>
@@ -174,7 +174,7 @@
                        <c:forEach var="aquaList" items="${aquaList }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="productDetail.sh?product_idx=${aquaList.product_idx }"><img src="<c:url value='/resources/upload/${aquaList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail.sh?product_idx=${aquaList.product_idx }"><img src="<c:url value='/resources/upload/${aquaList.product_main_image }'/>" alt="polo shirt img"></a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${aquaList.product_idx }">${aquaList.product_name }</a></h4>
                               <span class="aa-product-price">$ ${aquaList.product_price }</span><span class="aa-product-price"><del>$ ${aquaList.product_price }</del></span>

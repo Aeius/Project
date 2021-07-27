@@ -11,6 +11,12 @@ public interface ProductService {
 	public ArrayList<ProductBean> getProductSitrusList();
 
 	public ArrayList<ProductBean> getProductAquaList();
+	
+	public ArrayList<ProductBean> getProductAllList50();
+
+	public ArrayList<ProductBean> getProductSitrusList50();
+
+	public ArrayList<ProductBean> getProductAquaList50();
 
 	public ArrayList<ProductBean> getProductBestList();
 

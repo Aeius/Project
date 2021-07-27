@@ -12,6 +12,12 @@ public interface ProductDAO {
 
 	public ArrayList<ProductBean> getProductAquaList();
 	
+	public ArrayList<ProductBean> getProductAllList50();
+
+	public ArrayList<ProductBean> getProductSitrusList50();
+
+	public ArrayList<ProductBean> getProductAquaList50();
+	
 	public ArrayList<ProductBean> getProductBestList();
 
 	public ProductBean view(int product_idx);

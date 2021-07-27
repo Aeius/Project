@@ -99,7 +99,7 @@
               <!-- logo  -->
               <div class="aa-logo">
                 <!-- Text based logo -->
-                <a href="">
+                <a href="main.sh">
                   <span class="fa fa-shopping-cart"></span>
     <!---------------------------------------------------------------- 로고 제목 수정 가능 ------------------------------------------------------------->
                   <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
@@ -114,7 +114,7 @@
               <!-------------------------------------------------------- search box------------------------------------------------- -->
               <div class="aa-search-box">
                 <form action="">
-                  <input type="text" name="" id="" placeholder="Search here ex. 'man' ">
+                  <input type="text" name="" id="" placeholder="검색기능 ">
                   <button type="submit"><span class="fa fa-search"></span></button>
                 </form>
               </div>
@@ -144,7 +144,7 @@
           <div class="navbar-collapse collapse">
             <!-- Left nav -->
             <ul class="nav navbar-nav">
-              <li><a href="/">Home</a></li>
+              <li><a href="main.sh">Home</a></li>
               <li><a href="productList.sh">Shop <span class="caret"></span></a>
                 <ul class="dropdown-menu">                
                   <li><a href="productList.sh">30ml</a></li>

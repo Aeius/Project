@@ -20,9 +20,9 @@
                 <div class="aa-footer-widget">
                   <h3>Main Menu</h3>
                   <ul class="aa-footer-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Our Services</a></li>
-                    <li><a href="#">Our Products</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="notice.sh">Our Services</a></li>
+                    <li><a href="productList.sh">Our Products</a></li>
                   </ul>
                 </div>
               </div>
@@ -42,9 +42,9 @@
                   <div class="aa-footer-widget">
                     <h3>Service</h3>
                     <ul class="aa-footer-nav">
-                      <li><a href="#">QnA</a></li>
-                      <li><a href="#">FAQ</a></li>
-                      <li><a href="#">Notice</a></li>
+                      <li><a href="notice.sh">QnA</a></li>
+                      <li><a href="notice.sh">FAQ</a></li>
+                      <li><a href="notice.sh">Notice</a></li>
                     </ul>
                   </div>
                 </div>

@@ -36,6 +36,21 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Override
+	public ArrayList<ProductBean> getProductAllList50() {
+		return (ArrayList)sqlSession.selectList(namespace+".getProductAllList50");
+	}
+	
+	@Override
+	public ArrayList<ProductBean> getProductSitrusList50() {
+		return (ArrayList)sqlSession.selectList(namespace+".getProductSitrusList50");
+	}
+	
+	@Override
+	public ArrayList<ProductBean> getProductAquaList50() {
+		return (ArrayList)sqlSession.selectList(namespace+".getProductAquaList50");
+	}
+	
+	@Override
 	public ArrayList<ProductBean> getProductBestList() {
 		return (ArrayList)sqlSession.selectList(namespace+".getProductBestList");
 	}

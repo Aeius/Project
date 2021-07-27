@@ -36,24 +36,24 @@
                 <span>상품관리</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="productList.jsp"><i class="fa fa-circle-o"></i> 상품목록</a></li>
-                <li><a href="productAdd.jsp"><i class="fa fa-circle-o"></i> 상품등록</a></li>
+                <li><a href="productList.ad"><i class="fa fa-circle-o"></i> 상품목록</a></li>
+                <li><a href="productAdd.ad"><i class="fa fa-circle-o"></i> 상품등록</a></li>
               </ul>
             </li>
             <li>
-              <a href="orderList.jsp">
+              <a href="orderList.ad">
                 <i class="fa fa-shopping-cart"></i> 
                 <span>주문관리</span>
               </a>
             </li>    
             <li>
-              <a href="reviewList.jsp">
+              <a href="reviewList.ad">
                 <i class="fa fa-thumbs-up"></i> 
                 <span>리뷰관리</span>
               </a>
             </li>   
             <li class="treeview">
-              <a href="#">
+              <a href="memberList.ad">
                 <i class="fa fa-user"></i>
                 <span>회원관리</span>
               </a>
@@ -63,7 +63,7 @@
               </ul>
             </li>   
             <li class="treeview">
-              <a href="#">
+              <a href="couponList.ad">
                 <i class="fa fa-ticket"></i>
                 <span>쿠폰관리</span>
               </a>
@@ -73,25 +73,25 @@
               </ul>
             </li>    
             <li class="treeview">
-              <a href="#">
+              <a href="chart.ad">
                 <i class="fa fa-pie-chart"></i> 
                 <span>매출관리</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="chart.jsp"><i class="fa fa-circle-o"></i> 차트</a></li>
-                <li><a href="chartList.jsp"><i class="fa fa-circle-o"></i> 리스트</a></li>
+                <li><a href="chart.ad"><i class="fa fa-circle-o"></i> 차트</a></li>
+                <li><a href="chartList.ad"><i class="fa fa-circle-o"></i> 리스트</a></li>
               </ul>
             </li> 
             <li class="treeview">
-              <a href="#">
+              <a href="noticeList.ad">
                 <i class="fa fa-user"></i>
                 <span>공지관리</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="noticeWrite.jsp"><i class="fa fa-circle-o"></i> 공지사항 등록</a></li>
-                <li><a href="noticeList.jsp"><i class="fa fa-circle-o"></i> 공지사항 목록</a></li>
-                <li><a href='<c:url value="/faqWrite.ad" />'><i class="fa fa-circle-o"></i> FAQ 등록</a></li>
-                <li><a href='<c:url value="/faqList.ad" />'><i class="fa fa-circle-o"></i> FAQ 목록</a></li>
+                <li><a href="noticeWrite.ad"><i class="fa fa-circle-o"></i> 공지사항 등록</a></li>
+                <li><a href="noticeList.ad"><i class="fa fa-circle-o"></i> 공지사항 목록</a></li>
+                <li><a href="faqWrite.ad" ><i class="fa fa-circle-o"></i> FAQ 등록</a></li>
+                <li><a href="faqList.ad"><i class="fa fa-circle-o"></i> FAQ 목록</a></li>
               </ul>
             </li> 
           </ul>
