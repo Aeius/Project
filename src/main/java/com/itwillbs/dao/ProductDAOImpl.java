@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.ProductBean;
 
 @Repository
@@ -69,5 +68,21 @@ public class ProductDAOImpl implements ProductDAO {
 	public void insertProduct(ProductBean productBean) {
 		sqlSession.insert(namespace + ".insertProduct", productBean);
 	}
+
+	@Override
+	public void setStatusRelease(int product_idx) {
+		sqlSession.update(namespace + ".setStatusRelease", product_idx);
+	}
+
+	@Override
+	public void setStatusDiscontinue(int product_idx) {
+		sqlSession.update(namespace + ".setStatusDiscontinue", product_idx);
+	}
+
+	@Override
+	public void updateProduct(ProductBean productBean) {
+		sqlSession.update(namespace + ".updateProduct", productBean);
+	}
+
 	
 }

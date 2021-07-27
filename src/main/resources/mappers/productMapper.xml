@@ -63,4 +63,25 @@
 	)
   </insert>
   
+  <update id="setStatusRelease">
+  	update product set product_status=true where product_idx=#{product_idx}
+  </update>
+  
+  <update id="setStatusDiscontinue">
+ 	 update product set product_status=false where product_idx=#{product_idx}
+  </update>
+  
+  <update id="updateProduct">
+  	update product set 
+	  	product_name=#{product_name},
+	  	product_detail=#{product_detail},
+	  	product_price=#{product_price},
+	  	product_size=#{product_size},
+	  	product_stock=#{product_stock},
+	  	product_category=#{product_category},
+	  	product_main_image=#{product_main_image},
+	  	product_detail_image=#{product_detail_image}
+  	where product_idx=#{product_idx}
+  </update>
+  
 </mapper>

@@ -68,42 +68,14 @@
                     <!-- checkbox -->
                     <div class="form-group">
                       <label>상품 카테고리 선택</label>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" name="product_category" value="파우더리"/>
-                          파우더리
-                        </label>
-                      </div>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" name="product_category" value="플로럴"/>
-                          플로럴
-                        </label>
-                      </div>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" name="product_category" value="우디"/>
-                          우디
-                        </label>
-                      </div>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" name="product_category" value="아쿠아"/>
-                          아쿠아
-                        </label>
-                      </div>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" name="product_category" value="그린"/>
-                          그린
-                        </label>
-                      </div>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" name="product_category" value="모던"/>
-                          모던
-                        </label>
-                      </div>
+                      <div class="checkbox"><label><input type="checkbox" name="product_category" value="파우더리"/>파우더리</label></div>
+                      <div class="checkbox"><label><input type="checkbox" name="product_category" value="플로럴"/>플로럴</label></div>
+                      <div class="checkbox"><label><input type="checkbox" name="product_category" value="우디"/>우디</label></div>
+                      <div class="checkbox"><label><input type="checkbox" name="product_category" value="아쿠아"/>아쿠아</label></div>
+                      <div class="checkbox"><label><input type="checkbox" name="product_category" value="프루티"/>프루티</label></div>
+                      <div class="checkbox"><label><input type="checkbox" name="product_category" value="시트러스"/>시트러스</label></div>
+                      <div class="checkbox"><label><input type="checkbox" name="product_category" value="스파이시"/>스파이시</label></div>
+                      <div class="checkbox"><label><input type="checkbox" name="product_category" value="모던"/>모던</label></div>
                     </div>
                     
 					<div class="box-footer">

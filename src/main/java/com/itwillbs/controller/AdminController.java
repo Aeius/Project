@@ -118,6 +118,71 @@ public class AdminController {
 		model.addAttribute("allList", allList);
 		return "/AdminLTE-master/pages/productList";
 	}
+	
+	// ------------------ 상품판매개시 ---------------------
+	@RequestMapping(value = "/productReleasePro.ad", method = RequestMethod.GET)
+	public String productReleasePro(HttpServletRequest request) {
+		int product_idx = Integer.parseInt(request.getParameter("product_idx"));
+		productService.setStatusRelease(product_idx);
+		return "redirect:/productList.ad";
+	}
+	
+	// ------------------ 상품판매중단 ---------------------
+	@RequestMapping(value = "/productDiscontinuePro.ad", method = RequestMethod.GET)
+	public String productDiscontinuePro(HttpServletRequest request) {
+		int product_idx = Integer.parseInt(request.getParameter("product_idx"));
+		productService.setStatusDiscontinue(product_idx);
+		return "redirect:/productList.ad";
+	}
+	
+	// ------------------ 상품수정 ---------------------
+	@RequestMapping(value = "/productUpdate.ad", method = RequestMethod.GET)
+	public String productUpdate(HttpServletRequest request, Model model) {
+		int product_idx = Integer.parseInt(request.getParameter("product_idx"));
+		ProductBean productBean = productService.view(product_idx);
+		model.addAttribute("productBean", productBean);
+		return "/AdminLTE-master/pages/productUpdate";
+	}
+	@RequestMapping(value = "/productUpdatePro.ad", method = RequestMethod.POST)
+	public String productUpdatePro(MultipartHttpServletRequest request, @RequestParam MultipartFile[] file) throws Exception {
+		
+		int product_idx = Integer.parseInt(request.getParameter("product_idx"));
+		ProductBean productBean = productService.view(product_idx); // 기존 정보 불러옴
+		
+		productBean.setProduct_name(request.getParameter("product_name"));
+		productBean.setProduct_detail(request.getParameter("product_detail"));
+		productBean.setProduct_price(Integer.parseInt(request.getParameter("product_price")));
+		productBean.setProduct_size(Integer.parseInt(request.getParameter("product_size")));
+		productBean.setProduct_stock(Integer.parseInt(request.getParameter("product_stock")));
+
+		String[] category = request.getParameterValues("product_category");
+		String selectedCategory = "";
+		for(int i=0; i<category.length; i++) {
+			 selectedCategory += category[i] + "/";
+		}
+		productBean.setProduct_category(selectedCategory);
+
+		UUID uid = UUID.randomUUID(); 
+		String saveName = ""; 
+		for(int i=0; i<file.length; i++) {
+			if(file[i].getOriginalFilename()=="") { //파일 미선택시
+				continue; // 변경안하고 넘어감 (기존 파일 유지)
+			} else { // 파일 선택시
+				saveName = uid.toString() + "_" + file[i].getOriginalFilename(); 
+				File target = new File(uploadPath, saveName);
+				FileCopyUtils.copy(file[i].getBytes(), target);
+				if(i==0) { // 첫번째 파일 = 메인 이미지
+					productBean.setProduct_main_image(saveName);
+				} else if(i==1) { // 두번째파일 = 디테일 이미지
+					productBean.setProduct_detail_image(saveName);
+				}
+			}
+		}
+		
+		productService.updateProduct(productBean);
+		
+		return "redirect:/productList.ad";
+	}
 
 	// ------------------ 주문목록 ---------------------
 	@RequestMapping(value = "/orderList.ad", method = RequestMethod.GET)
@@ -136,10 +201,12 @@ public class AdminController {
 
 		int order_idx = Integer.parseInt(request.getParameter("order_idx"));
 
-		OrderBean orderBean = orderService.getOrderDetail(order_idx);
+		OrderBean orderBean = orderService.getOrderInfo(order_idx); // orderBean에 주문 정보 받아오기
+		
+		// OrderDetailBean에 주문번호, 상품번호, 개수 받아오기 (같은 주문번호에 여러 상품 주문 가능 -> 리스트 사용) 
 		ArrayList<OrderDetailBean> orderProductList = orderDetailService.getOrderProductList(order_idx);
 
-		ArrayList<ProductBean> orderProductInfo = new ArrayList<ProductBean>(); // 상품 정보를 저장할 리스트
+		ArrayList<ProductBean> orderProductInfo = new ArrayList<ProductBean>(); // 상품번호를 통해 해당 상품 정보를 가져옴
 		for (OrderDetailBean bean : orderProductList) {
 			ProductBean productBean = productService.view(bean.getOrder_detail_product_idx()); // 상품 정보 받아오기
 			orderProductInfo.add(productBean); // 리스트에 추가

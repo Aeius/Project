@@ -26,4 +26,10 @@ public interface ProductDAO {
 
 	public void insertProduct(ProductBean productBean);
 	
+	public void setStatusRelease(int product_idx);
+	
+	public void setStatusDiscontinue(int product_idx);
+	
+	public void updateProduct(ProductBean productBean);
+	
 }

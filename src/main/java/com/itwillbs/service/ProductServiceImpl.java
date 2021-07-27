@@ -69,8 +69,22 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.insertProduct(productBean);
 	}
 
+	@Override
+	public void setStatusRelease(int product_idx) {
+		productDAO.setStatusRelease(product_idx);
+	}
 
+	@Override
+	public void setStatusDiscontinue(int product_idx) {
+		productDAO.setStatusDiscontinue(product_idx);
+	}
 
+	@Override
+	public void updateProduct(ProductBean productBean) {
+		productDAO.updateProduct(productBean);
+	}
+
+	
 	
 
 	

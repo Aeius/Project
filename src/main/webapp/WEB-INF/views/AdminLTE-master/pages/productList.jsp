@@ -39,6 +39,7 @@
                         <th>가격</th>
                         <th>재고</th>
                         <th>좋아요 수</th>
+                        <th>판매상태</th>
                         <th>관리</th>
                       </tr>
                     </thead>
@@ -53,8 +54,21 @@
 	                        <td>${list.product_stock }개</td>
 	                        <td>${list.product_likecount } ♥</td>
 	                        <td>
-	                        <input type="button" value="수정">
-	                        <input type="button" value="삭제">
+		                        <c:choose>
+		                        	<c:when test="${list.product_status eq true }">판매중</c:when>
+		                        	<c:otherwise>중단</c:otherwise>
+		                        </c:choose>
+	                        </td>
+	                        <td>
+	                        <input type="button" value="수정" onclick="location.href='<c:url value="/productUpdate.ad?product_idx=${list.product_idx}"/>'">
+	                        	<c:choose>
+	                        		<c:when test="${list.product_status eq true }">
+	                        			<input type="button" value="판매중단" onclick="location.href='<c:url value="/productDiscontinuePro.ad?product_idx=${list.product_idx}"/>'">
+                        			</c:when>
+		                        	<c:otherwise>
+		                        		<input type="button" value="판매시작" onclick="location.href='<c:url value="/productReleasePro.ad?product_idx=${list.product_idx}"/>'">
+		                        	</c:otherwise>
+	                        	</c:choose>
 	                        </td>
 	                      </tr>
                       </c:forEach>
