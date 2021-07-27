@@ -20,16 +20,23 @@
   $(document).ready(function(){
 	 $('#wishlistbtn').click(function(){
 		alert("찜버튼");
-		$.ajax('<c:url value="/pushWishList.sh" />',{
+		$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
+			data:{product_idx:${pd.product_idx }},
 			success:function(rdata){
-				if(rdata == "onHeart"){
-					rdata = "♥";
-				} else {
-					rdata = "♡";
-				}
-				$('#wishlistbtn').val(rdata);
+				var count = rdata; // 카운트 값 변수에 저장
+				$.ajax('<c:url value="/pushWishList.sh"/>',{
+					data:{product_idx:${pd.product_idx }},
+					success:function(rdata){
+						if(rdata == "onHeart"){
+							rdata = "찜♥ "+ count; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
+						} else {
+							rdata = "찜♡ "+ count;
+						}
+						$('#wishlistbtn').html(rdata);
+					}
+				});		 
 			}
-		});		 
+		});	
 	 });
   });
   
@@ -115,15 +122,22 @@
 
 					<!-- 제품 수량 -->
                     <div class="aa-prod-quantity">
-                    수량 :<input class="aa-prod-category" type="number" value="1" min="1">
+                    수량 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:<input class="aa-prod-category" type="number" value="1" min="1">
                     </div>
             
                     <div class="aa-prod-view-bottom">
                       <a class="aa-add-to-cart-btn" href="#">바로구매</a>
                       <a class="aa-add-to-cart-btn" href="#">장바구니 담기</a>
-                      <input type="button" class="aa-add-to-cart-btn" value="찜" name="wishlistbtn" id="wishlistbtn">
-                      <a class="aa-add-to-cart-btn" href="pushWishList.sh?product_idx=${pd.product_idx }" > 찜 ${pd.product_likecount }</a>
-<!--                       <a class="aa-add-to-cart-btn" href="#">Compare</a> -->
+<!--                       <input type="button" class="aa-add-to-cart-btn" value="" name="wishlistbtn" id="wishlistbtn"> -->
+					<c:choose>
+						<c:when test="${pd.wishlist_member_email eq null }">
+                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > 찜 ♡ ${pd.product_likecount }</a>
+						</c:when>
+						<c:otherwise>
+                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > 찜 ♥ ${pd.product_likecount }</a>
+                        </c:otherwise>
+					</c:choose>
+<!--                       <a class="aa-add-to-cart-btn" href="#">Compare</a>  href="pushWishList.sh?product_idx=${pd.product_idx }"-->
                     </div>
                     
                
@@ -153,28 +167,25 @@
                 
                 </div>
                 
-                    <!-- 리뷰 -->
+                <!-- 리뷰 -->
                 <div class="tab-pane fade in active3" id="review">
                  <div class="aa-product-review-area">
                  <!-- 총 리뷰 총수 -->
 <!--                    <h4>[2 Reviews for T-Shirt]</h4>  -->
                    <ul class="aa-review-nav">
-                   
-<%--                     <c:forEach var="reviewList" items="${reviewList}">  --%>
                      <li>
                         <div class="media">
                           <div class="media-body">
                           <div class="media-lef=">
                             <a href="#">
-                            <!-- 상품 이미지 300px, 300px -->
-                                <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
+                            <!-- 리뷰 작성시 올린 상품 이미지 300px, 300px -->
+                              <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
                               <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
                             </a>
                           </div>
                          
                          <!-------------------------------  리뷰 작성자, 작성일  --------------------------------------->
-                         	<h4 class="media-heading"><strong>제목 : ${reviewList.review_subject}</strong></h4>
-                            <h4 class="media-heading"><strong>작성자 : ${reviewList.review_email}</strong> - <span>작성일 : ${reviewList.review_date}</span></h4>
+                            <h4 class="media-heading"><strong>리뷰작성자</strong> - <span>March 26, 2016 작성일</span></h4>
                             <div class="aa-product-rating">
                            <!-------------------------------  별점  --------------------------------------->
                               <span class="fa fa-star"></span>
@@ -184,20 +195,17 @@
                               <span class="fa fa-star-o"></span>
                             </div>
                           <!-------------------------------  리뷰내용  --------------------------------------->
-<%--                             <p>${reviewList.review_content}</p> --%>
-							
-                            <p><textarea rows="10px" cols="55px" name="review_content" readonly="readonly">${reviewList.review_content}</textarea></p>
-                        
-                            <a href="#" class="reply-btn">삭제</a>
-                            <a href="#" class="reply-btn">수정</a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> 
+                                  
                           </div>
-                          
                         </div>
                       </li>
-<%--                     </c:forEach> --%>
                    </ul>
-                  </div>
-                </div>
+                   </div>
+                   </div>
                     <!-- 페이징 부분 -->
                  <div class="aa-blog-archive-pagination" align="center">
                       <nav>
