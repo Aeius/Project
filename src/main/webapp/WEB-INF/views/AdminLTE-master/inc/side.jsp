@@ -68,8 +68,8 @@
                 <span>쿠폰관리</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="couponList.jsp"><i class="fa fa-circle-o"></i> 쿠폰목록</a></li>
-                <li><a href="couponAdd.jsp"><i class="fa fa-circle-o"></i> 쿠폰생성</a></li>
+                <li><a href="couponList.ad"><i class="fa fa-circle-o"></i> 쿠폰목록</a></li>
+                <li><a href="couponAdd.ad"><i class="fa fa-circle-o"></i> 쿠폰생성</a></li>
               </ul>
             </li>    
             <li class="treeview">

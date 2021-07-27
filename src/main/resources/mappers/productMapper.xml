@@ -5,6 +5,10 @@
 <mapper namespace="com.itwillbs.mapper.ProductMapper">
 
   <select id="getProductAllList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product
+  </select>
+  
+  <select id="getProductAllList30" resultType="com.itwillbs.domain.ProductBean">
   	select * from product where product_size=30
   </select>
   

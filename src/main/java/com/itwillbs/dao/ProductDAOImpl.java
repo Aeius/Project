@@ -26,6 +26,11 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Override
+	public ArrayList<ProductBean> getProductAllList30() {
+		return (ArrayList)sqlSession.selectList(namespace+".getProductAllList30");
+	}
+	
+	@Override
 	public ArrayList<ProductBean> getProductSitrusList() {
 		return (ArrayList)sqlSession.selectList(namespace+".getProductSitrusList");
 	}

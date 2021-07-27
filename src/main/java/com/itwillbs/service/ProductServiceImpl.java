@@ -23,6 +23,11 @@ public class ProductServiceImpl implements ProductService {
 	public ArrayList<ProductBean> getProductAllList() {
 		return (ArrayList)productDAO.getProductAllList();
 	}
+	
+	@Override
+	public ArrayList<ProductBean> getProductAllList30() {
+		return (ArrayList)productDAO.getProductAllList();
+	}
 
 	@Override
 	public ArrayList<ProductBean> getProductSitrusList() {

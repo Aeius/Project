@@ -7,6 +7,8 @@ import com.itwillbs.domain.ProductBean;
 
 public interface ProductDAO {
 	public ArrayList<ProductBean> getProductAllList();
+	
+	public ArrayList<ProductBean> getProductAllList30();
 
 	public ArrayList<ProductBean> getProductSitrusList();
 

@@ -33,7 +33,7 @@ public class ProductController {
 	public String list30(HttpSession session, Model model) {
 		
 		// member 정보 전체를 조회
-		ArrayList<ProductBean> allList = productService.getProductAllList();
+		ArrayList<ProductBean> allList = productService.getProductAllList30();
 		ArrayList<ProductBean> sitrusList = productService.getProductSitrusList();
 		ArrayList<ProductBean> aquaList = productService.getProductAquaList();
 		//Model mb.mb 데이터 담아 가기
