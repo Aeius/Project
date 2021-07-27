@@ -38,4 +38,9 @@
   	SELECT COUNT(*) as wishListCount FROM wishlist WHERE wishList_product_idx=#{product_idx} AND wishList_member_email=#{wishList_member_email}
   </select>
   
+  <select id="checkWishCount" resultType="com.itwillbs.domain.ProductBean">
+  	SELECT product_likecount from product where product_idx = #{product_idx}
+  </select>
+  
+  
 </mapper>

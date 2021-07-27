@@ -49,6 +49,11 @@ public class WishListDAOImpl implements WishListDAO {
 		return sqlSession.selectOne(namespace+".checkWishList", wishListBean);
 		
 	}
+
+	@Override
+	public ProductBean checkWishCount(int product_idx) {
+		return sqlSession.selectOne(namespace+".checkWishCount",product_idx);
+	}
 }
 
 

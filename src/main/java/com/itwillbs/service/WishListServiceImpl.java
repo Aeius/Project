@@ -48,4 +48,11 @@ public class WishListServiceImpl implements WishListService {
 			return wishListDAO.checkWishList(wishListBean);
 		}
 
+		@Override
+		public ProductBean checkWishCount(int product_idx) {
+			return wishListDAO.checkWishCount(product_idx);
+
+		}
+
+
 }

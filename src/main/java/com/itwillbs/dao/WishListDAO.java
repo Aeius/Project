@@ -16,4 +16,6 @@ public interface WishListDAO {
 
 	public WishListBean checkWishList(WishListBean wishListBean);
 	
+	public ProductBean checkWishCount(int product_idx);
+	
 }

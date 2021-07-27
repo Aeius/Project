@@ -13,14 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.WishListBean;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.ProductService;
+import com.itwillbs.service.WishListService;
 
 @Controller
 public class ProductController {
 	
 	@Inject
 	private ProductService productService;
+	
+	@Inject WishListService wishListService;
 
 //	가상주소  http://localhost:8080/myweb2/member/insert
 	
@@ -44,10 +48,16 @@ public class ProductController {
 	
 	//-------------------------------------------------------------- 상품 상세 페이지 --------------------------------------------------------
 	@RequestMapping(value = "/productDetail.sh", method = RequestMethod.GET)
-	public String view(@RequestParam("product_idx") int product_idx, Model model) {
+	public String view(@RequestParam("product_idx") int product_idx, Model model, HttpSession session) {
 		ProductBean pd = productService.view(product_idx);
+		WishListBean wishListBean = new WishListBean();
+		wishListBean.setProduct_idx(product_idx);
+		wishListBean.setWishList_member_email((String)session.getAttribute("member_email"));
+		WishListBean wl = wishListService.checkWishList(wishListBean);
 		
 		model.addAttribute("pd", pd);
+		model.addAttribute("wl", wl);
+		
 		
 		return "/dailyShop/product_board/product-detail";
 		

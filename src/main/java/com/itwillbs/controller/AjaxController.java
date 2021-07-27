@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.WishListBean;
 import com.itwillbs.service.WishListService;
 
@@ -69,33 +70,22 @@ public class AjaxController {
 //			return "redirect:/productDetail.sh?product_idx="+product_idx; // ajax 미구현으로 인한 새로고침
 			return entity;
 		}
+		
+		//-------------------------------------------------------------- wishListCount 체크-------------------------------------------------------------------------
 		@RequestMapping(value = "/checkWishCount.sh", method = RequestMethod.GET)
 		public ResponseEntity<String> checkWishCount(HttpServletRequest request, HttpSession session, @RequestParam("product_idx") int product_idx) {
 			System.out.println("WishListController - checkWishCount()");
 			ResponseEntity<String> entity = null;
 			
 			try {
-				// SQL구문 만능문자에 가져갈 데이터를 Bean에 담아서 전달하는 과정 
-				WishListBean wishListBean = new WishListBean();
-				wishListBean.setProduct_idx(product_idx);  // 현재 접근한 상세페이지의 상품번호 (product_idx) 파라미터 가져오기
-				wishListBean.setWishList_member_email((String)session.getAttribute("member_email")); // 세션에있는(로그인되어있는) 회원이메일정보 불러오기 
 				
-				WishListBean checkWishList =  wishListService.checkWishList(wishListBean);
+				ProductBean checkWishCount =  wishListService.checkWishCount(product_idx);
 //			System.out.println("WishListController - chekcWishList() 리턴 값 : " + checkWishList);
-				String wishListCount = checkWishList.getWishlistcount();  
-				//SQL구문 결과 값 
-				//(SELECT COUNT(*) as wishListCount FROM wishlist WHERE wishlist_member_email=member_email AND wishlist_product_idx=product_idx) 
-				// |---------------|
-				// | wishListCount |
-				// |---------------|
-				// |             1 |
-				// |---------------|
-				//가져와 저장하려면 리턴할 Bean에 멤버변수로 컬럼앨리어스로 지정한 wishListCount와 동일한 이름의 변수가 있어야 
-				//SQL 구문 결과값을 자동으로 해당 Bean에 저장함
-				//최종적으로 SQL 구문결과값을 저장한 Bean이 리턴이 됨 그래서 해당 Bean에서 데이터 꺼내서 정수형으로 변환 후
-				//판별하여 좋아요 숫자 증가 혹은 삭제 구문 실행.
+				String wishCount = checkWishCount.getProduct_likecount()+"";  
+//				SQL 구문 : SELECT product_likecount from product where product_idx = #{product_idx}
 				
-				entity = new ResponseEntity<String>(wishListCount, HttpStatus.OK);
+				System.out.println(wishCount);
+				entity = new ResponseEntity<String>(wishCount, HttpStatus.OK);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 				entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

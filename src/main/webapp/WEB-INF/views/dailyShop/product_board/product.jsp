@@ -17,6 +17,31 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   
+   <script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
+  <script type="text/javascript">
+  $(document).ready(function(){
+	 $('#wishlistbtn').click(function(){
+		$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
+			data:{product_idx:${pd.product_idx }},
+			success:function(rdata){
+				var heart = rdata;
+				$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
+					data:{product_idx:${pd.product_idx }},
+					success:function(wishCount){
+						if(heart == "offHeart"){
+							heart = "찜♡ "+ wishCount;
+						} else {
+							heart = "찜♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
+						}
+						$('#wish').html(heart);
+					}
+				});		 
+			}
+		});	
+	 });
+  });
+  
+  </script>
 
   </head>
   <body> 
@@ -84,10 +109,19 @@
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
-                            <a href="pushWishList.sh?product_idx=${allList.product_idx }" data-toggle="tooltip" data-placement="top" title="좋아요 ${allList.product_likecount }"><span class="fa fa-heart-o"></span></a>  <!-- 찜하기 버튼 -->
-<!--                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>  <!--  비교하기 버튼 -->
+<%--                         	  <c:choose> --%>
+<%-- 									<c:when test="${wl.wishlistcount eq 0 }"> --%>
+<%-- 			                      		<a class="aa-add-to-cart-btn" id="wishlistbtn${allList.product_idx }" > <span id="wish${allList.product_idx }">찜♡ ${allList.product_likecount }</span></a> --%>
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise> --%>
+<%-- 			                      		<a class="aa-add-to-cart-btn" id="wishlistbtn${allList.product_idx }" >  <span id="wish"${allList.product_idx }>찜♥ ${allList.product_likecount }</span></a> --%>
+<%-- 		                       		 </c:otherwise> --%>
+<%-- 								</c:choose> --%>
+                       <a href="pushWishList.sh?product_idx=${allList.product_idx }" data-toggle="tooltip" data-placement="top" title="좋아요 ${allList.product_likecount }"><span class="fa fa-heart-o"></span></a>  <!-- 찜하기 버튼 -->
+<!--                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>   비교하기 버튼
 <!--                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>  <!--퀵뷰                      -->
                           </div>
+                          
 <!--                       ---- product badge- -->
 <!--                           <span class="aa-badge aa-sale" href="#">SALE!</span> 세일중 표시 -->
 						<c:if test="${allList.product_stock eq 0 }">

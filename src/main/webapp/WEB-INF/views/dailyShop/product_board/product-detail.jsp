@@ -19,20 +19,19 @@
   <script type="text/javascript">
   $(document).ready(function(){
 	 $('#wishlistbtn').click(function(){
-		alert("찜버튼");
-		$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
+		$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
 			data:{product_idx:${pd.product_idx }},
 			success:function(rdata){
-				var count = rdata; // 카운트 값 변수에 저장
-				$.ajax('<c:url value="/pushWishList.sh"/>',{
+				var heart = rdata;
+				$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
 					data:{product_idx:${pd.product_idx }},
-					success:function(rdata){
-						if(rdata == "onHeart"){
-							rdata = "찜♥ "+ count; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
+					success:function(wishCount){
+						if(heart == "offHeart"){
+							heart = "찜♡ "+ wishCount;
 						} else {
-							rdata = "찜♡ "+ count;
+							heart = "찜♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
 						}
-						$('#wishlistbtn').html(rdata);
+						$('#wish').html(heart);
 					}
 				});		 
 			}
@@ -130,11 +129,11 @@
                       <a class="aa-add-to-cart-btn" href="#">장바구니 담기</a>
 <!--                       <input type="button" class="aa-add-to-cart-btn" value="" name="wishlistbtn" id="wishlistbtn"> -->
 					<c:choose>
-						<c:when test="${pd.wishlist_member_email eq null }">
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > 찜 ♡ ${pd.product_likecount }</a>
+						<c:when test="${wl.wishlistcount eq 0 }">
+                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish">찜♡ ${pd.product_likecount }</span></a>
 						</c:when>
 						<c:otherwise>
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > 찜 ♥ ${pd.product_likecount }</a>
+                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" >  <span id="wish">찜♥ ${pd.product_likecount }</span></a>
                         </c:otherwise>
 					</c:choose>
 <!--                       <a class="aa-add-to-cart-btn" href="#">Compare</a>  href="pushWishList.sh?product_idx=${pd.product_idx }"-->
