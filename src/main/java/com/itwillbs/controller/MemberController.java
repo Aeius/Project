@@ -52,7 +52,7 @@ public class MemberController {
 	}
 	
 	//---------------------------------------------------------------  내 정보 & 수정 ------------------------------------------------------------
-	@RequestMapping(value = "/update.sh", method = RequestMethod.GET)
+	@RequestMapping(value = "/myPage.sh", method = RequestMethod.GET)
 	public String update(HttpSession session, Model model) {
 		String member_email = (String)session.getAttribute("member_email");
 		MemberBean memberBean = memberService.getMember(member_email);

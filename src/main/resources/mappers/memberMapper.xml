@@ -75,4 +75,6 @@
      UPDATE member SET member_coupon=CONCAT(member_coupon, CONCAT(#{coupon_idx},'/')) WHERE member_email=#{member_email}
   </update>
   
+
+  
 </mapper>

@@ -81,6 +81,22 @@ public class ProductController {
 		
 	}
 	
+	//-------------------------------------------------------------- 장바구니 이동 --------------------------------------------------------
+	@RequestMapping(value = "/basket.sh", method = RequestMethod.GET)
+	public String basket() {
+		
+		return "/dailyShop/member/basket";
+		
+	}
+	
+	//-------------------------------------------------------------- 장바구니 담기 후 팝업창 --------------------------------------------------------
+	@RequestMapping(value = "/basketPopUp.sh", method = RequestMethod.GET)
+	public String basketPopUp() {
+		
+		return "/dailyShop/product_board/basketPopUp";
+		
+	}
+	
 	
 	
 }

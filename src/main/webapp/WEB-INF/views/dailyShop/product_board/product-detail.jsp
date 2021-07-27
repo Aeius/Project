@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,8 +40,36 @@
   });
   
   </script>
-  
-
+    
+ 	<script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('#intoCart').click(function() {
+			var popupWidth = 330;
+			var popupHeight = 185;
+			var popupX = (window.screen.width / 2) - (popupWidth / 2);
+			// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+			var popupY= (window.screen.height / 2) - (popupHeight / 2);
+			// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
+			var popUp = window.open("about:blank","basket", 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+			$.ajax('<c:url value="/intoBasket.sh"/>', {
+				data:{
+					product_idx:$('#product_idx').val(),
+					quantity:$('#quantity').val(),
+					member_email:$('#member_email').val()
+					},
+				success:function(rdata){
+					if(rdata=="in") {
+						popUp.location.href="<c:url value='/basketPopUp.sh'/>";
+					} else {
+						popUp.close();
+						alert('장바구니에 담기 실패');
+					}
+				}
+			});
+		});
+	});
+</script>
   </head>
   <body> 
    <!-- wpf loader Two -->
@@ -97,19 +125,21 @@
                 <div class="col-md-7 col-sm-7 col-xs-12">
                   <div class="aa-product-view-content">
                   <!-- 제품명 -->
+<!--                   값 전달을 위해 hidden으로 가공 -->
+                  	<input type="hidden" id="product_idx" value="${pd.product_idx}">
+                  	<input type="hidden" id="member_email" value="${sessionScope.member_email}">
                     <h3>${pd.product_name}</h3>
                     <div class="aa-price-block">
                    <!-- 제품 가격  -->
-                     <span class="aa-product-view-price">판매가격 : ${pd.product_price }</span><br>
+                     <span class="aa-product-view-price">판매가격 : ${pd.product_price}</span><br>
 <!--                      <span class="aa-product-view-price">소비자가격 : <del>86,000원</del></span> -->
                     <!-- 재고 상태 -->
-                      <p class="aa-product-avilability">재고상태 : <span>${pd.product_stock } 개</span></p>
+                      <p class="aa-product-avilability">재고상태 : <span>${pd.product_stock} 개</span></p>
                     </div>
                     <!-- 제품 간단 설명 -->
                     <p>${pd.product_detail }</p>
                     
                     <p>좋아요 수 : ${pd.product_likecount }</p>
-                   
                  
 <!--                     <h4>Size</h4> -->
 					<!-- 제품 용량 -->
@@ -121,12 +151,13 @@
 
 					<!-- 제품 수량 -->
                     <div class="aa-prod-quantity">
-                    수량 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:<input class="aa-prod-category" type="number" value="1" min="1">
+                    수량 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:<input class="aa-prod-category" type="number" value="1" min="1" id="quantity">
                     </div>
             
                     <div class="aa-prod-view-bottom">
                       <a class="aa-add-to-cart-btn" href="#">바로구매</a>
-                      <a class="aa-add-to-cart-btn" href="#">장바구니 담기</a>
+                      <a class="aa-add-to-cart-btn" href="#" id="intoCart">장바구니 담기</a>
+<!--                       <a class="aa-add-to-cart-btn" href="#">장바구니 담기</a> -->
 <!--                       <input type="button" class="aa-add-to-cart-btn" value="" name="wishlistbtn" id="wishlistbtn"> -->
 					<c:choose>
 						<c:when test="${wl.wishlistcount eq 0 }">
@@ -137,6 +168,8 @@
                         </c:otherwise>
 					</c:choose>
 <!--                       <a class="aa-add-to-cart-btn" href="#">Compare</a>  href="pushWishList.sh?product_idx=${pd.product_idx }"-->
+<%--                       <a class="aa-add-to-cart-btn" href="pushWishList.sh?product_idx=${pd.product_idx}"> 찜 ${pd.product_likecount }</a> --%>
+<!--                       <a class="aa-add-to-cart-btn" href="#">Compare</a> -->
                     </div>
                     
                

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,10 +66,10 @@
 					</c:if>
 					
                   <c:if test="${ ! empty sessionScope }">
-                  <li class="hidden-xs"><a href="../member/cart.jsp">My Cart</a></li>
+                  <li class="hidden-xs"><a href="<c:url value='/basket.sh'/>">My Cart</a></li>
 <!--              <li class="hidden-xs"><a href="../member/checkout.jsp">Checkout</a></li> -->                  
                   <li class="hidden-xs"><a href="myWishList.sh">Wish list</a></li>
-				  <li><a href="update.sh">My page</a></li>
+				  <li><a href="<c:url value='/myPage.sh'/>">My page</a></li>
 				  <li class="hidden-xs"><a href="logout.sh">Logout</a></li>
 				  </c:if>
                   

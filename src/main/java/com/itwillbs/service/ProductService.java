@@ -2,7 +2,7 @@ package com.itwillbs.service;
 
 import java.util.ArrayList;
 
-import com.itwillbs.domain.MemberBean;
+import com.itwillbs.domain.BasketBean;
 import com.itwillbs.domain.ProductBean;
 
 public interface ProductService {
@@ -31,5 +31,7 @@ public interface ProductService {
 	public void setStatusDiscontinue(int product_idx);
 
 	public void updateProduct(ProductBean productBean);
+	
+	public boolean intoBasket(BasketBean basketBean);
 
 }
