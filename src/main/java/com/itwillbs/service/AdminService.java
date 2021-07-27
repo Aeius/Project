@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.ReviewBean;
@@ -27,6 +28,8 @@ public interface AdminService {
 	public List<ReviewBean> getReviewList();
 
 	public void deleteReview(int review_idx);
+
+	public List<CouponBean> getCouponList();
 
 
 	

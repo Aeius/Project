@@ -73,6 +73,11 @@
 	<delete id="deleteReview">
 		delete from review where review_idx=#{review_idx}
 	</delete>
+	
+	<select id="getCouponList"
+		resultType="com.itwillbs.domain.CouponBean">
+		select * from coupon
+	</select>
 
 </mapper>
 

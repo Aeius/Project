@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.OrderBean;
 import com.itwillbs.domain.OrderDetailBean;
@@ -205,4 +206,20 @@ public class AdminController {
 			adminService.deleteReview(review_idx);
 			return "redirect:/reviewList.ad";
 		}
+
+	// ------------------ 쿠폰 목록 ------------------------
+	@RequestMapping(value = "/couponList.ad", method = RequestMethod.GET)
+	public String couponList(HttpServletRequest request, Model model) {
+		List<CouponBean> coupon = adminService.getCouponList();
+		model.addAttribute("coupon", coupon);
+		return "/AdminLTE-master/pages/couponList";
+	}
+	
+	
 }
+
+
+
+
+
+

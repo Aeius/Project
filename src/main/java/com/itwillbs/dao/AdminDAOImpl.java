@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.ReviewBean;
@@ -58,6 +59,11 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void deleteReview(int review_idx) {
 		sqlSession.delete(namespace + ".deleteReview", review_idx);
+	}
+
+	@Override
+	public List<CouponBean> getCouponList() {
+		return sqlSession.selectList(namespace + ".getCouponList");
 	}
 	
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -42,33 +43,17 @@
                     </thead>
                     <!-- 쿠폰 목록 나열 -->
                     <tbody>
+                      <c:forEach var="coupon" items="${coupon}">
                       <tr>
-                        <td>WELCOME</td>
-                        <td>3000원</td>
-                        <td>2021.07.13</td>
-                        <td>2021.07.20</td>
+                        <td>${coupon.coupon_idx}</td>
+                        <td>${coupon.coupon_price}</td>
+                        <td>${coupon.coupon_date}</td>
+                        <td>${coupon.coupon_expire}</td>
                         <td>
                         <input type="button" value="만료">
                         </td>
                       </tr>
-                      <tr>
-                        <td>SUMMERSUMMER</td>
-                        <td>2000원</td>
-                        <td>2021.07.15</td>
-                        <td>2021.08.05</td>
-                        <td>
-                        <input type="button" value="만료">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>LOVEPURFUME</td>
-                        <td>1000원</td>
-                        <td>2021.07.10</td>
-                        <td>2021.07.31</td>
-                        <td>
-                        <input type="button" value="만료">
-                        </td>
-                      </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->

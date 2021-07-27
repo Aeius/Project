@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.itwillbs.dao.AdminDAO;
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.ReviewBean;
@@ -57,6 +58,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteReview(int review_idx) {
 		adminDAO.deleteReview(review_idx);
+	}
+
+	@Override
+	public List<CouponBean> getCouponList() {
+		return adminDAO.getCouponList();
 	}
 
 
