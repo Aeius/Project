@@ -33,16 +33,29 @@ public class ProductController {
 	@RequestMapping(value = "/productList.sh", method = RequestMethod.GET)
 	public String list30(HttpSession session, Model model) {
 		
-		// member 정보 전체를 조회
+		// 파우더리 / 플로럴 / 우디 / 아쿠아 / 프루티 / 시트러스 / 스파이시 / 모던
+		// powdery / floral / woody / aqua / fruity / sitrus / sprices / modern
+		// product의 정보 전체를 조회
 		ArrayList<ProductBean> allList = productService.getProductAllList30();
-		ArrayList<ProductBean> sitrusList = productService.getProductSitrusList();
+		ArrayList<ProductBean> powderyList = productService.getProductPowderyList();
+		ArrayList<ProductBean> floralList = productService.getProductFloralList();
+		ArrayList<ProductBean> woodyList = productService.getProductWoodyList();
 		ArrayList<ProductBean> aquaList = productService.getProductAquaList();
+		ArrayList<ProductBean> fruityList = productService.getProductFruityList();
+		ArrayList<ProductBean> sitrusList = productService.getProductSitrusList();
+		ArrayList<ProductBean> spricesList = productService.getProductSpicesList();
+		ArrayList<ProductBean> modernList = productService.getProductModernList();
+		
 		//Model mb.mb 데이터 담아 가기
 		model.addAttribute("allList" , allList);
-		model.addAttribute("sitrusList" , sitrusList);
+		model.addAttribute("powderyList" , powderyList);
+		model.addAttribute("floralList" , floralList);
+		model.addAttribute("woodyList" , woodyList);
 		model.addAttribute("aquaList" , aquaList);
-		
-		//  /WEB-INF/views/member/info.jsp 이동
+		model.addAttribute("fruityList" , fruityList);
+		model.addAttribute("sitrusList" , sitrusList);
+		model.addAttribute("spricesList" , spricesList);
+		model.addAttribute("modernList" , modernList);
 		
 		return "/dailyShop/product_board/product";
 	}
@@ -51,18 +64,30 @@ public class ProductController {
 		@RequestMapping(value = "/productList50.sh", method = RequestMethod.GET)
 		public String list50(HttpSession session, Model model) {
 			
-			// member 정보 전체를 조회
+			// 파우더리 / 플로럴 / 우디 / 아쿠아 / 프루티 / 시트러스 / 스파이시 / 모던
+			// powdery / floral / woody / aqua / fruity / sitrus / sprices / modern
+			// product의 정보 전체를 조회
 			ArrayList<ProductBean> allList = productService.getProductAllList50();
-			ArrayList<ProductBean> sitrusList = productService.getProductSitrusList50();
+			ArrayList<ProductBean> powderyList = productService.getProductPowderyList50();
+			ArrayList<ProductBean> floralList = productService.getProductFloralList50();
+			ArrayList<ProductBean> woodyList = productService.getProductWoodyList50();
 			ArrayList<ProductBean> aquaList = productService.getProductAquaList50();
+			ArrayList<ProductBean> fruityList = productService.getProductFruityList50();
+			ArrayList<ProductBean> sitrusList = productService.getProductSitrusList50();
+			ArrayList<ProductBean> spricesList = productService.getProductSpicesList50();
+			ArrayList<ProductBean> modernList = productService.getProductModernList50();
 			//Model mb.mb 데이터 담아 가기
 			model.addAttribute("allList" , allList);
-			model.addAttribute("sitrusList" , sitrusList);
+			model.addAttribute("powderyList" , powderyList);
+			model.addAttribute("floralList" , floralList);
+			model.addAttribute("woodyList" , woodyList);
 			model.addAttribute("aquaList" , aquaList);
+			model.addAttribute("fruityList" , fruityList);
+			model.addAttribute("sitrusList" , sitrusList);
+			model.addAttribute("spricesList" , spricesList);
+			model.addAttribute("modernList" , modernList);
 			
-			//  /WEB-INF/views/member/info.jsp 이동
-			
-			return "/dailyShop/product_board/product";
+			return "/dailyShop/product_board/product50ml";
 		}
 	//-------------------------------------------------------------- 검색 기능 -----------------------------------------------------------
 		@RequestMapping(value = "/search.sh", method = RequestMethod.GET)

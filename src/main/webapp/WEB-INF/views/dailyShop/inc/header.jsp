@@ -148,7 +148,7 @@
               <li><a href="productList.sh">Shop <span class="caret"></span></a>
                 <ul class="dropdown-menu">                
                   <li><a href="productList.sh">30ml</a></li>
-                  <li><a href="productList.sh">50ml</a></li>
+                  <li><a href="productList50.sh">50ml</a></li>
                   <li><a href="productDetail.sh">상세페이지</a></li>
                 </ul>
               </li>

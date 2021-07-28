@@ -82,14 +82,7 @@
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
-                       	  <c:choose>
-								<c:when test="${wl.wishlistcount eq 0 }">
-		                      		<a class="aa-add-to-cart-btn" id="wishlistbtn${search.product_idx }"> <span id="wish${search.product_idx }">찜♡ ${search.product_likecount }</span></a>
-								</c:when>
-								<c:otherwise>
-		                      		<a class="aa-add-to-cart-btn" id="wishlistbtn${search.product_idx }">  <span id="wish"${search.product_idx }>찜♥ ${search.product_likecount }</span></a>
-	                       		 </c:otherwise>
-							</c:choose>
+                       	 <a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${search.product_idx }">좋아요 수♡ ${search.product_likecount }</span></a>
 <%--                        <a href="pushWishList.sh?product_idx=${allList.product_idx }" data-toggle="tooltip" data-placement="top" title="좋아요 ${allList.product_likecount }"><span class="fa fa-heart-o"></span></a>  <!-- 찜하기 버튼 --> --%>
 <!--                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>   비교하기 버튼
 <!--                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>  <!--퀵뷰                      -->
@@ -112,8 +105,6 @@
                               <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
                             </figcaption>
                           </figure>                        
-                          <div class="aa-product-hvr-content">
-                          </div>
                         </li>
                        <li>
                           <figure>
@@ -123,8 +114,6 @@
                               <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
                             </figcaption>
                           </figure>                        
-                          <div class="aa-product-hvr-content">
-                          </div>
                         </li>
                         <li>
                           <figure>
@@ -134,8 +123,6 @@
                               <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
                             </figcaption>
                           </figure>                        
-                          <div class="aa-product-hvr-content">
-                          </div>
                         </li>
                          <li>
                           <figure>
@@ -145,8 +132,6 @@
                               <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
                             </figcaption>
                           </figure>                        
-                          <div class="aa-product-hvr-content">
-                          </div>
                         </li>
                         <!------------------------------------  검색 결과가 적을 경우 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>

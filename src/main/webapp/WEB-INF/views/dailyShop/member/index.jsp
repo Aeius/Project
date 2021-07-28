@@ -142,12 +142,13 @@
                               <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${bestList.product_idx }">${bestList.product_name }</a></h4>
                               <span class="aa-product-price">$
-                              ${bestList.product_price }</span><span class="aa-product-price"><del>${bestList.product_price }</del>
+                              ${bestList.product_price }</span><span class="aa-product-price">
                               </span>
                          	  </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
-                      		 <a href="pushWishList.sh?product_idx=${bestList.product_idx }" data-toggle="tooltip" data-placement="top" title="좋아요 ${bestList.product_likecount }"><span class="fa fa-heart-o"></span></a>  <!-- 찜하기 버튼 -->
+                         <a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${bestList.product_idx }">좋아요 수♡ ${bestList.product_likecount }</span></a>
+<%--                       		 <a href="pushWishList.sh?product_idx=${bestList.product_idx }" data-toggle="tooltip" data-placement="top" title="좋아요 ${bestList.product_likecount }"><span class="fa fa-heart-o"></span></a>  <!-- 찜하기 버튼 --> --%>
 <!--                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>   비교하기 버튼
 <!--                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>  <!--퀵뷰                      -->
                           </div>

@@ -17,8 +17,7 @@
     <![endif]-->
  <script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
   <script type="text/javascript">
-  $(document).ready(function(){
-	 $('#wishlistbtn').click(function(){
+  $(document).ready(function(){	 $('#wishlistbtn').click(function(){
 		$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
 			data:{product_idx:${pd.product_idx }},
 			success:function(rdata){
