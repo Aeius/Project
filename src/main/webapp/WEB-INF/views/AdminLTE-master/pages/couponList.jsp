@@ -22,7 +22,7 @@
         <section class="content-header">
           <h1>쿠폰 목록</h1>
         </section>
-        
+        계정명 변경확인
 
         <!-- Main content -->
         <section class="content">
