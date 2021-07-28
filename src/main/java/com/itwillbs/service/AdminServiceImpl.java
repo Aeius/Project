@@ -70,5 +70,10 @@ public class AdminServiceImpl implements AdminService {
 		adminDAO.unexpireCoupon(coupon_idx);
 	}
 
+	@Override
+	public void couponAddPro(CouponBean couponBean) {
+		adminDAO.couponAddPro(couponBean);
+	}
+
 
 }

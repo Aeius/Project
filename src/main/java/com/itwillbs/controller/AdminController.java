@@ -381,7 +381,7 @@ public class AdminController {
 		model.addAttribute("coupon", coupon);
 		return "/AdminLTE-master/pages/couponList";
 	}
-	
+
 	// ------------------ 쿠폰 만료, 재활성화 ------------------------
 	@RequestMapping(value = "/expireCoupon.ad", method = RequestMethod.GET)
 	public String expireCoupon(HttpServletRequest request) {
@@ -398,7 +398,19 @@ public class AdminController {
 		adminService.unexpireCoupon(coupon_idx); // coupon_idx 추출 테스트
 		return "redirect:/couponList.ad";
 	}
-	
+
+	// ------------------ 쿠폰 등록 ---------------------
+	@RequestMapping(value = "/couponAdd.ad", method = RequestMethod.GET)
+	public String couponAdd() {
+		return "/AdminLTE-master/pages/couponAdd";
+	}
+
+	@RequestMapping(value = "/couponAddPro.ad", method = RequestMethod.POST)
+	public String couponAddPro(CouponBean couponBean) {
+
+		adminService.couponAddPro(couponBean);
+		return "redirect:/couponList.ad";
+	}
 }
 
 

@@ -33,6 +33,8 @@ public interface AdminService {
 
 	public void unexpireCoupon(int coupon_idx);
 
+	public void couponAddPro(CouponBean couponBean);
+
 
 	
 }

@@ -34,5 +34,6 @@ public interface AdminDAO {
 
 	public void unexpireCoupon(int coupon_idx);
 
+	public void couponAddPro(CouponBean couponBean);
 
 }

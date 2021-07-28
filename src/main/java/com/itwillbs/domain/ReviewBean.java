@@ -21,6 +21,12 @@ public class ReviewBean {
 	private String order_status;
 	private int product_idx;
 	
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
 	public int getReview_idx() {
 		return review_idx;
 	}
@@ -100,18 +106,6 @@ public class ReviewBean {
 		this.product_idx = product_idx;
 	}
 	
-
-	public String getProduct_name() {
-		return product_name;
-	}
-
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
-	}
-
-	
-
-
 
 	
 }

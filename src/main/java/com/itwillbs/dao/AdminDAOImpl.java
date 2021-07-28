@@ -70,6 +70,11 @@ public class AdminDAOImpl implements AdminDAO {
 	public void unexpireCoupon(int coupon_idx) {
 		sqlSession.update(namespace + ".unexpireCoupon", coupon_idx);
 	}
+
+	@Override
+	public void couponAddPro(CouponBean couponBean) {
+		sqlSession.insert(namespace + ".couponAddPro", couponBean);
+	}
 	
 	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -23,11 +24,11 @@
                   <h1 class="box-title">쿠폰 생성하기</h1>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form">
+                  <form role="form" action="<c:url value='/couponAddPro.ad'/>" method="post">
                     <!-- text input -->
                     <div class="form-group">
                       <label>쿠폰 코드 입력</label>
-                      <input type="text" class="form-control" placeholder="쿠폰 코드를 입력하세요"/>
+                      <input type="text" name="coupon_name" id="coupon_name" class="form-control" placeholder="쿠폰 코드를 입력하세요"/>
                     </div>
 
                     <!-- radio -->
@@ -35,19 +36,19 @@
                       <label>할인 금액 선택</label>
                       <div class="radio">
                         <label>
-                          <input type="radio" name="optionsRadiosP" id="optionsRadiosP1" value="option1">
+                          <input type="radio" name="coupon_price" id="coupon_price" value="1000">
                           1천원
                         </label>
                       </div>
                       <div class="radio">
                         <label>
-                          <input type="radio" name="optionsRadiosP" id="optionsRadiosP2" value="option2">
+                          <input type="radio" name="coupon_price" id="coupon_price" value="2000">
                           2천원
                         </label>
                       </div>
                       <div class="radio">
                         <label>
-                          <input type="radio" name="optionsRadiosP" id="optionsRadiosP3" value="option3">
+                          <input type="radio" name="coupon_price" id="coupon_price" value="3000">
                           3천원
                         </label>
                       </div>
@@ -55,31 +56,15 @@
                     
                     <!-- radio -->
                     <div class="form-group">
-                      <label>유효 기간 선택</label>
-                      <div class="radio">
+                      <label>유효 기간 선택</label><br>
+                  
                         <label>
-                          <input type="radio" name="optionsRadiosW" id="optionsRadiosW1" value="option1">
-                          1주일
+                          <input type="date" name="coupon_date" id="coupon_date">
                         </label>
-                      </div>
-                      <div class="radio">
+                      &nbsp; ~ &nbsp;
                         <label>
-                          <input type="radio" name="optionsRadiosW" id="optionsRadiosW2" value="option2">
-                          2주일
+                          <input type="date" name="coupon_expire" id="coupon_expire">
                         </label>
-                      </div>
-                      <div class="radio">
-                        <label>
-                          <input type="radio" name="optionsRadiosW" id="optionsRadiosW3" value="option3">
-                          3주일
-                        </label>
-                      </div>
-                      <div class="radio">
-                        <label>
-                          <input type="radio" name="optionsRadiosW" id="optionsRadiosW4" value="option4">
-                          4주일
-                        </label>
-                      </div>
                     </div>
 					<div class="box-footer">
                     <button type="submit" class="btn btn-primary">쿠폰생성</button>
