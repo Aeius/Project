@@ -103,6 +103,7 @@
 <!--                      <span class="aa-badge aa-hot" href="#">HOT!</span> 인기 표시 -->
                         </li>
 						</c:forEach>
+					<!------------------------------------  검색 결과가 적을 경우 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
 						<li>
                           <figure>
 	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
@@ -147,6 +148,7 @@
                           <div class="aa-product-hvr-content">
                           </div>
                         </li>
+                        <!------------------------------------  검색 결과가 적을 경우 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                     </div>
                 	</div>
