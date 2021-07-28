@@ -61,6 +61,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public ArrayList<ProductBean> getProductSearchList(String search) {
+		return (ArrayList)productDAO.getProductSearchList(search);
+	}
+	
+	@Override
 	public ProductBean view(int product_idx) {
 		return productDAO.view(product_idx);
 	}
@@ -100,6 +105,7 @@ public class ProductServiceImpl implements ProductService {
 	public void updateProduct(ProductBean productBean) {
 		productDAO.updateProduct(productBean);
 	}
+
 
 	
 	

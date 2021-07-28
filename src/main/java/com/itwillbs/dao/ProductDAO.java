@@ -39,5 +39,7 @@ public interface ProductDAO {
 
 	public int updateBasket(BasketBean basketBean);
 
+	public ArrayList getProductSearchList(String search);
+
 
 }

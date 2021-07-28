@@ -15,18 +15,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
+import com.itwillbs.domain.ProductBean;
 import com.itwillbs.service.MemberService;
+import com.itwillbs.service.ProductService;
 
 @Controller
 public class MemberController {
 	// 부모인터페이스 변수 => 멤버변수 정의 => 객체생성 자동
 	@Inject
 	private MemberService memberService;
+	
+	@Inject
+	private ProductService productService;
 
 //	가상주소  http://localhost:8080/myweb2/member/insert
 	//---------------------------------------------------------------  메인 페이지 ------------------------------------------------------------
 	@RequestMapping(value = "/main.sh", method = RequestMethod.GET)
-	public String main() {
+	public String main(HttpSession session, Model model) {
+		
+		ArrayList<ProductBean> bestList = productService.getProductBestList();
+		//Model mb.mb 데이터 담아 가기
+		model.addAttribute("bestList" , bestList);
 		return "/dailyShop/member/index";
 	}
 		

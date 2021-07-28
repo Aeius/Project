@@ -61,6 +61,11 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Override
+	public ArrayList getProductSearchList(String search) {
+		return (ArrayList)sqlSession.selectList(namespace+".getProductSearchList", search);
+	}
+	
+	@Override
 	public ProductBean view(int product_idx) {
 		return sqlSession.selectOne(namespace+".getProductDetail", product_idx);
 	}
@@ -103,6 +108,8 @@ public class ProductDAOImpl implements ProductDAO {
 	public int updateBasket(BasketBean basketBean) {
 		return sqlSession.update(namespace + ".updateBasket", basketBean);
 	}
+
+	
 	
 	
 	

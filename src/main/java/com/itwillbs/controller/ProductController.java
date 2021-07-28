@@ -3,6 +3,7 @@ package com.itwillbs.controller;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -62,6 +63,20 @@ public class ProductController {
 			//  /WEB-INF/views/member/info.jsp 이동
 			
 			return "/dailyShop/product_board/product";
+		}
+	//-------------------------------------------------------------- 검색 기능 -----------------------------------------------------------
+		@RequestMapping(value = "/search.sh", method = RequestMethod.GET)
+		public String search(HttpServletRequest request, Model model) {
+			
+			String search = request.getParameter("search");
+			// member 정보 전체를 조회
+			ArrayList<ProductBean> searchList = productService.getProductSearchList(search);
+			//Model mb.mb 데이터 담아 가기
+			model.addAttribute("search" , searchList);
+			
+			//  /WEB-INF/views/member/info.jsp 이동
+			
+			return "/dailyShop/product_board/search";
 		}
 	
 	//-------------------------------------------------------------- 상품 상세 페이지 --------------------------------------------------------

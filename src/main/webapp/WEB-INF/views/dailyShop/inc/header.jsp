@@ -113,8 +113,8 @@
              
               <!-------------------------------------------------------- search box------------------------------------------------- -->
               <div class="aa-search-box">
-                <form action="">
-                  <input type="text" name="" id="" placeholder="검색기능 ">
+                <form action="search.sh">
+                  <input type="text" name="search" id="search" placeholder="검색기능 ">
                   <button type="submit"><span class="fa fa-search"></span></button>
                 </form>
               </div>

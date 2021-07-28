@@ -19,7 +19,7 @@
 				<a href='<c:url value="/logout.ad" />'>로그아웃</a>
               </li>
               <li class="dropdown user user-menu">
-				<a href='<c:url value="/index.sh" />'>쇼핑몰로 이동</a>
+				<a href='<c:url value="/main.sh" />'>쇼핑몰로 이동</a>
               </li>
             </ul>
           </div>
