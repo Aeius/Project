@@ -99,7 +99,7 @@ public class AjaxController {
 			return entity;
 		}
 
-	
+	//------------------------------------------------------------------------ 상품 담기 ------------------------------------------------------
 	// 응답 정보를 담아서 리턴
 	@RequestMapping(value = "/intoBasket.sh", method = RequestMethod.GET)
 	public ResponseEntity<String> intoBasket(HttpServletRequest request) {

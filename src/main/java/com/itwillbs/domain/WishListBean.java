@@ -15,9 +15,23 @@ public class WishListBean {
 	
 	private String product_stock;
 	
+	private String product_main_image;
+	
 	private String wishListCount;
 	
 	
+	public String getProduct_main_image() {
+		return product_main_image;
+	}
+	public void setProduct_main_image(String product_main_image) {
+		this.product_main_image = product_main_image;
+	}
+	public String getWishListCount() {
+		return wishListCount;
+	}
+	public void setWishListCount(String wishListCount) {
+		this.wishListCount = wishListCount;
+	}
 	public String getWishlistcount() {
 		return wishListCount;
 	}

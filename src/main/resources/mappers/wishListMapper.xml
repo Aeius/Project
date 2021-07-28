@@ -10,6 +10,7 @@
 	wishList_product_idx,
 	product_name,
 	product_price,
+	product_main_image,
 	product_stock
 	
 	FROM wishList, product

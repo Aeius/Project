@@ -64,9 +64,9 @@
                     <tbody>
                     <c:forEach var="myWishList" items="${myWishList}">
                       <tr>
-                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="#"><img src="../img/man/polo-shirt-1.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">${myWishList.product_name}</a></td>
+                        <td><a class="remove" href="deleteWishList.sh?product_idx=${myWishList.wishList_product_idx }"><fa class="fa fa-close"></fa></a></td>
+                        <td><a href="#"><img src="<c:url value='/resources/upload/${myWishList.product_main_image}' />" width="80" height="80" ></a></td>
+                        <td><a class="aa-cart-title" href="productDetail.sh?product_idx=${myWishList.wishList_product_idx }">${myWishList.product_name}</a></td>
                         <td>${myWishList.product_price} 원</td>
                         <td>${myWishList.product_stock} 개</td>
                         <td><a href="#" class="aa-add-to-cart-btn">장바구니에 담기</a></td>
