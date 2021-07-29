@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <header class="main-header">
-        <a href="../../index2.html" class="logo"><b>관리자 모드</b></a>
+        <a href='<c:url value="/chart.ad" />' class="logo"><b>관리자 모드</b></a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->

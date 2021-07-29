@@ -97,6 +97,14 @@ public class MemberDAOImpl implements MemberDAO{
       System.out.println(map);
       sqlSession.update(namespace + ".updateMemberCoupon", map);
    }
+
+   
+   	//관리자 페이지 : 구독자만 관리
+	@Override
+	public List<MemberBean> getSubMemberList() {
+		System.out.println("MemberDAOImpl - getSubMemberList()");
+		return sqlSession.selectList(namespace+".getSubMemberList");
+	}
    
    
    

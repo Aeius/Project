@@ -32,7 +32,7 @@
 											<h4 class="panel-title">
 												<a data-toggle="collapse" data-parent="#accordion"
 													href="#collapseOne${fbb.faq_idx}"> <!-- href = collapse### 이랑 아래에 -->
-													Q. 질문 ${fbb.faq_idx} ${fbb.faq_question}
+													Q. 질문 ${fbb.faq_idx}. ${fbb.faq_question}
 
 												</a>
 											</h4>
@@ -42,7 +42,7 @@
 
 											<div class="panel-body">
 												<div class="row">
-													<div class="col-md-12">A. 답변 내용 ${fbb.faq_answer}
+													<div class="col-md-12">A. 답변 내용 : ${fbb.faq_answer}
 														</div>
 												</div>
 											</div>

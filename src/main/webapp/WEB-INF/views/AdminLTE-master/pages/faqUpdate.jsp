@@ -22,20 +22,21 @@
       <div class="content-wrapper">
       <div class="box box-warning">
                 <div class="box-header">
-                  <h1 class="box-title">FAQ 등록하기</h1>
+                  <h1 class="box-title">FAQ 수정하기</h1>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" action='<c:url value="/pages/faqWritePro" />' method="post">
+                  <form role="form" action='<c:url value="/pages/faqUpdatePro" />' method="post">
+                  <input type="hidden" name="faq_idx" value="${fbb.faq_idx }">
                     <!-- textarea -->
                     <div class="form-group">
                       <label>질문 입력</label>
-                      <textarea name="faq_question" class="form-control" rows="5" placeholder="내용을 입력하세요"></textarea>
+                      <textarea name="faq_question" class="form-control" rows="5">${fbb.faq_question }</textarea>
                     </div>
                     
                     <!-- textarea -->
                     <div class="form-group">
                       <label>답변 입력</label>
-                      <textarea name="faq_answer" class="form-control" rows="5" placeholder="내용을 입력하세요"></textarea>
+                      <textarea name="faq_answer" class="form-control" rows="5">${fbb.faq_answer }</textarea>
                     </div>
 					  
 					<div class="box-footer">

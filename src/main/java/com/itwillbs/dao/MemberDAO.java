@@ -30,4 +30,8 @@ public interface MemberDAO {
 
    public void registMemberCoupon(String member_email, int coupon_idx);
 
+   //관리자 페이지 : 구독자만 관리
+   public List<MemberBean> getSubMemberList();
+
+
 }

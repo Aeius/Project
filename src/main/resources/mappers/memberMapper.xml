@@ -73,6 +73,15 @@
      UPDATE member SET member_coupon=CONCAT_WS('/',member_coupon,#{coupon_idx}) WHERE member_email=#{member_email}
   </update>
   
-
+<!-- 관리자 : 구독자만 -->
+<!-- 	구독자 회원의 모든 정보 -->
+	<select id="getSubMemberList" resultType="com.itwillbs.domain.MemberBean">
+		SELECT * FROM member WHERE member_subscribe=1
+	</select>
+<!-- 	구독 여부만 조회 -->
+<!-- 	<select id="getSubMemberList" resultType="com.itwillbs.domain.MemberBean"> -->
+<!-- 		SELECT IF(member_subscribe,'true','false') as member_subscribe  -->
+<!-- 		FROM member WHERE member_subscribe=1 -->
+<!-- 	</select> -->
   
 </mapper>

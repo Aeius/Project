@@ -41,15 +41,22 @@
                     </thead>
                     <!-- FAQ 목록 나열 -->
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>FAQ1</td>
-                        <td>
-                        <input type="button" value="수정">
-                        <input type="button" value="삭제">
-                        </td>
+                    	<c:forEach var="fbb" items="${fbbList }">
+							<tr>
+								<td>${fbb.faq_idx }</td>
+				    	        <td><a href='<c:url value="faqUpdate.ad?faq_idx=${fbb.faq_idx }" />'>
+				    	      ${fbb.faq_question }</a></td>
+				                <td>
+		                        <input type="button" value="수정" onclick="location.href='<c:url value="/faqUpdate.ad?faq_idx=${fbb.faq_idx }" />'">
+		                        <input type="button" value="삭제" onclick="location.href='<c:url value="/faqDelete.ad?faq_idx=${fbb.faq_idx }" />'">
+		                        </td>
+				             </tr>
+						</c:forEach>   
+				    </tbody>                    
+				    <tr>
+                        
                       </tr>
-                    </tbody>
+                    
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

@@ -149,4 +149,10 @@ public class MemberServiceImpl implements MemberService {
       }
    }
 
+    //관리자 페이지 : 구독자만 관리
+	@Override
+	public List<MemberBean> getSubMemberList() {
+		return memberDAO.getSubMemberList();
+	}
+
 }

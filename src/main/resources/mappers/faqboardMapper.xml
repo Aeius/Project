@@ -22,22 +22,26 @@
 <!--   <insert id="insertFaqBoard"> -->
 <!--   	insert into faq values(null,#{faq_question},#{faq_answer},#{faq_date}) -->
 <!--   </insert> -->
+
+<!-- 번호로 해당 글 확인 -->
+	<select id="getFaqBoard" resultType="com.itwillbs.domain.FaqBoardBean">
+		SELECT * FROM faq WHERE faq_idx=#{faq_idx}
+	</select>
   
 <!--   FAQ 관리자권한 체크 -->
 <!-- 	<select id="adminCheck" resultType="com.itwillbs.domain.MemberBean"> -->
 <!--     select * from admin where admin_id=#{id} and admin_password=#{pass} -->
 <!--   </select> -->
   
-  <!--   FAQ 글수정(글번호로 수정) -->
-<!--   <update id="updateFaqBoard"> -->
-<!--   	update faq set faq_question=#{faq_question}, faq_answer=#{faq_answer}, faq_date=#{faq_date} where faq_idx=#{faq_idx} -->
-<!--   </update> -->
+<!--     FAQ 글수정(글번호로 수정) -->
+  <update id="updateFaqBoard">
+  	update faq set faq_question=#{faq_question}, faq_answer=#{faq_answer}, faq_date=#{faq_date} where faq_idx=#{faq_idx}
+  </update>
   
-  <!--   FAQ 글삭제(글번호로 삭제) -->
-<!--   <delete id="deleteFaqBoard"> -->
-<!--   	delete from faq where faq_idx=#{id} -->
-<!--   </delete> -->
-  
-  
+<!--   	 FAQ 글삭제(글번호로 삭제) -->
+  <delete id="deleteFaqBoard">
+  	delete from faq where faq_idx=#{faq_idx}
+  </delete>
+ 
 
 </mapper>

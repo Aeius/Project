@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -35,41 +35,29 @@
                     <thead>
                       <tr>
                         <th>회원번호</th>
-                        <th>아이디</th>
+                        <th>이메일</th>
+                        <th>이름</th>
                         <th>구독일자</th>
                         <th>만료일자</th>
                         <th>관리</th>
                       </tr>
                     </thead>
                     <!-- 구독자 목록 나열 -->
+                    <%-- subscribe 테이블 : subscribe_email / subscribe_start_date / subscribe_month --%>
+                    <%-- member 테이블 : member_subscribe --%>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>회원1</td>
-                        <td>2021.07.15</td>
-                        <td>2021.08.15</td>
-                        <td>
-                        <input type="button" value="연장 권장 메일 발송">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>회원2</td>
-                        <td>2021.07.10</td>
-                        <td>2021.08.10</td>
-                        <td>
-                        <input type="button" value="연장 권장 메일 발송">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>회원3</td>
-                        <td>2021.07.12</td>
-                        <td>2021.08.12</td>
-                        <td>
-                        <input type="button" value="연장 권장 메일 발송">
-                        </td>
-                      </tr>
+                    	<c:forEach var="mb" items="${mbList }">
+	                      <tr>
+	                        <td>${mb.member_idx }</td>
+	                        <td>${mb.member_email }</td>
+	                        <td>${mb.member_name }</td>
+	                        <td>${subscribe_start_date }</td>
+	                        <td>2021.08.15</td>
+	                        <td>
+	                        <input type="button" value="연장 권장 메일 발송">
+	                        </td>
+	                      </tr>
+                    	</c:forEach> 
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->

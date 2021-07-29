@@ -23,9 +23,31 @@ public class FaqBoardDAOImpl implements FaqBoardDAO {
 	}
 
 	@Override
-	public void insertfaqBoard(FaqBoardBean fbb) {
-		System.out.println("FaqBoardDAOImpl - insertfaqBoard()");
+	public void insertFaqBoard(FaqBoardBean fbb) {
+		System.out.println("FaqBoardDAOImpl - insertFaqBoard()");
 		sqlSession.insert(namespace+".insertFaqBoard", fbb);
+	}
+
+	@Override
+	public FaqBoardBean getFaqBoard(int faq_idx) {
+		System.out.println("FaqBoardDAOImpl - getFaqBoard()");
+		return sqlSession.selectOne(namespace+".getFaqBoard", faq_idx);
+	}
+
+	@Override
+	public void updateFaqBoard(FaqBoardBean fbb) {
+		sqlSession.update(namespace+".updateFaqBoard", fbb);
+		
+	}
+
+	@Override
+	public void deleteFaqBoard(FaqBoardBean fbb) {
+		sqlSession.delete(namespace+".deleteFaqBoard", fbb);
+	}
+
+	@Override
+	public List<FaqBoardBean> getFaqBoardList() {
+		return sqlSession.selectList(namespace+".getFaqBoardList");
 	}
 	
 	

@@ -22,16 +22,42 @@ public class FaqBoardServiceImpl implements FaqBoardService {
 		return faqBoardDAO.getFaqList();
 	}
 
+	
+	//관리자 페이지에서 FAQ 쓰기
 	@Override
-	public void insertfaqBoard(FaqBoardBean fbb) {
-		System.out.println("FaqBoardServiceImpl - insertfaqBoard()");
-		// 처리작업 name, pass,subject,content 폼에서 들고옴
-		//  num date 처리작업
-				
-		fbb.setFaq_date(new Timestamp(System.currentTimeMillis())); 
+	public void insertFaqBoard(FaqBoardBean fbb) {
+		System.out.println("FaqBoardServiceImpl - insertFaqBoard()");
+		// date 처리작업
+		fbb.setFaq_date(new Timestamp(System.currentTimeMillis()));
 				
 		//메서드 호출
-		faqBoardDAO.insertfaqBoard(fbb);
+		faqBoardDAO.insertFaqBoard(fbb);
+	}
+
+
+	@Override
+	public FaqBoardBean getFaqBoard(int faq_idx) {
+		return faqBoardDAO.getFaqBoard(faq_idx);
+	}
+
+
+	@Override
+	public void updateFaqBoard(FaqBoardBean fbb) {
+		// date 처리작업
+		fbb.setFaq_date(new Timestamp(System.currentTimeMillis()));
+		faqBoardDAO.updateFaqBoard(fbb);
+	}
+
+
+	@Override
+	public void deleteFaqBoard(FaqBoardBean fbb) {
+		faqBoardDAO.deleteFaqBoard(fbb);
+	}
+
+
+	@Override
+	public List<FaqBoardBean> getFaqBoardList() {
+		return faqBoardDAO.getFaqBoardList();
 	}
 	
 }

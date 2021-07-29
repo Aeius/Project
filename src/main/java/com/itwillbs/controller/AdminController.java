@@ -232,41 +232,48 @@ public class AdminController {
 
 		return "redirect:/orderList.ad";
 	}
+	
 
 	// ------------------ 관리자 로그아웃 ------------------------
 	@RequestMapping(value = "/logout.ad", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();
+		
 		return "/dailyShop/member/index";
 	}
 	
-	// ------------------ 관리자 메인페이지 이동 ------------------------
+	// ------------------ 관리자 메인페이지 이동 -------------------
 	@RequestMapping(value = "/index.sh", method = RequestMethod.GET)
 	public String index(HttpSession session) {
 		//세션 값가져오기
 		String member_email=(String)session.getAttribute("member_email");
+		
 		return "/dailyShop/member/index";
 	}
 	
-	// ------------------ 회원관리 > 전체회원 ----------------------
+	
+	// ------------------ 회원관리 > 전체회원 ---------------------
 	@RequestMapping(value = "/memberList.ad", method = RequestMethod.GET)
 	public String memberList(HttpSession session, Model model) {
 		//  member정보 전체를 조회
 		List<MemberBean> mbList=memberService.getMemberList();
+		
 		//Model mbList,mbList 데이터 담아 가기
 		model.addAttribute("mbList", mbList);
+		
 		return "/AdminLTE-master/pages/memberList";
 	}
 	
 	// ------------------ 회원관리 > 구독자 ---------------------
-//		@RequestMapping(value = "/subscribeList.ad", method = RequestMethod.GET)
-//		public String subscribeList(HttpSession session, Model model) {
-//			//  member정보 전체를 조회
-//			List<MemberBean> mbList=memberService.getMemberList();
-//			//Model mbList,mbList 데이터 담아 가기
-//			model.addAttribute("mbList", mbList);
-//			return "/AdminLTE-master/pages/subscribeList";
-//		}
+		@RequestMapping(value = "/subscribeList.ad", method = RequestMethod.GET)
+		public String subscribeList(HttpSession session, Model model) {
+			//  member정보 전체를 조회
+			List<MemberBean> mbList=memberService.getSubMemberList();
+			//Model mbList,mbList 데이터 담아 가기
+			model.addAttribute("mbList", mbList);
+			return "/AdminLTE-master/pages/subscriberList";
+		}
+	
 	
 	// ------------------ 공지관리 > FAQ 등록 ------------------
 	@RequestMapping(value = "/faqWrite.ad", method = RequestMethod.GET)
@@ -275,14 +282,66 @@ public class AdminController {
 		return "/AdminLTE-master/pages/faqWrite";
 	}
 	
-	@RequestMapping(value = "/board/faqWritePro", method = RequestMethod.POST)
+	@RequestMapping(value = "pages/faqWritePro", method = RequestMethod.POST)
 	public String faqWritePro(FaqBoardBean fbb) {
 		// 글쓰기 메서드 호출
-		faqBoardService.insertfaqBoard(fbb);
-		//  /board/list 가상주소 이동
+		faqBoardService.insertFaqBoard(fbb);
+		
 		return "redirect:/faqList.ad";
 	}
+	
+	// ------------------ 공지관리 > FAQ 전체 보기 ------------------
+//	가상주소  http://localhost:8080/myweb2/pages/faqList	
+	@RequestMapping(value = "/faqList.ad", method = RequestMethod.GET)
+	public String faqList(HttpSession session, Model model) {
+		
+		// 게시판 글 가져오기 
+		List<FaqBoardBean> fbbList=faqBoardService.getFaqBoardList();
+		
+		//게시판 글 가져온 데이터 model담아서 이동
+		model.addAttribute("fbbList",fbbList);
+		
+		return "/AdminLTE-master/pages/faqList";
+	}
 
+	// ------------------ 공지관리 > FAQ 수정 ------------------
+	@RequestMapping(value = "/faqUpdate.ad", method = RequestMethod.GET)
+	public String faqUpdate(Model model, HttpServletRequest request) {
+		
+		//번호 가져오기
+		int faq_idx=Integer.parseInt(request.getParameter("faq_idx"));
+		
+		//번호에 맞는 글 불러서 model에 담아가기
+		FaqBoardBean fbb=faqBoardService.getFaqBoard(faq_idx);
+		model.addAttribute("fbb",fbb);
+		
+		return "/AdminLTE-master/pages/faqUpdate";
+	}
+	
+	@RequestMapping(value = "/pages/faqUpdatePro", method = RequestMethod.POST)
+	public String faqUpdatePro(FaqBoardBean fbb) {
+		
+		// 글수정 메서드 호출
+		faqBoardService.updateFaqBoard(fbb);
+		
+		return "redirect:/faqList.ad";
+	}
+	
+	// ------------------ 공지관리 > FAQ 삭제 ------------------	
+	@RequestMapping(value = "/faqDelete.ad", method = RequestMethod.GET)
+	public String faqDelete(HttpServletRequest request, FaqBoardBean fbb, HttpSession session, Model model) {
+		
+		//번호 찾아서 해당 글 삭제
+		int faq_idx=Integer.parseInt(request.getParameter("faq_idx"));
+		faqBoardService.deleteFaqBoard(fbb);
+		
+		//세션값 초기화
+		session.invalidate();
+		model.addAttribute("msg","해당 게시글이 삭제되었습니다.");
+		return "/member/msg";
+	}	
+
+	
 	// ------------------ 매출 조회 ---------------------
 	@RequestMapping(value = "/chartList.ad", method = RequestMethod.GET)
 	public String chartList(Model model) {
