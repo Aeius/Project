@@ -2335,6 +2335,7 @@ img {
   float: left;
   padding-top: 50px;
   width: 100%;
+  padding-bottom: 50px;
 }
 #cart-view .cart-view-area .cart-view-table {
   background-color: #F5F5F5;

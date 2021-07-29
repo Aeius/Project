@@ -58,6 +58,10 @@
           <br><br>
           <!-- 쿠폰 등록 추가 -->
           <!-- 페이징 지우기 -->
+          <!-- session 값 없을 때 로그인 페이지로 이동  -->
+			<c:if test="${empty sessionScope.member_email}">
+				<c:redirect url="/login.sh"></c:redirect>
+			</c:if>
           <h2>혜택</h2>
             <h3>나의 보유 포인트 : ${member.member_point}</h3>
             <div class="aa-product-catg-body">
@@ -65,7 +69,7 @@
             <input type="text" name="inputCouponCode" placeholder="쿠폰번호를 입력">
             <input type="submit" value="쿠폰등록"> 
             </form>
-            
+               <!-- 쿠폰 목록 나열 -->
             <br>
                   <table id="example1" class="table table-bordered table-striped">
                   <tr>
@@ -74,33 +78,30 @@
                   	<td>사용기한</td>
                   	<td>사용여부</td>
 					</tr>
-						<c:forEach var="couponInfoList" items="${couponInfoList}" varStatus="status">
-                   		<tr>
-							<td>${couponInfoList.coupon_name}</td>
-							<td>${couponInfoList.coupon_price}원</td>
-							<td>${couponInfoList.coupon_date} ~ ${couponInfoList.coupon_expireDate}</td>
-							<td><c:choose>
-								    <c:when test="${couponInfoList.coupon_status eq false}">
-								    	사용 완료
-								    </c:when>         
-								    <c:otherwise>
-								    	사용 가능
-								    </c:otherwise>
-							 	</c:choose></td>
-                      </tr>
-                    </thead>
-                    <!-- 쿠폰 목록 나열 -->
-                    <tbody>
-                    	<c:forEach var="couponInfoList" items="${couponInfoList}">
-	                      <tr>
-	                        <td>${couponInfoList.coupon_name}</td>
-	                        <td>${couponInfoList.coupon_price}원</td>
-	                        <td>${couponInfoList.coupon_date}</td>
-	                        <td>${couponInfoList.coupon_expireDate}</td>
-	                      </tr>
-                     	</c:forEach>
-                    </tbody>
-					</c:forEach>
+                   <c:choose>
+	                    <c:when test="${ empty couponInfoList }">
+	                    	<tr>
+	                  		<td colspan="4"style="text-align: center;">사용 가능한 쿠폰 없음</td>
+							</tr>
+	                    </c:when>
+	                    <c:otherwise>
+							<c:forEach var="couponInfoList" items="${couponInfoList}" varStatus="status">
+		                  		<tr>
+								<td>${couponInfoList.coupon_name}</td>
+								<td>${couponInfoList.coupon_price}원</td>
+								<td>${couponInfoList.coupon_date} ~ ${couponInfoList.coupon_expire}</td>
+								<td><c:choose>
+									    <c:when test="${couponInfoList.coupon_status eq false}">
+									    	사용 완료
+									    </c:when>         
+									    <c:otherwise>
+									    	사용 가능
+									    </c:otherwise>
+								 	</c:choose></td>
+		                     	</tr>
+							</c:forEach>
+	                    </c:otherwise>
+                    </c:choose>
                   </table>
             </div>
           </div>

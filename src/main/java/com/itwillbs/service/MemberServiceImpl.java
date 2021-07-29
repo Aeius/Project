@@ -85,21 +85,28 @@ public class MemberServiceImpl implements MemberService {
    @Override
    public ArrayList<CouponBean> getMemberCouponList(String member_email) {
       String memberCouponList = memberDAO.getMemberCouponList(member_email);
-      String[] arrCouponList = memberCouponList.split("/");
-      ArrayList<CouponBean> couponInfoList = new ArrayList<CouponBean>();
-      for(int i = 0; i < arrCouponList.length; i++) {
-         couponInfoList.add(memberDAO.getCouponInfo(Integer.parseInt(arrCouponList[i])));
+      ArrayList<CouponBean> couponInfoList = null;
+
+      if(memberCouponList != null) {
+    	  String[] arrCouponList = memberCouponList.split("/");
+    	  couponInfoList = new ArrayList<CouponBean>();
+    	  for(int i = 0; i < arrCouponList.length; i++) {
+    		  couponInfoList.add(memberDAO.getCouponInfo(Integer.parseInt(arrCouponList[i])));
 //         System.out.println(couponInfoList.toString());
+    	  }
       }
       return couponInfoList;
    }
-
+   
+   // 쿠폰등록
    @Override
    public boolean registMemberCoupon(String inputCouponCode, String member_email) {
       System.out.println("MemberService - registMemberCoupon");
       boolean isRegisted = false;
+      
       List<CouponBean> couponList = memberDAO.getCouponList();
       System.out.println(couponList);
+      
       for(CouponBean couponBean : couponList) {
          if(inputCouponCode.equals(couponBean.getCoupon_name())) {
             memberDAO.registMemberCoupon(member_email, couponBean.getCoupon_idx());

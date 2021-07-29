@@ -44,28 +44,39 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('#intoCart').click(function() {
-			var popupWidth = 330;
-			var popupHeight = 185;
-			var popupX = (window.screen.width / 2) - (popupWidth / 2);
-			// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
-			var popupY= (window.screen.height / 2) - (popupHeight / 2);
-			// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
-			var popUp = window.open("about:blank","basket", 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
-			$.ajax('<c:url value="/intoBasket.sh"/>', {
-				data:{
-					product_idx:$('#product_idx').val(),
-					quantity:$('#quantity').val(),
-					member_email:$('#member_email').val()
-					},
+			$.ajax('<c:url value="/checkSession.sh"/>', {
+				data:{member_email:$('#member_email').val()},
 				success:function(rdata){
-					if(rdata=="in") {
-						popUp.location.href="<c:url value='/basketPopUp.sh'/>";
+					if(rdata=="empty") {
+						location.href="<c:url value='/login.sh'/>";
 					} else {
-						popUp.close();
-						alert('장바구니에 담기 실패');
+						var popupWidth = 330, popupHeight = 185;
+						// 팝업창 화면 한가운데 열리게 설정
+						var popupX = (window.screen.width / 2) - (popupWidth / 2);
+						var popupY= (window.screen.height / 2) - (popupHeight / 2);
+						
+						var popUp = window.open("about:blank","basket", 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+						
+						$.ajax('<c:url value="/intoBasket.sh"/>', {
+							data:{
+								product_idx:$('#product_idx').val(),
+								quantity:$('#quantity').val(),
+								member_email:$('#member_email').val()
+								},
+							success:function(rdata){
+								if(rdata=="in") {
+									popUp.location.href="<c:url value='/basketPopUp.sh'/>";
+								} else {
+									popUp.close();
+									alert('장바구니에 담기 실패');
+								}
+							}
+						});
 					}
 				}
 			});
+			
+			
 		});
 	});
 </script>
@@ -125,26 +136,26 @@
                   <div class="aa-product-view-content">
                   <!-- 제품명 -->
 <!--                   값 전달을 위해 hidden으로 가공 -->
-                  	<input type="hidden" id="product_idx" value="${pd.product_idx}">
+                  	<input type="hidden" id="product_idx" value="${productBean.product_idx}">
                   	<input type="hidden" id="member_email" value="${sessionScope.member_email}">
-                    <h3>${pd.product_name}</h3>
+                    <h3>${productBean.product_name}</h3>
                     <div class="aa-price-block">
                    <!-- 제품 가격  -->
-                     <span class="aa-product-view-price">판매가격 : ${pd.product_price}</span><br>
+                     <span class="aa-product-view-price">판매가격 : ${productBean.product_price}</span><br>
 <!--                      <span class="aa-product-view-price">소비자가격 : <del>86,000원</del></span> -->
                     <!-- 재고 상태 -->
-                      <p class="aa-product-avilability">재고상태 : <span>${pd.product_stock} 개</span></p>
+                      <p class="aa-product-avilability">재고상태 : <span>${productBean.product_stock} 개</span></p>
                     </div>
                     <!-- 제품 간단 설명 -->
-                    <p>${pd.product_detail }</p>
+                    <p>${productBean.product_detail }</p>
                     
-                    <p>좋아요 수 : ${pd.product_likecount }</p>
+                    <p>좋아요 수 : ${productBean.product_likecount }</p>
                  
 <!--                     <h4>Size</h4> -->
 					<!-- 제품 용량 -->
                     <div class="aa-prod-view-size">
-                     제품 사이즈 : ${pd.product_size } ml <br>
-                 	 제품 카테고리 : ${pd.product_category }
+                     제품 사이즈 : ${productBean.product_size } ml <br>
+                 	 제품 카테고리 : ${productBean.product_category }
                     </div>
                     
 
@@ -160,10 +171,10 @@
 <!--                       <input type="button" class="aa-add-to-cart-btn" value="" name="wishlistbtn" id="wishlistbtn"> -->
 					<c:choose>
 						<c:when test="${wl.wishlistcount eq 0 }">
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish">찜♡ ${pd.product_likecount }</span></a>
+                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish">찜♡ ${productBean.product_likecount }</span></a>
 						</c:when>
 						<c:otherwise>
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" >  <span id="wish">찜♥ ${pd.product_likecount }</span></a>
+                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" >  <span id="wish">찜♥ ${productBean.product_likecount }</span></a>
                         </c:otherwise>
 					</c:choose>
 <!--                       <a class="aa-add-to-cart-btn" href="#">Compare</a>  href="pushWishList.sh?product_idx=${pd.product_idx }"-->
@@ -188,13 +199,13 @@
               <div class="tab-content">
                 <div class="tab-pane fade in active" id="description">
                 
-                 <img src='<c:url value="/resources/upload/${pd.product_detail_image }"/>'>
+                 <img src='<c:url value="/resources/upload/${productBean.product_detail_image }"/>'>
                   
                 </div>
                 <div class="tab-pane fade in active2" id="information">
                 
                 <!-- 상품 구매 안내 부분 -->
-                 ${pd.product_detail_image }
+                 ${productBean.product_detail_image }
                 
                 </div>
                 

@@ -124,8 +124,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public ProductBean view(int product_idx) {
-		return productDAO.view(product_idx);
+	public ProductBean getProductInfo(int product_idx) {
+		return productDAO.getProductInfo(product_idx);
 	}
 
 	@Override

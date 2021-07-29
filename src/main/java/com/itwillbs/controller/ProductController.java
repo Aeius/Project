@@ -106,37 +106,20 @@ public class ProductController {
 	
 	//-------------------------------------------------------------- 상품 상세 페이지 --------------------------------------------------------
 	@RequestMapping(value = "/productDetail.sh", method = RequestMethod.GET)
-	public String view(@RequestParam("product_idx") int product_idx, Model model, HttpSession session) {
-		ProductBean pd = productService.view(product_idx);
+	public String getProductInfo(@RequestParam("product_idx") int product_idx, Model model, HttpSession session) {
+		ProductBean productBean = productService.getProductInfo(product_idx);
 		WishListBean wishListBean = new WishListBean();
 		wishListBean.setProduct_idx(product_idx);
 		wishListBean.setWishList_member_email((String)session.getAttribute("member_email"));
 		WishListBean wl = wishListService.checkWishList(wishListBean);
 		
-		model.addAttribute("pd", pd);
+		model.addAttribute("productBean", productBean);
 		model.addAttribute("wl", wl);
 		
 		
 		return "/dailyShop/product_board/product-detail";
 		
 	}
-	
-	//-------------------------------------------------------------- 장바구니 이동 --------------------------------------------------------
-	@RequestMapping(value = "/basket.sh", method = RequestMethod.GET)
-	public String basket() {
-		
-		return "/dailyShop/member/basket";
-		
-	}
-	
-	//-------------------------------------------------------------- 장바구니 담기 후 팝업창 --------------------------------------------------------
-	@RequestMapping(value = "/basketPopUp.sh", method = RequestMethod.GET)
-	public String basketPopUp() {
-		
-		return "/dailyShop/product_board/basketPopUp";
-		
-	}
-	
 	
 	
 }

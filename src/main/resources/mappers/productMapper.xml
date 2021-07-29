@@ -93,7 +93,7 @@
   </select>
   
   <!-- 상세페이지 -->
-  <select id="getProductDetail" parameterType="int" resultType="com.itwillbs.domain.ProductBean">
+  <select id="getProductInfo" parameterType="int" resultType="com.itwillbs.domain.ProductBean">
   	select * from product where product_idx= #{product_idx}
   </select>
   

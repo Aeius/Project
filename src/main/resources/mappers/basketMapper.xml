@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mapper.BasketMapper">
+
+	<select id="getBasketList" resultType="com.itwillbs.domain.BasketBean">
+		SELECT product_idx, basket_quantity, product_name, product_main_image, product_price, product_size
+		FROM basket b JOIN product p
+		ON b.basket_product_idx = p.product_idx
+		WHERE basket_email = #{member_email};
+	</select>
+
+
+</mapper>
+

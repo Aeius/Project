@@ -135,7 +135,7 @@ public class AdminController {
 	@RequestMapping(value = "/productUpdate.ad", method = RequestMethod.GET)
 	public String productUpdate(HttpServletRequest request, Model model) {
 		int product_idx = Integer.parseInt(request.getParameter("product_idx"));
-		ProductBean productBean = productService.view(product_idx);
+		ProductBean productBean = productService.getProductInfo(product_idx);
 		model.addAttribute("productBean", productBean);
 		return "/AdminLTE-master/pages/productUpdate";
 	}
@@ -143,7 +143,7 @@ public class AdminController {
 	public String productUpdatePro(MultipartHttpServletRequest request, @RequestParam MultipartFile[] file) throws Exception {
 		
 		int product_idx = Integer.parseInt(request.getParameter("product_idx"));
-		ProductBean productBean = productService.view(product_idx); // 기존 정보 불러옴
+		ProductBean productBean = productService.getProductInfo(product_idx); // 기존 정보 불러옴
 		
 		productBean.setProduct_name(request.getParameter("product_name"));
 		productBean.setProduct_detail(request.getParameter("product_detail"));
@@ -204,7 +204,7 @@ public class AdminController {
 
 		ArrayList<ProductBean> orderProductInfo = new ArrayList<ProductBean>(); // 상품번호를 통해 해당 상품 정보를 가져옴
 		for (OrderDetailBean bean : orderProductList) {
-			ProductBean productBean = productService.view(bean.getOrder_detail_product_idx()); // 상품 정보 받아오기
+			ProductBean productBean = productService.getProductInfo(bean.getOrder_detail_product_idx()); // 상품 정보 받아오기
 			orderProductInfo.add(productBean); // 리스트에 추가
 		}
 

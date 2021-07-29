@@ -62,17 +62,15 @@
   </select>
   
   <select id="getCouponInfo" resultType="com.itwillbs.domain.CouponBean">
-     SELECT coupon_idx, coupon_name, coupon_price, coupon_status, coupon_date, 
-           DATE_ADD(coupon_date, INTERVAL coupon_expire DAY) as "coupon_expireDate"
-   FROM coupon WHERE coupon_idx = #{coupon_idx};
+     SELECT * FROM coupon WHERE coupon_idx = #{coupon_idx}
   </select>
   
   <select id="getCouponList" resultType="com.itwillbs.domain.CouponBean">
      select * from coupon
   </select>
-  
+  <!-- CONCAT_WS(첫 번째 인자값, 데이터1, 데이터2, ...) : 첫 번째 인자값으로 구분해 데이터를 입력해주는 함수로 null 값에도 사용가능 -->
   <update id="updateMemberCoupon" parameterType="HashMap">
-     UPDATE member SET member_coupon=CONCAT(member_coupon, CONCAT(#{coupon_idx},'/')) WHERE member_email=#{member_email}
+     UPDATE member SET member_coupon=CONCAT_WS('/',member_coupon,#{coupon_idx}) WHERE member_email=#{member_email}
   </update>
   
 

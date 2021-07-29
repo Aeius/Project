@@ -99,8 +99,7 @@ public class AjaxController {
 			return entity;
 		}
 
-	//------------------------------------------------------------------------ 상품 담기 ------------------------------------------------------
-	// 응답 정보를 담아서 리턴
+	//------------------------------------------------------------------------ 장바구니 담기 ------------------------------------------------------
 	@RequestMapping(value = "/intoBasket.sh", method = RequestMethod.GET)
 	public ResponseEntity<String> intoBasket(HttpServletRequest request) {
 		String result = ""; // 문자열로 결과 값 저장
@@ -134,23 +133,26 @@ public class AjaxController {
 	}
 	
 	
-//	@RequestMapping(value = "/board/ajaxList", method = RequestMethod.GET)
-//	public ResponseEntity<List<BoardBean>> ajaxList() {
-//		String result = ""; // 문자열로 결과 값 저장
-//		ResponseEntity<List<BoardBean>> entity = null; // 저장한 문자열을 담아서 전달하기 위한 객체
-//		
-//		try {
-//			PageBean pageBean = new PageBean();
-//			pageBean.setPageNum("1");
-//			pageBean.setPageSize(5);
-//			List<BoardBean> boardList = boardService.getBoardList(pageBean);
-//			
-//			entity = new ResponseEntity<List<BoardBean>>(boardList, HttpStatus.OK);
-//		} catch (Exception e) {
-//			System.out.println("오류 발생 -" + e.getMessage());
-//			entity = new ResponseEntity<List<BoardBean>>(HttpStatus.BAD_REQUEST);
-//		}
-//		
-//		return entity;
-//	}
+	//-------------------------------------------------------------- 로그인 확인 --------------------------------------------------------
+		@RequestMapping(value = "/checkSession.sh", method = RequestMethod.GET)
+		public ResponseEntity<String> checkSession(HttpServletRequest request) {
+			String result = ""; // 문자열로 결과 값 저장
+			ResponseEntity<String> entity = null;
+
+			try {
+				String member_email = request.getParameter("member_email");
+				// member_email == null 은 안되고 문자열 비교하니까 작동
+				if(member_email == "") {
+					result = "empty";
+				} else {
+					result = "notEmpty";
+				}
+
+				entity = new ResponseEntity<String>(result, HttpStatus.OK);
+			} catch (Exception e) {
+				System.out.println("오류 발생 -" + e.getMessage());
+				entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			}
+			return entity;
+		}
 }

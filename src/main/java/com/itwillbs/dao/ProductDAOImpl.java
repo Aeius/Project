@@ -114,8 +114,8 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Override
-	public ProductBean view(int product_idx) {
-		return sqlSession.selectOne(namespace+".getProductDetail", product_idx);
+	public ProductBean getProductInfo(int product_idx) {
+		return sqlSession.selectOne(namespace+".getProductInfo", product_idx);
 	}
 
 	@Override
@@ -145,13 +145,13 @@ public class ProductDAOImpl implements ProductDAO {
 		return basketBean2;
 	}
 	
-	// 장바구니에 최초로 담기
 	@Override
 	public int intoBasket(BasketBean basketBean) {
 		int insertCount = sqlSession.insert(namespace + ".intoBasket", basketBean);
 		return insertCount;
 	}
 
+	// 장바구니에 담겨 있으면 수량만 변경
 	@Override
 	public int updateBasket(BasketBean basketBean) {
 		return sqlSession.update(namespace + ".updateBasket", basketBean);
