@@ -17,13 +17,14 @@
     <![endif]-->
  <script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
   <script type="text/javascript">
-  $(document).ready(function(){	 $('#wishlistbtn').click(function(){
+  $(document).ready(function(){	 
+	  $('#wishlistbtn').click(function(){
 		$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
-			data:{product_idx:${pd.product_idx }},
+			data:{product_idx:${productBean.product_idx }},
 			success:function(rdata){
 				var heart = rdata;
 				$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
-					data:{product_idx:${pd.product_idx }},
+					data:{product_idx:${productBean.product_idx }},
 					success:function(wishCount){
 						if(heart == "offHeart"){
 							heart = "찜♡ "+ wishCount;
@@ -75,8 +76,6 @@
 					}
 				}
 			});
-			
-			
 		});
 	});
 </script>
@@ -126,7 +125,7 @@
                     <div id="demo-1" class="simpleLens-gallery-container">
                       <div class="simpleLens-container">
                       <!-- 돋보기로 확대될 사진 넣는 곳 -->
-                        <div class="simpleLens-big-image-container"><a data-lens-image="<c:url value='/resources/upload/${pd.product_main_image }'/>" class="simpleLens-lens-image"><img src="<c:url value='/resources/upload/${pd.product_main_image }'/>" class="simpleLens-big-image"></a></div>
+                        <div class="simpleLens-big-image-container"><a data-lens-image="<c:url value='/resources/upload/${productBean.product_main_image }'/>" class="simpleLens-lens-image"><img src="<c:url value='/resources/upload/${productBean.product_main_image }'/>" class="simpleLens-big-image"></a></div>
                       </div>
                     </div>
                   </div>

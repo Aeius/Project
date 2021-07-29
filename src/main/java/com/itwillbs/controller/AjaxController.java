@@ -84,6 +84,7 @@ public class AjaxController {
 			try {
 				
 				ProductBean checkWishCount =  wishListService.checkWishCount(product_idx);
+				System.out.println("checkWishCount실행됨");
 //			System.out.println("WishListController - chekcWishList() 리턴 값 : " + checkWishList);
 				String wishCount = checkWishCount.getProduct_likecount()+"";  
 //				SQL 구문 : SELECT product_likecount from product where product_idx = #{product_idx}

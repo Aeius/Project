@@ -11,6 +11,7 @@
   	review_subject,
   	review_content,
   	review_image,
+  	review_image2,
   	review_star,
   	review_date
   	) 
@@ -21,6 +22,7 @@
   	#{review_subject},
   	#{review_content},
   	#{review_image},
+  	#{review_image2},
   	#{review_star},
   	#{review_date}
   	)
@@ -39,6 +41,7 @@
 			review_subject,
 			review_content,
             review_image,
+            review_image2,
 			review_star,
 			review_date
  
@@ -50,20 +53,29 @@
 	</select>
 	
 	 <select id="getReview" resultType="com.itwillbs.domain.ReviewBean" >
-		SELECT * FROM review WHERE review_product_idx = #{review_product_idx}
+		SELECT * FROM review WHERE review_idx = #{review_product_idx}
 	</select>
 	
-	<update id="updateReview">
+    <select id="getReviewListPage" resultType="com.itwillbs.domain.ReviewBean">
+  	select * from review order by review_idx desc limit #{startRow},#{pageSize}
+    </select>
+
+	<select id="getReviewListCount" resultType="java.lang.Integer">
+  	select count(*) from review
+  	</select>
+  
+ 	 <update id="updateReview">
 		UPDATE review SET
 			review_subject = #{review_subject},
 		    review_content = #{review_content},
 		    review_image = #{review_image},
+		    review_image2 = #{review_image2},
 		    review_star = #{review_star}
-		WHERE review_product_idx = #{review_product_idx}
+		WHERE review_idx = #{review_idx}
 	</update>
-	
+  
 	<delete id="deleteReview">
-		DELETE FROM review where review_product_idx = #{review_product_idx}
+		DELETE FROM review where review_idx = #{review_idx}
 	</delete>
 
 </mapper>

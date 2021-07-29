@@ -15,37 +15,11 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-<style type="text/css">
 
-	.star-rating {
-/*   border:solid 1px #ccc; */
-  display:flex;
-  flex-direction: row-reverse;
-  font-size:1.5em;
-  justify-content:space-around;
-  padding:0 .2em;
-  text-align:center;
-  width:5em;
-}
 
-.star-rating input {
-  display:none;
-}
-
-.star-rating label {
-  color:#ccc;
-  cursor:pointer;
-}
-
-.star-rating :checked ~ label {
-  color:#f90;
-}
-
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  color:#fc0;
-}
-	</style>
+	<!-- 별점 css -->
+	<link href='<c:url value="/resources/css/star-rating.css" />' rel="stylesheet" type="text/css">
+	
   </head>
   <body> 
    <!-- wpf loader Two -->
@@ -110,8 +84,8 @@
                 <div class="aa-myaccount-register">                 
                  <h4>리뷰수정</h4>
                  
-                 <form action='<c:url value="reviewUpdatePro.sh" />' id="fr" class="aa-login-form" method="post">
-                 	<input type="hidden" name="review_product_idx" value="${reviewBean.review_product_idx}">
+                 <form action='<c:url value="reviewUpdatePro.sh" />' id="fr" class="aa-login-form" method="post" enctype="multipart/form-data">
+                 	<input type="hidden" name="review_idx" value="${reviewBean.review_idx}">
 	  				
                    <label for="name">평점</label>
                    
@@ -124,7 +98,7 @@
 							  <label for="3-stars" class="star">&#9733;</label>
 							  <input type="radio" id="2-stars" name="review_star" value="2" />
 							  <label for="2-stars" class="star">&#9733;</label>
-							  <input type="radio" id="1-star" name="review_star" value="1"  />
+							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
 							  <label for="1-star" class="star">&#9733;</label>
                    </div>
          
@@ -137,8 +111,8 @@
                 	<textarea rows="10px" cols="90" name="review_content" >${reviewBean.review_content }</textarea>
                 	
                 	
-                    <input type="file" class="form-control" id="review_image" name="review_image" value="${reviewBean.review_image }" >
-                    
+                     <!-- 다중 파일 업로드시 multiple="multiple" 추가 / name="file" 이어야함 accept : 확장자명 지정 -->
+                     <input multiple="multiple" type="file" class="form-control" id="review_image" name="review_image" value="파일 등록" accept=".jpg,.jpeg,.png,.gif">
                     
                     <button type="submit" id="review_insertBtn" class="aa-browse-btn">리뷰수정</button>
                             

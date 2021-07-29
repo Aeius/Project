@@ -19,52 +19,24 @@
   
   <script type="text/javascript">
 						
-	function updateReview(product_idx){
+	function updateReview(review_idx){
 		
 		// 댓글 번호를 새로운 윈도우 창으로 가져가 댓글 번호 정보 비교
 			window.name="parentForm"
-			document.open("<c:url value='/reviewUpdateForm.sh?product_idx="+product_idx+"'/>","replyForm","width=720, height=800");
+			document.open("<c:url value='/reviewUpdateForm.sh?review_idx="+review_idx+"'/>","replyForm","width=720, height=800");
 			}
 	</script>
 						
   <script type="text/javascript">
 						
- 	function deleteReview(product_idx){
+ 	function deleteReview(review_idx){
 		// 댓글 번호를 새로운 윈도우 창으로 가져가 댓글 번호 정보 비교
-			location.href="<c:url value='/reviewDeletePro.sh?product_idx="+product_idx+"'/>"
+			location.href="<c:url value='/reviewDeletePro.sh?review_idx="+review_idx+"'/>"
 			}
-	</script>				
-<style type="text/css">
+	</script>	
+				
 
-	.star-rating {
-/*   border:solid 1px #ccc; */
-  display:flex;
-  flex-direction: row-reverse;
-  font-size:1.5em;
-  justify-content:space-around;
-  padding:0 .2em;
-  text-align:center;
-  width:5em;
-}
-
-.star-rating input {
-  display:none;
-}
-
-.star-rating label {
-  color:#ccc;
-  cursor:pointer;
-}
-
-.star-rating :checked ~ label {
-  color:#f90;
-}
-
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  color:#fc0;
-}
-	</style>
+<link href='<c:url value="/resources/css/star-rating.css" />' rel="stylesheet" type="text/css">
 
   </head>
   <body> 
@@ -112,9 +84,11 @@
                           <div class="media-body">
                           <div class="media-lef=">
                             <a href="#">
-                            <!-- 상품 이미지 300px, 300px -->
-                                <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
-                              <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
+                            
+                            <!-- 리뷰 이미지 300px, 300px -->
+		                      <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image }" />'>
+                              <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image2 }" />'>
+                             
                             </a>
                           </div>
                          
@@ -124,6 +98,7 @@
                             <h4 class="media-heading"><strong>작성자 : ${reviewList.review_email}</strong> - <span>작성일 : ${reviewList.review_date}</span></h4>
                            <div class="star-rating">
 
+						<!-------------------------------  별점 체크안되는 빈공간 --------------------------------------->
                            <c:set var ="review_star" value="${ reviewList.review_star }"></c:set>
                             <c:if test="${review_star eq 1}">
 							  <label for="5-stars" class="star">&#9733;</label>
@@ -153,15 +128,7 @@
                            
                       <c:forEach var="review_star" items="${ratingOptions}" varStatus="status" begin="1" end="${reviewList.review_star}">
 
-<!-- 							  <input type="radio" id="5-stars" name="review_star" value="5" /> -->
-<!-- 							  <label for="5-stars" class="star">&#9733;</label> -->
-<!-- 							  <input type="radio" id="4-stars" name="review_star" value="4" /> -->
-<!-- 							  <label for="4-stars" class="star">&#9733;</label> -->
-<!-- 							  <input type="radio" id="3-stars" name="review_star" value="3" /> -->
-<!-- 							  <label for="3-stars" class="star">&#9733;</label> -->
-<!-- 							  <input type="radio" id="2-stars" name="review_star" value="2" /> -->
-<!-- 							  <label for="2-stars" class="star">&#9733;</label> -->
-							
+<!-- 							 별점 체크 되는 부분 곳 -->
 							  <input type="checkbox" id="1-star" name="review_star" checked="checked" />
 							  <label for="1-star" class="star">&#9733;</label>
 							
@@ -175,8 +142,8 @@
 							
                             <p><textarea rows="10px" cols="55px" name="review_content" readonly="readonly">${reviewList.review_content}</textarea></p>
                         	
-                            <input type="button" class="aa-browse-btn" value="수정" onclick="updateReview (${reviewList.review_product_idx} )">
-                            <input type="button" class="aa-browse-btn" value="삭제" onclick="deleteReview(${reviewList.review_product_idx} )">
+                            <input type="button" class="aa-browse-btn" value="수정" onclick="updateReview (${reviewList.review_idx} )">
+                            <input type="button" class="aa-browse-btn" value="삭제" onclick="deleteReview(${reviewList.review_idx} )">
                            
                         
                           </div>
@@ -186,6 +153,33 @@
                     </c:forEach>
                    </ul>
                   </div>
+                    <!-------------------------------  페이징  --------------------------------------->
+                   <div class="aa-blog-archive-pagination" align="center">
+                      <nav>
+                        <ul class="pagination">
+                          <li>
+                          <c:if test="${pb.startPage > pb.pageBlock }">
+                            <a href='<c:url value="/reviewList.sh?pageNum=${pb.startPage-pb.pageBlock }" />' aria-label="Previous">
+                              <span aria-hidden="true">«</span>
+                            </a>
+                            </c:if>
+                                                       
+                          </li>
+                          
+                          <c:forEach var="i" begin="${pb.startPage }" end="${pb.endPage }" step="1">
+                          	<li><a href='<c:url value="/reviewList.sh?pageNum=${i }" />'>${i }</a></li>
+    					  </c:forEach>
+					
+                          <li>
+                          <c:if test="${pb.endPage < pb.pageCount }">
+                           <a href='<c:url value="/reviewList.sh?pageNum=${pb.startPage+pb.pageBlock }" />' aria-label="Next">
+                              <span aria-hidden="true">»</span>
+                            </a>
+                          </c:if>
+                          </li> 
+                        </ul>
+                      </nav>
+                    </div>  			
                 </div>
             </div>
           </div>

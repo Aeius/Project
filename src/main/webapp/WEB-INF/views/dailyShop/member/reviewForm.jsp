@@ -15,37 +15,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-	<style type="text/css">
 
-	.star-rating {
-/*   border:solid 1px #ccc; */
-  display:flex;
-  flex-direction: row-reverse;
-  font-size:1.5em;
-  justify-content:space-around;
-  padding:0 .2em;
-  text-align:center;
-  width:5em;
-}
-
-.star-rating input {
-  display:none;
-}
-
-.star-rating label {
-  color:#ccc;
-  cursor:pointer;
-}
-
-.star-rating :checked ~ label {
-  color:#f90;
-}
-
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  color:#fc0;
-}
-	</style>
 
 </head>
   <body> 
@@ -60,8 +30,12 @@
     <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
   <!-- END SCROLL TOP BUTTON -->
 
+ <!-- 평점 css -->
+<link href='<c:url value="/resources/css/star-rating.css" />' rel="stylesheet" type="text/css">
 
  <!-- Font awesome -->
+ 
+ 
     <link href="<c:url value='/resources/member/css/font-awesome.css'/>" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="<c:url value='/resources/member/css/bootstrap.css'/>" rel="stylesheet">   
@@ -145,8 +119,8 @@
                     
                 	<textarea rows="10px" cols="90" placeholder="리뷰를 작성해 주세요" name="review_content"></textarea>
                 	
-                	
-                    <input type="file" class="form-control" id="review_image" name="review_image" value="파일 등록" >
+                	 <!-- 다중 파일 업로드시 multiple="multiple" 추가 / name="file" 이어야함 accept : 확장자명 지정 -->
+                    <input multiple="multiple" type="file" class="form-control" id="review_image" name="review_image" value="파일 등록" accept=".jpg,.jpeg,.png,.gif">
                     
                     
                     <button type="submit" id="review_insertBtn" class="aa-browse-btn">리뷰등록</button>

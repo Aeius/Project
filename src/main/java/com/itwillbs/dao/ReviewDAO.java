@@ -1,5 +1,6 @@
 package com.itwillbs.dao;
 
+import com.itwillbs.domain.PageBean;
 import com.itwillbs.domain.ReviewBean;
 
 import java.util.ArrayList;
@@ -19,6 +20,10 @@ public interface ReviewDAO {
 	public void updateReview(ReviewBean reviewBean);
 
 	public void deleteReview(int review_product_idx);
+
+	public ArrayList<ReviewBean> getReviewListPage(PageBean pb);
+
+	public Integer getReviewListCount();
 
 	
 

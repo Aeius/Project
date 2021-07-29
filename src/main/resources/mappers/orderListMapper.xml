@@ -18,6 +18,41 @@
 			order_idx = order_detail_order_idx
 		    AND
 		    order_member_email = #{order_member_email}
+	</select>
+	
+	<select id="getOrderListPage" resultType="com.itwillbs.domain.OrderListBean" >
+		SELECT 
+			order_idx,    
+			product_name,
+		    order_status,
+		    product_idx,
+		    order_detail_order_idx,
+		    order_member_email
+			
+			FROM orderlist, order_detail, product
+			WHERE 
+			order_idx = order_detail_order_idx
+		    AND
+		    order_member_email = #{order_member_email}
+		    order by order_idx desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getOrderListCount" resultType="java.lang.Integer">
+  		select count(*) FROM orderlist, order_detail, product
+			WHERE 
+			order_idx = order_detail_order_idx
+		    AND
+		    order_member_email = #{order_member_email};
+  	</select>
+
+	<select id="getOrderMember" resultType="com.itwillbs.domain.OrderListBean" >
+		SELECT * FROM orderlist WHERE order_idx = #{order_idx}
 	</select>	
+	
+	<update id="updateOrder">
+		UPDATE orderlist SET
+			order_status = #{order_status}
+		WHERE order_idx = #{order_idx}
+	</update>
 	
 </mapper>

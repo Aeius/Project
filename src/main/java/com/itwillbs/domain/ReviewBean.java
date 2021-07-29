@@ -11,6 +11,8 @@ public class ReviewBean {
 	private String review_subject;
 	private String review_content;
 	private String review_image;
+	private String review_image2;
+
 	private int review_star;
 	private Date member_date;
 	private String product_name;
@@ -26,6 +28,12 @@ public class ReviewBean {
 	}
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
+	}
+	public String getReview_image2() {
+		return review_image2;
+	}
+	public void setReview_image2(String review_image2) {
+		this.review_image2 = review_image2;
 	}
 	public int getReview_idx() {
 		return review_idx;

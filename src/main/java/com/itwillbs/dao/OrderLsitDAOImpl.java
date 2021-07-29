@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.MemberBean;
+import com.itwillbs.domain.OrderBean;
 import com.itwillbs.domain.OrderListBean;
+import com.itwillbs.domain.PageBean;
 import com.itwillbs.domain.ProductBean;
 
 @Repository
@@ -23,9 +25,36 @@ public class OrderLsitDAOImpl implements OrderListDAO {
 
 	@Override
 	public ArrayList<OrderListBean> getOrderList(String order_member_email) {
-		System.out.println("OrderLsitDAOImpl");
+		System.out.println("OrderLsitDAOImpl - getOrderList" );
 		return (ArrayList)sqlSession.selectList(namespace+".getOrderList",order_member_email);
 	}
+
+	@Override
+	public OrderListBean getOrderMember(int order_idx) {
+		System.out.println("OrderLsitDAOImpl - getOrderMember" );
+		return sqlSession.selectOne(namespace+".getOrderMember",order_idx);
+	}
+
+	@Override
+	public void updateOrder(OrderListBean orederBListBean) {
+		System.out.println("ReviewDAOImpl-updateOrder");
+		sqlSession.update(namespace + ".updateOrder", orederBListBean);
+		
+	}
+
+	@Override
+	public ArrayList<OrderListBean> getOrderListPage(PageBean pb) {
+		System.out.println("OrderLsitDAOImpl - getOrderListPage" );
+		return (ArrayList)sqlSession.selectList(namespace+".getOrderListPage",pb);
+	}
+
+	@Override
+	public Integer getOrderListCount(String order_member_email) {
+		System.out.println("ReviewDAOImpl-getOrderListCount");
+		return sqlSession.selectOne(namespace+".getOrderListCount",order_member_email);
+	}
+
+
 	
 
 	

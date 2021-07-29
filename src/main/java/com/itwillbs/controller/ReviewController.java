@@ -1,14 +1,18 @@
 package com.itwillbs.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -17,9 +21,11 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-
+import com.itwillbs.domain.PageBean;
 import com.itwillbs.domain.ReviewBean;
 import com.itwillbs.service.ReviewService;
 
@@ -56,57 +62,124 @@ public class ReviewController {
 
 // -----------------------------------리뷰 등록 처리---------------------------------------------------
 	@RequestMapping(value = "/reviewWritePro.sh", method = RequestMethod.POST)
-	public String reviewWritePro(HttpServletRequest request, @RequestParam("review_image") MultipartFile review_image) throws Exception{
+	public String reviewWritePro(MultipartHttpServletRequest  request, @RequestParam("review_image") MultipartFile[] file, HttpServletResponse response ) throws Exception{
+		// 여러 파일 MultipartHttpServletRequest, @RequestParam MultipartFile[] 배열
+			
 //		System.out.println(reviewBean.getReview_email());
 //		System.out.println(reviewBean.getReview_star());
 //		System.out.println(reviewBean.getReview_product_idx());
 //		System.out.println(reviewBean.getReview_content());
 		// 랜덤문자열 생성  랜덤문자열_파일이름
-				UUID uid=UUID.randomUUID();
-				String saveName=uid.toString()+"_"+review_image.getOriginalFilename();
-				System.out.println(saveName);
-				
-				// 올리파일을 => upload폴더 복사(파일카피)
-				File target=new File(uploadPath,saveName);
-				FileCopyUtils.copy(review_image.getBytes(), target);
-				
-				// BoardBean bb 객체생성
-				// 멤버변수 파라미터값 저장
-				ReviewBean reviewBean=new ReviewBean();
-				reviewBean.setReview_product_idx(Integer.parseInt(request.getParameter("review_product_idx")));
-				reviewBean.setReview_email(request.getParameter("review_email"));
-				reviewBean.setReview_subject(request.getParameter("review_subject"));
-				reviewBean.setReview_content(request.getParameter("review_content"));
-				reviewBean.setReview_star(Integer.parseInt(request.getParameter("review_star")));
+		UUID uid = UUID.randomUUID(); // 랜덤문자열
+		String saveName = ""; // upload 폴더에 저장되는 파일명
+		System.out.println(saveName);
+		
+		ReviewBean reviewBean=new ReviewBean();
+		reviewBean.setReview_product_idx(Integer.parseInt(request.getParameter("review_product_idx")));
+		reviewBean.setReview_email(request.getParameter("review_email"));
+		reviewBean.setReview_subject(request.getParameter("review_subject"));
+		reviewBean.setReview_content(request.getParameter("review_content"));
+		reviewBean.setReview_star(Integer.parseInt(request.getParameter("review_star")));
+		
+		System.out.println(file.length);
+		System.out.println(reviewBean.getReview_image());
+		System.out.println(file.length);
+		
+		// 파일 담기
+		for(int i=0; i<file.length; i++) { // 파일 갯수만큼 반복
+			// 저장되는 파일명 = 랜덤문자열_원래파일이름 => 같은 상품은 같은 랜덤문자열 
+													//=> for문 안에서 UUID 선언시 각 파일마다 랜덤문자열 달라짐
+		saveName = uid.toString() + "_" + file[i].getOriginalFilename(); 
+
+			// upload 폴더로 복사 => webapp > resources > upload 폴더 있어야함
+			File target = new File(uploadPath, saveName);
+			FileCopyUtils.copy(file[i].getBytes(), target);
+
+			// jsp 파일 폼 태그 순서대로 저장됨
+			if(i==0) { // 첫번째 파일 = 첫번째 이미지
 				reviewBean.setReview_image(saveName);
-				
-		reviewService.insertReview(reviewBean);	
-		return "/dailyShop/member/myReview";
+			} else if(i==1) { // 두번째파일 = 두번째 이미지
+				reviewBean.setReview_image2(saveName);
+			}
+		}
+
+		reviewService.insertReview(reviewBean);
+	
+		return "/dailyShop/member/reviewPop";
 	}
 // -----------------------------------리뷰 수정---------------------------------------------------	
 	@RequestMapping(value = "/reviewUpdateForm.sh", method = RequestMethod.GET)
-	public String reviewUpdate(@RequestParam("product_idx") int product_idx,Model model) {
-		int review_product_idx = product_idx;
-		System.out.println(product_idx);
-		ReviewBean reviewBean = reviewService.getReview(review_product_idx);
+	public String reviewUpdate(@RequestParam("review_idx") int review_idx,Model model) {
 		
+		System.out.println(review_idx);
+		ReviewBean reviewBean = reviewService.getReview(review_idx);
 		model.addAttribute("reviewBean", reviewBean);
 		return "/dailyShop/member/reviewUpdateForm";
 	}
 	
 	@RequestMapping(value = "/reviewUpdatePro.sh", method = RequestMethod.POST)
-	public String reviewUpdatePro(ReviewBean reviewBean,Model model) {
+	public String reviewUpdatePro(Model model, MultipartHttpServletRequest request, @RequestParam("review_image") MultipartFile[] file, HttpServletResponse response) throws Exception{
+		// 랜덤문자열 생성  랜덤문자열_파일이름
+				
+				UUID uid = UUID.randomUUID(); // 랜덤문자열
+				String saveName = ""; // upload 폴더에 저장되는 파일명
+				System.out.println(saveName);
+				System.out.println(request.getParameter("review_idx"));
+				
+				
+				ReviewBean reviewBean=new ReviewBean();
+				reviewBean.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
+				reviewBean.setReview_email(request.getParameter("review_email"));
+				reviewBean.setReview_subject(request.getParameter("review_subject"));
+				reviewBean.setReview_content(request.getParameter("review_content"));
+				reviewBean.setReview_star(Integer.parseInt(request.getParameter("review_star")));
+				
+				System.out.println(Integer.parseInt(request.getParameter("review_idx")));
+				System.out.println(file.length);
+				System.out.println(reviewBean.getReview_image());
+				System.out.println(file.length);
+				
+				// 파일 담기
+				for(int i=0; i<file.length; i++) { // 파일 갯수만큼 반복
+					// 저장되는 파일명 = 랜덤문자열_원래파일이름 => 같은 상품은 같은 랜덤문자열 
+															//=> for문 안에서 UUID 선언시 각 파일마다 랜덤문자열 달라짐
+				saveName = uid.toString() + "_" + file[i].getOriginalFilename(); 
+
+					// upload 폴더로 복사 => webapp > resources > upload 폴더 있어야함
+					File target = new File(uploadPath, saveName);
+					FileCopyUtils.copy(file[i].getBytes(), target);
+
+					// jsp 파일 폼 태그 순서대로 저장됨
+					if(i==0) { // 첫번째 파일 = 첫번째 이미지
+						reviewBean.setReview_image(saveName);
+					} else if(i==1) { // 두번째파일 = 두번째 이미지
+						reviewBean.setReview_image2(saveName);
+					}
+				}
+		
+		// 리뷰 수정창 닫고 수정 알림 부분
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script> "
+				+ "alert('리뷰 수정 완료');"
+				+ "window.opener.document.location.reload();"
+				+ "window.close();"
+				+ "</script>");
+		out.flush();
+				
+				
 		reviewService.updateReview(reviewBean);
 		model.addAttribute("reviewBean", reviewBean);
+		
 		return "redirect:/reviewList.sh";
 	}
 	
 	// -----------------------------------리뷰 삭제---------------------------------------------------		
 	@RequestMapping(value = "/reviewDeletePro.sh", method = RequestMethod.GET)
-	public String reviewDeltePro(@RequestParam("product_idx") int product_idx, Model model,HttpSession session) {
-		int review_product_idx = product_idx;
-		System.out.println(review_product_idx);
-		reviewService.deleteReview(review_product_idx);
+	public String reviewDeltePro(@RequestParam("review_idx") int review_idx, Model model,HttpSession session) {
+		
+		System.out.println(review_idx);
+		reviewService.deleteReview(review_idx);
 		
 		return "redirect:/reviewList.sh";
 	}
@@ -114,13 +187,35 @@ public class ReviewController {
 // -----------------------------------내 리뷰 리스트---------------------------------------------------
 	
 	@RequestMapping(value = "/reviewList.sh", method = RequestMethod.GET)
-	public String ReviewList(HttpSession session, Model model) {
+	public String ReviewList(HttpSession session, Model model, HttpServletRequest request){
+		//PageBean 객체생성
+		PageBean pb=new PageBean();
+//		pageNum pageSize 조합해서 시작하는 행번호 구하기
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			// pageNum 없으면 1페이지
+			pageNum="1";
+		}
+		pb.setPageNum(pageNum);
 		
-		String review_email = (String)session.getAttribute("member_email");
+		//한화면에 보여줄 글개수
+		int pageSize=10;
+		pb.setPageSize(pageSize);
+		
+		// 게시판 글 가져오기 (시작하는 행번호에서 몇개 )
+		ArrayList<ReviewBean> reviewList = reviewService.getReviewListPage(pb);
+		
+		// 전체 글개수 구하기 (PageBean에 저장시 페이지 관련 정보 계산)
+		pb.setCount(reviewService.getReviewListCount());
+
+//		String review_email = (String)session.getAttribute("member_email");
 //		System.out.println(review_email);
 		// member 정보 전체를 조회
-		ArrayList<ReviewBean> reviewList = reviewService.getReviewList(review_email);
+//		ArrayList<ReviewBean> reviewList = reviewService.getReviewList(review_email);
 		
+	
+		
+		// 평점 별 개수 map에 저장해서 가져가는 부분
 		Map ratingOptions = new HashMap();
 		ratingOptions.put(0, "☆☆☆☆☆");
 		ratingOptions.put(1, "★☆☆☆☆");
@@ -128,10 +223,16 @@ public class ReviewController {
 		ratingOptions.put(3, "★★★☆☆");
 		ratingOptions.put(4, "★★★★☆");
 		ratingOptions.put(5, "★★★★★");
-		model.addAttribute("ratingOptions", ratingOptions);
+		
 		//Model 데이터 담아 가기
+		// 평점 별모양 정보 가져가기
+		model.addAttribute("ratingOptions", ratingOptions);
+		// 페이지 정보, 리뷰 정보 가져 가기
 		model.addAttribute("reviewList" , reviewList);
+//		model.addAttribute("pb",pb);
 		
 		return "/dailyShop/member/myReview";
 	}
+
 }
+

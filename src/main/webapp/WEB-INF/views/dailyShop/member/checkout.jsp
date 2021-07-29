@@ -69,7 +69,7 @@
      <div class="row">
        <div class="col-md-12">
         <div class="checkout-area">
-          <form action="./checkout_finish.jsp">
+          <form action="./naverPay.jsp">
             <div class="row">
               <div class="col-md-8">
                 <div class="checkout-left">

@@ -2,6 +2,7 @@ package com.itwillbs.service;
 
 import java.util.ArrayList;
 
+import com.itwillbs.domain.PageBean;
 import com.itwillbs.domain.ReviewBean;
 
 public interface ReviewService {
@@ -15,5 +16,11 @@ public interface ReviewService {
 	public void updateReview(ReviewBean reviewBean);
 
 	public void deleteReview(int review_product_idx);
+
+	public ArrayList<ReviewBean> getReviewListPage(PageBean pb);
+
+	public Integer getReviewListCount();
+
+	
 
 }

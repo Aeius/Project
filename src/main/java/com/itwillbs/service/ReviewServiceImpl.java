@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.dao.ReviewDAO;
+import com.itwillbs.domain.PageBean;
 import com.itwillbs.domain.ReviewBean;
 
 @Service
@@ -52,6 +53,24 @@ public class ReviewServiceImpl implements ReviewService {
 		System.out.println("ReviewServiceImpl-updateReview");
 		reviewDAO.deleteReview(review_product_idx);
 		
+	}
+
+	@Override
+	public ArrayList<ReviewBean> getReviewListPage(PageBean pb) {
+		// 페이지 관련 처리 pageNum, pageSize 담아옴
+				// currentPage startRow-1 endRow 계산
+				pb.setCurrentPage(Integer.parseInt(pb.getPageNum()));
+				pb.setStartRow((pb.getCurrentPage()-1)*pb.getPageSize()+1-1);
+//				pb.setEndPage(((pb.getCurrentPage()-1)*pb.getPageSize()+1)+pb.getPageSize()-1);
+				
+		System.out.println("ReviewServiceImpl-getReviewListPage");
+		return reviewDAO.getReviewListPage(pb);
+	}
+
+	@Override
+	public Integer getReviewListCount() {
+		System.out.println("ReviewServiceImpl-getReviewListCount");
+		return reviewDAO.getReviewListCount();
 	}
 
 

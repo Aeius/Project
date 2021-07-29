@@ -16,16 +16,16 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    
-      				<script type="text/javascript">
-						
-						function review(product_idx){
-							
-							// 댓글 번호를 새로운 윈도우 창으로 가져가 댓글 번호 정보 비교
-								window.name="parentForm"
-								document.open("<c:url value='/reviewForm.sh?product_idx="+product_idx+"'/>","replyForm","width=720, height=800");
-	  					}
-						</script>
+
+  		<script type="text/javascript">
+		
+		function review(product_idx){
+			
+			// 댓글 번호를 새로운 윈도우 창으로 가져가 댓글 번호 정보 비교
+				window.name="parentForm"
+				document.open("<c:url value='/reviewForm.sh?product_idx="+product_idx+"'/>","replyForm","width=720, height=800");
+				}
+		</script>
 
   </head>
   <body> 
@@ -76,10 +76,18 @@
                         <td>${orderList.order_idx}</td>
                         <td>${orderList.product_name}</td>
                         <td>${orderList.order_status}</td>
-                        <td><input type="button" value="${orderList.order_status}">
-                        <input type="button" value="리뷰쓰기" onclick="review( ${orderList.product_idx} )">
-                        <input type="button" value="반품신청">
+                        <td>
+<%--                         <input type="button" value="${orderList.order_status}"> --%>
+                        
+                       <c:set var="order_status" value="${orderList.order_status}" />
                        
+                       <c:if test="${order_status eq '배송완료'}">
+                        <input type="button" value="리뷰쓰기" onclick="review( ${orderList.product_idx} )">
+                       </c:if>
+                       
+						 <c:if test="${order_status ne '반품신청'}">
+                        <input type="button" value="반품신청" onclick="location.href='<c:url value='/orderReturn.sh?order_idx=${orderList.order_idx}'/>'">
+                       </c:if>
                         </td>
                       </tr>
                       	
@@ -92,19 +100,24 @@
                       <nav>
                         <ul class="pagination">
                           <li>
-                            <a href="#" aria-label="Previous">
+                           <c:if test="${pb.startPage > pb.pageBlock }">
+                            <a href='<c:url value="/orderList.sh?pageNum=${pb.startPage-pb.pageBlock }" />' aria-label="Previous">
                               <span aria-hidden="true">«</span>
                             </a>
+                            </c:if>
+                                                       
                           </li>
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
+                          
+                          <c:forEach var="i" begin="${pb.startPage }" end="${pb.endPage }" step="1">
+                          	<li><a href='<c:url value="/orderList.sh?pageNum=${i }" />'>${i }</a></li>
+    					  </c:forEach>
+					
                           <li>
-                            <a href="#" aria-label="Next">
+                          <c:if test="${pb.endPage < pb.pageCount }">
+                           <a href='<c:url value="/orderList.sh?pageNum=${pb.startPage+pb.pageBlock }" />' aria-label="Next">
                               <span aria-hidden="true">»</span>
                             </a>
+                          </c:if>
                           </li>
                         </ul>
                       </nav>

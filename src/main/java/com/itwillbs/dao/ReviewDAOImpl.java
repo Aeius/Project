@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.PageBean;
 import com.itwillbs.domain.ReviewBean;
 
 @Repository
@@ -35,6 +36,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public ReviewBean getReview(int review_product_idx) {
+		System.out.println("ReviewDAOImpl-getReview");
 		return sqlSession.selectOne(namespace + ".getReview", review_product_idx);
 
 	}
@@ -52,4 +54,16 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	}
 
+	@Override
+	public ArrayList<ReviewBean> getReviewListPage(PageBean pb) {
+		System.out.println("ReviewDAOImpl-getReviewListPage");
+		return (ArrayList) sqlSession.selectList(namespace + ".getReviewListPage", pb);
+	}
+
+	@Override
+	public Integer getReviewListCount() {
+		System.out.println("ReviewDAOImpl-getReviewListCount");
+		return sqlSession.selectOne(namespace+".getReviewListCount");
+	}
+	
 }
