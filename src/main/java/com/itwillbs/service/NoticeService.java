@@ -2,11 +2,24 @@ package com.itwillbs.service;
 
 import java.util.List;
 
-import com.itwillbs.domain.FaqBoardBean;
+import javax.servlet.http.HttpServletRequest;
+
+import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.NoticeBean;
+import com.itwillbs.domain.PageBean;
 
 public interface NoticeService {
 
 	List<NoticeBean> getNoticeList();
+
+	NoticeBean getNoticeDatail(int notice_idx);
+
+	List<NoticeBean> getNoticeList(PageBean pb);
+
+	Integer getnoticeCount();
+//	
+//	
+	
+//	public void sendQnaMail(MemberBean memberBean,HttpServletRequest request);
 
 }

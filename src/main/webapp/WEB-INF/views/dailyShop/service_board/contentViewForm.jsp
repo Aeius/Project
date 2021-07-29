@@ -72,68 +72,36 @@
 					          <div class="aa-product-catg-content">
 					          <br><br>
 					            <div class="aa-product-catg-body">
+					            <form action='<c:url value="/notice.sh"/>' class="aa-login-form" method="get" id="fr" class="fr">
+					            
 					                  <table id="example1" class="table table-bordered table-striped">
-					                    <thead>
-					                      <tr>
-					                        <th>글번호</th>
-					                        <th>제목</th>
-<!-- 					                        <th>내용</th> -->
-					                        <th>작성자</th>
-					                        <th>작성일</th>
-					                      </tr>
+				                          <thead >
+					                      
+					                       <tr>
+					                       	<td>글번호</td><td>${noticeBean.notice_idx}</td>
+					                        <td>제목</td><td>${noticeBean.notice_subject}</td>
+					                        <td>작성자</td><td>${noticeBean.notice_name}</td>
+					                        <td>작성일</td><td><fmt:formatDate value="${noticeBean.notice_date}" type="both" pattern="yyyy.MM.dd"/></td>
+					                       </tr>
+					                        <tr>
+					                        <td >내용</td><td colspan="7">${noticeBean.notice_content}</td>
+					                        </tr>
+					                      
 					                    </thead>
+
 					                    <!-- 상품 목록 나열 -->
 					                    <tbody>
-					                    <c:forEach var="nb" items="${nbList}">
-					                      <tr>
-					                        <td>${nb.notice_idx}</td>
-					                         <td><a href='<c:url value=
-					                         "/board/contentView.sh?notice_idx=${nb.notice_idx}" />'>${nb.notice_subject }</a></td>
-<%-- 					                        <td>${nb.notice_content}</td> --%>
-					                        <td>${nb.notice_name}</td>
-					                        <td><fmt:formatDate value="${nb.notice_date}" type="both" pattern="yyyy.MM.dd"/></td>
-					                      </tr>
-					                    </c:forEach>
 					                    </tbody>
 					                  </table>
+					                  <button type="submit" class="aa-browse-btn">목록</button>
+					                
 					            </div>
+					              <br><br>
 					          </div>
 					        </div>
 					        </div>
 					        </div>
-								  	
-								  	<div class="aa-blog-archive-pagination" align="center">
-                      <nav>
-                        <ul class="pagination">
-                          <li>
-                           <c:if test="${pb.startPage > pb.pageBlock }">
-                            <a href='<c:url value="/board/noticelist.sh?pageNum=${pb.startPage-pb.pageBlock }" />' aria-label="Previous">
-                              <span aria-hidden="true">«</span>
-                            </a>
-                            </c:if>
-                                                       
-                          </li>
-                          
-                          <c:forEach var="i" begin="${pb.startPage }" end="${pb.endPage }" step="1">
-                             <li><a href='<c:url value="/board/noticelist.sh?pageNum=${i }" />'>${i }</a></li>
-                     </c:forEach>
-               
-                          <li>
-                          <c:if test="${pb.endPage < pb.pageCount }">
-                           <a href='<c:url value="/board/noticelist.sh?pageNum=${pb.startPage+pb.pageBlock }" />' aria-label="Next">
-                              <span aria-hidden="true">»</span>
-                            </a>
-                          </c:if>
-                          </li>
-                        </ul>
-                      </nav>
-                    </div>   
-<!-- 				                              <SPAN ARIA-HIDDEN="TRUE">»</SPAN> -->
-<!-- 				                            </A> -->
-<!-- 				                          </LI> -->
-<!-- 				                        </UL> -->
-<!-- 				                      </NAV> -->
-<!-- 				                    </DIV>  -->
+					        
 					  </section>
 					  
   

@@ -12,15 +12,15 @@ public class PageBean {
 	private int endPage;
 	private int count;
 	private int pageCount;
+	private String search;
 	
-	private String order_member_email;
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	
-	public String getOrder_member_email() {
-		return order_member_email;
-	}
-	public void setOrder_member_email(String order_member_email) {
-		this.order_member_email = order_member_email;
-	}
 	public int getPageSize() {
 		return pageSize;
 	}
