@@ -15,13 +15,13 @@
       <div class="aa-catg-head-banner-content">
         <h2>My Page</h2>
         <ol class="breadcrumb">
-          <li><a href="./cart.jsp">장바구니</a></li> 
-          <li><a href="./orderList.jsp">주문내역</a></li>
-          <li><a href="./wishlist.jsp">찜목록</a></li> 
-          <li><a href="./myReview.jsp">내 리뷰</a></li>    
-          <li><a href="<c:url value='/coupon.sh'/>">혜택</a></li> 
-          <li><a href="<c:url value='/update.sh'/>">내 정보</a></li>    
-          <li><a href="./subscribe.jsp">구독 정보</a></li>   
+          <li><a href="basket.sh">장바구니</a></li> 
+          <li><a href="orderList.sh">주문내역</a></li>
+          <li><a href="myWishList.sh">찜목록</a></li> 
+          <li><a href="reviewList.sh">내 리뷰</a></li>    
+          <li><a href="coupon.sh">혜택</a></li> 
+          <li><a href="myPage.sh">내 정보</a></li>    
+          <li><a href="subscribe.sh">구독 정보</a></li>   
         </ol>
       </div>
      </div>
