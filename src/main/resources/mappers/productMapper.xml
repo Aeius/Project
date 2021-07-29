@@ -153,5 +153,9 @@
   	update basket set basket_quantity = basket_quantity + #{basket_quantity} where basket_email=#{basket_email} and basket_product_idx=#{basket_product_idx}
   </update>
   
+  <select id="getBarList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product order by product_sellcount desc limit 0,5 ;
+  </select>
+  
   
 </mapper>

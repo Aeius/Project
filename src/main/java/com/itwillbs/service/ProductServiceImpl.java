@@ -164,8 +164,10 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.updateProduct(productBean);
 	}
 
-
-	
+	@Override
+	public ArrayList<ProductBean> getBarList() {
+		return productDAO.getBarList();
+	}
 	
 	
 

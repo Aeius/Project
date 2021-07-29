@@ -46,5 +46,7 @@ public interface ProductService {
 	public boolean intoBasket(BasketBean basketBean);
 
 	public ArrayList<ProductBean> getProductSearchList(String search);
+	
+	public ArrayList<ProductBean> getBarList();
 
 }

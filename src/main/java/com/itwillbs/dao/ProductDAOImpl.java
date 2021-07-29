@@ -157,7 +157,10 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.update(namespace + ".updateBasket", basketBean);
 	}
 
-	
+	@Override
+	public ArrayList<ProductBean> getBarList() {
+		return (ArrayList)sqlSession.selectList(namespace + ".getBarList");
+	}
 	
 	
 	

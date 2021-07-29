@@ -52,5 +52,6 @@ public interface ProductDAO {
 
 	public ArrayList getProductSearchList(String search);
 
-
+	public ArrayList<ProductBean> getBarList();
+	
 }

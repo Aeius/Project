@@ -350,10 +350,16 @@ public class AdminController {
 		return "/AdminLTE-master/pages/chartList";
 	}
 
-	// ------------------ 매출 차트(메인화면) ---------------------
+	// ------------------ 매출 차트(로그인 시 메인화면) ---------------------
 	@RequestMapping(value = "/chart.ad", method = RequestMethod.GET)
-	public String chart() {
-		// 차트 아직 구현 안됨 (이동 확인용)
+	public String chart(Model model) {
+		
+		// Bar Chart에 표시할 데이터 받아오기 (판매수량 많은 순으로 5개)
+		// product_sellcount, product_likecount 에 값 있어야함
+		// update product set product_sellcount=500, product_likecount=670 where product_idx=9;
+		ArrayList<ProductBean> barList = productService.getBarList();
+		model.addAttribute("barList", barList); 
+		
 		return "/AdminLTE-master/pages/chart";
 	}
 

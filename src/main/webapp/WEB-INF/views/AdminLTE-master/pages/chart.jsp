@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -67,7 +68,7 @@
               <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header">
-                  <a href="#"><h3 class="box-title">Bar Chart</h3></a>
+                  <h3 class="box-title">판매 TOP5</h3>
                 </div>
                 <div class="box-body chart-responsive">
                   <div class="chart" id="bar-chart" style="height: 300px;"></div>
@@ -150,23 +151,22 @@
           ],
           hideHover: 'auto'
         });
+        
         //BAR CHART
         var bar = new Morris.Bar({
           element: 'bar-chart',
           resize: true,
-          data: [
-            {y: '2006', a: 100, b: 90}, // a 초록
-            {y: '2007', a: 75, b: 65}, // b 빨강
-            {y: '2008', a: 50, b: 40},
-            {y: '2009', a: 75, b: 65},
-            {y: '2010', a: 50, b: 40},
-            {y: '2011', a: 75, b: 65},
-            {y: '2012', a: 100, b: 90}
+          data: [ // 나타낼 데이터
+       	  	<c:forEach var="bar" items="${barList }"> 
+       	  	  // 상품번호 + 판매 수 + 좋아요 수 => 판매량 순으로 5개 
+       	  	  // 상품이름이 길어서 그런지 ${bar.product_name } 넣으면 차트가 아예 안뜸
+              {idx: "상품번호 " + ${bar.product_idx }, sell: ${bar.product_sellcount }, like: ${bar.product_likecount } },
+            </c:forEach>
           ],
-          barColors: ['#00a65a', '#f56954'],
-          xkey: 'y',
-          ykeys: ['a', 'b'],
-          labels: ['CPU', 'DISK'],
+          barColors: ['#00a65a', '#f56954'], // 색 지정
+          xkey: 'idx', 
+          ykeys: ['sell', 'like'], // 막대기로 나타낼 데이터
+          labels: ['판매량', '좋아요 수'], // 막대기 이름 표시
           hideHover: 'auto'
         });
       });
