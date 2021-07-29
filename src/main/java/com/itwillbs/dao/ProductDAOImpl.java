@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.BasketBean;
+import com.itwillbs.domain.CategoryBean;
+import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.ProductBean;
 
 @Repository
@@ -160,6 +162,16 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public ArrayList<ProductBean> getBarList() {
 		return (ArrayList)sqlSession.selectList(namespace + ".getBarList");
+	}
+
+	@Override
+	public ArrayList<ChartBean> getLineList() {
+		return (ArrayList)sqlSession.selectList(namespace + ".getLineList");
+	}
+
+	@Override
+	public ArrayList<CategoryBean> getDonutList() {
+		return (ArrayList)sqlSession.selectList(namespace + ".getDonutList");
 	}
 	
 	

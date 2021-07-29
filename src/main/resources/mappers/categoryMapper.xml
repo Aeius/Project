@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mapper.CategoryMapper">
+	
+	<update id="addCount">
+		update category 
+		set category_count = category_count+1
+		where category_name=#{category_name}
+	</update>
+	
+	<update id="minusCount">
+		update category 
+		set category_count = category_count-1
+		where category_name=#{category_name}
+	</update>
+</mapper>

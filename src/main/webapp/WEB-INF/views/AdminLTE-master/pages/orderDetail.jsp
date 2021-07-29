@@ -89,7 +89,7 @@
             </div><!-- /.box-body -->
           </div><!-- /.box -->
           
-          <input type="button" value="목록으로 돌아가기"  onClick="location.href='orderList.jsp'">
+          <input type="button" value="목록으로 돌아가기"  onClick="location.href='orderList.ad'">
 
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->

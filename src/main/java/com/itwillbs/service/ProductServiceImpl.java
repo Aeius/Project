@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.dao.ProductDAO;
 import com.itwillbs.domain.BasketBean;
+import com.itwillbs.domain.CategoryBean;
+import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.ProductBean;
 
@@ -167,6 +169,14 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ArrayList<ProductBean> getBarList() {
 		return productDAO.getBarList();
+	}
+	@Override
+	public ArrayList<ChartBean> getLineList() {
+		return productDAO.getLineList();
+	}
+	@Override
+	public ArrayList<CategoryBean> getDonutList() {
+		return productDAO.getDonutList();
 	}
 	
 	

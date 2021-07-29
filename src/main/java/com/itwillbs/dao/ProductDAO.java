@@ -3,6 +3,8 @@ package com.itwillbs.dao;
 import java.util.ArrayList;
 
 import com.itwillbs.domain.BasketBean;
+import com.itwillbs.domain.CategoryBean;
+import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.ProductBean;
 
@@ -53,5 +55,9 @@ public interface ProductDAO {
 	public ArrayList getProductSearchList(String search);
 
 	public ArrayList<ProductBean> getBarList();
+	
+	public ArrayList<ChartBean> getLineList();
+	
+	public ArrayList<CategoryBean> getDonutList();
 	
 }

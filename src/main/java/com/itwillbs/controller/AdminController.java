@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.itwillbs.domain.CategoryBean;
+import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.FaqBoardBean;
 import com.itwillbs.domain.MemberBean;
@@ -29,6 +31,7 @@ import com.itwillbs.domain.OrderDetailBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.ReviewBean;
 import com.itwillbs.service.AdminService;
+import com.itwillbs.service.CategoryService;
 import com.itwillbs.service.FaqBoardService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.OrderDetailService;
@@ -56,6 +59,9 @@ public class AdminController {
 	@Inject
 	private FaqBoardService faqBoardService;
 	
+	@Inject
+	private CategoryService categoryService;
+	
 	@Resource(name = "uploadPath") //=> servlet-context.xml 에 업로드 폴더 경로 지정된거 불러옴
 	private String uploadPath; // 파일 업로드 경로
 
@@ -80,8 +86,9 @@ public class AdminController {
 		// 체크박스 다중값 담기
 		String[] category = request.getParameterValues("product_category");
 		String selectedCategory = "";
+		categoryService.addCount(category); // (차트 표시용) 카테고리별 카운트 증가, 문자열 배열 전달
 		for(int i=0; i<category.length; i++) { // 체크한 갯수만큼 반복
-			 selectedCategory += category[i] + "/"; // => "/"기호로 구분
+			 selectedCategory += category[i] + "/"; // => "/"기호로 구분해서 product_category 컬럼에 저장
 		}
 		productBean.setProduct_category(selectedCategory);
 		// 파일 담기
@@ -144,6 +151,7 @@ public class AdminController {
 		
 		int product_idx = Integer.parseInt(request.getParameter("product_idx"));
 		ProductBean productBean = productService.getProductInfo(product_idx); // 기존 정보 불러옴
+		String[] preCategory = productBean.getProduct_category().split("/"); // 기존 카테고리 저장
 		
 		productBean.setProduct_name(request.getParameter("product_name"));
 		productBean.setProduct_detail(request.getParameter("product_detail"));
@@ -176,6 +184,10 @@ public class AdminController {
 		}
 		
 		productService.updateProduct(productBean);
+		
+		// 차트 표시용 카테고리 카운트 업데이트 
+		categoryService.minusCount(preCategory); // 기존 카테고리 -> 카테고리별 카운트 감소 
+		categoryService.addCount(category); // 수정 카테고리-> 카테고리별 카운트 증가
 		
 		return "redirect:/productList.ad";
 	}
@@ -353,6 +365,14 @@ public class AdminController {
 	// ------------------ 매출 차트(로그인 시 메인화면) ---------------------
 	@RequestMapping(value = "/chart.ad", method = RequestMethod.GET)
 	public String chart(Model model) {
+		
+		// Donut Chart에 표시할 데이터 받아오기 (카테고리별 상품 갯수) 
+		ArrayList<CategoryBean> donutList = productService.getDonutList();
+		model.addAttribute("donutList", donutList);
+		
+		// Line Chart에 표시할 데이터 받아오기 (일별 판매총액 최근 7일)
+		ArrayList<ChartBean> lineList = productService.getLineList();
+		model.addAttribute("lineList", lineList);
 		
 		// Bar Chart에 표시할 데이터 받아오기 (판매수량 많은 순으로 5개)
 		// product_sellcount, product_likecount 에 값 있어야함
