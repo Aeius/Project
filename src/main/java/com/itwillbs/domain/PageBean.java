@@ -14,6 +14,14 @@ public class PageBean {
 	private int pageCount;
 	private String search;
 	
+	private String Order_member_email;
+	
+	public String getOrder_member_email() {
+		return Order_member_email;
+	}
+	public void setOrder_member_email(String order_member_email) {
+		Order_member_email = order_member_email;
+	}
 	public String getSearch() {
 		return search;
 	}
