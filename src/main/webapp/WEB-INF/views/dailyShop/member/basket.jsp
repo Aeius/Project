@@ -1,49 +1,94 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Daily Shop | Home</title>
-    
-    <!-- Font awesome -->
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">   
-    <!-- SmartMenus jQuery Bootstrap Addon CSS -->
-    <link href="css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
-    <!-- Product view slider -->
-    <link rel="stylesheet" type="text/css" href="css/jquery.simpleLens.css">    
-    <!-- slick slider -->
-    <link rel="stylesheet" type="text/css" href="css/slick.css">
-    <!-- price picker slider -->
-    <link rel="stylesheet" type="text/css" href="css/nouislider.css">
-    <!-- Theme color -->
-    <link id="switcher" href="css/theme-color/default-theme.css" rel="stylesheet">
-    <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
-    <!-- Top Slider CSS -->
-    <link href="css/sequence-theme.modern-slide-in.css" rel="stylesheet" media="all">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Shop | Home</title>
 
-    <!-- Main style sheet -->
-    <link href="css/style.css" rel="stylesheet">    
+<!-- Font awesome -->
+<link href="css/font-awesome.css" rel="stylesheet">
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<!-- SmartMenus jQuery Bootstrap Addon CSS -->
+<link href="css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
+<!-- Product view slider -->
+<link rel="stylesheet" type="text/css" href="css/jquery.simpleLens.css">
+<!-- slick slider -->
+<link rel="stylesheet" type="text/css" href="css/slick.css">
+<!-- price picker slider -->
+<link rel="stylesheet" type="text/css" href="css/nouislider.css">
+<!-- Theme color -->
+<link id="switcher" href="css/theme-color/default-theme.css"
+	rel="stylesheet">
+<!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
+<!-- Top Slider CSS -->
+<link href="css/sequence-theme.modern-slide-in.css" rel="stylesheet"
+	media="all">
 
-    <!-- Google Font -->
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-    
+<!-- Main style sheet -->
+<link href="css/style.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+<!-- Google Font -->
+<link href='https://fonts.googleapis.com/css?family=Lato'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Raleway'
+	rel='stylesheet' type='text/css'>
+
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  
 
-  </head>
+<!-- ajax -->
+<script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script>
+<script type="text/javascript">
+// 	$(document).ready(function() {
+// 		$('.removeBasket').click(function() {
+// 			if(confirm("정말 삭제하시겠습니까?")) {
+// 				$.ajax({
+// 					url: 'deleteBasket.sh',
+// 					data: {product_idx : $('#product_idx').val(),
+// 						   member_email : $('#member_email').val()},
+// 					success:function(data){
+// 						if(data == "deletedSuccess") {
+// 							history.go(0);
+// 						}
+// 					}
+// 				}); // end ajax
+// 			}
+// 		});
+// 	});
+
+
+// -------------------------------- 장바구니 삭제 --------------------------------
+	$(document).ready(function() {
+		$('.remove').click(function() {
+// 			var check = $(this).attr("name");
+// 			alert(check);
+			if(confirm("정말 삭제하시겠습니까?")) {
+				$.ajax({
+					url: 'deleteBasket.sh',
+					data: {product_idx : $(this).attr("name"),
+						   member_email : $('#member_email').val()},
+					success:function(data){
+						if(data == "deletedSuccess") {
+							history.go(0);
+						}
+					}
+				}); // end ajax
+			}
+		});
+	});
+</script>
+
+</head>
 <body>
 	<!-- wpf loader Two -->
 	<div id="wpf-loader-two">
@@ -78,17 +123,12 @@
 									<div class="table-responsive">
 										<h2>장바구니</h2>
 										<div style="text-align: center;" class="aa-prod-view-bottom">
-											<br>
-											<br>
-											<br>
+											<br> <br> <br>
 											<p style="font-size: 50px; color: red;">!</p>
 											<h4>장바구니에 담긴 상품이 없습니다.</h4>
 											<a href="<c:url value='/productList.sh'/>"
-												class="aa-add-to-cart-btn">쇼핑하러 가기</a> <br>
-											<br>
-											<br>
-											<br>
-											<br>
+												class="aa-add-to-cart-btn">쇼핑하러 가기</a> <br> <br> <br>
+											<br> <br>
 										</div>
 									</div>
 								</div>
@@ -97,11 +137,12 @@
 								<div class="cart-view-table">
 									<div class="table-responsive">
 										<form action="<c:url value='/pay.sh'/>">
+										<input type="hidden" value="${sessionScope.member_email}" id="member_email">
 											<h2>장바구니</h2>
 											<table class="table">
 												<thead>
 													<tr>
-														<th></th>
+														<th><input type="checkbox" onclick="" id="allSelected"></th>
 														<th>제품명</th>
 														<th>가격</th>
 														<th>수량</th>
@@ -110,19 +151,39 @@
 													</tr>
 												</thead>
 												<tbody>
+<%-- 													<c:forEach var="basketList" items="${basketList}"> --%>
+<!-- 														<tr> -->
+<%-- 															<td><input type="checkbox" id="selectedProduct" value="${basketList.product_idx}"></td> --%>
+<!-- 															<td><a href="#"><img src="#" alt="img"></a></td> -->
+<!-- 															이미지 -->
+<%-- 															<td><a href="#"><img src="<c:url value='/resources/upload/${basketList.product_main_image}'/>" alt="img"></a></td> <!-- 이미지 --> --%>
+<%-- 															<td><input type="hidden" name="product_idx" id="product_idx" value="${basketList.product_idx}"> --%>
+<!-- 															<a class="aa-cart-title" -->
+<%-- 																href="<c:url value='/productDetail.sh?product_idx=${basketList.product_idx}'/>">${basketList.product_name} --%>
+<%-- 																	- ${basketList.product_size}ml</a></td> --%>
+<%-- 															<td>${basketList.product_price}</td> --%>
+<!-- 															<td><input class="aa-cart-quantity" type="number" -->
+<%-- 																value="${basketList.basket_quantity}"></td> --%>
+<!-- 															수량입력 -->
+<%-- 															<td>${basketList.basket_quantity * basketList.product_price}</td> --%>
+<!-- 															삭제버튼 -->
+<!-- 														</tr> -->
+<%-- 													</c:forEach> --%>
+
 													<c:forEach var="basketList" items="${basketList}">
 														<tr>
 															<td><a href="#"><img src="#" alt="img"></a></td>
 															<!-- 이미지 -->
 															<%-- <td><a href="#"><img src="<c:url value='/resources/upload/${basketList.product_main_image}'/>" alt="img"></a></td> <!-- 이미지 --> --%>
-															<td><a class="aa-cart-title" href="<c:url value='/productDetail.sh?product_idx=${basketList.product_idx}'/>">${basketList.product_name}
+															<td><input type="hidden" name="product_idx" class="product_idx" value="${basketList.product_idx}">
+																<a class="aa-cart-title" href="<c:url value='/productDetail.sh?product_idx=${basketList.product_idx}'/>">${basketList.product_name}
 																	- ${basketList.product_size}</a></td>
 															<td>${basketList.product_price}</td>
 															<td><input class="aa-cart-quantity" type="number"
 																value="${basketList.basket_quantity}"></td>
 															<!-- 수량입력 -->
 															<td>${basketList.basket_quantity * basketList.product_price}</td>
-															<td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+															<td><a class="remove" href="#" name="${basketList.product_idx}" id="${basketList.product_idx}"><fa class="fa fa-close"></fa></a></td>
 															<!-- 삭제버튼 -->
 														</tr>
 													</c:forEach>

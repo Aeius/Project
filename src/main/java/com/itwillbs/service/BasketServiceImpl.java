@@ -20,4 +20,11 @@ public class BasketServiceImpl implements BasketService {
 		return basketDAO.getBasketList(member_email);
 	}
 
+	@Override
+	public int deleteBasket(String member_email, String product_idx) {
+		return basketDAO.deleteBasket(member_email, product_idx);
+	}
+	
+	
+
 }

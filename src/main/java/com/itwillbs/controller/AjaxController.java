@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwillbs.domain.BasketBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.WishListBean;
+import com.itwillbs.service.BasketService;
 import com.itwillbs.service.ProductService;
 import com.itwillbs.service.WishListService;
 
@@ -27,53 +28,55 @@ public class AjaxController {
 	@Inject
 	private WishListService wishListService;
 	
+	@Inject
+	private BasketService basketService;
+	
 	//-------------------------------------------------------------- 찜(좋아요) 버튼 눌렀을 때 --------------------------------------------------------
-		@RequestMapping(value = "/pushWishList.sh", method = RequestMethod.GET)
-		public ResponseEntity<String> pushWishList(HttpServletRequest request, HttpSession session, @RequestParam("product_idx") int product_idx) {
-			System.out.println("WishListController - pushWishList()");
-			String result = "";
-			ResponseEntity<String> entity = null;
+	@RequestMapping(value = "/pushWishList.sh", method = RequestMethod.GET)
+	public ResponseEntity<String> pushWishList(HttpServletRequest request, HttpSession session, @RequestParam("product_idx") int product_idx) {
+		System.out.println("WishListController - pushWishList()");
+		String result = "";
+		ResponseEntity<String> entity = null;
+		
+		try {
+			// SQL구문 만능문자에 가져갈 데이터를 Bean에 담아서 전달하는 과정 
+			WishListBean wishListBean = new WishListBean();
+			wishListBean.setProduct_idx(product_idx);  // 현재 접근한 상세페이지의 상품번호 (product_idx) 파라미터 가져오기
+			wishListBean.setWishList_member_email((String)session.getAttribute("member_email")); // 세션에있는(로그인되어있는) 회원이메일정보 불러오기 
 			
-			try {
-				// SQL구문 만능문자에 가져갈 데이터를 Bean에 담아서 전달하는 과정 
-				WishListBean wishListBean = new WishListBean();
-				wishListBean.setProduct_idx(product_idx);  // 현재 접근한 상세페이지의 상품번호 (product_idx) 파라미터 가져오기
-				wishListBean.setWishList_member_email((String)session.getAttribute("member_email")); // 세션에있는(로그인되어있는) 회원이메일정보 불러오기 
-				
-				WishListBean checkWishList =  wishListService.checkWishList(wishListBean);
+			WishListBean checkWishList =  wishListService.checkWishList(wishListBean);
 //			System.out.println("WishListController - chekcWishList() 리턴 값 : " + checkWishList);
-				int wishListCount = Integer.parseInt(checkWishList.getWishlistcount());  
-				//SQL구문 결과 값 
-				//(SELECT COUNT(*) as wishListCount FROM wishlist WHERE wishlist_member_email=member_email AND wishlist_product_idx=product_idx) 
-				// |---------------|
-				// | wishListCount |
-				// |---------------|
-				// |             1 |
-				// |---------------|
-				//가져와 저장하려면 리턴할 Bean에 멤버변수로 컬럼앨리어스로 지정한 wishListCount와 동일한 이름의 변수가 있어야 
-				//SQL 구문 결과값을 자동으로 해당 Bean에 저장함
-				//최종적으로 SQL 구문결과값을 저장한 Bean이 리턴이 됨 그래서 해당 Bean에서 데이터 꺼내서 정수형으로 변환 후
-				//판별하여 좋아요 숫자 증가 혹은 삭제 구문 실행.
-				
-				if(wishListCount > 0) {
+			int wishListCount = Integer.parseInt(checkWishList.getWishlistcount());  
+			//SQL구문 결과 값 
+			//(SELECT COUNT(*) as wishListCount FROM wishlist WHERE wishlist_member_email=member_email AND wishlist_product_idx=product_idx) 
+			// |---------------|
+			// | wishListCount |
+			// |---------------|
+			// |             1 |
+			// |---------------|
+			//가져와 저장하려면 리턴할 Bean에 멤버변수로 컬럼앨리어스로 지정한 wishListCount와 동일한 이름의 변수가 있어야 
+			//SQL 구문 결과값을 자동으로 해당 Bean에 저장함
+			//최종적으로 SQL 구문결과값을 저장한 Bean이 리턴이 됨 그래서 해당 Bean에서 데이터 꺼내서 정수형으로 변환 후
+			//판별하여 좋아요 숫자 증가 혹은 삭제 구문 실행.
+			
+			if(wishListCount > 0) {
 //				System.out.println("checkWishList > 0 true 일때");
-					wishListService.deleteWishList(wishListBean);
-					result = "offHeart";
-				} else {
+				wishListService.deleteWishList(wishListBean);
+				result = "offHeart";
+			} else {
 //				System.out.println("checkWishList > 0 false 일때");
-					wishListService.insertWishList(wishListBean);
-					result = "onHeart";
-				}
-				
-				entity = new ResponseEntity<String>(result, HttpStatus.OK);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+				wishListService.insertWishList(wishListBean);
+				result = "onHeart";
 			}
 			
-//			return "redirect:/productDetail.sh?product_idx="+product_idx; // ajax 미구현으로 인한 새로고침
-			return entity;
+			entity = new ResponseEntity<String>(result, HttpStatus.OK);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			
 		}
+		return entity;
+	}
 		
 		//-------------------------------------------------------------- wishListCount 체크-------------------------------------------------------------------------
 		@RequestMapping(value = "/checkWishCount.sh", method = RequestMethod.GET)
@@ -97,8 +100,9 @@ public class AjaxController {
 			}
 			
 //			return "redirect:/productDetail.sh?product_idx="+product_idx; // ajax 미구현으로 인한 새로고침
-			return entity;
-		}
+		return entity;
+	}
+	
 
 	//------------------------------------------------------------------------ 장바구니 담기 ------------------------------------------------------
 	@RequestMapping(value = "/intoBasket.sh", method = RequestMethod.GET)
@@ -135,25 +139,51 @@ public class AjaxController {
 	
 	
 	//-------------------------------------------------------------- 로그인 확인 --------------------------------------------------------
-		@RequestMapping(value = "/checkSession.sh", method = RequestMethod.GET)
-		public ResponseEntity<String> checkSession(HttpServletRequest request) {
-			String result = ""; // 문자열로 결과 값 저장
-			ResponseEntity<String> entity = null;
+	@RequestMapping(value = "/checkSession.sh", method = RequestMethod.GET)
+	public ResponseEntity<String> checkSession(HttpServletRequest request) {
+		String result = ""; // 문자열로 결과 값 저장
+		ResponseEntity<String> entity = null;
 
-			try {
-				String member_email = request.getParameter("member_email");
-				// member_email == null 은 안되고 문자열 비교하니까 작동
-				if(member_email == "") {
-					result = "empty";
-				} else {
-					result = "notEmpty";
-				}
-
-				entity = new ResponseEntity<String>(result, HttpStatus.OK);
-			} catch (Exception e) {
-				System.out.println("오류 발생 -" + e.getMessage());
-				entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		try {
+			String member_email = request.getParameter("member_email");
+			// member_email == null 은 안되고 문자열 비교하니까 작동
+			if(member_email == "") {
+				result = "empty";
+			} else {
+				result = "notEmpty";
 			}
-			return entity;
+
+			entity = new ResponseEntity<String>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println("오류 발생 -" + e.getMessage());
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
+		return entity;
+	}
+	
+	//-------------------------------------------------------------- 장바구니 삭제 --------------------------------------------------------
+	@RequestMapping(value = "/deleteBasket.sh", method = RequestMethod.GET)
+	public ResponseEntity<String> deleteBasket(HttpServletRequest request) {
+		String result = ""; // 문자열로 결과 값 저장
+		ResponseEntity<String> entity = null;
+
+		try {
+			String member_email = request.getParameter("member_email");
+			String product_idx = request.getParameter("product_idx");
+			
+			int deleteCount = basketService.deleteBasket(member_email, product_idx);
+			
+			if(deleteCount != 0) {
+				result = "deletedSuccess";
+			} else {
+				result = "deleteFail";
+			}
+
+			entity = new ResponseEntity<String>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println("오류 발생 -" + e.getMessage());
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

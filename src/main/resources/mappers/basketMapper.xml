@@ -10,6 +10,10 @@
 		ON b.basket_product_idx = p.product_idx
 		WHERE basket_email = #{member_email};
 	</select>
+	
+	<delete id="deleteBasket" parameterType="HashMap">
+		DELETE FROM basket WHERE basket_email = #{member_email} AND basket_product_idx = #{product_idx}
+	</delete>
 
 
 </mapper>

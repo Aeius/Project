@@ -81,7 +81,7 @@ public class MemberController {
 			return "/dailyShop/member/msg";
 
 		}
-		return "redirect:/update.sh";
+		return "redirect:/myPage.sh";
 	}
 	
 	//---------------------------------------------------------------  회원가입 ------------------------------------------------------------
