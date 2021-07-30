@@ -43,7 +43,7 @@ public class ProductController {
 		ArrayList<ProductBean> aquaList = productService.getProductAquaList();
 		ArrayList<ProductBean> fruityList = productService.getProductFruityList();
 		ArrayList<ProductBean> sitrusList = productService.getProductSitrusList();
-		ArrayList<ProductBean> spricesList = productService.getProductSpicesList();
+		ArrayList<ProductBean> spicesList = productService.getProductSpicesList();
 		ArrayList<ProductBean> modernList = productService.getProductModernList();
 		
 		//Model mb.mb 데이터 담아 가기
@@ -54,7 +54,7 @@ public class ProductController {
 		model.addAttribute("aquaList" , aquaList);
 		model.addAttribute("fruityList" , fruityList);
 		model.addAttribute("sitrusList" , sitrusList);
-		model.addAttribute("spricesList" , spricesList);
+		model.addAttribute("spicesList" , spicesList);
 		model.addAttribute("modernList" , modernList);
 		
 		return "/dailyShop/product_board/product";
@@ -74,7 +74,7 @@ public class ProductController {
 			ArrayList<ProductBean> aquaList = productService.getProductAquaList50();
 			ArrayList<ProductBean> fruityList = productService.getProductFruityList50();
 			ArrayList<ProductBean> sitrusList = productService.getProductSitrusList50();
-			ArrayList<ProductBean> spricesList = productService.getProductSpicesList50();
+			ArrayList<ProductBean> spicesList = productService.getProductSpicesList50();
 			ArrayList<ProductBean> modernList = productService.getProductModernList50();
 			//Model mb.mb 데이터 담아 가기
 			model.addAttribute("allList" , allList);
@@ -84,7 +84,7 @@ public class ProductController {
 			model.addAttribute("aquaList" , aquaList);
 			model.addAttribute("fruityList" , fruityList);
 			model.addAttribute("sitrusList" , sitrusList);
-			model.addAttribute("spricesList" , spricesList);
+			model.addAttribute("spicesList" , spicesList);
 			model.addAttribute("modernList" , modernList);
 			
 			return "/dailyShop/product_board/product50ml";

@@ -59,9 +59,35 @@ public class OrderListController {
 				// 게시판 글 가져오기 (시작하는 행번호에서 몇개 )
 				pb.setCount(orderListService.getOrderListCount(order_member_email));
 				
+				// .getReview
+				// SELECT review_idx, review_product_idx FROM review where review_member_email = #{member_email};
+				// List result = reviewService.getReview(member_email);
+				// 리뷰 테이블 조회 시 member_email 값 줌으로써 내 리뷰들만 조회
+				// 1   1
+				// 2   1
+				// 3   2
+				// 4   3
+				//이런식으로 출력됨
+				
+				
+				// 해당 리뷰들의 review_product_idx 를 통해 product 정보들 가져오기
+				// .getProduct
+				// SELECT product_name, product_price from product, review where product_idx = #{review_product_idx};
+				// ProductBean pb = productService.getProduct(result.getReview_product_idx());
+				
+				
+				// ReviewBean rb = new ReviewBean();
+				// rb.setReview_idx(result.getReview_idx())
+				
+				
+				
 				ArrayList<OrderListBean> orderList = orderListService.getOrderListPage(pb);
 				
-	
+				for(OrderListBean o  : orderList) {
+					System.out.println(o.getOrder_idx());
+				}
+				
+				
 			    System.out.println(order_member_email);
   
 //				System.out.println(pb.getCurrentPage());

@@ -59,17 +59,17 @@ public class PayController {
 			for(Map.Entry<String, String> element : map.entrySet()) {
 				param += (element.getKey() + "=" + element.getValue() + "&");
 			}
+			System.out.println(param);
 			
-			// 담은 정보를 연결한 url(kakao)로 request 신청 
+			// 담은 정보를 연결한 url(kakao)로 request
 			conn.getOutputStream().write(param.getBytes());
-			
 			// 응답 받기
 			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			System.out.println(in.readLine());
 			
-//			JsonParser parser = new JsonParser(); // JSON 데이터를 자바에서 사용하기위해 형태를 바꿔주는 클래스
-//			
-//			JSONPObject json = parser.getParsingContext(in);
-//			
+			
+			
+			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -37,12 +37,15 @@ public class AjaxController {
 		System.out.println("WishListController - pushWishList()");
 		String result = "";
 		ResponseEntity<String> entity = null;
+		int request_product_idx = Integer.parseInt(request.getParameter("product_idx")); 
+		String request_member_email = request.getParameter("member_email");
 		
 		try {
+//			request.getParameter("")
 			// SQL구문 만능문자에 가져갈 데이터를 Bean에 담아서 전달하는 과정 
 			WishListBean wishListBean = new WishListBean();
-			wishListBean.setProduct_idx(product_idx);  // 현재 접근한 상세페이지의 상품번호 (product_idx) 파라미터 가져오기
-			wishListBean.setWishList_member_email((String)session.getAttribute("member_email")); // 세션에있는(로그인되어있는) 회원이메일정보 불러오기 
+			wishListBean.setProduct_idx(request_product_idx);  // 현재 접근한 상세페이지의 상품번호 (product_idx) 파라미터 가져오기
+			wishListBean.setWishList_member_email(request_member_email); // 세션에있는(로그인되어있는) 회원이메일정보 불러오기 
 			
 			WishListBean checkWishList =  wishListService.checkWishList(wishListBean);
 //			System.out.println("WishListController - chekcWishList() 리턴 값 : " + checkWishList);
@@ -80,10 +83,10 @@ public class AjaxController {
 		
 		//-------------------------------------------------------------- wishListCount 체크-------------------------------------------------------------------------
 		@RequestMapping(value = "/checkWishCount.sh", method = RequestMethod.GET)
-		public ResponseEntity<String> checkWishCount(HttpServletRequest request, HttpSession session, @RequestParam("product_idx") int product_idx) {
+		public ResponseEntity<String> checkWishCount(HttpServletRequest request, HttpSession session) {
 			System.out.println("WishListController - checkWishCount()");
 			ResponseEntity<String> entity = null;
-			
+			int product_idx = Integer.parseInt(request.getParameter("product_idx")); 
 			try {
 				
 				ProductBean checkWishCount =  wishListService.checkWishCount(product_idx);

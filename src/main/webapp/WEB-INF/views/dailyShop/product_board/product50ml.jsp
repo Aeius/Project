@@ -17,6 +17,42 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   
+   <script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
+  <script type="text/javascript">
+  $(document).ready(function(){	 
+	  $('#aa-add-to-cart-btn').click(function(){
+		  alert("버튼 클릭됨");
+	  });
+  });
+// 		  $.ajax('<c:url value="/checkSession.sh"/>', {
+// 				data:{member_email:$('#member_email').val()},
+// 				success:function(rdata){
+// 					if(rdata=="empty") {
+// 						location.href="<c:url value='/login.sh'/>";
+// 					} else {
+// 						$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
+// 							data:{product_idx:${productBean.product_idx }},
+// 							success:function(rdata){
+// 							var heart = rdata;
+// 							$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
+// 								data:{product_idx:${productBean.product_idx }},
+// 								success:function(wishCount){
+// 									if(heart == "offHeart"){
+// 										heart = "찜♡ "+ wishCount;
+// 									} else {
+// 										heart = "찜♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
+// 									}
+// 									$('#wish').html(heart);
+// 								}	
+// 							});		 
+// 							}
+// 						});	
+// 					}	
+// 				}
+// 			 });
+// 		 });
+// 	  });
+  </script>
   
 
   </head>
@@ -93,7 +129,7 @@
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
-                       	 <a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${allList.product_idx }">좋아요 수♡ ${allList.product_likecount }</span></a>
+                       	 <a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span class="aa-add-to-cart-btn"  id="aa-add-to-cart-btn">좋아요 수♡ ${allList.product_likecount }</span></a>
 <%--                        <a href="pushWishList.sh?product_idx=${allList.product_idx }" data-toggle="tooltip" data-placement="top" title="좋아요 ${allList.product_likecount }"><span class="fa fa-heart-o"></span></a>  <!-- 찜하기 버튼 --> --%>
 <!--                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>   비교하기 버튼
 <!--                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>  <!--퀵뷰                      -->
