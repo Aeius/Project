@@ -55,4 +55,18 @@
 		WHERE order_idx = #{order_idx}
 	</update>
 	
+	<select id="getReviewCheck" resultType="com.itwillbs.domain.OrderListBean" >
+		select review_idx, review_product_idx, product_idx 
+		from review, product 
+		where review_email = #{review_email}
+		and product_idx = review_product_idx 
+		and review_idx = #{review_idx}
+	</select>
+	
+	<select id="getReviewFind" resultType="com.itwillbs.domain.OrderListBean" >
+		select review_idx
+		from review
+		where review_email = #{review_email}
+	</select>
+	
 </mapper>

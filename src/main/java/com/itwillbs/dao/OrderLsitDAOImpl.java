@@ -54,6 +54,11 @@ public class OrderLsitDAOImpl implements OrderListDAO {
 		return sqlSession.selectOne(namespace+".getOrderListCount",order_member_email);
 	}
 
+	@Override
+	public OrderListBean getReviewFind(String review_email) {
+		System.out.println("OrderLsitDAOImpl - getReviewFind" );
+		return sqlSession.selectOne(namespace+".getReviewFind",review_email);
+	}
 
 	
 

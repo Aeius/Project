@@ -59,7 +59,11 @@ public class OrderListServiceImpl implements OrderListService {
 	}
 
 
-	
+	@Override
+	public OrderListBean getReviewFind(String review_email) {
+		System.out.println("OrderListServiceImpl - getReviewFind");
+		return orderListDAO.getReviewFind(review_email);
+	}
 
 	
 

@@ -34,7 +34,8 @@ public class OrderListController {
 	@RequestMapping(value = "/orderList.sh", method = RequestMethod.GET)
 	public String orderList(HttpSession session, Model model, HttpServletRequest request) {
 		String order_member_email = (String)session.getAttribute("member_email");
-		
+//		String review_email = order_member_email;
+
 		// member 정보 전체를 조회
 //		ArrayList<OrderListBean> orderList = orderListService.getOrderList(order_member_email);
 		
@@ -57,21 +58,41 @@ public class OrderListController {
 				
 				// 게시판 글 가져오기 (시작하는 행번호에서 몇개 )
 				pb.setCount(orderListService.getOrderListCount(order_member_email));
+				
 				ArrayList<OrderListBean> orderList = orderListService.getOrderListPage(pb);
 				
+	
 			    System.out.println(order_member_email);
-				System.out.println(pb.getCurrentPage());
-				System.out.println(pb.getPageCount());
-				System.out.println(pb.getEndPage());
-				System.out.println(pb.getEndRow());
-				System.out.println(pb.getPageNum());
-				System.out.println(pb.getPageBlock());
-				System.out.println(pb.getPageSize());
+  
+//				System.out.println(pb.getCurrentPage());
+//				System.out.println(pb.getPageCount());
+//				System.out.println(pb.getEndPage());
+//				System.out.println(pb.getEndRow());
+//				System.out.println(pb.getPageNum());
+//				System.out.println(pb.getPageBlock());
+//				System.out.println(pb.getPageSize());
+				
+//				OrderListBean reviewFind = orderListService.getReviewFind(review_email);
+//				System.out.println(reviewFind.getReview_idx());
+//				
+//				
+////				reviewFind.getReview_idx();
+//				int review_idx = reviewFind.getReview_idx();
+//				System.out.println(review_idx);
+//				OrderListBean reviewCheck = orderListService.getReviewCheck(review_email, review_idx);
+//				
+//				OrderListBean reviewCheck = orderListService.getReviewCheck1(review_idx);
+				
+//				System.out.println(reviewCheck.getReview_idx());
 				
 			// 전체 글개수 구하기 (PageBean에 저장시 페이지 관련 정보 계산)
 			
 			System.out.println(pb.getOrder_member_email());
 			System.out.println(pb.getCount());
+			
+			// 리뷰 정보 가져가기
+//			model.addAttribute("reviewCheck" , reviewCheck);
+			
 			//Model 데이터 담아 가기
 			model.addAttribute("orderList" , orderList);
 			// 페이지 총 개수 가져 가기

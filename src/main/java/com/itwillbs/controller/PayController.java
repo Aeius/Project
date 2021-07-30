@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,24 +30,37 @@ public class PayController {
 	public String kakaoPay() {
 		try {
 			URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
-			HttpURLConnection connectionServer = (HttpURLConnection)url.openConnection();
-			connectionServer.setRequestMethod("POST");
-			connectionServer.setRequestProperty("Authorization", "KakaoAK fd61f8ddd34ee2b8cbf8dc344f47beea");
-			connectionServer.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-			connectionServer.setDoInput(true);
-			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=2200&vat_amount=200&tax_free_amount=0&approval_url=https://developers.kakao.com/success&fail_url=https://developers.kakao.com/fail&cancel_url=https://developers.kakao.com/cancel";
-			OutputStream dataSetter = connectionServer.getOutputStream();
+			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Authorization", "KakaoAK fd61f8ddd34ee2b8cbf8dc344f47beea");
+			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			
+			Map<String, String> map = new HashMap<String, String>(); 
+			map.put("cid", "TC0ONETIME");
+			map.put("partner_order_id", "주문번호");
+			map.put("partner_user_id", "회원ID");
+			map.put("item_name", "상품명");
+			map.put("quantity", "1"); // 수량
+			map.put("total_amount", "100"); // 총가격
+			map.put("tax_free_amount", "100"); // 비과세 금액
+			map.put("approval_url", "TC0ONETIME"); // 결제 성공시 url
+			map.put("cancel_url", "TC0ONETIME"); // 취소
+			map.put("fail_url", "TC0ONETIME"); // 실패
+			
+			OutputStream dataSetter = conn.getOutputStream();
 			DataOutputStream setData = new DataOutputStream(dataSetter);
-			setData.writeBytes(parameter);
+//			setData.writeBytes();
 			setData.flush();
 			setData.close();
 			
-			int resultCode = connectionServer.getResponseCode();
+			int resultCode = conn.getResponseCode();
 			InputStream getter;
 			if(resultCode == 200) {
-				getter = connectionServer.getInputStream();
+				getter = conn.getInputStream();
 			} else {
-				getter = connectionServer.getErrorStream();
+				getter = conn.getErrorStream();
 			}
 			InputStreamReader reader = new InputStreamReader(getter);
 			BufferedReader buffer = new BufferedReader(reader);

@@ -19,5 +19,7 @@ public interface OrderListService {
 	public ArrayList<OrderListBean> getOrderListPage(PageBean pb);
 
 	public Integer getOrderListCount(String order_member_email);
+	
+	public OrderListBean getReviewFind(String review_email);
 
 }
