@@ -104,7 +104,7 @@
                        </c:if>
                        
                         <c:if test="${product_idx eq review_product_idx}">
-                        <input type="button" value="리뷰등록완료" onclick="review( ${orderList.product_idx} )">
+                        <input type="button" value="리뷰등록완료">
                        </c:if>
                       
                         

@@ -53,21 +53,21 @@
                     </thead>
                     <!-- 회원 목록 나열 -->
                     <tbody>
-                      <c:forEach var="mb" items="${mbList }">
-						<tr><td>${mb.member_idx }</td>
-			    	      <td>${mb.member_email }</td>
-			    	      <td>${mb.member_password }</td>
-			    	      <td>${mb.member_name }</td>
-			              <td>${mb.member_phone }</td>
-			              <td>${mb.member_post }</td>
-			              <td>${mb.member_address }</td>
-			              <td>${mb.member_extraAddress }</td>
-			              <td>${mb.member_extraAddress2 }</td>
-			              <td>${mb.member_date }</td>
-			              <td>${mb.member_coupon }</td>
-			              <td>${mb.member_like }</td>
-			              <td>${mb.member_subscribe }</td>
-			              <td>${mb.member_point }</td></tr>
+                      <c:forEach var="memberBean" items="${memberBeanList }">
+						<tr><td>${memberBean.member_idx }</td>
+			    	      <td>${memberBean.member_email }</td>
+			    	      <td>${memberBean.member_password }</td>
+			    	      <td>${memberBean.member_name }</td>
+			              <td>${memberBean.member_phone }</td>
+			              <td>${memberBean.member_post }</td>
+			              <td>${memberBean.member_address }</td>
+			              <td>${memberBeanb.member_extraAddress }</td>
+			              <td>${memberBean.member_extraAddress2 }</td>
+			              <td>${memberBean.member_date }</td>
+			              <td>${memberBean.member_coupon }</td>
+			              <td>${memberBean.member_like }</td>
+			              <td>${memberBean.member_subscribe }</td>
+			              <td>${memberBean.member_point }</td></tr>
 					</c:forEach> 
                     </tbody>
                   </table>

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
+import com.itwillbs.domain.SubscribeBean;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -154,5 +155,37 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberBean> getSubMemberList() {
 		return memberDAO.getSubMemberList();
 	}
+
+//	@Override
+//	public void sendResubscribeMail(SubscribeBean subscribeBean) {
+//		String setfrom = "javateamproject2021@gmail.com";
+//	    String tomail = subscribeBean.getSubscribe_email(); // 받는 사람 이메일
+//	    String title = "구독을 연장해보시는 건 어떤가요?"; // 제목
+//	    String content = "<div align=\"center\" style=\"text-align: center;\"><span style=\"font-size: 24pt; font-family: arial, sans-serif;\">"
+//	          + "<b>구독을 이용해주셔서 감사합니다.</b></span></div><div align=\"center\" style=\"text-align: center;\">"
+//	          + "<p align=\"center\" style=\"font-family: 돋움, Dotum, Helvetica, Apple SD Gothic Neo, sans-serif; font-size: 12px;\"><span style=\"font-size: 10pt; font-family: arial, sans-serif;\">구독 만료기간이 도래하여 갱신하실 수 있도록 알려드립니다.</span></p>"
+//	          + "<p align=\"center\" style=\"font-family: 돋움, Dotum, Helvetica, Apple SD Gothic Neo, sans-serif; font-size: 12px;\"><span style=\"font-size: 10pt; font-family: arial, sans-serif;\">지금 바로 기간을 연장하시고 구독 감사 쿠폰을 등록해보세요!</span></p>"
+//	          + "<p align=\"center\" style=\"font-family: 돋움, Dotum, Helvetica, Apple SD Gothic Neo, sans-serif; font-size: 12px;\"><span style=\"font-size: 12pt; font-family: arial, sans-serif;\">"
+//	          + "코드 번호 : <span style=\"background-color: rgb(255, 255, 255); font-size: 12pt; color: rgb(0, 0, 0); font-family: arial, sans-serif;\"><u>THANKS2021</u></span></span></p>"
+//	          + "<p align=\"center\" style=\"font-family: 돋움, Dotum, Helvetica, Apple SD Gothic Neo, sans-serif; font-size: 12px;\">"
+//	          + "<span style=\"font-size: 12pt; font-family: arial, sans-serif;\"><span style=\"background-color: rgb(255, 255, 255); font-size: 12pt; color: rgb(0, 0, 0); font-family: arial, sans-serif;\"><br></span>"
+//	          + "</span></p></div><div align=\"center\" style=\"text-align: center;\"><img src=\"https://image.flaticon.com/icons/png/512/1169/1169905.png\" alt=\"Coupons free icon\" style=\"width=\" height=\"240\"><br></div>"
+//	          + "<div align=\"center\" style=\"text-align: center;\"><br></div><div align=\"center\" style=\"text-align: center;\">"
+//	          + "<form action=\"http://localhost:8080/myweb2/main.sh\" method=\"get\"><input type=\"submit\" value=\"쿠폰 등록하러가기\" style=\"border:1px solid #f4f4f4; padding: 7px 15px; border-radius:8px; background-color: rgb(81, 143, 187);color:white; cursor: pointer;\"></form></div>"; // 내용
+//
+//	    try {
+//	       MimeMessage message = mailSender.createMimeMessage();
+//	       MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+//
+//	       messageHelper.setFrom(setfrom); // 보내는사람 생략하거나 하면 정상작동을 안함
+//	       messageHelper.setTo(tomail); // 받는사람 이메일
+//	       messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+//	       messageHelper.setText(content, true); // 메일 내용
+//
+//	       mailSender.send(message);
+//	    } catch (Exception e) {
+//	       System.out.println("메일 발송 실패 - " + e.getMessage());
+//	    }
+//	}
 
 }

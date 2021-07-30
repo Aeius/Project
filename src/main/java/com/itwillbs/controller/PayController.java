@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.util.BufferRecycler;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
 @Controller
 public class PayController {
 	
@@ -45,27 +49,27 @@ public class PayController {
 			map.put("quantity", "1"); // 수량
 			map.put("total_amount", "100"); // 총가격
 			map.put("tax_free_amount", "100"); // 비과세 금액
-			map.put("approval_url", "TC0ONETIME"); // 결제 성공시 url
-			map.put("cancel_url", "TC0ONETIME"); // 취소
-			map.put("fail_url", "TC0ONETIME"); // 실패
+			map.put("approval_url", "http://localhost:8080/myweb2/daliyShop/member/checkout_finish.jsp"); // 결제 성공시 url
+			map.put("cancel_url", "http://localhost:8080/myweb2/daliyShop/404.jsp"); // 취소
+			map.put("fail_url", "http://localhost:8080/myweb2/daliyShop/member/checkout.jsp"); // 실패
 			
-			OutputStream dataSetter = conn.getOutputStream();
-			DataOutputStream setData = new DataOutputStream(dataSetter);
-//			setData.writeBytes();
-			setData.flush();
-			setData.close();
-			
-			int resultCode = conn.getResponseCode();
-			InputStream getter;
-			if(resultCode == 200) {
-				getter = conn.getInputStream();
-			} else {
-				getter = conn.getErrorStream();
+			// map을 바디에 전달한 값의 형태에 맞게
+			// key=value&key=value 로 바꿔준다
+			String param = new String();
+			for(Map.Entry<String, String> element : map.entrySet()) {
+				param += (element.getKey() + "=" + element.getValue() + "&");
 			}
-			InputStreamReader reader = new InputStreamReader(getter);
-			BufferedReader buffer = new BufferedReader(reader);
-			return buffer.readLine();
 			
+			// 담은 정보를 연결한 url(kakao)로 request 신청 
+			conn.getOutputStream().write(param.getBytes());
+			
+			// 응답 받기
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			
+//			JsonParser parser = new JsonParser(); // JSON 데이터를 자바에서 사용하기위해 형태를 바꿔주는 클래스
+//			
+//			JSONPObject json = parser.getParsingContext(in);
+//			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

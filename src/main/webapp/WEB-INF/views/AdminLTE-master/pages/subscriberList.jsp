@@ -46,15 +46,15 @@
                     <%-- subscribe 테이블 : subscribe_email / subscribe_start_date / subscribe_month --%>
                     <%-- member 테이블 : member_subscribe --%>
                     <tbody>
-                    	<c:forEach var="mb" items="${mbList }">
+                    	<c:forEach var="memberBean" items="${memberBean }">
 	                      <tr>
-	                        <td>${mb.member_idx }</td>
-	                        <td>${mb.member_email }</td>
-	                        <td>${mb.member_name }</td>
+	                        <td>${memberBean.member_idx }</td>
+	                        <td>${memberBean.member_email }</td>
+	                        <td>${memberBean.member_name }</td>
 	                        <td>${subscribe_start_date }</td>
 	                        <td>2021.08.15</td>
 	                        <td>
-	                        <input type="button" value="연장 권장 메일 발송">
+	                        <input type="button" value="연장 권장 메일 발송" onclick="location.href='<c:url value="/sendResubscribeMail.ad?faq_idx=${faqBoardBean.faq_idx }" />'">
 	                        </td>
 	                      </tr>
                     	</c:forEach> 

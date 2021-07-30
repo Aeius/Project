@@ -58,12 +58,26 @@ public class OrderListServiceImpl implements OrderListService {
 		return orderListDAO.getOrderListCount(order_member_email);
 	}
 
-
 	@Override
 	public OrderListBean getReviewFind(String review_email) {
 		System.out.println("OrderListServiceImpl - getReviewFind");
 		return orderListDAO.getReviewFind(review_email);
 	}
+	
+//	@Override
+//	public OrderListBean getReviewCheck(String review_email, int review_idx) {
+//		System.out.println("ReviewServiceImpl-getOrderListCount");
+//		return orderListDAO.getReviewCheck(review_email,review_idx);
+//	}
+	
+//	@Override
+//	public OrderListBean getReviewCheck1(int review_idx) {
+//		System.out.println("OrderListServiceImpl - getReviewCheck1");
+//		return orderListDAO.getReviewCheck1(review_idx);
+//	}
+
+
+	
 
 	
 

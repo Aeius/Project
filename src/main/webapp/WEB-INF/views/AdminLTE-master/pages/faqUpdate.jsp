@@ -26,21 +26,21 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <form role="form" action='<c:url value="/pages/faqUpdatePro" />' method="post">
-                  <input type="hidden" name="faq_idx" value="${fbb.faq_idx }">
+                  <input type="hidden" name="faq_idx" value="${faqBoardBean.faq_idx }">
                     <!-- textarea -->
                     <div class="form-group">
                       <label>질문 입력</label>
-                      <textarea name="faq_question" class="form-control" rows="5">${fbb.faq_question }</textarea>
+                      <textarea name="faq_question" class="form-control" rows="5">${faqBoardBean.faq_question }</textarea>
                     </div>
                     
                     <!-- textarea -->
                     <div class="form-group">
                       <label>답변 입력</label>
-                      <textarea name="faq_answer" class="form-control" rows="5">${fbb.faq_answer }</textarea>
+                      <textarea name="faq_answer" class="form-control" rows="5">${faqBoardBean.faq_answer }</textarea>
                     </div>
 					  
 					<div class="box-footer">
-                    <button type="submit" class="btn btn-primary">FAQ 등록</button>
+                    <button type="submit" class="btn btn-primary">FAQ 수정</button>
                   </div>
                   </form>
                 </div><!-- /.box-body -->

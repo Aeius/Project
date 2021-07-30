@@ -268,36 +268,50 @@ public class AdminController {
 	@RequestMapping(value = "/memberList.ad", method = RequestMethod.GET)
 	public String memberList(HttpSession session, Model model) {
 		//  member정보 전체를 조회
-		List<MemberBean> mbList=memberService.getMemberList();
+		List<MemberBean> memberBeanList=memberService.getMemberList();
 		
 		//Model mbList,mbList 데이터 담아 가기
-		model.addAttribute("mbList", mbList);
+		model.addAttribute("memberBeanList", memberBeanList);
 		
 		return "/AdminLTE-master/pages/memberList";
 	}
 	
-	// ------------------ 회원관리 > 구독자 ---------------------
+	// ------------------ 회원관리 > 구독자 ----------------------
 		@RequestMapping(value = "/subscribeList.ad", method = RequestMethod.GET)
 		public String subscribeList(HttpSession session, Model model) {
-			//  member정보 전체를 조회
-			List<MemberBean> mbList=memberService.getSubMemberList();
-			//Model mbList,mbList 데이터 담아 가기
-			model.addAttribute("mbList", mbList);
+			List<MemberBean> memberBeanList=memberService.getSubMemberList();
+			
+			model.addAttribute("memberBeanList", memberBeanList);
 			return "/AdminLTE-master/pages/subscriberList";
 		}
+		
+	// ------------------ 회원관리 > 구독자 : 연장메일발송 ------------
+//		@RequestMapping(value = "/sendResubscribeMail.sh/{member_email}", method = RequestMethod.GET)
+//		public String sendResubscribeMail(@PathVariable String member_email) {
+//			SubscribeBean subscribeBean = memberService.getMember(subscribe_email);
+//			subscribeBean.sendResubscribeMail(subscribeBean);
+//			return "/AdminLTE-master/pages/subscriberList";
+//		}	
+//		@RequestMapping(value = "/sendResubscribeMail.ad/{member_email}", method = RequestMethod.GET)
+//		public String sendResubscribeMail(@PathVariable String member_email) { 
+//			SubscribeBean subscribeBean = new SubscribeBean();
+//			subscribeBean.setSubscribe_email(memberService.getMember(member_email));
+//			subscribeBean.sendResubscribeMail(subscribeBean);
+//			return "/AdminLTE-master/pages/subscriberList";
+//		}	
 	
 	
-	// ------------------ 공지관리 > FAQ 등록 ------------------
+	// ------------------ 공지관리 > FAQ 등록 ---------------------
 	@RequestMapping(value = "/faqWrite.ad", method = RequestMethod.GET)
 	public String faqWrite() {
-		//  /WEB-INF/views/pages/faqWrite.jsp 이동
+		
 		return "/AdminLTE-master/pages/faqWrite";
 	}
 	
 	@RequestMapping(value = "pages/faqWritePro", method = RequestMethod.POST)
-	public String faqWritePro(FaqBoardBean fbb) {
-		// 글쓰기 메서드 호출
-		faqBoardService.insertFaqBoard(fbb);
+	public String faqWritePro(FaqBoardBean faqBoardBean) {
+		
+		faqBoardService.insertFaqBoard(faqBoardBean);
 		
 		return "redirect:/faqList.ad";
 	}
@@ -308,15 +322,15 @@ public class AdminController {
 	public String faqList(HttpSession session, Model model) {
 		
 		// 게시판 글 가져오기 
-		List<FaqBoardBean> fbbList=faqBoardService.getFaqBoardList();
+		List<FaqBoardBean> faqBoardBeanList=faqBoardService.getFaqBoardList();
 		
 		//게시판 글 가져온 데이터 model담아서 이동
-		model.addAttribute("fbbList",fbbList);
+		model.addAttribute("faqBoardBeanList",faqBoardBeanList);
 		
 		return "/AdminLTE-master/pages/faqList";
 	}
 
-	// ------------------ 공지관리 > FAQ 수정 ------------------
+	// ------------------ 공지관리 > FAQ : 수정 --------------------
 	@RequestMapping(value = "/faqUpdate.ad", method = RequestMethod.GET)
 	public String faqUpdate(Model model, HttpServletRequest request) {
 		
@@ -324,33 +338,32 @@ public class AdminController {
 		int faq_idx=Integer.parseInt(request.getParameter("faq_idx"));
 		
 		//번호에 맞는 글 불러서 model에 담아가기
-		FaqBoardBean fbb=faqBoardService.getFaqBoard(faq_idx);
-		model.addAttribute("fbb",fbb);
+		FaqBoardBean faqBoardBean=faqBoardService.getFaqBoard(faq_idx);
+		model.addAttribute("faqBoardBean",faqBoardBean);
 		
 		return "/AdminLTE-master/pages/faqUpdate";
 	}
 	
 	@RequestMapping(value = "/pages/faqUpdatePro", method = RequestMethod.POST)
-	public String faqUpdatePro(FaqBoardBean fbb) {
+	public String faqUpdatePro(FaqBoardBean faqBoardBean) {
 		
 		// 글수정 메서드 호출
-		faqBoardService.updateFaqBoard(fbb);
+		faqBoardService.updateFaqBoard(faqBoardBean);
 		
 		return "redirect:/faqList.ad";
 	}
 	
-	// ------------------ 공지관리 > FAQ 삭제 ------------------	
+	// ------------------ 공지관리 > FAQ : 삭제 ---------------------
 	@RequestMapping(value = "/faqDelete.ad", method = RequestMethod.GET)
-	public String faqDelete(HttpServletRequest request, FaqBoardBean fbb, HttpSession session, Model model) {
+	public String faqDelete(HttpServletRequest request, FaqBoardBean faqBoardBean, HttpSession session, Model model) {
 		
 		//번호 찾아서 해당 글 삭제
 		int faq_idx=Integer.parseInt(request.getParameter("faq_idx"));
-		faqBoardService.deleteFaqBoard(fbb);
+		faqBoardService.deleteFaqBoard(faqBoardBean);
 		
 		//세션값 초기화
 		session.invalidate();
-		model.addAttribute("msg","해당 게시글이 삭제되었습니다.");
-		return "/member/msg";
+		return "/AdminLTE-master/pages/faqList";
 	}	
 
 	

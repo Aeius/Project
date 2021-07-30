@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
+import com.itwillbs.domain.SubscribeBean;
 
 public interface MemberService {
    // memberService.insertMember(mb); 추상메서드 생성
@@ -30,6 +31,8 @@ public interface MemberService {
 
    //관리자 페이지 : 구독자만 관리
    public List<MemberBean> getSubMemberList();
+
+//   public void sendResubscribeMail(SubscribeBean subscribeBean);
 
 
 
