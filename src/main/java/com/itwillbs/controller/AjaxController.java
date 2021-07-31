@@ -86,6 +86,7 @@ public class AjaxController {
 		public ResponseEntity<String> checkWishCount(HttpServletRequest request, HttpSession session) {
 			System.out.println("WishListController - checkWishCount()");
 			ResponseEntity<String> entity = null;
+			System.out.println(request.getParameter("product_idx"));
 			int product_idx = Integer.parseInt(request.getParameter("product_idx")); 
 			try {
 				

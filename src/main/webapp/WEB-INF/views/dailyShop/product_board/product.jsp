@@ -20,6 +20,7 @@
   <script type="text/javascript">
   $(document).ready(function(){	 
 	  $('.aa-add-to-cart-btn').click(function(){
+		  var idx = $(this).attr("id")
 		  $.ajax('<c:url value="/checkSession.sh"/>', {
 				data:{
 					member_email:$('#member_email').val()
@@ -30,14 +31,14 @@
 					} else {
 						$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
 							data:{
-								product_idx:$('.aa-add-to-cart-btn').attr("id"),
+								product_idx:$('#'+idx).attr("id"),
 								member_email:$('#member_email').val()
 							},
 							success:function(rdata){
 							var heart = rdata;
 							$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
 								data:{
-									product_idx:$('.aa-add-to-cart-btn').attr("id")
+									product_idx:$('#'+idx).attr("id")
 								},
 								success:function(wishCount){
 									if(heart == "offHeart"){
@@ -45,7 +46,7 @@
 									} else {
 										heart = "좋아요♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
 									}
-									$('#' + $('.aa-add-to-cart-btn').attr("id")).html(heart);
+									$('#' + idx).html(heart);
 								}	
 							});		 
 							}

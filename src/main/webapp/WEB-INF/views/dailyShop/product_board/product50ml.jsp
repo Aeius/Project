@@ -20,6 +20,7 @@
   <script type="text/javascript">
   $(document).ready(function(){	 
 	  $('.aa-add-to-cart-btn').click(function(){
+		  var idx = $(this).attr("id")
 		  $.ajax('<c:url value="/checkSession.sh"/>', {
 				data:{
 					member_email:$('#member_email').val()
@@ -30,14 +31,14 @@
 					} else {
 						$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
 							data:{
-								product_idx:$('.aa-add-to-cart-btn').attr("id"),
+								product_idx:$('#'+idx).attr("id"),
 								member_email:$('#member_email').val()
 							},
 							success:function(rdata){
 							var heart = rdata;
 							$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
 								data:{
-									product_idx:$('.aa-add-to-cart-btn').attr("id")
+									product_idx:$('#'+idx).attr("id")
 								},
 								success:function(wishCount){
 									if(heart == "offHeart"){
@@ -45,7 +46,7 @@
 									} else {
 										heart = "좋아요♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
 									}
-									$('.' + $('.aa-add-to-cart-btn').attr("id")).html(heart);
+									$('#' + idx).html(heart);
 								}	
 							});		 
 							}
@@ -132,14 +133,7 @@
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
-                          <c:choose>
-							<c:when test="${wl.wishlistcount eq 0 }">
-                      			<a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span class="${allList.product_idx }">좋아요♡ ${allList.product_likecount }</span></a>
-							</c:when>
-							<c:otherwise>
-                      			<a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span class="${allList.product_idx }">좋아요♥ ${allList.product_likecount }</span></a>
-                        	</c:otherwise>
-						</c:choose>
+                      			<a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span id="${allList.product_idx }">좋아요♡ ${allList.product_likecount }</span></a>
 <%--                        	 <a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span class="${allList.product_idx }">좋아요♡ ${allList.product_likecount }</span></a> --%>
 <%--                        <a href="pushWishList.sh?product_idx=${allList.product_idx }" data-toggle="tooltip" data-placement="top" title="좋아요 ${allList.product_likecount }"><span class="fa fa-heart-o"></span></a>  <!-- 찜하기 버튼 --> --%>
 <!--                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>   비교하기 버튼
@@ -168,14 +162,7 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                         	 <c:choose>
-								<c:when test="${wl.wishlistcount eq 0 }">
                       				<a class="aa-add-to-cart-btn" id="${powderyList.product_idx }" > <span class="${powderyList.product_idx }">좋아요♡ ${powderyList.product_likecount }</span></a>
-								</c:when>
-							<c:otherwise>
-                      			<a class="aa-add-to-cart-btn" id="${powderyList.product_idx }" > <span class="${powderyList.product_idx }">좋아요♥ ${powderyList.product_likecount }</span></a>
-                        	</c:otherwise>
-							</c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${powderyList.product_stock eq 0 }">
@@ -217,7 +204,7 @@
                               <figcaption>
                                <h4 class="aa-product-title"><a></a></h4>
                               <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
+                            </figcaption> 
                           </figure>                        
                         </li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
