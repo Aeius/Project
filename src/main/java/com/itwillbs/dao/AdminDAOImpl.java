@@ -75,6 +75,16 @@ public class AdminDAOImpl implements AdminDAO {
 	public void couponAddPro(CouponBean couponBean) {
 		sqlSession.insert(namespace + ".couponAddPro", couponBean);
 	}
+
+	@Override
+	public void couponActivateInOnce() {
+		sqlSession.update(namespace + ".couponActivateInOnce");
+	}
+
+	@Override
+	public void couponExpireInOnce() {
+		sqlSession.update(namespace + ".couponExpireInOnce");
+	}
 	
 	
 }

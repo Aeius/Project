@@ -1,8 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
+<script type="text/javascript">
+function noticeNullCheck(){
+
+	var notice_subject = document.getElementById('notice_subject');
+	var notice_content = document.getElementById('notice_content');
+	var blank_pattern = /^\s+|\s+$/g;
+	
+		if( notice_subject.value.replace( blank_pattern, '' ) == "" ){
+		    alert('제목을 입력해주세요');
+		    return false;
+		}
+		if( notice_content.value.replace( blank_pattern, '' ) == "" ){
+		    alert('내용을 입력해주세요');
+		    return false;
+		}
+	}
+</script>
   <!-- head -->
   <jsp:include page="../inc/head.jsp" />
   
@@ -25,7 +43,7 @@
                   <h1 class="box-title">공지사항 등록하기</h1>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" action="<c:url value='/noticeWritePro.ad'/>" method="post">
+                  <form role="form" action="<c:url value='/noticeWritePro.ad'/>" method="post" onsubmit="return noticeNullCheck()">
                   <input type="hidden" name="notice_name" id="notice_name" value="관리자">
                     <!-- text input -->
                     <div class="form-group">
@@ -39,7 +57,8 @@
                     </div>
 					  
 					<div class="box-footer">
-                    <button type="submit" class="btn btn-primary">공지 등록</button>
+<!-- 					<input type="submit" class="btn btn-primary" onclick="noticeNullCheck()" value="공지등록"> -->
+                    <button type="submit" class="btn btn-primary" >공지 등록</button>
                   </div>
                   </form>
                 </div><!-- /.box-body -->

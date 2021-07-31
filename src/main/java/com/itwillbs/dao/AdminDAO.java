@@ -36,4 +36,8 @@ public interface AdminDAO {
 
 	public void couponAddPro(CouponBean couponBean);
 
+	public void couponActivateInOnce();
+
+	public void couponExpireInOnce();
+
 }

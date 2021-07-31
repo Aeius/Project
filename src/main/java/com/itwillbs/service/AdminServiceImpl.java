@@ -75,5 +75,15 @@ public class AdminServiceImpl implements AdminService {
 		adminDAO.couponAddPro(couponBean);
 	}
 
+	@Override
+	public void couponActivateInOnce() {
+		adminDAO.couponActivateInOnce();
+	}
+
+	@Override
+	public void couponExpireInOnce() {
+		adminDAO.couponExpireInOnce();
+	}
+
 
 }

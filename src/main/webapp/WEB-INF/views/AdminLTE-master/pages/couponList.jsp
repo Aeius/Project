@@ -40,7 +40,7 @@
                         <th>발급일</th>
                         <th>만료일</th>
                         <th>상태</th>
-                        <th>관리</th>
+                        <th>관리 &nbsp; <input type="button" value="자동 관리버튼" onclick="location.href='<c:url value="/couponExpireInOnce.ad"/>'"></th>
                       </tr>
                     </thead>
                     <!-- 쿠폰 목록 나열 -->
@@ -55,8 +55,8 @@
                         <td>${coupon.coupon_status}</td>
                         <td>
                         <input type="button" value="쿠폰 활성화" onclick="location.href='<c:url value="/unexpireCoupon.ad?coupon_idx=${coupon.coupon_idx}"/>'">
+                        &nbsp;
                         <input type="button" value="쿠폰 비활성화" onclick="location.href='<c:url value="/expireCoupon.ad?coupon_idx=${coupon.coupon_idx}"/>'">
-                        <input type="button" value="비활성화" onclick="location.href='<c:url value="/expireCoupon.ad?coupon_idx=${coupon.coupon_idx}"/>'">
                         </td>
                       </tr>
                       </c:forEach>

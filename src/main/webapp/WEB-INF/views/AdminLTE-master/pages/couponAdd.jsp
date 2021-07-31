@@ -28,7 +28,7 @@
                     <!-- text input -->
                     <div class="form-group">
                       <label>쿠폰 코드 입력</label>
-                      <input type="text" name="coupon_name" id="coupon_name" class="form-control" placeholder="쿠폰 코드를 입력하세요"/>
+                      <input type="text" name="coupon_name" id="coupon_name" class="form-control" maxlength="10" placeholder="쿠폰 코드를 입력하세요. (10 문자)"/>
                     </div>
 
                     <!-- radio -->
