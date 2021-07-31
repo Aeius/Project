@@ -177,7 +177,8 @@
                       <ul class="aa-product-catg">
                         <!---------------------------------------------------  start single product item--------------------------------------------->
                         <c:forEach var="bestList" items="${bestList}">
-                        <li>
+                        <input type="hidden" id="member_email" value="${sessionScope.member_email }">
+                         <li>
                           <figure>
                             <a class="aa-product-img"  href="productDetail.sh?product_idx=${bestList.product_idx }"><img src="<c:url value='/resources/upload/${bestList.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->

@@ -112,6 +112,7 @@
                       <ul class="aa-product-catg">
                         <!---------------------------------------------------  start single product item--------------------------------------------->
                         <c:forEach var="search" items="${search }">
+                        <input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
                             <a class="aa-product-img"  href="productDetail.sh?product_idx=${search.product_idx }"><img src="<c:url value='/resources/upload/${search.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
