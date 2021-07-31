@@ -16,42 +16,45 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  
-   <script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
+<script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
   <script type="text/javascript">
   $(document).ready(function(){	 
-	  $('#aa-add-to-cart-btn').click(function(){
-		  alert("버튼 클릭됨");
+	  $('.aa-add-to-cart-btn').click(function(){
+		  $.ajax('<c:url value="/checkSession.sh"/>', {
+				data:{
+					member_email:$('#member_email').val()
+					},
+				success:function(rdata){
+					if(rdata=="empty") {
+						location.href="<c:url value='/login.sh'/>";
+					} else {
+						$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
+							data:{
+								product_idx:$('.aa-add-to-cart-btn').attr("id"),
+								member_email:$('#member_email').val()
+							},
+							success:function(rdata){
+							var heart = rdata;
+							$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
+								data:{
+									product_idx:$('.aa-add-to-cart-btn').attr("id")
+								},
+								success:function(wishCount){
+									if(heart == "offHeart"){
+										heart = "좋아요♡ "+ wishCount;
+									} else {
+										heart = "좋아요♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
+									}
+									$('.' + $('.aa-add-to-cart-btn').attr("id")).html(heart);
+								}	
+							});		 
+							}
+						});	
+					}	
+				}
+			 });
+		 });
 	  });
-  });
-// 		  $.ajax('<c:url value="/checkSession.sh"/>', {
-// 				data:{member_email:$('#member_email').val()},
-// 				success:function(rdata){
-// 					if(rdata=="empty") {
-// 						location.href="<c:url value='/login.sh'/>";
-// 					} else {
-// 						$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
-// 							data:{product_idx:${productBean.product_idx }},
-// 							success:function(rdata){
-// 							var heart = rdata;
-// 							$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
-// 								data:{product_idx:${productBean.product_idx }},
-// 								success:function(wishCount){
-// 									if(heart == "offHeart"){
-// 										heart = "찜♡ "+ wishCount;
-// 									} else {
-// 										heart = "찜♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
-// 									}
-// 									$('#wish').html(heart);
-// 								}	
-// 							});		 
-// 							}
-// 						});	
-// 					}	
-// 				}
-// 			 });
-// 		 });
-// 	  });
   </script>
   
 
@@ -79,7 +82,7 @@
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2>50ml</h2>
+        <h2>30ml</h2>
 <!--         <ol class="breadcrumb"> -->
 <!--           <li><a href="index.html">Home</a></li>          -->
 <!--           <li class="active">Women</li> -->
@@ -89,7 +92,6 @@
    </div>
   </section>
   <!-- / catg header banner section -->
-
   <section id="aa-product">
     <div class="container">
       <div class="row">
@@ -116,6 +118,7 @@
                       <ul class="aa-product-catg">
 <!-- all product item-------------------------------------------------------------------------------------------------------------------------------->
                         <c:forEach var="allList" items="${allList }">
+						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                          <script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
 						  <script type="text/javascript">
 						  </script>
@@ -129,7 +132,15 @@
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
-                       	 <a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span class="aa-add-to-cart-btn"  id="aa-add-to-cart-btn">좋아요 수♡ ${allList.product_likecount }</span></a>
+                          <c:choose>
+							<c:when test="${wl.wishlistcount eq 0 }">
+                      			<a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span class="${allList.product_idx }">좋아요♡ ${allList.product_likecount }</span></a>
+							</c:when>
+							<c:otherwise>
+                      			<a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span class="${allList.product_idx }">좋아요♥ ${allList.product_likecount }</span></a>
+                        	</c:otherwise>
+						</c:choose>
+<%--                        	 <a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span class="${allList.product_idx }">좋아요♡ ${allList.product_likecount }</span></a> --%>
 <%--                        <a href="pushWishList.sh?product_idx=${allList.product_idx }" data-toggle="tooltip" data-placement="top" title="좋아요 ${allList.product_likecount }"><span class="fa fa-heart-o"></span></a>  <!-- 찜하기 버튼 --> --%>
 <!--                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>   비교하기 버튼
 <!--                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>  <!--퀵뷰                      -->
@@ -147,6 +158,7 @@
                       <ul class="aa-product-catg">
 <!-- powdery product item ---------------------------------------------------------------------------------------------------------------->
 						<c:forEach var="powderyList" items="${powderyList }">
+						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${powderyList.product_idx }"><img src="<c:url value='/resources/upload/${powderyList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
@@ -156,8 +168,14 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${powderyList.product_idx }">좋아요 수♡ ${powderyList.product_likecount }</span></a>
-<%--                             <a href="#" data-toggle="tooltip" data-placement="top" title="${sitrus.product_likecount }"><span class="fa fa-heart-o"></span></a> --%>
+                         	 <c:choose>
+								<c:when test="${wl.wishlistcount eq 0 }">
+                      				<a class="aa-add-to-cart-btn" id="${powderyList.product_idx }" > <span class="${powderyList.product_idx }">좋아요♡ ${powderyList.product_likecount }</span></a>
+								</c:when>
+							<c:otherwise>
+                      			<a class="aa-add-to-cart-btn" id="${powderyList.product_idx }" > <span class="${powderyList.product_idx }">좋아요♥ ${powderyList.product_likecount }</span></a>
+                        	</c:otherwise>
+							</c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${powderyList.product_stock eq 0 }">
@@ -210,6 +228,7 @@
                       <ul class="aa-product-catg">
 <!-- floral product item ---------------------------------------------------------------------------------------------------------------------->
 						<c:forEach var="floralList" items="${floralList }">
+						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${floralList.product_idx }"><img src="<c:url value='/resources/upload/${floralList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
@@ -219,8 +238,14 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${floralList.product_idx }">좋아요 수♡ ${floralList.product_likecount }</span></a>
-<%--                             <a href="#" data-toggle="tooltip" data-placement="top" title="${sitrus.product_likecount }"><span class="fa fa-heart-o"></span></a> --%>
+                      		<c:choose>
+								<c:when test="${wl.wishlistcount eq 0 }">
+                      				<a class="aa-add-to-cart-btn" id="${floralList.product_idx }" > <span class="${floralList.product_idx }">좋아요♡ ${floralList.product_likecount }</span></a>
+								</c:when>
+							<c:otherwise>
+                      			<a class="aa-add-to-cart-btn" id="${floralList.product_idx }" > <span class="${floralList.product_idx }">좋아요♥ ${floralList.product_likecount }</span></a>
+                        	</c:otherwise>
+							</c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${floralList.product_stock eq 0 }">
@@ -273,6 +298,7 @@
                       <ul class="aa-product-catg">
 <!-- woody product item ------------------------------------------------------------------------------------------------------------------------->
 						<c:forEach var="woodyList" items="${woodyList }">
+						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${woodyList.product_idx }"><img src="<c:url value='/resources/upload/${woodyList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
@@ -282,8 +308,14 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${woodyList.product_idx }">좋아요 수♡ ${woodyList.product_likecount }</span></a>
-<%--                             <a href="#" data-toggle="tooltip" data-placement="top" title="${sitrus.product_likecount }"><span class="fa fa-heart-o"></span></a> --%>
+                      		<c:choose>
+								<c:when test="${wl.wishlistcount eq 0 }">
+                      				<a class="aa-add-to-cart-btn" id="${woodyList.product_idx }" > <span class="${woodyList.product_idx }">좋아요♡ ${woodyList.product_likecount }</span></a>
+								</c:when>
+							<c:otherwise>
+                      			<a class="aa-add-to-cart-btn" id="${woodyList.product_idx }" > <span class="${woodyList.product_idx }">좋아요♥ ${woodyList.product_likecount }</span></a>
+                        	</c:otherwise>
+							</c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${woodyList.product_stock eq 0 }">
@@ -336,6 +368,7 @@
                       <ul class="aa-product-catg">
 <!--  aqua product item ------------------------------------------------------------------------------------------------------------------------->
                        <c:forEach var="aquaList" items="${aquaList }">
+                       <input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${aquaList.product_idx }"><img src="<c:url value='/resources/upload/${aquaList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
@@ -345,7 +378,14 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                          <a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${aquaList.product_idx }">좋아요 수♡ ${aquaList.product_likecount }</span></a>
+                          <c:choose>
+								<c:when test="${wl.wishlistcount eq 0 }">
+                      				<a class="aa-add-to-cart-btn" id="${aquaList.product_idx }" > <span class="${aquaList.product_idx }">좋아요♡ ${aquaList.product_likecount }</span></a>
+								</c:when>
+							<c:otherwise>
+                      			<a class="aa-add-to-cart-btn" id="${aquaList.product_idx }" > <span class="${aquaList.product_idx }">좋아요♥ ${aquaList.product_likecount }</span></a>
+                        	</c:otherwise>
+							</c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${aquaList.product_stock eq 0 }">
@@ -398,6 +438,7 @@
                       <ul class="aa-product-catg">
 <!-- fruity product item ------------------------------------------------------------------------------------------------------------------>
                        <c:forEach var="fruityList" items="${fruityList }">
+                       <input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${fruityList.product_idx }"><img src="<c:url value='/resources/upload/${fruityList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
@@ -407,7 +448,14 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                          <a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${fruityList.product_idx }">좋아요 수♡ ${fruityList.product_likecount }</span></a>
+                          <c:choose>
+								<c:when test="${wl.wishlistcount eq 0 }">
+                      				<a class="aa-add-to-cart-btn" id="${fruityList.product_idx }" > <span class="${fruityList.product_idx }">좋아요♡ ${fruityList.product_likecount }</span></a>
+								</c:when>
+							<c:otherwise>
+                      			<a class="aa-add-to-cart-btn" id="${fruityList.product_idx }" > <span class="${fruityList.product_idx }">좋아요♥ ${fruityList.product_likecount }</span></a>
+                        	</c:otherwise>
+							</c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${fruityList.product_stock eq 0 }">
@@ -460,6 +508,7 @@
                       <ul class="aa-product-catg">
 <!--  sitrus product item ------------------------------------------------------------------------------------------------------>
 						<c:forEach var="sitrusList" items="${sitrusList }">
+						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${sitrusList.product_idx }"><img src="<c:url value='/resources/upload/${sitrusList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
@@ -469,8 +518,14 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${sitrusList.product_idx }">좋아요 수♡ ${sitrusList.product_likecount }</span></a>
-<%--                             <a href="#" data-toggle="tooltip" data-placement="top" title="${sitrus.product_likecount }"><span class="fa fa-heart-o"></span></a> --%>
+                      		<c:choose>
+								<c:when test="${wl.wishlistcount eq 0 }">
+                      				<a class="aa-add-to-cart-btn" id="${sitrusList.product_idx }" > <span class="${sitrusList.product_idx }">좋아요♡ ${sitrusList.product_likecount }</span></a>
+								</c:when>
+							<c:otherwise>
+                      			<a class="aa-add-to-cart-btn" id="${sitrusList.product_idx }" > <span class="${sitrusList.product_idx }">좋아요♥ ${sitrusList.product_likecount }</span></a>
+                        	</c:otherwise>
+							</c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${sitrusList.product_stock eq 0 }">
@@ -524,6 +579,7 @@
                       <ul class="aa-product-catg">
 <!-- spices product item ---------------------------------------------------------------------------------------------------->
 						<c:forEach var="spicesList" items="${spicesList }">
+						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${spicesList.product_idx }"><img src="<c:url value='/resources/upload/${spicesList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
@@ -532,8 +588,14 @@
                               <span class="aa-product-price">$ ${spicesList.product_price }</span>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${spicesList.product_idx }">좋아요 수♡ ${spicesList.product_likecount }</span></a>
-<%--                             <a href="#" data-toggle="tooltip" data-placement="top" title="${sitrus.product_likecount }"><span class="fa fa-heart-o"></span></a> --%>
+                      		<c:choose>
+								<c:when test="${wl.wishlistcount eq 0 }">
+                      				<a class="aa-add-to-cart-btn" id="${spicesList.product_idx }" > <span class="${spicesList.product_idx }">좋아요♡ ${spicesList.product_likecount }</span></a>
+								</c:when>
+							<c:otherwise>
+                      			<a class="aa-add-to-cart-btn" id="${spicesList.product_idx }" > <span class="${spicesList.product_idx }">좋아요♥ ${spicesList.product_likecount }</span></a>
+                        	</c:otherwise>
+							</c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${spicesList.product_stock eq 0 }">
@@ -586,6 +648,7 @@
                       <ul class="aa-product-catg">
 <!-- modern product item ----------------------------------------------------------------------------------------------------->
 						<c:forEach var="modernList" items="${modernList }">
+						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${modernList.product_idx }"><img src="<c:url value='/resources/upload/${modernList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
@@ -595,8 +658,14 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish${modernList.product_idx }">좋아요 수♡ ${modernList.product_likecount }</span></a>
-<%--                             <a href="#" data-toggle="tooltip" data-placement="top" title="${sitrus.product_likecount }"><span class="fa fa-heart-o"></span></a> --%>
+                      		<c:choose>
+								<c:when test="${wl.wishlistcount eq 0 }">
+                      				<a class="aa-add-to-cart-btn" id="${modernList.product_idx }" > <span class="${modernList.product_idx }">좋아요♡ ${modernList.product_likecount }</span></a>
+								</c:when>
+							<c:otherwise>
+                      			<a class="aa-add-to-cart-btn" id="${modernList.product_idx }" > <span class="${modernList.product_idx }">좋아요♥ ${modernList.product_likecount }</span></a>
+                        	</c:otherwise>
+							</c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${modernList.product_stock eq 0 }">

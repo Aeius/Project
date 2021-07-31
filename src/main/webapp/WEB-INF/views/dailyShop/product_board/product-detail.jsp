@@ -38,9 +38,9 @@
 								},
 								success:function(wishCount){
 									if(heart == "offHeart"){
-										heart = "찜♡ "+ wishCount;
+										heart = "좋아요♡ "+ wishCount;
 									} else {
-										heart = "찜♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
+										heart = "좋아요♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
 									}
 									$('#wish').html(heart);
 								}	
