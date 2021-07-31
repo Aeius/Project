@@ -17,7 +17,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
-  <script type="text/javascript">
+  <script type="text/javascript"> 
   $(document).ready(function(){	 
 	  $('.aa-add-to-cart-btn').click(function(){
 		  var idx = $(this).attr("id")
