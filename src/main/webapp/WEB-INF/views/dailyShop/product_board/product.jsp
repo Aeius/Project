@@ -203,7 +203,7 @@
                               <figcaption>
                                <h4 class="aa-product-title"><a></a></h4>
                               <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
+                            </figcaption> 
                           </figure>                        
                         </li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
