@@ -183,10 +183,10 @@
 <!--                       <input type="button" class="aa-add-to-cart-btn" value="" name="wishlistbtn" id="wishlistbtn"> -->
 					<c:choose>
 						<c:when test="${wl.wishlistcount eq 0 }">
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish">찜♡ ${productBean.product_likecount }</span></a>
+                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" > <span id="wish">좋아요♡ ${productBean.product_likecount }</span></a>
 						</c:when>
 						<c:otherwise>
-                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" >  <span id="wish">찜♥ ${productBean.product_likecount }</span></a>
+                      		<a class="aa-add-to-cart-btn" id="wishlistbtn" >  <span id="wish">좋아요♥ ${productBean.product_likecount }</span></a>
                         </c:otherwise>
 					</c:choose>
 <!--                       <a class="aa-add-to-cart-btn" href="#">Compare</a>  href="pushWishList.sh?product_idx=${pd.product_idx }"-->

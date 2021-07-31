@@ -25,13 +25,27 @@ public class ProductController {
 	@Inject
 	private ProductService productService;
 	
-	@Inject WishListService wishListService;
+	@Inject 
+	private WishListService wishListService;
 
 //	가상주소  http://localhost:8080/myweb2/member/insert
 	
 	//-------------------------------------------------------------- 30ml 상품 리스트 --------------------------------------------------------
 	@RequestMapping(value = "/productList.sh", method = RequestMethod.GET)
 	public String list30(HttpSession session, Model model, HttpServletRequest request) {
+		
+		// 각 상품에 따른 좋아요 여부 체크
+		ArrayList<WishListBean> checkHeart = null;
+		if(session.getAttribute("member_email") != null){
+			String member_email = (String)session.getAttribute("member_email");
+			checkHeart = wishListService.checkHeart(member_email);
+		}
+		
+//		for(WishListBean o : checkHeart) {
+//			System.out.println("product_idx -" + o.getWishList_product_idx());
+//		}
+//		
+		model.addAttribute("checkHeart" ,checkHeart);
 		
 		// 파우더리 / 플로럴 / 우디 / 아쿠아 / 프루티 / 시트러스 / 스파이시 / 모던
 		// powdery / floral / woody / aqua / fruity / sitrus / spices / modern
@@ -64,6 +78,19 @@ public class ProductController {
 		@RequestMapping(value = "/productList50.sh", method = RequestMethod.GET)
 		public String list50(HttpSession session, Model model, HttpServletRequest request) {
 			
+			// 각 상품에 따른 좋아요 여부 체크
+			ArrayList<WishListBean> checkHeart = null;
+			if(session.getAttribute("member_email") != null){
+				String member_email = (String)session.getAttribute("member_email");
+				checkHeart = wishListService.checkHeart(member_email);
+			}
+			
+//			for(WishListBean o : checkHeart) {
+//				System.out.println("product_idx -" + o.getWishList_product_idx());
+//			}
+//			
+			model.addAttribute("checkHeart" ,checkHeart);
+			
 			// 파우더리 / 플로럴 / 우디 / 아쿠아 / 프루티 / 시트러스 / 스파이시 / 모던
 			// powdery / floral / woody / aqua / fruity / sitrus / spices / modern
 			// product의 정보 전체를 조회
@@ -91,7 +118,20 @@ public class ProductController {
 		}
 	//-------------------------------------------------------------- 검색 기능 -----------------------------------------------------------
 		@RequestMapping(value = "/search.sh", method = RequestMethod.GET)
-		public String search(HttpServletRequest request, Model model) {
+		public String search(HttpServletRequest request, Model model, HttpSession session) {
+			
+			// 각 상품에 따른 좋아요 여부 체크
+			ArrayList<WishListBean> checkHeart = null;
+			if(session.getAttribute("member_email") != null){
+				String member_email = (String)session.getAttribute("member_email");
+				checkHeart = wishListService.checkHeart(member_email);
+			}
+			
+//			for(WishListBean o : checkHeart) {
+//				System.out.println("product_idx -" + o.getWishList_product_idx());
+//			}
+//			
+			model.addAttribute("checkHeart" ,checkHeart);
 			
 			String search = request.getParameter("search");
 			// member 정보 전체를 조회

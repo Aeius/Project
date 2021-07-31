@@ -54,5 +54,10 @@ public class WishListServiceImpl implements WishListService {
 
 		}
 
+		@Override
+		public ArrayList<WishListBean> checkHeart(String member_email) {
+			return wishListDAO.checkHeart(member_email);
+		}
+
 
 }

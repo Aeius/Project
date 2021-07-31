@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.WishListBean;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.ProductService;
+import com.itwillbs.service.WishListService;
 
 @Controller
 public class MemberController {
@@ -27,11 +29,23 @@ public class MemberController {
 	
 	@Inject
 	private ProductService productService;
+	
+	@Inject
+	private WishListService wishListService;
 
 //	가상주소  http://localhost:8080/myweb2/member/insert
 	//---------------------------------------------------------------  메인 페이지 ------------------------------------------------------------
 	@RequestMapping(value = "/main.sh", method = RequestMethod.GET)
 	public String main(HttpSession session, Model model) {
+		
+		// 각 상품에 따른 좋아요 여부 체크
+		ArrayList<WishListBean> checkHeart = null;
+		if(session.getAttribute("member_email") != null){
+			String member_email = (String)session.getAttribute("member_email");
+			checkHeart = wishListService.checkHeart(member_email);
+		}
+		
+		model.addAttribute("checkHeart" ,checkHeart);
 		
 		ArrayList<ProductBean> bestList = productService.getProductBestList();
 		//Model mb.mb 데이터 담아 가기

@@ -19,4 +19,7 @@ public interface WishListService {
 
 	public ProductBean checkWishCount(int product_idx);
 
+	public ArrayList<WishListBean> checkHeart(String member_email);
+	
+
 }

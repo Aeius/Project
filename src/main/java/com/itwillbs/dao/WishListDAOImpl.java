@@ -54,6 +54,11 @@ public class WishListDAOImpl implements WishListDAO {
 	public ProductBean checkWishCount(int product_idx) {
 		return sqlSession.selectOne(namespace+".checkWishCount", product_idx);
 	}
+
+	@Override
+	public ArrayList<WishListBean> checkHeart(String member_email) {
+		return (ArrayList)sqlSession.selectList(namespace+".checkHeart", member_email);
+	}
 }
 
 

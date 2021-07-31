@@ -21,6 +21,8 @@
   <script type="text/javascript">
   $(document).ready(function(){	 
 	  $('.aa-add-to-cart-btn').click(function(){
+		  var idx = $(this).attr("id")
+		  var category = $(this).attr("name");
 		  $.ajax('<c:url value="/checkSession.sh"/>', {
 				data:{
 					member_email:$('#member_email').val()
@@ -31,14 +33,14 @@
 					} else {
 						$.ajax('<c:url value="/pushWishList.sh"/>',{ // 눌렀을때 insert delete 작동
 							data:{
-								product_idx:$('.aa-add-to-cart-btn').attr("id"),
+								product_idx:$('#'+idx).attr("id"),
 								member_email:$('#member_email').val()
 							},
 							success:function(rdata){
 							var heart = rdata;
 							$.ajax('<c:url value="/checkWishCount.sh"/>',{ // 위시리스트 카운트조회
 								data:{
-									product_idx:$('.aa-add-to-cart-btn').attr("id")
+									product_idx:$('#'+idx).attr("id")
 								},
 								success:function(wishCount){
 									if(heart == "offHeart"){
@@ -46,7 +48,7 @@
 									} else {
 										heart = "좋아요♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
 									}
-									$('.' + $('.aa-add-to-cart-btn').attr("id")).html(heart);
+									$('#best' + idx).html(heart);
 								}	
 							});		 
 							}
@@ -186,11 +188,29 @@
                               </span>
                          	  </figcaption>
                           </figure>                        
-                          <div class="aa-product-hvr-content">
-                         <a class="aa-add-to-cart-btn" id="${bestList.product_idx }" > <span class="${bestList.product_idx }">좋아요 수♡ ${bestList.product_likecount }</span></a>
-<%--                       		 <a href="pushWishList.sh?product_idx=${bestList.product_idx }" data-toggle="tooltip" data-placement="top" title="좋아요 ${bestList.product_likecount }"><span class="fa fa-heart-o"></span></a>  <!-- 찜하기 버튼 --> --%>
-<!--                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>   비교하기 버튼
-<!--                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>  <!--퀵뷰                      -->
+                         <div class="aa-product-hvr-content">
+                          <!-- 각 상품들에 대한 좋아요 체크 여부 확인 -->
+                          <c:set var="heart" scope="session" value="0" /> <!-- 체크전 0으로 설정(초기화) -->
+                          <c:forEach var="checkHeart"  items="${checkHeart}">
+                          <c:if test="${checkHeart.wishList_product_idx eq bestList.product_idx}" > <!-- 내 찜목록 중 해당 상품이 있으면 heart 1로 설정 -->
+							<c:set var="heart" scope="session" value="1" />
+							</c:if>
+                    	  </c:forEach>
+                    	  
+                    	  <c:choose>
+                    	  <c:when test="${heart eq '0' }" > <!-- heart 값이 0 이면 (좋아요 안눌린 상태) -->
+							<a class="aa-add-to-cart-btn" id="${bestList.product_idx }" name="best">
+							<span id="best${bestList.product_idx }">
+                      		좋아요♡ ${bestList.product_likecount }
+                      		</span></a>
+                          </c:when>
+                          <c:otherwise> <!-- heart 값이 0 이 아니면 (좋아요 눌린 상태) -->
+						   	<a class="aa-add-to-cart-btn" id="${bestList.product_idx }" name="best">
+                         	<span id="best${bestList.product_idx }">
+                          	좋아요♥ ${bestList.product_likecount }
+                          	</span></a>
+                          </c:otherwise>
+                    	  </c:choose>
                           </div>
                           
 <!--                       ---- product badge- -->

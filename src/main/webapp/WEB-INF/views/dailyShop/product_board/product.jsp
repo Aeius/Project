@@ -21,6 +21,7 @@
   $(document).ready(function(){	 
 	  $('.aa-add-to-cart-btn').click(function(){
 		  var idx = $(this).attr("id")
+		  var category = $(this).attr("name");
 		  $.ajax('<c:url value="/checkSession.sh"/>', {
 				data:{
 					member_email:$('#member_email').val()
@@ -46,7 +47,15 @@
 									} else {
 										heart = "좋아요♥ "+ wishCount; // 현재 카운트 리스트에 따른 하트와 카운트값 같이 출력
 									}
-									$('#' + idx).html(heart);
+									$('#all'+idx).html(heart); 
+									$('#powdery'+idx).html(heart);
+									$('#floral'+idx).html(heart);
+									$('#woody'+idx).html(heart);
+									$('#aqua'+idx).html(heart);
+									$('#fruity'+idx).html(heart);
+									$('#sitrus'+idx).html(heart);
+									$('#spices'+idx).html(heart);
+									$('#modern'+idx).html(heart);
 								}	
 							});		 
 							}
@@ -133,7 +142,28 @@
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
-                      			<a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span id="${allList.product_idx }">좋아요♡ ${allList.product_likecount }</span></a>
+                          <!-- 각 상품들에 대한 좋아요 체크 여부 확인 -->
+                          <c:set var="heart" scope="session" value="0" /> <!-- 체크전 0으로 설정(초기화) -->
+                          <c:forEach var="checkHeart"  items="${checkHeart}">
+                          <c:if test="${checkHeart.wishList_product_idx eq allList.product_idx}" > <!-- 내 찜목록 중 해당 상품이 있으면 heart 1로 설정 -->
+							<c:set var="heart" scope="session" value="1" />
+							</c:if>
+                    	  </c:forEach>
+                    	  
+                    	  <c:choose>
+                    	  <c:when test="${heart eq '0' }" > <!-- heart 값이 0 이면 (좋아요 안눌린 상태) -->
+							<a class="aa-add-to-cart-btn" id="${allList.product_idx }" name="all">
+							<span id="all${allList.product_idx }">
+                      		좋아요♡ ${allList.product_likecount }
+                      		</span></a>
+                          </c:when>
+                          <c:otherwise> <!-- heart 값이 0 이 아니면 (좋아요 눌린 상태) -->
+						   	<a class="aa-add-to-cart-btn" id="${allList.product_idx }" name="all">
+                         	<span id="all${allList.product_idx }">
+                          	좋아요♥ ${allList.product_likecount }
+                          	</span></a>
+                          </c:otherwise>
+                    	  </c:choose>
 <%--                        	 <a class="aa-add-to-cart-btn" id="${allList.product_idx }" > <span class="${allList.product_idx }">좋아요♡ ${allList.product_likecount }</span></a> --%>
 <%--                        <a href="pushWishList.sh?product_idx=${allList.product_idx }" data-toggle="tooltip" data-placement="top" title="좋아요 ${allList.product_likecount }"><span class="fa fa-heart-o"></span></a>  <!-- 찜하기 버튼 --> --%>
 <!--                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>   비교하기 버튼
@@ -162,7 +192,29 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      			<a class="aa-add-to-cart-btn" id="${powderyList.product_idx }" > <span id="${powderyList.product_idx }">좋아요♡ ${powderyList.product_likecount }</span></a>
+                      			<!-- 각 상품들에 대한 좋아요 체크 여부 확인 -->
+                          <c:set var="heart" scope="session" value="0" /> <!-- 체크전 0으로 설정(초기화) -->
+                          <c:forEach var="checkHeart"  items="${checkHeart}">
+                          <c:if test="${checkHeart.wishList_product_idx eq powderyList.product_idx}" > <!-- 내 찜목록 중 해당 상품이 있으면 heart 1로 설정 -->
+							<c:set var="heart" scope="session" value="1" />
+							</c:if>
+                    	  </c:forEach>
+                    	  
+                    	  <c:choose>
+                    	  <c:when test="${heart eq '0' }" > <!-- heart 값이 0 이면 (좋아요 안눌린 상태) -->
+							<a class="aa-add-to-cart-btn" id="${powderyList.product_idx }" name="powdery">
+							<span id="powdery${powderyList.product_idx }">
+                      		좋아요♡ ${powderyList.product_likecount }
+                      		</span></a>
+                          </c:when>
+                          <c:otherwise> <!-- heart 값이 0 이 아니면 (좋아요 눌린 상태) -->
+						   	<a class="aa-add-to-cart-btn" id="${powderyList.product_idx }" name="powdery">
+                         	<span id="powdery${powderyList.product_idx }">
+                          	좋아요♥ ${powderyList.product_likecount }
+                          	</span></a>
+                          </c:otherwise>
+                    	  </c:choose>
+                    	  
                           </div>
                           <!-- product badge -->
                           <c:if test="${powderyList.product_stock eq 0 }">
@@ -225,7 +277,29 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      			<a class="aa-add-to-cart-btn" id="${floralList.product_idx }" > <span id="${floralList.product_idx }">좋아요♡ ${floralList.product_likecount }</span></a>
+                      			<!-- 각 상품들에 대한 좋아요 체크 여부 확인 -->
+                          <c:set var="heart" scope="session" value="0" /> <!-- 체크전 0으로 설정(초기화) -->
+                          <c:forEach var="checkHeart"  items="${checkHeart}">
+                          <c:if test="${checkHeart.wishList_product_idx eq floralList.product_idx}" > <!-- 내 찜목록 중 해당 상품이 있으면 heart 1로 설정 -->
+							<c:set var="heart" scope="session" value="1" />
+							</c:if>
+                    	  </c:forEach>
+                    	  
+                    	  <c:choose>
+                    	  <c:when test="${heart eq '0' }" > <!-- heart 값이 0 이면 (좋아요 안눌린 상태) -->
+							<a class="aa-add-to-cart-btn" id="${floralList.product_idx }" name="floral">
+							<span id="floral${floralList.product_idx }">
+                      		좋아요♡ ${floralList.product_likecount }
+                      		</span></a>
+                          </c:when>
+                          <c:otherwise> <!-- heart 값이 0 이 아니면 (좋아요 눌린 상태) -->
+						   	<a class="aa-add-to-cart-btn" id="${floralList.product_idx }" name="floral">
+                         	<span id="floral${floralList.product_idx }">
+                          	좋아요♥ ${floralList.product_likecount }
+                          	</span></a>
+                          </c:otherwise>
+                    	  </c:choose>
+                    	  
                           </div>
                           <!-- product badge -->
                           <c:if test="${floralList.product_stock eq 0 }">
@@ -288,7 +362,28 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      			<a class="aa-add-to-cart-btn" id="${woodyList.product_idx }" > <span id="${woodyList.product_idx }">좋아요♡ ${woodyList.product_likecount }</span></a>
+                      			<!-- 각 상품들에 대한 좋아요 체크 여부 확인 -->
+                          <c:set var="heart" scope="session" value="0" /> <!-- 체크전 0으로 설정(초기화) -->
+                          <c:forEach var="checkHeart"  items="${checkHeart}">
+                          <c:if test="${checkHeart.wishList_product_idx eq woodyList.product_idx}" > <!-- 내 찜목록 중 해당 상품이 있으면 heart 1로 설정 -->
+							<c:set var="heart" scope="session" value="1" />
+							</c:if>
+                    	  </c:forEach>
+                    	  
+                    	  <c:choose>
+                    	  <c:when test="${heart eq '0' }" > <!-- heart 값이 0 이면 (좋아요 안눌린 상태) -->
+							<a class="aa-add-to-cart-btn" id="${woodyList.product_idx }" name="woody">
+							<span id="woody${woodyList.product_idx }">
+                      		좋아요♡ ${woodyList.product_likecount }
+                      		</span></a>
+                          </c:when>
+                          <c:otherwise> <!-- heart 값이 0 이 아니면 (좋아요 눌린 상태) -->
+						   	<a class="aa-add-to-cart-btn" id="${woodyList.product_idx }" name="woody">
+                         	<span id="woody${woodyList.product_idx }">
+                          	좋아요♥ ${woodyList.product_likecount }
+                          	</span></a>
+                          </c:otherwise>
+                    	  </c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${woodyList.product_stock eq 0 }">
@@ -351,7 +446,28 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      			<a class="aa-add-to-cart-btn" id="${aquaList.product_idx }" > <span id="${aquaList.product_idx }">좋아요♡ ${aquaList.product_likecount }</span></a>
+                      			<!-- 각 상품들에 대한 좋아요 체크 여부 확인 -->
+                          <c:set var="heart" scope="session" value="0" /> <!-- 체크전 0으로 설정(초기화) -->
+                          <c:forEach var="checkHeart"  items="${checkHeart}">
+                          <c:if test="${checkHeart.wishList_product_idx eq aquaList.product_idx}" > <!-- 내 찜목록 중 해당 상품이 있으면 heart 1로 설정 -->
+							<c:set var="heart" scope="session" value="1" />
+							</c:if>
+                    	  </c:forEach>
+                    	  
+                    	  <c:choose>
+                    	  <c:when test="${heart eq '0' }" > <!-- heart 값이 0 이면 (좋아요 안눌린 상태) -->
+							<a class="aa-add-to-cart-btn" id="${aquaList.product_idx }" name="aqua">
+							<span id="aqua${aquaList.product_idx }">
+                      		좋아요♡ ${aquaList.product_likecount }
+                      		</span></a>
+                          </c:when>
+                          <c:otherwise> <!-- heart 값이 0 이 아니면 (좋아요 눌린 상태) -->
+						   	<a class="aa-add-to-cart-btn" id="${aquaList.product_idx }" name="aqua">
+                         	<span id="aqua${aquaList.product_idx }">
+                          	좋아요♥ ${aquaList.product_likecount }
+                          	</span></a>
+                          </c:otherwise>
+                    	  </c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${aquaList.product_stock eq 0 }">
@@ -414,7 +530,28 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      			<a class="aa-add-to-cart-btn" id="${fruityList.product_idx }" > <span id="${fruityList.product_idx }">좋아요♡ ${fruityList.product_likecount }</span></a>
+                      			<!-- 각 상품들에 대한 좋아요 체크 여부 확인 -->
+                          <c:set var="heart" scope="session" value="0" /> <!-- 체크전 0으로 설정(초기화) -->
+                          <c:forEach var="checkHeart"  items="${checkHeart}">
+                          <c:if test="${checkHeart.wishList_product_idx eq fruityList.product_idx}" > <!-- 내 찜목록 중 해당 상품이 있으면 heart 1로 설정 -->
+							<c:set var="heart" scope="session" value="1" />
+							</c:if>
+                    	  </c:forEach>
+                    	  
+                    	  <c:choose>
+                    	  <c:when test="${heart eq '0' }" > <!-- heart 값이 0 이면 (좋아요 안눌린 상태) -->
+							<a class="aa-add-to-cart-btn" id="${fruityList.product_idx }" name="fruity">
+							<span id="fruity${fruityList.product_idx }">
+                      		좋아요♡ ${fruityList.product_likecount }
+                      		</span></a>
+                          </c:when>
+                          <c:otherwise> <!-- heart 값이 0 이 아니면 (좋아요 눌린 상태) -->
+						   	<a class="aa-add-to-cart-btn" id="${fruityList.product_idx }" name="fruity">
+                         	<span id="fruity${fruityList.product_idx }">
+                          	좋아요♥ ${fruityList.product_likecount }
+                          	</span></a>
+                          </c:otherwise>
+                    	  </c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${fruityList.product_stock eq 0 }">
@@ -477,7 +614,28 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      			<a class="aa-add-to-cart-btn" id="${sitrusList.product_idx }" > <span id="${sitrusList.product_idx }">좋아요♡ ${sitrusList.product_likecount }</span></a>
+                      			<!-- 각 상품들에 대한 좋아요 체크 여부 확인 -->
+                          <c:set var="heart" scope="session" value="0" /> <!-- 체크전 0으로 설정(초기화) -->
+                          <c:forEach var="checkHeart"  items="${checkHeart}">
+                          <c:if test="${checkHeart.wishList_product_idx eq sitrusList.product_idx}" > <!-- 내 찜목록 중 해당 상품이 있으면 heart 1로 설정 -->
+							<c:set var="heart" scope="session" value="1" />
+							</c:if>
+                    	  </c:forEach>
+                    	  
+                    	  <c:choose>
+                    	  <c:when test="${heart eq '0' }" > <!-- heart 값이 0 이면 (좋아요 안눌린 상태) -->
+							<a class="aa-add-to-cart-btn" id="${sitrusList.product_idx }" name="sitrus">
+							<span id="sitrus${sitrusList.product_idx }">
+                      		좋아요♡ ${sitrusList.product_likecount }
+                      		</span></a>
+                          </c:when>
+                          <c:otherwise> <!-- heart 값이 0 이 아니면 (좋아요 눌린 상태) -->
+						   	<a class="aa-add-to-cart-btn" id="${sitrusList.product_idx }" name="sitrus">
+                         	<span id="sitrus${sitrusList.product_idx }">
+                          	좋아요♥ ${sitrusList.product_likecount }
+                          	</span></a>
+                          </c:otherwise>
+                    	  </c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${sitrusList.product_stock eq 0 }">
@@ -538,9 +696,31 @@
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${spicesList.product_idx }">${spicesList.product_name }</a></h4>
                               <span class="aa-product-price">$ ${spicesList.product_price }</span>
+                            </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      			<a class="aa-add-to-cart-btn" id="${spicesList.product_idx }" > <span id="${spicesList.product_idx }">좋아요♡ ${spicesList.product_likecount }</span></a>
+                      			<!-- 각 상품들에 대한 좋아요 체크 여부 확인 -->
+                          <c:set var="heart" scope="session" value="0" /> <!-- 체크전 0으로 설정(초기화) -->
+                          <c:forEach var="checkHeart"  items="${checkHeart}">
+                          <c:if test="${checkHeart.wishList_product_idx eq spicesList.product_idx}" > <!-- 내 찜목록 중 해당 상품이 있으면 heart 1로 설정 -->
+							<c:set var="heart" scope="session" value="1" />
+							</c:if>
+                    	  </c:forEach>
+                    	  
+                    	  <c:choose>
+                    	  <c:when test="${heart eq '0' }" > <!-- heart 값이 0 이면 (좋아요 안눌린 상태) -->
+							<a class="aa-add-to-cart-btn" id="${spicesList.product_idx }" name="spices">
+							<span id="spices${spicesList.product_idx }">
+                      		좋아요♡ ${spicesList.product_likecount }
+                      		</span></a>
+                          </c:when>
+                          <c:otherwise> <!-- heart 값이 0 이 아니면 (좋아요 눌린 상태) -->
+						   	<a class="aa-add-to-cart-btn" id="${spicesList.product_idx }" name="spices">
+                         	<span id="spices${spicesList.product_idx }">
+                          	좋아요♥ ${spicesList.product_likecount }
+                          	</span></a>
+                          </c:otherwise>
+                    	  </c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${spicesList.product_stock eq 0 }">
@@ -603,7 +783,28 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      			<a class="aa-add-to-cart-btn" id="${modernList.product_idx }" > <span id="${modernList.product_idx }">좋아요♡ ${modernList.product_likecount }</span></a>
+                      			<!-- 각 상품들에 대한 좋아요 체크 여부 확인 -->
+                          <c:set var="heart" scope="session" value="0" /> <!-- 체크전 0으로 설정(초기화) -->
+                          <c:forEach var="checkHeart"  items="${checkHeart}">
+                          <c:if test="${checkHeart.wishList_product_idx eq modernList.product_idx}" > <!-- 내 찜목록 중 해당 상품이 있으면 heart 1로 설정 -->
+							<c:set var="heart" scope="session" value="1" />
+							</c:if>
+                    	  </c:forEach>
+                    	  
+                    	  <c:choose>
+                    	  <c:when test="${heart eq '0' }" > <!-- heart 값이 0 이면 (좋아요 안눌린 상태) -->
+							<a class="aa-add-to-cart-btn" id="${modernList.product_idx }" name="modern">
+							<span id="modern${modernList.product_idx }">
+                      		좋아요♡ ${modernList.product_likecount }
+                      		</span></a>
+                          </c:when>
+                          <c:otherwise> <!-- heart 값이 0 이 아니면 (좋아요 눌린 상태) -->
+						   	<a class="aa-add-to-cart-btn" id="${modernList.product_idx }" name="modern">
+                         	<span id="modern${modernList.product_idx }">
+                          	좋아요♥ ${modernList.product_likecount }
+                          	</span></a>
+                          </c:otherwise>
+                    	  </c:choose>
                           </div>
                           <!-- product badge -->
                           <c:if test="${modernList.product_stock eq 0 }">

@@ -53,5 +53,5 @@ public class WishListController {
 		return "redirect:/myWishList.sh";
 		
 	}
-			
+	
 }
