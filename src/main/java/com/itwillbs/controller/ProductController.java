@@ -31,10 +31,10 @@ public class ProductController {
 	
 	//-------------------------------------------------------------- 30ml 상품 리스트 --------------------------------------------------------
 	@RequestMapping(value = "/productList.sh", method = RequestMethod.GET)
-	public String list30(HttpSession session, Model model) {
+	public String list30(HttpSession session, Model model, HttpServletRequest request) {
 		
 		// 파우더리 / 플로럴 / 우디 / 아쿠아 / 프루티 / 시트러스 / 스파이시 / 모던
-		// powdery / floral / woody / aqua / fruity / sitrus / sprices / modern
+		// powdery / floral / woody / aqua / fruity / sitrus / spices / modern
 		// product의 정보 전체를 조회
 		ArrayList<ProductBean> allList = productService.getProductAllList30();
 		ArrayList<ProductBean> powderyList = productService.getProductPowderyList();
@@ -62,10 +62,10 @@ public class ProductController {
 	
 	//-------------------------------------------------------------- 50ml 상품 리스트 --------------------------------------------------------
 		@RequestMapping(value = "/productList50.sh", method = RequestMethod.GET)
-		public String list50(HttpSession session, Model model) {
+		public String list50(HttpSession session, Model model, HttpServletRequest request) {
 			
 			// 파우더리 / 플로럴 / 우디 / 아쿠아 / 프루티 / 시트러스 / 스파이시 / 모던
-			// powdery / floral / woody / aqua / fruity / sitrus / sprices / modern
+			// powdery / floral / woody / aqua / fruity / sitrus / spices / modern
 			// product의 정보 전체를 조회
 			ArrayList<ProductBean> allList = productService.getProductAllList50();
 			ArrayList<ProductBean> powderyList = productService.getProductPowderyList50();

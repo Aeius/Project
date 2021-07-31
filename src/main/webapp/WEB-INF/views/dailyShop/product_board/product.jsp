@@ -162,7 +162,7 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      				<a class="aa-add-to-cart-btn" id="${powderyList.product_idx }" > <span class="${powderyList.product_idx }">좋아요♡ ${powderyList.product_likecount }</span></a>
+                      			<a class="aa-add-to-cart-btn" id="${powderyList.product_idx }" > <span id="${powderyList.product_idx }">좋아요♡ ${powderyList.product_likecount }</span></a>
                           </div>
                           <!-- product badge -->
                           <c:if test="${powderyList.product_stock eq 0 }">
@@ -225,14 +225,7 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<c:choose>
-								<c:when test="${wl.wishlistcount eq 0 }">
-                      				<a class="aa-add-to-cart-btn" id="${floralList.product_idx }" > <span class="${floralList.product_idx }">좋아요♡ ${floralList.product_likecount }</span></a>
-								</c:when>
-							<c:otherwise>
-                      			<a class="aa-add-to-cart-btn" id="${floralList.product_idx }" > <span class="${floralList.product_idx }">좋아요♥ ${floralList.product_likecount }</span></a>
-                        	</c:otherwise>
-							</c:choose>
+                      			<a class="aa-add-to-cart-btn" id="${floralList.product_idx }" > <span id="${floralList.product_idx }">좋아요♡ ${floralList.product_likecount }</span></a>
                           </div>
                           <!-- product badge -->
                           <c:if test="${floralList.product_stock eq 0 }">
@@ -295,14 +288,7 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<c:choose>
-								<c:when test="${wl.wishlistcount eq 0 }">
-                      				<a class="aa-add-to-cart-btn" id="${woodyList.product_idx }" > <span class="${woodyList.product_idx }">좋아요♡ ${woodyList.product_likecount }</span></a>
-								</c:when>
-							<c:otherwise>
-                      			<a class="aa-add-to-cart-btn" id="${woodyList.product_idx }" > <span class="${woodyList.product_idx }">좋아요♥ ${woodyList.product_likecount }</span></a>
-                        	</c:otherwise>
-							</c:choose>
+                      			<a class="aa-add-to-cart-btn" id="${woodyList.product_idx }" > <span id="${woodyList.product_idx }">좋아요♡ ${woodyList.product_likecount }</span></a>
                           </div>
                           <!-- product badge -->
                           <c:if test="${woodyList.product_stock eq 0 }">
@@ -365,14 +351,7 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                          <c:choose>
-								<c:when test="${wl.wishlistcount eq 0 }">
-                      				<a class="aa-add-to-cart-btn" id="${aquaList.product_idx }" > <span class="${aquaList.product_idx }">좋아요♡ ${aquaList.product_likecount }</span></a>
-								</c:when>
-							<c:otherwise>
-                      			<a class="aa-add-to-cart-btn" id="${aquaList.product_idx }" > <span class="${aquaList.product_idx }">좋아요♥ ${aquaList.product_likecount }</span></a>
-                        	</c:otherwise>
-							</c:choose>
+                      			<a class="aa-add-to-cart-btn" id="${aquaList.product_idx }" > <span id="${aquaList.product_idx }">좋아요♡ ${aquaList.product_likecount }</span></a>
                           </div>
                           <!-- product badge -->
                           <c:if test="${aquaList.product_stock eq 0 }">
@@ -435,14 +414,7 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                          <c:choose>
-								<c:when test="${wl.wishlistcount eq 0 }">
-                      				<a class="aa-add-to-cart-btn" id="${fruityList.product_idx }" > <span class="${fruityList.product_idx }">좋아요♡ ${fruityList.product_likecount }</span></a>
-								</c:when>
-							<c:otherwise>
-                      			<a class="aa-add-to-cart-btn" id="${fruityList.product_idx }" > <span class="${fruityList.product_idx }">좋아요♥ ${fruityList.product_likecount }</span></a>
-                        	</c:otherwise>
-							</c:choose>
+                      			<a class="aa-add-to-cart-btn" id="${fruityList.product_idx }" > <span id="${fruityList.product_idx }">좋아요♡ ${fruityList.product_likecount }</span></a>
                           </div>
                           <!-- product badge -->
                           <c:if test="${fruityList.product_stock eq 0 }">
@@ -505,14 +477,7 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<c:choose>
-								<c:when test="${wl.wishlistcount eq 0 }">
-                      				<a class="aa-add-to-cart-btn" id="${sitrusList.product_idx }" > <span class="${sitrusList.product_idx }">좋아요♡ ${sitrusList.product_likecount }</span></a>
-								</c:when>
-							<c:otherwise>
-                      			<a class="aa-add-to-cart-btn" id="${sitrusList.product_idx }" > <span class="${sitrusList.product_idx }">좋아요♥ ${sitrusList.product_likecount }</span></a>
-                        	</c:otherwise>
-							</c:choose>
+                      			<a class="aa-add-to-cart-btn" id="${sitrusList.product_idx }" > <span id="${sitrusList.product_idx }">좋아요♡ ${sitrusList.product_likecount }</span></a>
                           </div>
                           <!-- product badge -->
                           <c:if test="${sitrusList.product_stock eq 0 }">
@@ -575,14 +540,7 @@
                               <span class="aa-product-price">$ ${spicesList.product_price }</span>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<c:choose>
-								<c:when test="${wl.wishlistcount eq 0 }">
-                      				<a class="aa-add-to-cart-btn" id="${spicesList.product_idx }" > <span class="${spicesList.product_idx }">좋아요♡ ${spicesList.product_likecount }</span></a>
-								</c:when>
-							<c:otherwise>
-                      			<a class="aa-add-to-cart-btn" id="${spicesList.product_idx }" > <span class="${spicesList.product_idx }">좋아요♥ ${spicesList.product_likecount }</span></a>
-                        	</c:otherwise>
-							</c:choose>
+                      			<a class="aa-add-to-cart-btn" id="${spicesList.product_idx }" > <span id="${spicesList.product_idx }">좋아요♡ ${spicesList.product_likecount }</span></a>
                           </div>
                           <!-- product badge -->
                           <c:if test="${spicesList.product_stock eq 0 }">
@@ -645,14 +603,7 @@
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
-                      		<c:choose>
-								<c:when test="${wl.wishlistcount eq 0 }">
-                      				<a class="aa-add-to-cart-btn" id="${modernList.product_idx }" > <span class="${modernList.product_idx }">좋아요♡ ${modernList.product_likecount }</span></a>
-								</c:when>
-							<c:otherwise>
-                      			<a class="aa-add-to-cart-btn" id="${modernList.product_idx }" > <span class="${modernList.product_idx }">좋아요♥ ${modernList.product_likecount }</span></a>
-                        	</c:otherwise>
-							</c:choose>
+                      			<a class="aa-add-to-cart-btn" id="${modernList.product_idx }" > <span id="${modernList.product_idx }">좋아요♡ ${modernList.product_likecount }</span></a>
                           </div>
                           <!-- product badge -->
                           <c:if test="${modernList.product_stock eq 0 }">
