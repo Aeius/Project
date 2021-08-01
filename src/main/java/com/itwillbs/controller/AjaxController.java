@@ -198,6 +198,7 @@ public class AjaxController {
 			int product_idx = Integer.parseInt(request.getParameter("product_idx"));
 			int quantity = Integer.parseInt(request.getParameter("quantity"));
 			System.out.println(member_email + product_idx + quantity);
+//			System.out.println(member_email + product_idx + quantity);
 			
 			// BasketBean 객체 생성해서 바로 저장
 			BasketBean basketBean = new BasketBean(member_email, product_idx, quantity);

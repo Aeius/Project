@@ -33,5 +33,7 @@ public interface MemberDAO {
    //관리자 페이지 : 구독자만 관리
    public List<MemberBean> getSubMemberList();
 
+   public CouponBean getCouponInfo_CouponCode(String inputCouponCode);
+
 
 }

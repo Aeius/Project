@@ -97,6 +97,12 @@ public class MemberDAOImpl implements MemberDAO{
       System.out.println(map);
       sqlSession.update(namespace + ".updateMemberCoupon", map);
    }
+   
+    //특정 쿠폰 정보 조회
+	@Override
+	public CouponBean getCouponInfo_CouponCode(String coupon_name) {
+		return sqlSession.selectOne(namespace + ".getCouponInfo_CouponCode", coupon_name);
+	}
 
    
    	//관리자 페이지 : 구독자만 관리

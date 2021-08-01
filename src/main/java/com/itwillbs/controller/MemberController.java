@@ -211,9 +211,13 @@ public class MemberController {
 	//---------------------------------------------------------------  쿠폰 등록 ------------------------------------------------------------
 	@RequestMapping(value = "/couponPro.sh", method = RequestMethod.POST)
 	public String couponPro(HttpSession session, HttpServletRequest request, Model model) {
+		// 입력 코드 가져오기 
 		String inputCouponCode = request.getParameter("inputCouponCode");
+		// 입력한 고객 email 가져오기 
 		String member_email = (String)session.getAttribute("member_email");
+		// registMemberCoupon() 메서드 호출
 		boolean isRegisted = memberService.registMemberCoupon(inputCouponCode, member_email);
+		// 리턴되는 결과에 따라 등록, 등록실패 판별 후 메세지 출력
 		if(!isRegisted) {
 			model.addAttribute("msg","쿠폰 등록 실패.");
 			return "/dailyShop/member/msg";

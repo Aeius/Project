@@ -65,6 +65,10 @@
      SELECT * FROM coupon WHERE coupon_idx = #{coupon_idx}
   </select>
   
+  <select id="getCouponInfo_CouponCode" resultType="com.itwillbs.domain.CouponBean">
+     SELECT * FROM coupon WHERE coupon_name = #{coupon_name}
+  </select>
+  
   <select id="getCouponList" resultType="com.itwillbs.domain.CouponBean">
      select * from coupon
   </select>

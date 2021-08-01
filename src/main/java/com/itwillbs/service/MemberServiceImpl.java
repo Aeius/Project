@@ -82,15 +82,21 @@ public class MemberServiceImpl implements MemberService {
       System.out.println("userCheck");
       return memberDAO.emailCheck(mb);
    }
-
+   
+ //---------------------------------------------------------------  고객 쿠폰 리스트 조회 ------------------------------------------------------------
    @Override
    public ArrayList<CouponBean> getMemberCouponList(String member_email) {
+	  // 쿠폰 리스트를 담을 객체 선언
+	  ArrayList<CouponBean> couponInfoList = null;
+	  // 쿠폰 리스트 가져오기
       String memberCouponList = memberDAO.getMemberCouponList(member_email);
-      ArrayList<CouponBean> couponInfoList = null;
-
+      
       if(memberCouponList != null) {
+    	  // 고객 쿠폰 정보를 가져왔을 때 '/'로 분리
     	  String[] arrCouponList = memberCouponList.split("/");
+    	  // 쿠폰 리스트를 담을 객체 생성
     	  couponInfoList = new ArrayList<CouponBean>();
+    	  // 쿠폰 정보 조회해서 쿠폰 리스트 객체에 담기
     	  for(int i = 0; i < arrCouponList.length; i++) {
     		  couponInfoList.add(memberDAO.getCouponInfo(Integer.parseInt(arrCouponList[i])));
 //         System.out.println(couponInfoList.toString());
@@ -99,24 +105,101 @@ public class MemberServiceImpl implements MemberService {
       return couponInfoList;
    }
    
-   // 쿠폰등록
-   @Override
-   public boolean registMemberCoupon(String inputCouponCode, String member_email) {
-      System.out.println("MemberService - registMemberCoupon");
-      boolean isRegisted = false;
-      
-      List<CouponBean> couponList = memberDAO.getCouponList();
-      System.out.println(couponList);
-      
-      for(CouponBean couponBean : couponList) {
-         if(inputCouponCode.equals(couponBean.getCoupon_name())) {
-            memberDAO.registMemberCoupon(member_email, couponBean.getCoupon_idx());
-            isRegisted = true;
-         }
-      }
-      return isRegisted;
-   }
-
+//--------------------------------------------------------------- 쿠폰 등록 ------------------------------------------------------------
+//	@Override
+//	public boolean registMemberCoupon(String inputCouponCode, String member_email) {
+//		System.out.println("MemberService - registMemberCoupon");
+//		boolean isRegisted = false;
+//		ArrayList<CouponBean> couponInfoList = null;
+//	    
+//		// 쿠폰 테이블 조회
+//		List<CouponBean> couponList = memberDAO.getCouponList();
+////		System.out.println(couponList);
+//		
+//		// 쿠폰 테이블을 하나씩 조회하는 반복문
+//		for(CouponBean couponBean : couponList) {
+//			// 입력 쿠폰 코드와 쿠폰 테이블에 등록된 쿠폰 코드가 일치하는 경우
+//			if(inputCouponCode.equals(couponBean.getCoupon_name())) {
+//				// 고개 쿠폰 정보 조회
+//				String memberCouponList = memberDAO.getMemberCouponList(member_email);
+//			      // 고객 쿠폰 정보가 존재할 경우
+//			      if(memberCouponList != null) {
+//			    	  // 고객 쿠폰 정보를 '/'로 분리
+//			    	  String[] arrMemberCoupon_idxList = memberCouponList.split("/");
+//			    	  // 
+//			    	  for(String memberCoupon_idx : arrMemberCoupon_idxList) {
+//			    		  if(memberCoupon_idx.equals(Integer.toString(couponBean.getCoupon_idx()))) {
+//			    			  return isRegisted;
+//			    		  } else {
+//			    			  memberDAO.registMemberCoupon(member_email, couponBean.getCoupon_idx());
+//			    		  }
+////			         System.out.println(couponInfoList.toString());
+//			    	  }
+//			      } else { // 고개 쿠폰 정보가 존재하지 않을 경우
+//			    	  // 쿠폰 등록
+//			    	  memberDAO.registMemberCoupon(member_email, couponBean.getCoupon_idx());
+//			      }
+//				isRegisted = true;
+//			}
+//		}
+//		return isRegisted;
+//	}
+	
+//--------------------------------------------------------------- 쿠폰 등록 ------------------------------------------------------------
+	@Override
+	public boolean registMemberCoupon(String inputCouponCode, String member_email) {
+		// 등록 여부 판별할 boolean 객체 
+		boolean isRegisted = false;
+		int duplicateCount = 0;
+		
+		// 입력 문자열에 대한 쿠폰 정보 가져오기
+		CouponBean couponBean = memberDAO.getCouponInfo_CouponCode(inputCouponCode);
+		if(couponBean == null) { // 쿠폰 정보가 없을 때 = 문자열 일치하지 않을 때
+			System.out.println("registMemberCoupon - 문자열 불일치");
+			return isRegisted; // 등록 불가
+		} else { // 입력 문자열과 일치하는 쿠폰 정보가 있을 때 = 문자열 일치
+			System.out.println("registMemberCoupon - 문자열 일치");
+			if(couponBean.isCoupon_status()) {
+				// 고객 쿠폰 정보 가져오기
+				String memberCouponList = memberDAO.getMemberCouponList(member_email);
+				
+				if(memberCouponList == null) { // 고객 쿠폰 정보가 없음 = 등록된 쿠폰 없음
+					System.out.println("registMemberCoupon - 고객 쿠폰 없음");
+					memberDAO.registMemberCoupon(member_email, couponBean.getCoupon_idx());
+					isRegisted = true;
+					return isRegisted;
+					
+				} else { // 고객 쿠폰 정보가 있음 = 등록된 쿠폰과 등록할 쿠폰 비교 필요
+					System.out.println("registMemberCoupon - 고객 쿠폰 있음");
+					
+					// 고객 쿠폰 정보 분리
+					String[] arrMemberCoupon_idxList = memberCouponList.split("/");
+					
+					// 하나씩 비교
+					for(String memberCoupon_idx : arrMemberCoupon_idxList) {
+						if(memberCoupon_idx.equals(Integer.toString(couponBean.getCoupon_idx()))) {
+							// 고객 쿠폰 정보의 쿠폰 번호와 입력한 쿠폰 코드의 번호가 일치할 때
+							System.out.println("registMemberCoupon - 고객 일치하는 쿠폰 있음");
+							// 중복 숫자를 체크하는 변수 1 증가
+							duplicateCount++;
+						}
+					}
+					// 중복 값 체크하는 변수가 1 이상일 때 = 중복이 있음
+					if(duplicateCount > 0) {
+						System.out.println("중복쿠폰 있음 : " + duplicateCount);
+						return isRegisted; // 등록 불가 -> false 리턴
+					} else {
+						// 중복 값이 0일 떄 = 중복 없음
+						System.out.println("중복쿠폰 없음 : " + duplicateCount);
+						memberDAO.registMemberCoupon(member_email, couponBean.getCoupon_idx());
+						isRegisted = true;
+					}
+				}
+			}
+		}
+		return isRegisted;	
+	}
+				
 // ---------------------------------------------   이메일 보내기 -----------------------------------------------   
    @Override
    public void sendWelcomeMail(MemberBean memberBean) {
