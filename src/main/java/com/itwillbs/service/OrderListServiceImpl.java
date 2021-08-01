@@ -23,12 +23,15 @@ public class OrderListServiceImpl implements OrderListService {
 	// xml에서 객체생성한것을 set 메서드를 통해서 부모인터페이스 멤버변수에 객체 생성한 것을 자동으로 전달 받기(Inject 사용)
 	@Inject
 	private OrderListDAO orderListDAO;
+	
+	// 리뷰 리스트 출력
 	@Override
 	public ArrayList<OrderListBean> getOrderList(String order_member_email) {
 		System.out.println("OrderListServiceImpl - getOrderList");
 		return orderListDAO.getOrderList(order_member_email);
 		
 	}
+
 	@Override
 	public OrderListBean getOrderMember(int order_idx) {
 		System.out.println("OrderListServiceImpl - getOrderMember");
@@ -57,12 +60,14 @@ public class OrderListServiceImpl implements OrderListService {
 		System.out.println("ReviewServiceImpl-getOrderListCount");
 		return orderListDAO.getOrderListCount(order_member_email);
 	}
-
+	
 	@Override
-	public OrderListBean getReviewFind(String review_email) {
+	public ArrayList<OrderListBean> getReviewFind(String review_email) {
 		System.out.println("OrderListServiceImpl - getReviewFind");
 		return orderListDAO.getReviewFind(review_email);
 	}
+
+
 	
 //	@Override
 //	public OrderListBean getReviewCheck(String review_email, int review_idx) {

@@ -52,17 +52,20 @@ public class ReviewController {
 	
 // -----------------------------------리뷰 작성---------------------------------------------------
 	@RequestMapping(value = "/reviewForm.sh", method = RequestMethod.GET)
-	public String review(@RequestParam("product_idx") int product_idx, HttpSession session, Model model) {
+	public String review(@RequestParam("product_idx") int product_idx, @RequestParam("order_idx")int order_idx, HttpSession session, Model model) {
 		String review_email = (String)session.getAttribute("member_email");
 		System.out.println(review_email);
+		System.out.println(product_idx);
+		System.out.println(order_idx);
 		model.addAttribute("review_email", review_email);
 		model.addAttribute("product_idx", product_idx);
+		model.addAttribute("order_idx", order_idx);
 		return "/dailyShop/member/reviewForm";
 	}
 
 // -----------------------------------리뷰 등록 처리---------------------------------------------------
 	@RequestMapping(value = "/reviewWritePro.sh", method = RequestMethod.POST)
-	public String reviewWritePro(MultipartHttpServletRequest  request, @RequestParam("review_image") MultipartFile[] file, HttpServletResponse response ) throws Exception{
+	public String reviewWritePro(MultipartHttpServletRequest  request,int review_order_idx, @RequestParam("review_image") MultipartFile[] file, HttpServletResponse response ) throws Exception{
 		// 여러 파일 MultipartHttpServletRequest, @RequestParam MultipartFile[] 배열
 			
 //		System.out.println(reviewBean.getReview_email());
@@ -80,6 +83,7 @@ public class ReviewController {
 		reviewBean.setReview_subject(request.getParameter("review_subject"));
 		reviewBean.setReview_content(request.getParameter("review_content"));
 		reviewBean.setReview_star(Integer.parseInt(request.getParameter("review_star")));
+		reviewBean.setReview_order_idx(Integer.parseInt(request.getParameter("review_order_idx")));
 		
 		System.out.println(file.length);
 		System.out.println(reviewBean.getReview_image());
@@ -158,20 +162,20 @@ public class ReviewController {
 				}
 		
 		// 리뷰 수정창 닫고 수정 알림 부분
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script> "
-				+ "alert('리뷰 수정 완료');"
-				+ "window.opener.document.location.reload();"
-				+ "window.close();"
-				+ "</script>");
-		out.flush();
+//		response.setContentType("text/html; charset=UTF-8");
+//		PrintWriter out = response.getWriter();
+//		out.println("<script> "
+//				+ "alert('리뷰 수정 완료');"
+//				+ "window.opener.document.location.reload();"
+//				+ "window.close();"
+//				+ "</script>");
+//		out.flush();
 				
 				
 		reviewService.updateReview(reviewBean);
 		model.addAttribute("reviewBean", reviewBean);
 		
-		return "redirect:/reviewList.sh";
+		return "/dailyShop/member/reviewUpdatePop";
 	}
 	
 	// -----------------------------------리뷰 삭제---------------------------------------------------		
@@ -229,7 +233,7 @@ public class ReviewController {
 		model.addAttribute("ratingOptions", ratingOptions);
 		// 페이지 정보, 리뷰 정보 가져 가기
 		model.addAttribute("reviewList" , reviewList);
-//		model.addAttribute("pb",pb);
+		model.addAttribute("pb",pb);
 		
 		return "/dailyShop/member/myReview";
 	}

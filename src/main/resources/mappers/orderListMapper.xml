@@ -4,72 +4,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.mapper.OrderListMapper">
 
-<!-- 	<select id="getOrderList" resultType="com.itwillbs.domain.OrderListBean" > -->
-<!-- 		SELECT  -->
-<!-- 			product_name, -->
-<!-- 		    product_idx, -->
-<!-- 		    order_detail_order_idx, -->
-<!-- 		    order_status -->
-			
-<!-- 			FROM order_detail, product, orderlist -->
-<!-- 			WHERE  -->
-<!-- 			product_idx = order_detail_product_idx  -->
-<!--             and order_detail_order_idx = order_idx  -->
-<!--             and order_member_email = #{order_member_email} -->
-<!-- 	</select> -->
-
 	<select id="getOrderList" resultType="com.itwillbs.domain.OrderListBean" >
-		SELECT 
-			product_name,
-		    product_idx,
-		    order_detail_order_idx,
-		    order_status,
-		    review_product_idx
-			
-			FROM order_detail, product, orderlist, review
-			WHERE 
-			product_idx = order_detail_product_idx 
-			and review_product_idx = product_idx
-            and order_detail_order_idx = order_idx 
-            and order_member_email = #{order_member_email}
+	SELECT 
+		o.order_idx,p.product_idx, p.product_name, o.order_status,d.order_detail_return_check, coalesce(r.review_idx, 0) 'review_idx'
+		from orderlist o 
+		inner join order_detail d
+		on o.order_idx = d.order_detail_order_idx
+		inner join product p 
+		on d.order_detail_product_idx = p.product_idx
+		left outer join review r
+		on o.order_idx = r.review_order_idx and d.order_detail_product_idx = r.review_product_idx
+		where o.order_member_email = #{order_member_email}
 	</select>
 	
-		<select id="getOrderListPage" resultType="com.itwillbs.domain.OrderListBean" >
-		SELECT 
-			product_name,
-		    product_idx,
-		    order_detail_order_idx,
-		    order_status,
-		    review_product_idx
-			
-			FROM order_detail, product, orderlist, review
-			WHERE 
-			product_idx = order_detail_product_idx 
-			and review_product_idx = product_idx
-            and order_detail_order_idx = order_idx 
-            and order_member_email = #{order_member_email}
+	<select id="getOrderListPage" resultType="com.itwillbs.domain.OrderListBean" >
+	SELECT 
+		o.order_idx,p.product_idx, p.product_name, o.order_status,d.order_detail_return_check, coalesce(r.review_idx, 0) 'review_idx'
+		from orderlist o 
+		inner join order_detail d
+		on o.order_idx = d.order_detail_order_idx
+		inner join product p 
+		on d.order_detail_product_idx = p.product_idx
+		left outer join review r
+		on o.order_idx = r.review_order_idx and d.order_detail_product_idx = r.review_product_idx
+		where o.order_member_email = #{order_member_email}
 		    
-		    order by order_idx desc limit #{startRow},#{pageSize}
+		order by order_idx desc limit #{startRow},#{pageSize}
 	</select>
 	
-<!-- 	<select id="getOrderListPage" resultType="com.itwillbs.domain.OrderListBean" > -->
-<!-- 		SELECT  -->
-<!-- 			product_name, -->
-<!-- 		    product_idx, -->
-<!-- 		    order_detail_order_idx, -->
-<!-- 		    order_status -->
-			
-<!-- 			FROM order_detail, product, orderlist -->
-<!-- 			WHERE  -->
-<!-- 			product_idx = order_detail_product_idx  -->
-<!--             and order_detail_order_idx = order_idx  -->
-<!--             and order_member_email = #{order_member_email} -->
-		    
-<!-- 		    order by order_idx desc limit #{startRow},#{pageSize} -->
-<!-- 	</select> -->
 	
 	<select id="getOrderListCount" resultType="java.lang.Integer">
-  		select count(*) FROM orderlist, order_detail, product
+  		SELECT count(*) FROM orderlist, order_detail, product
 			WHERE 
 			order_idx = order_detail_order_idx
 		    AND
@@ -80,12 +45,6 @@
 		SELECT * FROM orderlist WHERE order_idx = #{order_idx}
 	</select>
 	
-<!-- 	<select id="getReviewCheck" resultType="com.itwillbs.domain.OrderListBean" > -->
-<!-- 	select review_idx, review_product_idx, product_idx  -->
-<!-- 	from review, product  -->
-<!-- 	where review_email = #{review_email} -->
-<!-- 	and product_idx = review_product_idx	 -->
-<!-- 	</select> -->
 
 	<select id="getReviewCheck" resultType="com.itwillbs.domain.OrderListBean" >
 		select review_idx, review_product_idx, product_idx 
@@ -95,13 +54,6 @@
 		and review_idx = #{review_idx}
 	</select>
 	
-<!-- 	<select id="getReviewCheck1" resultType="com.itwillbs.domain.OrderListBean" > -->
-<!-- 		select review_idx, review_product_idx, product_idx  -->
-<!-- 		from review, product  -->
-<!-- 		where review_email = #{review_email} -->
-<!-- 		and product_idx = review_product_idx  -->
-<!-- 		and review_idx = #{review_idx} -->
-<!-- 	</select> -->
 	
 	<select id="getReviewFind" resultType="com.itwillbs.domain.OrderListBean" >
 		select review_idx
@@ -111,9 +63,14 @@
 	
 	
 	<update id="updateOrder">
-		UPDATE orderlist SET
-			order_status = #{order_status}
-		WHERE order_idx = #{order_idx}
+		update order_detail od,
+			(select product_idx,order_detail_order_idx,order_detail_product_idx
+			from product, order_detail
+			where order_detail_order_idx = #{order_idx} and product_idx = #{product_idx}
+			and product_idx = order_detail_product_idx) product
+  		set od.order_detail_return_check = #{order_detail_return_check}
+  		where od.order_detail_order_idx = product.order_detail_order_idx 
+  		and od.order_detail_product_idx = product.order_detail_product_idx;
 	</update>
 	
 </mapper>

@@ -22,7 +22,7 @@ public interface OrderListService {
 
 //	public OrderListBean getReviewCheck(String review_email, int review_idx);
 
-	public OrderListBean getReviewFind(String review_email);
+	ArrayList<OrderListBean> getReviewFind(String review_email);
 
 //	public OrderListBean getReviewCheck1(int review_idx);
 

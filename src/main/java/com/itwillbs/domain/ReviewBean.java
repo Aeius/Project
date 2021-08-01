@@ -22,7 +22,14 @@ public class ReviewBean {
 	private int order_idx;
 	private String order_status;
 	private int product_idx;
+	private int review_order_idx;
 	
+	public int getReview_order_idx() {
+		return review_order_idx;
+	}
+	public void setReview_order_idx(int review_order_idx) {
+		this.review_order_idx = review_order_idx;
+	}
 	public String getProduct_name() {
 		return product_name;
 	}

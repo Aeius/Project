@@ -18,12 +18,12 @@
     
 
   		<script type="text/javascript">
-		
-		function review(product_idx){
+  	//-------------------------------------------------------------- 리뷰작성 window창 생성 --------------------------------------------------------
+		function review(product_idx,order_idx){
 			
-			// 댓글 번호를 새로운 윈도우 창으로 가져가 댓글 번호 정보 비교
+			
 				window.name="parentForm"
-				document.open("<c:url value='/reviewForm.sh?product_idx="+product_idx+"'/>","replyForm","width=720, height=800");
+				document.open("<c:url value='/reviewForm.sh?product_idx="+product_idx+"&order_idx="+order_idx+"'/>","replyForm","width=720, height=800");
 				}
 		</script>
 
@@ -73,43 +73,31 @@
                     <tbody>
                      <c:forEach var="orderList" items="${orderList}">
                       <tr>
-                        <td>${orderList.order_detail_order_idx}</td>
+                        <td>${orderList.order_idx}</td>
                         <td>${orderList.product_name}</td>
                         <td>${orderList.order_status}</td>
                         <td>
-<%--                         <input type="button" value="${orderList.order_status}"> --%>
-                        
-<%--                         <input type="button" value="${orderList.review_product_idx}" > --%>
-<%--                           <input type="button" value="${orderList.product_idx}" > --%>
-                          
+<%--         				<input type="button" value="${orderList.review_idx}" > --%>
+        				
                        <c:set var="order_status" value="${orderList.order_status}" />
                        <c:set var="product_idx" value="${orderList.product_idx}" />
-                       <c:set var="review_product_idx" value="${orderList.review_product_idx}" />
-<%--                        <c:choose> --%>
-<%--                        	<c:when test="${order_status eq '배송완료'}"> --%>
-<%--                        	 <input type="button" value="리뷰쓰기" onclick="review( ${orderList.product_idx} )"> --%>
-<%--                        	</c:when> --%>
+                       <c:set var="review_idx" value="${orderList.review_idx}" />
+                        <c:set var="order_detail_return_check" value="${orderList.order_detail_return_check}" />
                        
-<%--                        	<c:when test="${not empty review_dup}"> --%>
-<%--                        	 <input type="button" value="리뷰작성완료" onclick="review( ${orderList.product_idx} )"> --%>
-<%--                        	</c:when> --%>
-<%--                        </c:choose> --%>
-                       
-<%--                        <c:if test="${not empty review_idx and order_status eq '배송완료'}"> --%>
-<!--                         <input type="button" value="리뷰작성완료" > -->
-<%--                        </c:if> --%>
-                      
-                       <c:if test="${order_status eq '배송완료' and product_idx ne review_product_idx}">
-                        <input type="button" value="리뷰쓰기" onclick="review( ${orderList.product_idx} )">
-                       </c:if>
-                       
-                        <c:if test="${product_idx eq review_product_idx}">
-                        <input type="button" value="리뷰등록완료">
+                       <c:if test="${review_idx >0 and order_status eq '배송완료'}">
+                        <input type="button" value="리뷰작성완료" >
                        </c:if>
                       
-                        
-						 <c:if test="${order_status ne '반품신청'}">
-                        <input type="button" value="반품신청" onclick="location.href='<c:url value='/orderReturn.sh?order_idx=${orderList.order_detail_order_idx}'/>'">
+                       <c:if test="${order_status eq '배송완료' and review_idx == 0}">
+                        <input type="button" value="리뷰쓰기" onclick="review( ${orderList.product_idx},${orderList.order_idx} )">
+                       </c:if>
+
+						 <c:if test="${empty order_detail_return_check and order_detail_return_check ne '반품신청'}">
+                        <input type="button" value="반품신청" onclick="location.href='<c:url value='/orderReturn.sh?order_idx=${orderList.order_idx}&product_idx=${orderList.product_idx}'/>'">
+                       </c:if>
+                       
+                       <c:if test="${order_detail_return_check eq '반품신청'}">
+                        <input type="button" value="반품신청완료" >
                        </c:if>
                         </td>
                       </tr>
@@ -119,6 +107,7 @@
                     </tbody>
                   </table>
                   </form>
+                  <!-- 페이징 처리 -->
         		 <div class="aa-blog-archive-pagination" align="center">
                       <nav>
                         <ul class="pagination">

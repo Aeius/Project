@@ -87,6 +87,7 @@
                  
                  <form action='<c:url value="reviewWritePro.sh " />' id="fr" class="aa-login-form" method="post" enctype="multipart/form-data">
                  	<input type="hidden" name="review_product_idx" value="${product_idx}">
+	  				<input type="hidden" name="review_order_idx" value="${order_idx}">
 	  				
                    <label for="name">평점</label>
 <!--                    <div> -->
@@ -105,7 +106,7 @@
 					  <label for="3-stars" class="star">&#9733;</label>
 					  <input type="radio" id="2-stars" name="review_star" value="2" />
 					  <label for="2-stars" class="star">&#9733;</label>
-					  <input type="radio" id="1-star" name="review_star" value="1" />
+					  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
 					  <label for="1-star" class="star">&#9733;</label>
 				
 <!--                      <input type="text" name="review_star"> -->

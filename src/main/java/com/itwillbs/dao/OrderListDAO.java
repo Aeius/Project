@@ -21,7 +21,7 @@ public interface OrderListDAO {
 	public Integer getOrderListCount(String order_member_email);
 
 
-	OrderListBean getReviewFind(String review_email);
+	ArrayList<OrderListBean> getReviewFind(String review_email);
 
 //	OrderListBean getReviewCheck(String review_email, int review_idx);
 

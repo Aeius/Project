@@ -13,7 +13,8 @@
   	review_image,
   	review_image2,
   	review_star,
-  	review_date
+  	review_date,
+  	review_order_idx
   	) 
   	
   	values(
@@ -24,7 +25,8 @@
   	#{review_image},
   	#{review_image2},
   	#{review_star},
-  	#{review_date}
+  	#{review_date},
+  	#{review_order_idx}
   	)
   </insert>
   
