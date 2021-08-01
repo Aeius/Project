@@ -49,26 +49,8 @@
 <!-- ajax -->
 <script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script>
 <script type="text/javascript">
-// 	$(document).ready(function() {
-// 		$('.removeBasket').click(function() {
-// 			if(confirm("정말 삭제하시겠습니까?")) {
-// 				$.ajax({
-// 					url: 'deleteBasket.sh',
-// 					data: {product_idx : $('#product_idx').val(),
-// 						   member_email : $('#member_email').val()},
-// 					success:function(data){
-// 						if(data == "deletedSuccess") {
-// 							history.go(0);
-// 						}
-// 					}
-// 				}); // end ajax
-// 			}
-// 		});
-// 	});
-
-
-// -------------------------------- 장바구니 삭제 --------------------------------
 	$(document).ready(function() {
+// -------------------------------- 장바구니 삭제 --------------------------------
 		$('.remove').click(function() {
 // 			var check = $(this).attr("name");
 // 			alert(check);
@@ -85,6 +67,41 @@
 				}); // end ajax
 			}
 		});
+		
+// -------------------------------- 수량 변경 -> 가격 변경 --------------------------------
+		$('.aa-cart-quantity').on('change', function() {
+			// 수량 value 가져오기
+			var quantity = $(this).val();
+			// 부모 tr 찾기
+			var tr = $(this).closest('tr');
+			// tr 안에 price 클래스 찾기
+		    var price = $(tr).find('.price').html();
+			
+			// 수량 바꿀 때마다 DB 저장
+		    $.ajax({
+				url: 'updateBasketQuantity.sh',
+				data: {product_idx : $(tr).find('.remove').attr("name"),
+						quantity : $(this).val(),
+					   member_email : $('#member_email').val()},
+				success:function(data){
+					if(data == "in") {
+						location.reload();
+					}
+				}
+			});
+		    
+		    $(tr).find('.eachTotalPrice').html(quantity * price);
+		    
+			var sum = 0;
+		    $('.eachTotalPrice').each(function(){
+		    	var eachTotalPrice = parseInt($(this).text());
+				sum += eachTotalPrice;
+				$('#sum').html(sum);
+			});
+		});
+
+
+
 	});
 </script>
 
@@ -143,48 +160,39 @@
 												<thead>
 													<tr>
 														<th><input type="checkbox" onclick="" id="allSelected"></th>
-														<th>제품명</th>
+														<th>제품정보</th>
 														<th>가격</th>
 														<th>수량</th>
-														<th>총 가격</th>
+														<th>금액</th>
 														<th></th>
 													</tr>
 												</thead>
 												<tbody>
-<%-- 													<c:forEach var="basketList" items="${basketList}"> --%>
-<!-- 														<tr> -->
-<%-- 															<td><input type="checkbox" id="selectedProduct" value="${basketList.product_idx}"></td> --%>
-<!-- 															<td><a href="#"><img src="#" alt="img"></a></td> -->
-<!-- 															이미지 -->
-<%-- 															<td><a href="#"><img src="<c:url value='/resources/upload/${basketList.product_main_image}'/>" alt="img"></a></td> <!-- 이미지 --> --%>
-<%-- 															<td><input type="hidden" name="product_idx" id="product_idx" value="${basketList.product_idx}"> --%>
-<!-- 															<a class="aa-cart-title" -->
-<%-- 																href="<c:url value='/productDetail.sh?product_idx=${basketList.product_idx}'/>">${basketList.product_name} --%>
-<%-- 																	- ${basketList.product_size}ml</a></td> --%>
-<%-- 															<td>${basketList.product_price}</td> --%>
-<!-- 															<td><input class="aa-cart-quantity" type="number" -->
-<%-- 																value="${basketList.basket_quantity}"></td> --%>
-<!-- 															수량입력 -->
-<%-- 															<td>${basketList.basket_quantity * basketList.product_price}</td> --%>
-<!-- 															삭제버튼 -->
-<!-- 														</tr> -->
-<%-- 													</c:forEach> --%>
-
-													<c:forEach var="basketList" items="${basketList}">
-														<tr>
-															<td><a href="#"><img src="#" alt="img"></a></td>
+													<!-- 총 가격 계산할 변수 선언 -->
+													<c:set var = "total" value = "0" />
+													<c:forEach var="basketList" items="${basketList}" varStatus="product">
+														<tr da>
 															<!-- 이미지 -->
+															<td><a href="#"><img src="#" alt="img"></a></td>
 															<%-- <td><a href="#"><img src="<c:url value='/resources/upload/${basketList.product_main_image}'/>" alt="img"></a></td> <!-- 이미지 --> --%>
+
+															<!-- 제품 정보(이름, 용량), 제품 번호 -->
 															<td><input type="hidden" name="product_idx" class="product_idx" value="${basketList.product_idx}">
-																<a class="aa-cart-title" href="<c:url value='/productDetail.sh?product_idx=${basketList.product_idx}'/>">${basketList.product_name}
-																	- ${basketList.product_size}</a></td>
-															<td>${basketList.product_price}</td>
-															<td><input class="aa-cart-quantity" type="number"
-																value="${basketList.basket_quantity}"></td>
-															<!-- 수량입력 -->
-															<td>${basketList.basket_quantity * basketList.product_price}</td>
-															<td><a class="remove" href="#" name="${basketList.product_idx}" id="${basketList.product_idx}"><fa class="fa fa-close"></fa></a></td>
+																<a class="aa-cart-title" href="<c:url value='/productDetail.sh?product_idx=${basketList.product_idx}'/>">${basketList.product_name} - ${basketList.product_size}ml</a></td>
+
+															<!-- 제품 가격 -->
+															<td class="price">${basketList.product_price}</td>
+															
+															<!-- 가격 계산 -->
+															<!-- jstl에서 + 기호는 숫자 연산만 가능. 문자열은 += 나 + 기호 없이 그냥 결합 가능 -->
+															<c:set var= "total" value="${total + (basketList.basket_quantity * basketList.product_price)}"/>
+															
+															<!-- 수량 -->
+															<td><input class="aa-cart-quantity" type="number" value="${basketList.basket_quantity}" min="1"></td>
+															<td class="eachTotalPrice">${basketList.basket_quantity * basketList.product_price}</td>
+
 															<!-- 삭제버튼 -->
+															<td><a class="remove" href="#" name="${basketList.product_idx}" id="${basketList.product_idx}"><fa class="fa fa-close"></fa></a></td>
 														</tr>
 													</c:forEach>
 													<tr>
@@ -199,8 +207,7 @@
 																	<option value="">1000원 할인 쿠폰</option>
 																</select> <input class="aa-cart-view-btn" type="submit"
 																	value="쿠폰 적용">
-															</div> <input class="aa-cart-view-btn" type="submit"
-															value="업데이트"> <!-- 수량 바꾸고 적용하는 버튼 -->
+															</div> <input class="aa-cart-view-btn" type="submit" value="업데이트"> <!-- 수량 바꾸고 적용하는 버튼 -->
 														</td>
 													</tr>
 												</tbody>
@@ -213,20 +220,19 @@
 											<tbody>
 												<tr>
 													<th>가격</th>
-													<td>$450</td>
+													<td id="sum"><c:out value="${total}"/></td>
 												</tr>
 												<tr>
-													<th>할인액</th>
-													<td>- $0</td>
+													<th>할인금액</th>
+													<td id="discount">- $0</td>
 												</tr>
 												<tr>
 													<th>총 가격</th>
-													<td>$450</td>
+													<td id="total2"><c:out value="${total}"/></td>
 												</tr>
 											</tbody>
 										</table>
-										<br>* 포인트 사용은 결제 페이지에서 가능합니다 <a href="#"
-											class="aa-cart-view-btn">결제하기</a>
+										<br>* 포인트 사용은 결제 페이지에서 가능합니다 <a href="<c:url value='/checkout.sh'/>" class="aa-cart-view-btn">결제하기</a>
 									</div>
 								</div>
 							</c:otherwise>

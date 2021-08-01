@@ -15,15 +15,11 @@ import com.itwillbs.domain.BasketBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.WishListBean;
 import com.itwillbs.service.BasketService;
-import com.itwillbs.service.ProductService;
 import com.itwillbs.service.WishListService;
 
 
 @RestController
 public class AjaxController {
-	
-	@Inject
-	private ProductService productService; 
 	
 	@Inject
 	private WishListService wishListService;
@@ -119,13 +115,13 @@ public class AjaxController {
 			String member_email = request.getParameter("member_email");
 			int product_idx = Integer.parseInt(request.getParameter("product_idx"));
 			int quantity = Integer.parseInt(request.getParameter("quantity"));
-//			System.out.println(member_email + product_idx + quantity);
+			System.out.println(member_email + product_idx + quantity);
 			
 			// BasketBean 객체 생성해서 바로 저장
 			BasketBean basketBean = new BasketBean(member_email, product_idx, quantity);
 			
-			// productService에서 처리 후 결과 리턴
-			boolean isIntoBasket = productService.intoBasket(basketBean);
+			// basketService에서 처리 후 결과 리턴
+			boolean isIntoBasket = basketService.intoBasket(basketBean);
 			
 			// 리턴 결과에 따라 in/out 리턴
 			if(isIntoBasket) {
@@ -190,4 +186,39 @@ public class AjaxController {
 		}
 		return entity;
 	}
+//------------------------------------------------------------------------ 장바구니 수량 변경 ------------------------------------------------------
+	@RequestMapping(value = "/updateBasketQuantity.sh", method = RequestMethod.GET)
+	public ResponseEntity<String> updateBasketQuantity(HttpServletRequest request) {
+		String result = ""; // 문자열로 결과 값 저장
+		ResponseEntity<String> entity = null; // 저장한 문자열을 담아서 전달하기 위한 객체
+		
+		try {
+			// BasketBean 객체에 저장할 값 불러오기
+			String member_email = request.getParameter("member_email");
+			int product_idx = Integer.parseInt(request.getParameter("product_idx"));
+			int quantity = Integer.parseInt(request.getParameter("quantity"));
+			System.out.println(member_email + product_idx + quantity);
+			
+			// BasketBean 객체 생성해서 바로 저장
+			BasketBean basketBean = new BasketBean(member_email, product_idx, quantity);
+			
+			// basketService에서 처리 후 결과 리턴
+			boolean isIntoBasket = basketService.updateBasketQuantity(basketBean);
+			
+			// 리턴 결과에 따라 in/out 리턴
+			if(isIntoBasket) {
+				result = "in";
+			} else {
+				result = "out";
+			}
+			entity = new ResponseEntity<String>(result, HttpStatus.OK);
+		}catch (Exception e) {
+			System.out.println("오류 발생 -" + e.getMessage());
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+		
+
+
 }

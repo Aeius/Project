@@ -7,12 +7,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.dao.ProductDAO;
-import com.itwillbs.domain.BasketBean;
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
-import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.ProductBean;
 
 @Service
@@ -135,22 +132,6 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.insertProduct(productBean);
 	}
 	
-	@Override
-	public boolean intoBasket(BasketBean basketBean) {
-		boolean isIntoBasket = false;
-		int resultCount = 0;
-		BasketBean basketBean2 = productDAO.checkBasket(basketBean);
-		if(basketBean2 != null) {
-			resultCount = productDAO.updateBasket(basketBean);
-		} else {
-			resultCount = productDAO.intoBasket(basketBean);
-		}
-		if(resultCount > 0) {
-			isIntoBasket = true;
-		}
-		return isIntoBasket;
-	}
-
 	@Override
 	public void setStatusRelease(int product_idx) {
 		productDAO.setStatusRelease(product_idx);

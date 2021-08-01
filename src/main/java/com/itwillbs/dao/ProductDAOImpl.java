@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.itwillbs.domain.BasketBean;
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.ProductBean;
@@ -138,25 +137,6 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void updateProduct(ProductBean productBean) {
 		sqlSession.update(namespace + ".updateProduct", productBean);
-	}
-
-	// 장바구니에 담겨 있는지 확인
-	@Override
-	public BasketBean checkBasket(BasketBean basketBean) {
-		BasketBean basketBean2 = sqlSession.selectOne(namespace + ".checkBasket", basketBean);
-		return basketBean2;
-	}
-	
-	@Override
-	public int intoBasket(BasketBean basketBean) {
-		int insertCount = sqlSession.insert(namespace + ".intoBasket", basketBean);
-		return insertCount;
-	}
-
-	// 장바구니에 담겨 있으면 수량만 변경
-	@Override
-	public int updateBasket(BasketBean basketBean) {
-		return sqlSession.update(namespace + ".updateBasket", basketBean);
 	}
 
 	@Override

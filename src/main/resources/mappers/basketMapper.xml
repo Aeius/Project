@@ -15,6 +15,22 @@
 		DELETE FROM basket WHERE basket_email = #{member_email} AND basket_product_idx = #{product_idx}
 	</delete>
 
+	<insert id="intoBasket">
+	 	insert into basket values(#{basket_email}, #{basket_product_idx}, #{basket_quantity})
+	 </insert>
+	 
+	 <select id="checkBasket" resultType="com.itwillbs.domain.BasketBean">
+	 	select * from basket where basket_email=#{basket_email} and basket_product_idx=#{basket_product_idx}
+	 </select>
+	 
+	 <update id="updateBasket">
+	 	update basket set basket_quantity = basket_quantity + #{basket_quantity} where basket_email=#{basket_email} and basket_product_idx=#{basket_product_idx}
+	 </update>
+	 
+	 <update id="updateBasketQuantity">
+	 	update basket set basket_quantity = #{basket_quantity} where basket_email=#{basket_email} and basket_product_idx=#{basket_product_idx}
+	 </update>
+  
 
 </mapper>
 

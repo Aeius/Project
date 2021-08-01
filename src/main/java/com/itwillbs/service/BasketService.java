@@ -6,8 +6,13 @@ import com.itwillbs.domain.BasketBean;
 
 public interface BasketService {
 
-	List<BasketBean> getBasketList(String member_email);
+	public List<BasketBean> getBasketList(String member_email);
 
-	int deleteBasket(String member_email, String product_idx);
+	public int deleteBasket(String member_email, String product_idx);
+	
+	public boolean intoBasket(BasketBean basketBean);
+
+	public boolean updateBasketQuantity(BasketBean basketBean);
+
 
 }

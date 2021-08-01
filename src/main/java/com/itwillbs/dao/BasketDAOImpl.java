@@ -17,6 +17,26 @@ public class BasketDAOImpl implements BasketDAO	{
 	private SqlSession sqlSession;
 
 	private static final String namespace = "com.itwillbs.mapper.BasketMapper";
+	
+	// 장바구니에 담겨 있는지 확인
+	@Override
+	public BasketBean checkBasket(BasketBean basketBean) {
+		BasketBean basketBean2 = sqlSession.selectOne(namespace + ".checkBasket", basketBean);
+		return basketBean2;
+	}
+	
+	@Override
+	public int intoBasket(BasketBean basketBean) {
+		int insertCount = sqlSession.insert(namespace + ".intoBasket", basketBean);
+		return insertCount;
+	}
+
+	// 장바구니에 담겨 있으면 수량만 변경
+	@Override
+	public int updateBasket(BasketBean basketBean) {
+		return sqlSession.update(namespace + ".updateBasket", basketBean);
+	}
+
 
 	@Override
 	public List<BasketBean> getBasketList(String member_email) {
@@ -32,5 +52,12 @@ public class BasketDAOImpl implements BasketDAO	{
 		
 		return sqlSession.delete(namespace + ".deleteBasket", map);
 	}
+
+	@Override
+	public int updateBasketQuantity(BasketBean basketBean) {
+		return sqlSession.update(namespace + ".updateBasketQuantity", basketBean);
+	}
+	
+	
 
 }

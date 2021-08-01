@@ -2,7 +2,6 @@ package com.itwillbs.service;
 
 import java.util.ArrayList;
 
-import com.itwillbs.domain.BasketBean;
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.ProductBean;
@@ -45,8 +44,6 @@ public interface ProductService {
 
 	public void updateProduct(ProductBean productBean);
 	
-	public boolean intoBasket(BasketBean basketBean);
-
 	public ArrayList<ProductBean> getProductSearchList(String search);
 	
 	public ArrayList<ProductBean> getBarList();

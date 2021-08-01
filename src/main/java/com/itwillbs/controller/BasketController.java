@@ -38,6 +38,12 @@ public class BasketController {
 	public String basketPopUp() {
 		return "/dailyShop/product_board/basketPopUp";
 	}
+	
+	//-------------------------------------------------------------- 장바구니 담기 후 팝업창 주소 이동 --------------------------------------------------------
+	@RequestMapping(value = "/checkout.sh", method = RequestMethod.GET)
+	public String checkout() {
+		return "/dailyShop/member/checkout";
+	}
 
 
 }

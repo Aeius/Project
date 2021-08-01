@@ -2,10 +2,8 @@ package com.itwillbs.dao;
 
 import java.util.ArrayList;
 
-import com.itwillbs.domain.BasketBean;
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
-import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.ProductBean;
 
 public interface ProductDAO {
@@ -46,12 +44,6 @@ public interface ProductDAO {
 	
 	public void updateProduct(ProductBean productBean);
 	
-	public BasketBean checkBasket(BasketBean basketBean);
-
-	public int intoBasket(BasketBean basketBean);
-
-	public int updateBasket(BasketBean basketBean);
-
 	public ArrayList getProductSearchList(String search);
 
 	public ArrayList<ProductBean> getBarList();
