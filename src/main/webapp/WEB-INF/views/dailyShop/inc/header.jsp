@@ -61,23 +61,35 @@
 <!--                 <c:if test="${ sessionScope.id eq 'admin' }"> <li><a href="../../../AdminLTE-master/pages/chart.jsp">관리자 페이지</a></li></c:if> -->
                   <%-- 관리자 로그인 --%>
 					<%-- admin 으로 로그인 시 admin page 보임 --%>
-					<c:if test="${ sessionScope.member_email eq 'admin' }">
-						<li><a href='<c:url value="/chart.ad" />'>Admin Page</a></li>
-					</c:if>
 					
-                  <c:if test="${ ! empty sessionScope }">
+					 <c:choose>
+					<c:when test="${sessionScope.member_email eq 'admin' }">
+						<li><a href='<c:url value="/chart.ad" />'>Admin Page</a></li>
+						 <li class="hidden-xs"><a href="<c:url value='/logout.sh'/>">Logout</a></li>
+						 
+						        <li class="hidden-xs"><a href="<c:url value='/basket.sh'/>">My Cart</a></li>
+						       <li class="hidden-xs"><a href="myWishList.sh">Wish list</a></li>
+				  <li><a href="<c:url value='/myPage.sh'/>">My page</a></li>
+						 
+					</c:when>
+					
+					<c:when test="${empty sessionScope.member_email  }">   
+                   <li class="hidden-xs"><a href="login.sh">Login</a></li>
+                   <li class="hidden-xs"><a href="account.sh">sign in</a></li>
+                   </c:when> 
+                   
+                   
+                  <c:when test="${!empty sessionScope.member_email }">
                   <li class="hidden-xs"><a href="<c:url value='/basket.sh'/>">My Cart</a></li>
 <!--              <li class="hidden-xs"><a href="../member/checkout.jsp">Checkout</a></li> -->                  
                   <li class="hidden-xs"><a href="myWishList.sh">Wish list</a></li>
 				  <li><a href="<c:url value='/myPage.sh'/>">My page</a></li>
-				  <li class="hidden-xs"><a href="logout.sh">Logout</a></li>
-				  </c:if>
-                  
+				  <li class="hidden-xs"><a href="<c:url value='/logout.sh'/>">Logout</a></li>
+									 
+				  </c:when>
+                    </c:choose>
                    
-                   <c:if test="${empty sessionScope }">   
-                   <li class="hidden-xs"><a href="login.sh">Login</a></li>
-                   <li class="hidden-xs"><a href="account.sh">sign in</a></li>
-                   </c:if> 
+             
                   
                    
                   

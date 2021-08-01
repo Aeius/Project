@@ -64,7 +64,7 @@
                    <label for="">Password<span>*</span></label>
                     <input type="password" placeholder="Password" name="member_password">
                     <button type="submit" class="aa-browse-btn">로그인</button>
-                    <button type="button" class="aa-browse-btn">회원가입</button>
+                    <a href="<c:url value='/account.sh'/>"><button type="button" class="aa-browse-btn">회원가입</button></a>
                     <br><br><br>
                     <p class="aa-lost-password"><a href="<c:url value="find.sh" />">아이디/비밀번호 찾기</a></p>
                   </form>

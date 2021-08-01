@@ -85,19 +85,19 @@
             <!-- single slide item -->
             <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/1.jpg'/>" alt="Men slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/1900test1.jpg'/>" alt="Men slide img" />
               </div>
               <div class="seq-title">
-               <span data-seq>Save Up to 75% Off</span>                
-                <h2 data-seq>Men Collection</h2>                
-                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
+               <span data-seq>조말론 특별 기획전</span>                
+                <h2 data-seq>Let jomalone hanldes it</h2>                
+                <p data-seq>어쩌고 저쩌고 어쩌고 저쩌고 저쩌고!</p>
                 <a data-seq href="../product_board/product.jsp" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
             <!-- single slide item -->
             <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/2.jpg'/>" alt="Wristwatch slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/1900test2.jpg'/>" alt="Wristwatch slide img" />
               </div>
               <div class="seq-title">
                 <span data-seq>Save Up to 40% Off</span>                
@@ -109,7 +109,7 @@
             <!-- single slide item -->
             <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/3.jpg'/>" alt="Women Jeans slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/1900test3.jpg'/>" alt="Women Jeans slide img" />
               </div>
               <div class="seq-title">
                 <span data-seq>Save Up to 75% Off</span>                
@@ -121,7 +121,7 @@
             <!-- single slide item -->           
             <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/4.jpg'/>" alt="Shoes slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/1900test4.jpg'/>" alt="Shoes slide img" />
               </div>
               <div class="seq-title">
                 <span data-seq>Save Up to 75% Off</span>                

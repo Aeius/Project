@@ -44,6 +44,12 @@ body {
   overflow-x: hidden;
 }
 
+
+
+
+
+
+
 .no-padding {
   padding: 0;
 }
@@ -1251,6 +1257,7 @@ img {
 }
 #quick-view-modal .modal-content .aa-product-view-slider .simpleLens-container {
   width: 100%;
+  
 }
 #quick-view-modal .modal-content .aa-product-view-slider .simpleLens-container .simpleLens-big-image-container {
   width: 100%;
@@ -1750,6 +1757,31 @@ img {
   top: 0;
   width: 120px;
 }
+
+
+
+
+
+
+
+
+
+
+/*==================
+	About  PAGE
+====================*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*==================
  PRODUCT PAGE
@@ -2335,7 +2367,6 @@ img {
   float: left;
   padding-top: 50px;
   width: 100%;
-  padding-bottom: 50px;
 }
 #cart-view .cart-view-area .cart-view-table {
   background-color: #F5F5F5;
@@ -2430,6 +2461,44 @@ img {
   float: none;
 }
 
+
+/*==================
+	RECOTEST PAGE
+====================*/
+
+.container .col-md-team2 #container_team2 h4{
+	width: 100%;
+	margin: 0 auto;
+}
+
+.about-page .container .col-md-team2 #container_team2{
+  background-image: url("../../img/test_back1_start.jpg");
+  display: inline;
+  float: left;
+  width: 100%;
+  height:80%;
+  background-repeat:no-repeat;
+  background-position:top right;
+	background-size: cover;
+	 background-attachment: fixed;
+}
+
+.about-page .container .col-md-team2 #container_team2_1{
+  background-image: url("../../img/test_back1_.jpg");
+  display: inline;
+  float: left;
+  width: 100%;
+  height:80%;
+  background-repeat:no-repeat;
+  background-position:top right;
+	background-size: cover;
+	 background-attachment: fixed;
+}
+
+
+
+
+	
 /*==================
  CHECKOUT PAGE
 ====================*/

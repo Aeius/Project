@@ -192,9 +192,10 @@ public class MemberController {
 	
 	@RequestMapping(value = "/logout.sh", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
-		
+		System.out.println("로그아웃 체크 ");
 		session.invalidate();
 		return "redirect:/main.sh";
+
 	}
 
 	//---------------------------------------------------------------  쿠폰 목록 조회 ------------------------------------------------------------
