@@ -152,7 +152,7 @@ https://www.tooplate.com/view/2114-pixie
 			
 			  <h3 style="font-size: 2.7em !important; font-family:궁서체 !important; 
 			 text-align: center; font-color: #300026; margin-top:100px;  -->
-			 padding-bottom:100px;"> Question 5 </h3>
+			 padding-bottom:100px;"> Question 6 </h3>
 
 
 			<section style="text-align: center; font-color: #300026; margin-top:100px;  

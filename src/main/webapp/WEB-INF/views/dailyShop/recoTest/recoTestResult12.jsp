@@ -105,27 +105,30 @@ https://www.tooplate.com/view/2114-pixie
 		 <p style="text-align: center;">
 		</p>
 	  	<!-- 상품 상세 이미지는 여기에 -->		  	
-		<img src="resources/img/recoTest/result12.JPG" style= "width:300px; height: 400px;" >
+		<img src="resources/img/recoTest/result12.jpg" style= "width:300px; height: 400px;" >
 				  	
 	 	<br>
 	 	<br>
 	  	<br>
-	  	<p style="font-size: 1.7em; ">메종 마르지엘라 커피 브레이크 EDT</p>
+	  	<p style="font-size: 1.7em; ">조말론 우드 세이지 앤 씨솔트 코롱</p>
  		<br>
  	 	<br>
 
 	  	<p style="font-style: italic;"> 
-	  	“따뜻하고 부드러운 커피 한 잔의 따스한 여유로움“ </p> 
+	  	“바다소금과 세이지의 우디한 흙 내음의 조화로 <br>
+	  	자유롭고 활기찬 에너지와 즐거움을 표현하다“ </p> 
 	  	<br>
 	  	<br>
-	  	2007년, 스웨덴 스톡홀름-<br>
-	 	추운 겨울 복잡한 도시 안의 작고 따스한 카페에서 크리미한 커피와 <br>
-		 따뜻한 페이스트리가 함께 하는 휴식을 떠오르게 하는 향취입니다.<br>
+	  	조말론의 베스트셀러 중 하나. <br>
+	  	마치 잘게 부서진 해변가의 부드러운 모래 알맹이가 <br>
+		바다에서 부는 시원하고 짭짜름한 공기와 섞여 평화로움을 느끼게 합니다.<br>
 	  	<br>
-		커피 어코드와 바닐라와 라벤더, 머스크로 만들어진 밀크 무스 어코드로 <br>
-		카페 라떼의 향취를 표현했습니다.<br>
-		<br>
-		푸제르 테이스티 계열로 푸제르의 향취가 현대 도시의 활기찬 모습을 떠오르게 합니다.
+	  	파우더리한 암브레트가 감싸안아주며 오독오독 씹히는 바다 소금의 느낌이 <br>
+	  	시원함과 신선함으로 전해집니다. <br>
+		또한 세이지 베이스 노트로 흙처럼 소박하며 아로마틱한 톤으로 
+		<br>베이스에 자연스러운 깊이를 더합니다. 
+
+
 		<br>
 		<br>
 		<br>

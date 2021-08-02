@@ -156,7 +156,7 @@ https://www.tooplate.com/view/2114-pixie
 			
 			  <h3 style="font-size: 2.7em !important; font-family:궁서체 !important; 
 			 text-align: center; font-color: #300026; margin-top:100px;  -->
-			 padding-bottom:100px;"> Question 3 </h3>
+			 padding-bottom:100px;"> Question 3</h3>
 
 
 			<section style="text-align: center; font-color: #300026; margin-top:100px;  
@@ -175,7 +175,7 @@ https://www.tooplate.com/view/2114-pixie
 
 			  	
 			  	<div class="select1" >
-			  	<a href='<c:url value="/recoTestQ4.sh?q3=1&sweet=1&natural=1&relax=1"/>'>&nbsp;&nbsp;
+			  	<a href='<c:url value="/recoTestQ4_1.sh?q3=1&sweet=1&natural=1&relax=1"/>'>&nbsp;&nbsp;
 			  	<img src='<c:url value="/resources/img/recoTest/3_spring.jpg"/>' style="border-radius: 5px;"></a>
 			  	<br> <br> 봄
 			  	<!-- 봄 : (sweet, natural, relax +1) -->
@@ -183,23 +183,23 @@ https://www.tooplate.com/view/2114-pixie
 			  	
 			  	
 			  	
-			  	<div class="select2"> <a href='<c:url value="/recoTestQ4.sh?q3=2&modern=1&natural=1&relax=1"/>'>&nbsp;&nbsp;
+			  	<div class="select2"> <a href='<c:url value="/recoTestQ4_1.sh?q3=2&modern=1&natural=1&relax=1"/>'>&nbsp;&nbsp;
 			  	<img src='<c:url value="/resources/img/recoTest/3_summer.jpg"/>' style="border-radius: 5px;"></a>
 			  	<br>
 			  	<br> 여름
 			  	<!-- 여름: (modern, natulal, relax +1) -->
 			  	</div>
 			  	
-			  	<div class="select3" > <a href='<c:url value="/recoTestQ4.sh?q3=3&modern=1&natural=1"/>'>&nbsp;&nbsp;
+			  	<div class="select3" > <a href='<c:url value="/recoTestQ4_1.sh?q3=3&modern=1&natural=1"/>'>&nbsp;&nbsp;
 			  	<img src='<c:url value="/resources/img/recoTest/3_fall.jpg"/>' style="border-radius: 5px;"></a>
 			  	<br> <br> 가을
 			  	<!-- 가을: (modern, natural +1) -->
 			  	</div>
 			  	
-			  	<div class="select4" > <a href='<c:url value="/recoTestQ4.sh?q3=4&modern=1&relax=1&sweet=1"/>'>&nbsp;&nbsp;
+			  	<div class="select4" > <a href='<c:url value="/recoTestQ4_1.sh?q3=4&modern=1&relax=1&sweet=1"/>'>&nbsp;&nbsp;
 			  	<img src='<c:url value="/resources/img/recoTest/3_winter.jpg"/>' style="border-radius: 5px;"></a>
 			  	<br> <br> 겨울
-			  	<!-- 겨울: (modern, relax, sweet +1) -->
+			  	<!-- 겨울: (modern +2?, relax, sweet +1) -->
 			  	</div>
 			  	
 			</form>

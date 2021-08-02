@@ -66,20 +66,39 @@ public class RecoTestController {
 			//int man = Integer.parseInt(request.getParameter("man"));
 			//이 경우, man = 1을 가지고 왔으므로 int man에는 1을 저장
 			int result_man = 1;
+			int result_woman = 0;
+			int result_both=0;
+			
 			session.setAttribute("result_man", result_man);
 			System.out.println("남성 선택 : " + result_man);
+			
+			session.setAttribute("result_both", result_both);
+			session.setAttribute("result_woman", result_woman);
+			
 			break;
 			
 		case "2":
+			
 			//int woman = Integer.parseInt(request.getParameter("woman"));
-			int result_woman=1;
+			result_man = 0;
+			result_woman=1;
+			result_both=0;
 			session.setAttribute("result_woman", result_woman);
 			System.out.println("여성 선택 : " + result_woman);
+			
+			session.setAttribute("result_man", result_man);
+			session.setAttribute("result_both", result_both);
 			break;
 			
 		case "3":
 			//int both = Integer.parseInt(request.getParameter("both"));
-			int result_both=1;
+			result_man = 0;
+			result_woman=0;
+			result_both=1;
+			
+			
+			session.setAttribute("result_man", result_man);
+			session.setAttribute("result_woman", result_woman);
 			session.setAttribute("result_both", result_both);
 			break;	
 		}
@@ -88,80 +107,134 @@ public class RecoTestController {
 	return "/dailyShop/recoTest/recoTest_Q3";
 	}
 	
+
 	
+	//-----------------(추가 문항) 잔향을 묻는 문항입니다 ---------------
+	@RequestMapping(value = "/recoTestQ4_1.sh", method = RequestMethod.GET)
+	public String recoTestQ4_1(HttpServletRequest request, HttpSession session, Model model) {
+
+
+		//이전 문항(계절)의 값 가지고 오기
+		String q3 = request.getParameter("q3");
+		
+		switch(q3) {
+		case "1": 
+//			int sweet = Integer.parseInt(request.getParameter("sweet"));
+//			int natural = Integer.parseInt(request.getParameter("natural"));
+//			int relax = Integer.parseInt(request.getParameter("relax"));
+			
+			//이번 문항은 속성치가 최초 부여되는 문항이므로
+			int result_sweet=4;
+			int result_natural=3;
+			int result_relax=1;
+			int result_modern=0;
+
+			session.setAttribute("result_sweet", result_sweet);
+			session.setAttribute("result_natural", result_natural);
+			session.setAttribute("result_relax", result_relax);
+			session.setAttribute("result_modern", result_modern);
+			
+			break;
+		case "2":
+			
+			result_modern=1;
+			result_natural=4;
+			result_relax=3;
+			result_sweet=0;
+			
+			session.setAttribute("result_modern", result_modern);
+			session.setAttribute("result_natural", result_natural);
+			session.setAttribute("result_relax", result_relax); 
+			session.setAttribute("result_sweet", result_sweet);
+			
+			break;
+		case "3":
+			
+			result_modern=1;
+			result_natural=2;
+			result_sweet=0;
+			result_relax=4;
+			
+			
+			session.setAttribute("result_modern", result_modern);
+			session.setAttribute("result_natural", result_natural);
+			session.setAttribute("result_sweet", result_sweet);
+			session.setAttribute("result_relax", result_relax);
+			
+			
+			break;
+		case "4":
+			
+			result_modern=1;
+			result_relax=3;
+			result_sweet =2;
+			result_natural=0;
+			
+			session.setAttribute("result_modern", result_modern);
+			session.setAttribute("result_relax", result_relax);
+			session.setAttribute("result_sweet", result_sweet);
+			session.setAttribute("result_natural", result_natural);
+			
+			System.out.println("result_sweet  : " + result_sweet +", result_relax  : "+result_relax);
+			break;	
+		
+		}
+		
+		
+		return "/dailyShop/recoTest/recoTest_Q4_a";
+		
+		
+		
+
+	}
+	
+	
+	
+
 	
 	//Recommend Test 네 번째 보기(분위기) 페이지 입니다---------------------
 	@RequestMapping(value = "/recoTestQ4.sh", method = RequestMethod.GET)
 	public String recoTestQ4(HttpServletRequest request, HttpSession session, Model model) {
 	
 	
-	//이전 문항(계절)의 값 가지고 오기
-	String q3 = request.getParameter("q3");
-	
-	switch(q3) {
-	case "1": 
-//		int sweet = Integer.parseInt(request.getParameter("sweet"));
-//		int natural = Integer.parseInt(request.getParameter("natural"));
-//		int relax = Integer.parseInt(request.getParameter("relax"));
+		//이전 문항(성별)의 값 가지고 오기
+		String q4_1 = request.getParameter("q4_1");
 		
-		//이번 문항은 속성치가 최초 부여되는 문항이므로
-		int result_sweet=1;
-		int result_natural=1;
-		int result_relax=1;
-		int result_modern=0;
+		switch(q4_1) {
+		case "1":
+			
+			int result_modern = (int)session.getAttribute("result_modern");
+			result_modern ++;
+			result_modern ++;
+			session.setAttribute("result_modern", result_modern);
+			
+			
+			int result_sweet = (int)session.getAttribute("result_sweet");
+			result_sweet ++;
+			session.setAttribute("result_sweet", result_sweet);
 
-		session.setAttribute("result_sweet", result_sweet);
-		session.setAttribute("result_natural", result_natural);
-		session.setAttribute("result_relax", result_relax);
-		session.setAttribute("result_modern", result_modern);
+			break;
+			
+		case "2":
+			int result_natural = (int)session.getAttribute("result_natural");
+			result_natural ++;
+			session.setAttribute("result_natural", result_natural);
+			
+			
+			int result_relax = (int)session.getAttribute("result_relax");
+			result_relax ++;
+			session.setAttribute("result_relax", result_relax);
+			break;
+			
 		
-		break;
-	case "2":
-		
-		result_modern=1;
-		result_natural=1;
-		result_relax=1;
-		result_sweet=0;
-		
-		session.setAttribute("result_modern", result_modern);
-		session.setAttribute("result_natural", result_natural);
-		session.setAttribute("result_relax", result_relax); 
-		session.setAttribute("result_sweet", result_sweet);
-		
-		break;
-	case "3":
-		
-		result_modern=1;
-		result_natural=1;
-		result_sweet=0;
-		result_relax=0;
+		}
 		
 		
-		session.setAttribute("result_modern", result_modern);
-		session.setAttribute("result_natural", result_natural);
-		session.setAttribute("result_sweet", result_sweet);
-		session.setAttribute("result_relax", result_relax);
 		
 		
-		break;
-	case "4":
+		return "/dailyShop/recoTest/recoTest_Q4";
+
 		
-		result_modern=1;
-		result_relax=1;
-		result_sweet =1;
-		result_natural=0;
-		
-		session.setAttribute("result_modern", result_modern);
-		session.setAttribute("result_relax", result_relax);
-		session.setAttribute("result_sweet", result_sweet);
-		session.setAttribute("result_natural", result_natural);
-		
-		System.out.println("result_sweet  : " + result_sweet +", result_relax  : "+result_relax);
-		break;	
-	
-	}
-	
-	return "/dailyShop/recoTest/recoTest_Q4";
 	}
 	
 	//----------------------- 5번 문항 페이지 -------------------------
@@ -249,7 +322,7 @@ public class RecoTestController {
 	//---------------------- 결과 계산 로딩 페이지--------------------
 	
 	
-	@RequestMapping(value = "/ecoTestResult.sh", method = RequestMethod.GET)
+	@RequestMapping(value = "/recoTestResult.sh", method = RequestMethod.GET)
 	public String recoTestResult(HttpSession session, HttpServletRequest request, Model model) {
 
 	String q5 = request.getParameter("q5");
@@ -271,38 +344,89 @@ public class RecoTestController {
 	case "1":
 		result_modern ++;
 		session.setAttribute("result_modern", result_modern);
-		break;
 		
+		System.out.println(result_man);
+		
+		System.out.println("릴렉스 총점: "+ result_relax);
+		System.out.println("모던 총점: " + result_modern);
+		System.out.println("스윗 총점 : " + result_sweet);
+		System.out.println("네츄럴 총점: " + result_natural);
+		break;
+
 		
 	case "2":
 		result_natural ++;
 		session.setAttribute("result_natural", result_natural);
 		result_relax++;
+		result_relax++;
+		result_relax++;
 		session.setAttribute("result_relax", result_relax);
+		
+		
+		System.out.println("릴렉스 총점: "+ result_relax);
+		System.out.println("모던 총점: " + result_modern);
+		System.out.println("스윗 총점 : " + result_sweet);
+		System.out.println("네츄럴 총점: " + result_natural);
+		
+		
 		break;	
 		
 		
 	case "3":
 		result_sweet ++;
+		result_sweet ++;
 		session.setAttribute("result_sweet", result_sweet);
+		
+		
+		System.out.println("릴렉스 총점: "+ result_relax);
+		System.out.println("모던 총점: " + result_modern);
+		System.out.println("스윗 총점 : " + result_sweet);
+		System.out.println("네츄럴 총점: " + result_natural);
+
 		break;	
 	
 	
 	case "4":
 		result_modern ++;
+		result_modern ++;
 		session.setAttribute("result_modern", result_modern);
+		
+		System.out.println("릴렉스 총점: "+ result_relax);
+		System.out.println("모던 총점: " + result_modern);
+		System.out.println("스윗 총점 : " + result_sweet);
+		System.out.println("네츄럴 총점: " + result_natural);
+
+		
 		break;
 		
 	case "5":
 		result_natural ++;
 		session.setAttribute("result_natural", result_natural);
 		result_sweet ++;
+		result_sweet ++;
 		session.setAttribute("result_sweet", result_sweet);
+
+		
+		System.out.println("네츄럴 총점: " + result_natural);
+		System.out.println("모던 총점: " + result_modern);
+		System.out.println("스윗 총점: " + result_sweet);
+		System.out.println("릴렉스 총점: " + result_relax);
+		
 		break;	
 		
 	case "6":
 		result_natural ++;
 		session.setAttribute("result_natural", result_natural);
+		result_relax++;
+		session.setAttribute("result_relax", result_relax);
+		
+		
+		System.out.println("릴렉스 총점: "+ result_relax);
+		System.out.println("모던 총점: " + result_modern);
+		System.out.println("스윗 총점 : " + result_sweet);
+		System.out.println("네츄럴 총점: " + result_natural);
+		
+		
 		break;		
 		
 		
@@ -310,16 +434,30 @@ public class RecoTestController {
 		result_natural ++;
 		session.setAttribute("result_natural", result_natural);
 		result_modern ++;
+		result_modern ++;
 		session.setAttribute("result_modern", result_modern);
+		
+		System.out.println("릴렉스 총점: "+ result_relax);
+		System.out.println("모던 총점: " + result_modern);
+		System.out.println("스윗 총점 : " + result_sweet);
+		System.out.println("네츄럴 총점: " + result_natural);
+		
 		break;	
 		
 	case "8":
-		result_sweet ++;
-		session.setAttribute("result_sweet", result_sweet);
 		result_natural ++;
 		session.setAttribute("result_natural", result_natural);
 		result_relax++;
+		result_relax++;
 		session.setAttribute("result_relax", result_relax);
+		
+		System.out.println("릴렉스 총점: "+ result_relax);
+		System.out.println("모던 총점: " + result_modern);
+		System.out.println("스윗 총점 : " + result_sweet);
+		System.out.println("네츄럴 총점: " + result_natural);
+		
+		
+		
 		break;	
 		
 		
@@ -327,16 +465,48 @@ public class RecoTestController {
 	}
 		
 	
-	if(result_man>1   //남자 modern이 가장 높은 경우
-			&& result_modern > result_sweet
-			&& result_modern > result_relax
-			&& result_modern > result_natural
+	
+		if(result_man>=1   //남자 modern이 가장 높은 경우
+				&& result_modern > result_sweet
+				&& result_modern > result_relax
+				&& result_modern > result_natural
+				) {	
+			return "/dailyShop/recoTest/recoTestResult1"; //1번결과
+		}
+	
+	if(result_man>=1   //남자 natural이 가장 높은 경우
+			&& result_natural > result_sweet
+			&& result_natural > result_relax
+			&& result_natural > result_modern
 			) {	
-		return "/dailyShop/recoTest/recoTestResult1"; //1번결과
+		return "/dailyShop/recoTest/recoTestResult2"; //2번결과
 	}
+	
+	
+	if(result_man>=1   //남자 sweet이 가장 높은 경우
+			&& result_sweet > result_modern
+			&& result_sweet > result_relax
+			&& result_sweet > result_natural
+			) {	
+		return "/dailyShop/recoTest/recoTestResult3"; //3번결과
+	}
+	
+	
+	if(result_man>=1   //남자 relax이 가장 높은 경우
+			&& result_relax > result_modern
+			&& result_relax > result_sweet
+			&& result_relax > result_natural
+			) {	
+		return "/dailyShop/recoTest/recoTestResult4"; //4번결과
+	}
+	
+	
+	
+	
+	//------------여성 결과---------------------------------------
+	
 		
-		
-	if(result_woman>1   //여자 modern이 가장 높은 경우
+	if(result_woman>=1   //여자 modern이 가장 높은 경우
 			&& result_modern > result_sweet
 			&& result_modern > result_relax
 			&& result_modern > result_natural
@@ -345,7 +515,37 @@ public class RecoTestController {
 	}
 	
 	
-	if(result_both>1   //성별무관 modern이 가장 높은 경우
+	
+	if(result_woman>=1   //여자 natural이 가장 높은 경우
+			&& result_natural > result_sweet
+			&& result_natural > result_relax
+			&& result_natural > result_modern
+			) {	
+		return "/dailyShop/recoTest/recoTestResult6"; //6번결과
+	}
+	
+	
+	if(result_woman>=1   //여자 sweet이 가장 높은 경우
+			&& result_sweet > result_modern
+			&& result_sweet > result_relax
+			&& result_sweet > result_natural
+			) {	
+		return "/dailyShop/recoTest/recoTestResult7"; //7번결과
+	}
+	
+	
+	if(result_woman>=1   //여자 relax이 가장 높은 경우
+			&& result_relax > result_modern
+			&& result_relax > result_sweet
+			&& result_relax > result_natural
+			) {	
+		return "/dailyShop/recoTest/recoTestResult8"; //8번결과
+	}
+
+	
+	//--------------성별무관 결과 ------------------------
+	
+	if(result_both>=1   //성별무관 modern이 가장 높은 경우
 			&& result_modern > result_sweet
 			&& result_modern > result_relax
 			&& result_modern > result_natural
@@ -353,8 +553,34 @@ public class RecoTestController {
 		return "/dailyShop/recoTest/recoTestResult9"; //9번결과
 	}
 		
-		
+
+	if(result_both>=1   //성별무관 natural이 가장 높은 경우
+			&& result_natural > result_sweet
+			&& result_natural > result_relax
+			&& result_natural > result_modern
+			) {	
+		return "/dailyShop/recoTest/recoTestResult10"; //10번결과
+	}
 	
+	
+	if(result_both>=1   //성별무관 sweet이 가장 높은 경우
+			&& result_sweet > result_modern
+			&& result_sweet > result_relax
+			&& result_sweet > result_natural
+			) {	
+		return "/dailyShop/recoTest/recoTestResult11"; //11번결과
+	}
+	
+	
+	if(result_both>=1   //성별무관 relax이 가장 높은 경우
+			&& result_relax > result_modern
+			&& result_relax > result_sweet
+			&& result_relax > result_natural
+			) {	
+		return "/dailyShop/recoTest/recoTestResult12"; //12번결과
+	}
+	
+
 	
 	return "/dailyShop/recoTest/recoTest";
 	}
@@ -362,98 +588,7 @@ public class RecoTestController {
 
 	
 	
-	//----------------------- 찐 결과 페이지 -------------------------
-	
-	@RequestMapping(value = "/recoTestResult1.sh", method = RequestMethod.GET)
-	public String recoTestResult1(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지1 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult1";
-	}
-	
-	
-	@RequestMapping(value = "/recoTestResult2.sh", method = RequestMethod.GET)
-	public String recoTestResult2(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지2 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult2";
-	}
-	
-	
-	
-	@RequestMapping(value = "/recoTestResult3.sh", method = RequestMethod.GET)
-	public String recoTestResult3(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지3 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult3";
-	}
-	
-	
-	@RequestMapping(value = "/recoTestResult4.sh", method = RequestMethod.GET)
-	public String recoTestResult4(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지4 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult4";
-	}
-	
 
-	
-	@RequestMapping(value = "/recoTestResult5.sh", method = RequestMethod.GET)
-	public String recoTestResult5(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지5 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult5";
-	}
-	
-	
-	@RequestMapping(value = "/recoTestResult6.sh", method = RequestMethod.GET)
-	public String recoTestResult6(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지6 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult6";
-	}
-	
-	
-	@RequestMapping(value = "/recoTestResult7.sh", method = RequestMethod.GET)
-	public String recoTestResult7(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지7 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult7";
-	}
-
-
-	
-	
-	@RequestMapping(value = "/recoTestResult8.sh", method = RequestMethod.GET)
-	public String recoTestResult8(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지8 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult8";
-	}
-	
-	
-	@RequestMapping(value = "/recoTestResult9.sh", method = RequestMethod.GET)
-	public String recoTestResult9(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지7 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult9";
-	}
-	
-	
-	
-	@RequestMapping(value = "/recoTestResult10.sh", method = RequestMethod.GET)
-	public String recoTestResult10(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지10 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult10";
-	}
-	
-	
-	
-	@RequestMapping(value = "/recoTestResult11.sh", method = RequestMethod.GET)
-	public String recoTestResult11(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지11 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult11";
-	}
-	
-	
-	@RequestMapping(value = "/recoTestResult12.sh", method = RequestMethod.GET)
-	public String recoTestResult12(HttpSession session, Model model) {
-	//Recommend Test 결과 페이지12 입니다. get 방식 사용	
-	return "/dailyShop/recoTest/recoTestResult12";
-	}
-	
-	
 	
 	
 	

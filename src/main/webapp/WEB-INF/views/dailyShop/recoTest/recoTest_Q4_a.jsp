@@ -152,7 +152,7 @@ https://www.tooplate.com/view/2114-pixie
 			
 			  <h3 style="font-size: 2.7em !important; font-family:궁서체 !important; 
 			 text-align: center; font-color: #300026; margin-top:100px;  -->
-			 padding-bottom:100px;"> Question 6 </h3>
+			 padding-bottom:100px;"> Question 4 </h3>
 
 
 			<section style="text-align: center; font-color: #300026; margin-top:100px;  
@@ -160,37 +160,34 @@ https://www.tooplate.com/view/2114-pixie
 			
 			  	<p style="text-align: center;">
 			  	<br>
-			  	향수와 더 가까운 이미지를 골라볼까요?<br></p>
+			  	이 향수를 뿌렸을 때에는‥<br></p>
 			  	<form action="" method="get">
 			  	<br>
 			  	<br>
 			  	<br>
-		
+	
 			  
 				<!-- 이미지경로: <img src="resources/img/test_back_Q1.jpg" > -->
 
 				<div>
 				<!-- width 유지용 더미 div -->
 				</div>
-
-
-
 			  	<div class="select1" >
-			  	<a href='<c:url value="/recoTestResult.sh?q5=1"/>'>&nbsp;&nbsp;
-			  	<img src='<c:url value="/resources/img/recoTest/5_1_1.jpg"/>' style="border-radius: 5px;"></a>
-			  	<br> <br> 오늘은 중요한 날! <br>
-				자신만만하게 시작하는 하루
-				<!-- modern +1  -->
+			  	<a href='<c:url value="/recoTestQ4.sh?q4_1=1"/>'>&nbsp;&nbsp;
+			  	<img src='<c:url value="/resources/img/recoTest/3_2_heavy.jpg"/>' style="border-radius: 5px;"></a>
+			  	<br> <br> 마치 향수를 입은 것 처럼<br>
+				잔향이 오래 남도록
+			 	<!-- modern +2, sweet +1 -->
 			  	</div>
 			  	
 			  	
 			  	
-			  	<div class="select2"> <a href='<c:url value="/recoTestResult.sh?q5=2"/>'>&nbsp;&nbsp;
-			  	<img src='<c:url value="/resources/img/recoTest/5_1_2.jpg"/>' style="border-radius: 5px;"></a>
+			  	<div class="select2"> <a href='<c:url value="/recoTestQ4.sh?q4_1=2"/>'>&nbsp;&nbsp;
+			  	<img src='<c:url value="/resources/img/recoTest/3_2_free.jpg"/>' style="border-radius: 5px;"></a>
 			  	<br>
-			  	<br> 상쾌한 아침, <br>
-				뽀송하고 산뜻하게 시작하기
-				<!-- natural, relax +1 -->
+			  	<br> 체향과 섞여서 <br>
+					자연스러운 발향
+			  	<!-- natural +2 relax +1-->
 			  	</div>
 			  	
 			  
