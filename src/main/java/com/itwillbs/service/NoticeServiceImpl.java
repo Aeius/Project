@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.dao.NoticeDAO;
+import com.itwillbs.domain.EmailDTO;
 import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.PageBean;
@@ -50,6 +51,43 @@ public class NoticeServiceImpl implements NoticeService{
 		System.out.println("여기까진옴");
 		return noticeDAO.getNoticeCount();
 	}
+
+	@Override
+	public int sendQnaMail(MemberBean memberBean, EmailDTO dto) {
+		  String tomail = "javateamproject2021@gmail.com";// 받는 사람 이메일
+	      String setfrom = dto.getSetfrom(); 
+	      System.out.println("dto잘왔나 마지막확인"+dto.getSetfrom());
+	      String title = "회원아이디: "+dto.getSetfrom() + dto.getTitle();
+	      String content = dto.getContent();
+	      int Mailsucess = 0;
+	      try {
+	         MimeMessage message = mailSender.createMimeMessage();
+	         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+	         messageHelper.setFrom(setfrom); // 보내는사람 생략하거나 하면 정상작동을 안함
+	         messageHelper.setTo(tomail); // 받는사람 이메일
+	         messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	         messageHelper.setText(content, true); // 메일 내용
+
+	         mailSender.send(message);
+	         System.out.println("정상전송");
+	         Mailsucess = 1;
+	      } catch (Exception e) {
+	         System.out.println("메일 발송 실패 - " + e.getMessage());
+	      }
+	      
+	      return Mailsucess;
+	   }
+
+	}
+	
+	//==================== 작업중(mail)
+
+//	@Override
+//	public void qnaMail(MemberBean memberBean) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 	
 	
 
@@ -76,4 +114,4 @@ public class NoticeServiceImpl implements NoticeService{
 //		      }
 //	
 //		}
-	}
+	

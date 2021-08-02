@@ -70,8 +70,11 @@
     }
   </script>
 	<h1>카카오 페이</h1>
-	<form action="kakaoPay.sh" method="POST">
+	<form action="kakaoPay.sh" method="POST" name="fr">
 		<input type="submit" id="paybtn" value="pay">
 	</form>
+	
+	
+	
 </body>
 </html>

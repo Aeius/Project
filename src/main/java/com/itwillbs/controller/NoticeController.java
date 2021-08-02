@@ -1,23 +1,42 @@
 package com.itwillbs.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.core.io.FileSystemResource;
+import javax.mail.internet.MimeMessage;
+
+
+import java.util.*;
+
+
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.domain.FaqBoardBean;
+import com.itwillbs.domain.EmailDTO;
 import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.PageBean;
@@ -26,6 +45,9 @@ import com.itwillbs.service.FaqBoardService;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.NoticeService;
 import com.itwillbs.service.NoticeServiceImpl;
+import com.mysql.fabric.Response;
+
+
 
 @Controller
 public class NoticeController {
@@ -39,11 +61,25 @@ public class NoticeController {
 	@Inject
 	private MemberService memberService;
 	
+	@Autowired private JavaMailSenderImpl mailSender;
+
+	
 	
 	
 // ------------------------------ 상단 메뉴 모음 ------------------------------
 	@RequestMapping(value = "/notice.sh", method = RequestMethod.GET)
 	public String NoticeList(HttpServletRequest request,HttpSession session, Model model, MemberBean memberBean) {
+		String member_email = (String)session.getAttribute("member_email");
+		memberBean = memberService.getMember(member_email);
+		
+		if(memberBean == null) {
+			model.addAttribute("msg", "로그인 후 이용해주십시오.");
+			return "/dailyShop/service_board/msg";
+		}
+		
+		System.out.println("드디어 ㅠ"+memberBean);
+		session.setAttribute(member_email, memberBean.getMember_email());
+		
 		
 		List<FaqBoardBean> fbb = faqBoardService.getFaqList();
 		model.addAttribute("faqList",fbb);
@@ -70,6 +106,10 @@ public class NoticeController {
 		
 		model.addAttribute("nbList",nbList);
 		model.addAttribute("pb",pb);
+		model.addAttribute("member",memberBean);
+		
+		
+		
 		
 		return "/dailyShop/service_board/notice";
 		}
@@ -117,41 +157,35 @@ public class NoticeController {
 
 		return "/dailyShop/service_board/notice";
 	}
-// ------------------------------ notice 목록연결 ------------------------------		
-//	@RequestMapping(value = "/notice.list", method = RequestMethod.GET)
-//	public String list(HttpServletRequest request,Model model) {
-//		PageBean pb=new PageBean();
-//		String pageNum=request.getParameter("pageNum");
-//		if(pageNum==null) {
-//			pb.setPageNum("1");
-//		}else {
-//			pb.setPageNum(pageNum);
-//		}
-//		int pageSize=15;
-//		pb.setPageSize(pageSize);
-//		
-//		List<NoticeBean> nbList= noticeService.getNoticeList(pb);
-//		
-//		//전체글 개수
-//		
-//		
-//		model.addAttribute("nbList",nbList);
-//		model.addAttribute("pb",pb);
-//		//  /WEB-INF/views/center/notice.jsp 이동
-//		return "/dailyShop/service_board/notice";
-//	}
-// ------------------------------ qna 메일보내기 ------------------------------
 	
-//	@RequestMapping(value = "/contact/mailsend", method = RequestMethod.POST)
-//	public String qnaMail(@PathVariable String member_email,HttpServletRequest request) {
-//		MemberBean memberBean = memberService.getMember(member_email);
-//		noticeService.sendQnaMail(memberBean,request);
-//		return "redirect:/main.sh";
-//	}
-	
-//	http://localhost:8080/myweb2/board/content?num=${notice_idx}
 
-	
+	@RequestMapping(value = "/mailsend.sh", method = RequestMethod.GET)
+	public String sendMail(@ModelAttribute EmailDTO dto, MemberBean memberBean,HttpSession session, HttpServletResponse response) throws IOException {
+		
+		
+		String member_email = (String)session.getAttribute("member_email");
+		
+		memberBean = memberService.getMember(member_email);
+		
+		int Mailsuccess = noticeService.sendQnaMail(memberBean, dto);
+		
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		if(Mailsuccess == 1) {// mailsuccess 메일전송성공
+			out.println("<script>alert('1:1문의 전송완료')</script>");
+			out.flush();
+//			return "/dailyShop/service_board/notice";
+			return "/dailyShop/member/index";
+		}else {// 메일전송실패
+			out.println("<script>alert('1:1문의 전송실패 다시 시도하여 주십시오')</script>");
+			out.flush();
+			return "/dailyShop/service_board/notice";
+		}
+	}
+
 
 
 }
+

@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -205,50 +206,35 @@
 						<h2>1:1 문의</h2>
 						<p>- 아래 사항을 입력하시어 문의해주시면 확인 후 메일로 답변드립니다.</p>
 					</div>
-					<!-- contact map -->
-					<!-- 					<div class="aa-contact-map"> -->
-					<!-- 						<iframe -->
-					<!-- 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3902.3714257064535!2d-86.7550931378034!3d34.66757706940219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8862656f8475892d%3A0xf3b1aee5313c9d4d!2sHuntsville%2C+AL+35813%2C+USA!5e0!3m2!1sen!2sbd!4v1445253385137" -->
-					<!-- 							width="100%" height="450" frameborder="0" style="border: 0" -->
-					<!-- 							allowfullscreen></iframe> -->
-					<!-- 					</div> -->
-					<!-- Contact address -->
 					<div class="aa-contact-address">
 						<div class="row">
 							<div class="col-md-8">
 								<div class="aa-contact-address-left">
-									<form class="comments-form contact-form" action="contact/mailsend" method="POST">
+									<form class="comments-form contact-form" action="mailsend.sh" method="GET">
 										<div class="row">
+								
 											<div class="col-md-6">
 												<div class="form-group">
-													<input type="text" 
-<%-- 													<% request.getSession("id") %> --%>
-														class="form-control">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<input type="email" placeholder="Email"
-														class="form-control" value="${memberBean.getMember_email()}">
+													<input type="email" placeholder="Email" id="email" name="setfrom"
+														class="form-control" value="${member.getMember_email()}">
 												</div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
-													<input type="text" placeholder="Subject"
-														class="form-control" id="title">
+													<input type="text" placeholder="subject"
+														class="form-control" id="title" name="title">
 												</div>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<textarea class="form-control" rows="20"
-												placeholder="Message" id="content"></textarea>
+												placeholder="Message" id="content" name="content"></textarea>
 										</div>
 
-<input type="submit" value="메일 보내기" class="aa-secondary-btn">
-<!-- 										<a href=">메일 보내기</a><br /> -->
+									<input type="submit" value="메일 보내기" class="aa-secondary-btn">
 
 									</form>
 								</div>
