@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<head>
+	
+</head>
   <!-- head -->
   <jsp:include page="../inc/head.jsp" />
   
@@ -48,7 +51,11 @@
 				    	      ${faqBoardBean.faq_question }</a></td>
 				                <td>
 		                        <input type="button" value="수정" onclick="location.href='<c:url value="/faqUpdate.ad?faq_idx=${faqBoardBean.faq_idx }" />'">
+<<<<<<< HEAD
 		                        <input type="button" value="삭제" onclick="location.href='<c:url value="/faqDelete.ad?faq_idx=${faqBoardBean.faq_idx }" />'">
+=======
+		                        <input type="button" value="삭제" onclick="delete123(${faqBoardBean.faq_idx })">
+>>>>>>> refs/remotes/origin/woo
 		                        </td>
 				             </tr>
 						</c:forEach>   
@@ -84,4 +91,12 @@
     </script>
 
   </body>
+  <script type="text/javascript">
+		function delete123(faq_idx) {
+			var check = confirm("삭제하시겠습니까");
+			if(check){
+				location.href='<c:url value="/faqDelete.ad?faq_idx='+faq_idx+'" />';
+			} 
+		}
+	</script>
 </html>

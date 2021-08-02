@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -10,8 +9,20 @@
   <!-- Morris charts 추가 -->
     <link href="<c:url value='/resources/AdminLTE-master/plugins/morris/morris.css'/>" rel="stylesheet" type="text/css" />
   </head>
-  
   <body class="skin-blue">
+  
+  
+	<!--   admin 구분 :  로그인이 되어있지 않으면 로그인 페이지로 이동, 일반회원이면 홈페이지로 이동 -->
+	  <c:choose>
+	  	<c:when test="${empty sessionScope }">
+	  		<c:redirect url="/login.ad"></c:redirect>
+	  	</c:when>
+	  	<c:when test="${ sessionScope.member_email ne 'admin'  }">
+	  		<c:redirect url="/main.sh"></c:redirect>
+	  	</c:when>
+	  </c:choose>
+
+	
     <div class="wrapper">
       
       <!-- 상단바 -->

@@ -8,6 +8,17 @@
   <jsp:include page="../inc/head.jsp" />
   
   <body class="skin-blue">
+  
+<!--   admin 구분 :  로그인이 되어있지 않으면 로그인 페이지로 이동, 일반호 -->
+  <c:choose>
+  	<c:when test="${empty sessionScope }">
+  		<c:redirect url="/login.ad"></c:redirect>
+  	</c:when>
+  	<c:when test="${ sessionScope.member_email ne 'admin'  }">
+  		<c:redirect url="/main.sh"></c:redirect>
+  	</c:when>
+  </c:choose>
+  
     <!-- Site wrapper -->
     <div class="wrapper">
     <!-- 상단바 -->

@@ -30,13 +30,13 @@
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
-        <form action="./chart.jsp" method="post">
+        <form action='<c:url value="/loginPro.ad" />' method="post">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Email"/>
+            <input type="text" class="form-control" placeholder="Email" name="member_email"/>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password"/>
+            <input type="password" class="form-control" placeholder="Password" name="member_password"/>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="social-auth-links text-center">

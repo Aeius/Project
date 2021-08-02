@@ -44,7 +44,7 @@
     </script>
 </head>
 <body>
-
+ 
 <div class="aa-prod-view-bottom">
 <br><br>
 <p style="font-size: 10px; text-align: center;">장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?</p>

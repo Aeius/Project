@@ -34,8 +34,6 @@ function noticeNullCheck(){
       
 	  <!-- ==========본문 시작========== -->
 	  
-	  
-	  
       <!-- Right side column. Contains the navbar and content of the page -->
       <div class="content-wrapper">
       <div class="box box-warning">
