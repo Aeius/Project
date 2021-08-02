@@ -71,7 +71,6 @@ public class BasketServiceImpl implements BasketService {
 		
 		try {
 			arrStrMemberCoupon = memberDAO.getMemberCouponList(member_email).split("/");
-			// 고객 보유 쿠폰 하나씩 조회해서 List 객체에 담
 			if(arrStrMemberCoupon == null) {
 				return couponInfoList;
 			} else {
