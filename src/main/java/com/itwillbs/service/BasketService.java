@@ -3,6 +3,7 @@ package com.itwillbs.service;
 import java.util.List;
 
 import com.itwillbs.domain.BasketBean;
+import com.itwillbs.domain.CouponBean;
 
 public interface BasketService {
 
@@ -13,6 +14,8 @@ public interface BasketService {
 	public boolean intoBasket(BasketBean basketBean);
 
 	public boolean updateBasketQuantity(BasketBean basketBean);
+
+	public List<CouponBean> getMemberCouponList(String member_email);
 
 
 }

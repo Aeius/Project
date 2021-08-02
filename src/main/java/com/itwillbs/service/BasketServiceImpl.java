@@ -1,5 +1,6 @@
 package com.itwillbs.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,7 +8,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.dao.BasketDAO;
+import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.domain.BasketBean;
+import com.itwillbs.domain.CouponBean;
 
 @Service
 public class BasketServiceImpl implements BasketService {
@@ -15,6 +18,10 @@ public class BasketServiceImpl implements BasketService {
 	@Inject
 	private BasketDAO basketDAO;
 	
+	@Inject
+	private MemberDAO memberDAO;
+	
+	// -------------------------------------------------- 장바구니 담기 -------------------------------------------------- 
 	@Override
 	public boolean intoBasket(BasketBean basketBean) {
 		boolean isIntoBasket = false;
@@ -30,17 +37,20 @@ public class BasketServiceImpl implements BasketService {
 		}
 		return isIntoBasket;
 	}
-
+	
+	// -------------------------------------------------- 장바구니 가져오기 -------------------------------------------------- 
 	@Override
 	public List<BasketBean> getBasketList(String member_email) {
 		return basketDAO.getBasketList(member_email);
 	}
-
+	
+	// -------------------------------------------------- 장바구니 삭제 -------------------------------------------------- 
 	@Override
 	public int deleteBasket(String member_email, String product_idx) {
 		return basketDAO.deleteBasket(member_email, product_idx);
 	}
-
+	
+	// -------------------------------------------------- (장바구니) 수량 변경 -------------------------------------------------- 
 	@Override
 	public boolean updateBasketQuantity(BasketBean basketBean) {
 		boolean isUpdated = false;
@@ -48,8 +58,37 @@ public class BasketServiceImpl implements BasketService {
 		if (updateCount > 0) {
 			isUpdated = true;
 		}
-		return false;
+		return isUpdated;
 	}
+
+	// -------------------------------------------------- (장바구니) 고객 쿠폰 정보 가져오기 -------------------------------------------------- 
+	@Override
+	public List<CouponBean> getMemberCouponList(String member_email) {
+		// 고객 보유 쿠폰 가져오기 
+		String[] arrStrMemberCoupon;
+		// 고객 보유 쿠폰 정보 담을 List 객체 선언
+		ArrayList<CouponBean> couponInfoList = null;
+		
+		try {
+			arrStrMemberCoupon = memberDAO.getMemberCouponList(member_email).split("/");
+			// 고객 보유 쿠폰 하나씩 조회해서 List 객체에 담
+			if(arrStrMemberCoupon == null) {
+				return couponInfoList;
+			} else {
+				couponInfoList = new ArrayList<CouponBean>();
+				// 분리한 고객 보유 쿠폰 번호 하나씩 조회해서 객체에 담기
+				for(String memberCoupon : arrStrMemberCoupon) {
+					couponInfoList.add(memberDAO.getCouponInfo(Integer.parseInt(memberCoupon)));
+				}
+			}
+			
+		} catch (Exception e) {
+			return couponInfoList;
+		}
+		
+		return couponInfoList;
+	}
+	
 	
 	
 

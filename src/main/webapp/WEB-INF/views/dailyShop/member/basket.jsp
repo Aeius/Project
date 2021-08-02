@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +76,7 @@
 			// 부모 tr 찾기
 			var tr = $(this).closest('tr');
 			// tr 안에 price 클래스 찾기
-		    var price = $(tr).find('.price').html();
+		    var price = $(tr).find('.price').html().replace(/,/g, "");
 			
 			// 수량 바꿀 때마다 DB 저장
 		    $.ajax({
@@ -84,24 +85,51 @@
 						quantity : $(this).val(),
 					   member_email : $('#member_email').val()},
 				success:function(data){
-					if(data == "in") {
-						location.reload();
-					}
 				}
 			});
 		    
-		    $(tr).find('.eachTotalPrice').html(quantity * price);
+			// 제품별 총 금액 출력
+			var eachTotalPrice = quantity * price;
+		    $(tr).find('.eachTotalPrice').html(priceToString(eachTotalPrice));
 		    
+			// 쿠폰 적용 전 총 금액 계산할 변수 선언
 			var sum = 0;
+			
+			// 제품별 총 금액을 더해 총 쿠폰 적용 전 금액 합계 계산
 		    $('.eachTotalPrice').each(function(){
-		    	var eachTotalPrice = parseInt($(this).text());
+		    	var eachTotalPrice = parseInt($(this).text().replace(/,/g, ""));
 				sum += eachTotalPrice;
-				$('#sum').html(sum);
+				$('#beforeDiscountTotal').html(priceToString(sum));
 			});
+			
+			// 선택된 쿠폰 value 가져오기
+			var coupon_value = $("#coupon option:selected").val();
+			// 쿠폰 가격을 제외한 최종 금액 계산
+			var total = sum - coupon_value;
+			// 출력
+			$('#total').html(priceToString(total));
+		    		
 		});
+		
+// -------------------------------- 쿠폰 적용 --------------------------------
+		// selectBox 선택시
+		$('select').on('change', function() {
+			// 쿠폰 할인 금액 가져오기
+			var coupon_value = $(this).val();
+			// 할인 전 금액 가져오기(숫자 콤마 제거하고 가져오기)
+			var sum = parseInt($('#beforeDiscountTotal').text().replace(/,/g, ""));
+			// 할인 전 금액 - 쿠폰 = 총 결제 금액 구하기
+			var total = sum - coupon_value;
+			// 쿠폰 금액 칸, 총 결제 금액 칸에 값 출력
+			$('#discount').html(priceToString(-coupon_value));
+			$('#total').html(priceToString(total));
+		});	
 
-
-
+// -------------------------------- 숫자 콤마 --------------------------------		
+		function priceToString(price) {
+		    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		}
+		
 	});
 </script>
 
@@ -160,10 +188,10 @@
 												<thead>
 													<tr>
 														<th><input type="checkbox" onclick="" id="allSelected"></th>
-														<th>제품정보</th>
-														<th>가격</th>
+														<th>제품 정보</th>
+														<th>제품 금액</th>
 														<th>수량</th>
-														<th>금액</th>
+														<th>총 금액</th>
 														<th></th>
 													</tr>
 												</thead>
@@ -181,7 +209,7 @@
 																<a class="aa-cart-title" href="<c:url value='/productDetail.sh?product_idx=${basketList.product_idx}'/>">${basketList.product_name} - ${basketList.product_size}ml</a></td>
 
 															<!-- 제품 가격 -->
-															<td class="price">${basketList.product_price}</td>
+															<td class="price"><fmt:formatNumber value="${basketList.product_price}" type="number"/></td>
 															
 															<!-- 가격 계산 -->
 															<!-- jstl에서 + 기호는 숫자 연산만 가능. 문자열은 += 나 + 기호 없이 그냥 결합 가능 -->
@@ -189,7 +217,7 @@
 															
 															<!-- 수량 -->
 															<td><input class="aa-cart-quantity" type="number" value="${basketList.basket_quantity}" min="1"></td>
-															<td class="eachTotalPrice">${basketList.basket_quantity * basketList.product_price}</td>
+															<td class="eachTotalPrice"><fmt:formatNumber value="${basketList.basket_quantity * basketList.product_price}" type="number"/></td>
 
 															<!-- 삭제버튼 -->
 															<td><a class="remove" href="#" name="${basketList.product_idx}" id="${basketList.product_idx}"><fa class="fa fa-close"></fa></a></td>
@@ -201,13 +229,15 @@
 															<!-- _responsice.scss에 관련 스타일이 있는데 다른 태그들이랑 묶여 있어서 손대기 어려울듯.. -->
 															<div class="aa-cart-coupon">
 																<!--                             <input class="aa-coupon-code" type="text" placeholder="쿠폰(텍스트->셀렉트)"> 셀렉트 박스로 바꿈 -->
-																<select name="coupon" class="aa-coupon-code">
-																	<option value="">쿠폰 선택</option>
-																	<option value="">3000원 할인 쿠폰</option>
-																	<option value="">1000원 할인 쿠폰</option>
-																</select> <input class="aa-cart-view-btn" type="submit"
-																	value="쿠폰 적용">
-															</div> <input class="aa-cart-view-btn" type="submit" value="업데이트"> <!-- 수량 바꾸고 적용하는 버튼 -->
+																<select name="coupon" class="aa-coupon-code" id="coupon">
+																	<option value="0">쿠폰 선택</option>
+																	<c:if test="${! empty couponList}">
+																	<c:forEach var="couponList" items="${couponList}">
+																	<option value="${couponList.coupon_price}">${couponList.coupon_name} - <fmt:formatNumber value="${couponList.coupon_price}" type="number" />원 할인</option>
+																	</c:forEach>
+																	</c:if>
+																</select> <input class="aa-cart-view-btn" type="submit" value="쿠폰 적용">
+															</div><!--  <input class="aa-cart-view-btn" type="submit" value="업데이트"> 수량 바꾸고 적용하는 버튼 -->
 														</td>
 													</tr>
 												</tbody>
@@ -215,24 +245,27 @@
 										</form>
 									</div>
 									<!-- Cart Total view -->
-									<div class="cart-view-total">
-										<table class="aa-totals-table">
+									<div class="cart-view-total" style="width: 650px;">
+										<table class="aa-totals-table" style="border: none;">
 											<tbody>
-												<tr>
-													<th>가격</th>
-													<td id="sum"><c:out value="${total}"/></td>
+												<tr style="border: none;">
+													<th style="border: none;">상품 금액</th>
+													<th style="border: none;">+</th>
+													<th style="border: none;">할인 금액</th>
+													<th style="border: none;">=</th>
+													<th style="border: none;">주문 합계</th>
+												
 												</tr>
-												<tr>
-													<th>할인금액</th>
-													<td id="discount">- $0</td>
-												</tr>
-												<tr>
-													<th>총 가격</th>
-													<td id="total2"><c:out value="${total}"/></td>
+												<tr style="border: none;">
+													<td id="beforeDiscountTotal" style="border: none; font-size: 25px;"><fmt:formatNumber value="${total}" type="number"/></td>
+													<td style="border: none; font-size: 25px;">+</td>
+													<td id="discount" style="border: none; font-size: 25px;">0</td>
+													<td style="border: none; font-size: 25px;">=</td>
+													<td id="total" style="border: none; font-size: 30px; font-weight: bold;"><fmt:formatNumber value="${total}" type="number"/></td>
 												</tr>
 											</tbody>
 										</table>
-										<br>* 포인트 사용은 결제 페이지에서 가능합니다 <a href="<c:url value='/checkout.sh'/>" class="aa-cart-view-btn">결제하기</a>
+										<br>* 포인트 사용은 결제 페이지에서 가능합니다.<br><a href="<c:url value='/checkout.sh'/>" class="aa-cart-view-btn">결제하기</a>
 									</div>
 								</div>
 							</c:otherwise>

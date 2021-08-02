@@ -68,22 +68,22 @@
 						 <li class="hidden-xs"><a href="<c:url value='/logout.sh'/>">Logout</a></li>
 						 
 						        <li class="hidden-xs"><a href="<c:url value='/basket.sh'/>">My Cart</a></li>
-						       <li class="hidden-xs"><a href="myWishList.sh">Wish list</a></li>
+						       <li class="hidden-xs"><a href="<c:url value='/myWishList.sh'/>">Wish list</a></li>
 				  <li><a href="<c:url value='/myPage.sh'/>">My page</a></li>
 						 
 					</c:when>
 					
 					<c:when test="${empty sessionScope.member_email  }">   
-                   <li class="hidden-xs"><a href="login.sh">Login</a></li>
-                   <li class="hidden-xs"><a href="account.sh">sign in</a></li>
+                   <li class="hidden-xs"><a href="<c:url value='/login.sh'/>">Login</a></li>
+                   <li class="hidden-xs"><a href="<c:url value='/account.sh'/>">sign in</a></li>
                    </c:when> 
                    
                    
                   <c:when test="${!empty sessionScope.member_email }">
                   <li class="hidden-xs"><a href="<c:url value='/basket.sh'/>">My Cart</a></li>
 <!--              <li class="hidden-xs"><a href="../member/checkout.jsp">Checkout</a></li> -->                  
-                  <li class="hidden-xs"><a href="myWishList.sh">Wish list</a></li>
-				  <li><a href="<c:url value='/myPage.sh'/>">My page</a></li>
+                  <li class="hidden-xs"><a href="<c:url value='/myWishList.sh'/>">Wish list</a></li>
+				  <li class="hidden-xs"><a href="<c:url value='/myPage.sh'/>">My page</a></li>
 				  <li class="hidden-xs"><a href="<c:url value='/logout.sh'/>">Logout</a></li>
 									 
 				  </c:when>

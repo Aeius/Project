@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.BasketBean;
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.service.BasketService;
 import com.itwillbs.service.ProductService;
@@ -30,6 +31,11 @@ public class BasketController {
 		// 고객의 장바구니 List 불러오기
 		List<BasketBean> basketList = basketService.getBasketList(member_email);
 		model.addAttribute("basketList", basketList);
+		
+		List<CouponBean> couponList = basketService.getMemberCouponList(member_email);
+		if(couponList != null) {
+			model.addAttribute("couponList", couponList);
+		}
 		return "/dailyShop/member/basket";
 	}
 
