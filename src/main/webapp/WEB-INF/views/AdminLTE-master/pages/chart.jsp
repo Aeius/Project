@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
   <!-- head -->
@@ -9,10 +10,9 @@
   <!-- Morris charts 추가 -->
     <link href="<c:url value='/resources/AdminLTE-master/plugins/morris/morris.css'/>" rel="stylesheet" type="text/css" />
   </head>
+  
   <body class="skin-blue">
-  
-  
-	<!--   admin 구분 :  로그인이 되어있지 않으면 로그인 페이지로 이동, 일반회원이면 홈페이지로 이동 -->
+      <!--   admin 구분 :  로그인이 되어있지 않으면 로그인 페이지로 이동, 일반회원이면 홈페이지로 이동 -->
 	  <c:choose>
 	  	<c:when test="${empty sessionScope }">
 	  		<c:redirect url="/login.ad"></c:redirect>
@@ -21,8 +21,6 @@
 	  		<c:redirect url="/main.sh"></c:redirect>
 	  	</c:when>
 	  </c:choose>
-
-	
     <div class="wrapper">
       
       <!-- 상단바 -->
@@ -48,12 +46,16 @@
               <!-- AREA CHART -->
               <div class="box box-primary">
                 <div class="box-header">
-                  <h3 class="box-title">뭘 넣으면 좋을까요</h3>
+                  <h3 class="box-title">향수 MBTI 추천 TOP5 (데이터 미적용 / 테스트)</h3>
                 </div>
                 <div class="box-body chart-responsive">
                   <div class="chart" id="revenue-chart" style="height: 300px;"></div>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
+                </div>
+              </div>
+			  <!-- BAR CHART -->
+<!--                   <div class="chart" id="recommend-chart" style="height: 300px;"></div> -->
+<!--                 </div>/.box-body -->
+<!--               </div>/.box -->
 
               <!-- DONUT CHART -->
               <div class="box box-danger">
@@ -105,29 +107,6 @@
       $(function () {
         "use strict";
 
-        // AREA CHART
-        var area = new Morris.Area({
-          element: 'revenue-chart',
-          resize: true,
-          data: [
-            {y: '2011 Q1', item1: 2666, item2: 2666}, // item1 진한 선
-            {y: '2011 Q2', item1: 2778, item2: 2294}, // item2 연한 선
-            {y: '2011 Q3', item1: 4912, item2: 1969},
-            {y: '2011 Q4', item1: 3767, item2: 3597},
-            {y: '2012 Q1', item1: 6810, item2: 1914},
-            {y: '2012 Q2', item1: 5670, item2: 4293},
-            {y: '2012 Q3', item1: 4820, item2: 3795},
-            {y: '2012 Q4', item1: 15073, item2: 5967},
-            {y: '2013 Q1', item1: 10687, item2: 4460},
-            {y: '2013 Q2', item1: 8432, item2: 5713}
-          ],
-          xkey: 'y',
-          ykeys: ['item1', 'item2'],
-          labels: ['Item 1', 'Item 2'],
-          lineColors: ['#a0d0e0', '#3c8dbc'],
-          hideHover: 'auto'
-        });
-
         // LINE CHART
         var line = new Morris.Line({
           element: 'line-chart',
@@ -174,6 +153,23 @@
           labels: ['판매량', '좋아요 수'], // 막대기 이름 표시
           hideHover: 'auto'
         });
+        
+        // recommend-chart => 향수 추천 결과 받아오기
+        var bar2 = new Morris.Bar({
+            element: 'revenue-chart',
+            resize: true,
+            data: [ // 나타낼 데이터
+         	  	<c:forEach var="bar2" items="${barList }"> 
+                {idx: "${bar2.product_name }", m: ${bar2.product_sellcount }, fm: ${bar2.product_likecount }, none: 400 },
+              </c:forEach>
+            ],
+            barColors: ['#179D49', '#F02456', '#39403B'], // 색 지정
+            xkey: 'idx', 
+            ykeys: ['m', 'fm', 'none'], // 막대기로 나타낼 데이터
+            labels: ['남', '여', '무관'], // 막대기 이름 표시
+            hideHover: 'auto'
+          });
+        
       });
     </script>
 

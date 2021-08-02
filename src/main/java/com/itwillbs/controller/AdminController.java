@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.itwillbs.dao.MemberDAO;
+import com.itwillbs.domain.CategoryBean;
+import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.FaqBoardBean;
 import com.itwillbs.domain.MemberBean;
@@ -323,7 +325,7 @@ public class AdminController {
 			session.setAttribute("member_email", mb.getMember_email());		
 			if(mb2.getMember_email().equals("admin")) {
 				//admin 으로 로그인하면
-				return "/AdminLTE-master/pages/chart";
+				return "redirect:/chart.ad"; // 차트 내용이 안떠서 redirect로 리턴하니 해결됨
 			}else {
 				//로그인은 했으나 관리자가 아닌 일반회원일 시
 //				model.addAttribute("msg","잘못된 접근입니다.");
@@ -536,7 +538,7 @@ public class AdminController {
 
 	// ------------------ 매출 차트(로그인 시 메인화면) ---------------------
 	@RequestMapping(value = "/chart.ad", method = RequestMethod.GET)
-	public String chart(HttpSession session) {
+	public String chart(Model model, HttpSession session) {
 		
 		// -------------- 임시 어드민 확인 adminCheck() 4줄
 		String result = adminCheck(session); //1번째
@@ -544,7 +546,19 @@ public class AdminController {
 			
 			// ---------- 원래 수행작업 ----------------------------------------
 			
-			// 차트 아직 구현 안됨 (이동 확인용)
+			// Donut Chart에 표시할 데이터 받아오기 (카테고리별 상품 갯수) 
+			ArrayList<CategoryBean> donutList = productService.getDonutList();
+			model.addAttribute("donutList", donutList);
+			
+			// Line Chart에 표시할 데이터 받아오기 (일별 판매총액 최근 7일)
+			ArrayList<ChartBean> lineList = productService.getLineList();
+			model.addAttribute("lineList", lineList);
+			
+			// Bar Chart에 표시할 데이터 받아오기 (판매수량 많은 순으로 5개)
+			// product_sellcount, product_likecount 에 값 있어야함
+			// update product set product_sellcount=500, product_likecount=670 where product_idx=9;
+			ArrayList<ProductBean> barList = productService.getBarList();
+			model.addAttribute("barList", barList); 
 			return "/AdminLTE-master/pages/chart";
 			
 			// ---------- 원래 수행작업 ----------------------------------------
