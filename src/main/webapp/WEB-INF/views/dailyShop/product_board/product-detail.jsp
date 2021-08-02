@@ -227,67 +227,116 @@
                  <!-- 총 리뷰 총수 -->
 <!--                    <h4>[2 Reviews for T-Shirt]</h4>  -->
                    <ul class="aa-review-nav">
+                   
+                    <c:forEach var="reviewList" items="${reviewList}"> 
                      <li>
                         <div class="media">
                           <div class="media-body">
                           <div class="media-lef=">
                             <a href="#">
-                            <!-- 리뷰 작성시 올린 상품 이미지 300px, 300px -->
-                              <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
-                              <img class="media-object" src="<c:url value='/resources/img/testimonial-img-3.jpg'/>" alt="girl image">
+                            
+                            <!-- 리뷰 이미지 300px, 300px -->
+		                      <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image }" />'>
+                              <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image2 }" />'>
+                             
                             </a>
                           </div>
                          
                          <!-------------------------------  리뷰 작성자, 작성일  --------------------------------------->
-                            <h4 class="media-heading"><strong>리뷰작성자</strong> - <span>March 26, 2016 작성일</span></h4>
-                            <div class="aa-product-rating">
-                           <!-------------------------------  별점  --------------------------------------->
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star-o"></span>
-                            </div>
+                         
+                         	<h4 class="media-heading"><strong>제목 : ${reviewList.review_subject}</strong></h4>
+                            <h4 class="media-heading"><strong>작성자 : ${reviewList.review_email}</strong> - <span>작성일 : ${reviewList.review_date}</span></h4>
+                           <div class="star-rating">
+
+						<!-------------------------------  별점 체크안되는 빈공간 --------------------------------------->
+                           <c:set var ="review_star" value="${ reviewList.review_star }"></c:set>
+                            <c:if test="${review_star eq 1}">
+							  <label for="5-stars" class="star">&#9733;</label>
+							  <label for="4-stars" class="star">&#9733;</label>
+							  <label for="3-stars" class="star">&#9733;</label>
+							  <label for="2-stars" class="star">&#9733;</label>
+						   </c:if>
+						   
+						    <c:if test="${review_star eq 2}">
+							
+							  <label for="4-stars" class="star">&#9733;</label>
+							  <label for="3-stars" class="star">&#9733;</label>
+							  <label for="2-stars" class="star">&#9733;</label>
+						   </c:if>
+						    <c:if test="${review_star eq 3}">
+							  <label for="5-stars" class="star">&#9733;</label>
+							  <label for="4-stars" class="star">&#9733;</label>
+							  
+						   </c:if>
+
+						   <c:if test="${review_star eq 4}">
+							  <label for="5-stars" class="star">&#9733;</label>
+							
+						
+						   </c:if>
+						 
+                           
+                      <c:forEach var="review_star" items="${ratingOptions}" varStatus="status" begin="1" end="${reviewList.review_star}">
+
+<!-- 							 별점 체크 되는 부분 곳 -->
+							  <input type="checkbox" id="1-star" name="review_star" checked="checked" />
+							  <label for="1-star" class="star">&#9733;</label>
+							
+							
+						</c:forEach>
+<%-- 		                     <input type="text" name="review_star" value=${ reviewList.review_star }> --%>
+		                   </div>
+		                   
                           <!-------------------------------  리뷰내용  --------------------------------------->
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> 
-                                  
+<%--                             <p>${reviewList.review_content}</p> --%>
+							
+                            <p><textarea rows="10px" cols="55px" name="review_content" readonly="readonly">${reviewList.review_content}</textarea></p>
+                        	
+                            <input type="button" class="aa-browse-btn" value="수정" onclick="updateReview (${reviewList.review_idx} )">
+                            <input type="button" class="aa-browse-btn" value="삭제" onclick="deleteReview(${reviewList.review_idx} )">
+                           
+                        
                           </div>
+                          
                         </div>
                       </li>
+                    </c:forEach>
                    </ul>
-                   </div>
-                   </div>
-                    <!-- 페이징 부분 -->
-                 <div class="aa-blog-archive-pagination" align="center">
+                  </div>
+                    <!-------------------------------  페이징  --------------------------------------->
+                   <div class="aa-blog-archive-pagination" align="center">
                       <nav>
                         <ul class="pagination">
                           <li>
-                            <a href="#" aria-label="Previous">
+                          <c:if test="${pb.startPage > pb.pageBlock }">
+                            <a href='<c:url value="/reviewList.sh?pageNum=${pb.startPage-pb.pageBlock }" />' aria-label="Previous">
                               <span aria-hidden="true">«</span>
                             </a>
+                            </c:if>
+                                                       
                           </li>
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
+                          
+                          <c:forEach var="i" begin="${pb.startPage }" end="${pb.endPage }" step="1">
+                          	<li><a href='<c:url value="/reviewList.sh?pageNum=${i }" />'>${i }</a></li>
+    					  </c:forEach>
+					
                           <li>
-                            <a href="#" aria-label="Next">
+                          <c:if test="${pb.endPage < pb.pageCount }">
+                           <a href='<c:url value="/reviewList.sh?pageNum=${pb.startPage+pb.pageBlock }" />' aria-label="Next">
                               <span aria-hidden="true">»</span>
                             </a>
-                          </li>
+                          </c:if>
+                          </li> 
                         </ul>
                       </nav>
-                    </div>      
-                 </div>
-                </div>            
-              </div>
+                    </div>  			
+                </div>
             </div>
           </div>
          </div>
+        </div>
+       </div>
+       </div>
       </section>
   <!-- footer -->  
  <jsp:include page="../inc/footer.jsp"></jsp:include>

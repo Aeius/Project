@@ -21,6 +21,8 @@ public interface ReviewService {
 
 	public Integer getReviewListCount();
 
+	ArrayList<ReviewBean> getProductReview(int product_idx);
+
 	
 
 }

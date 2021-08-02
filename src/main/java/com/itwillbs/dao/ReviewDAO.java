@@ -25,6 +25,8 @@ public interface ReviewDAO {
 
 	public Integer getReviewListCount();
 
+	ArrayList<ReviewBean> getProductReview(int product_idx);
+
 	
 
 	

@@ -40,6 +40,13 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return sqlSession.selectOne(namespace + ".getReview", review_product_idx);
 
 	}
+	
+	@Override
+	public ArrayList<ReviewBean> getProductReview(int product_idx) {
+		System.out.println("ReviewDAOImpl-getProductReview");
+		return (ArrayList)sqlSession.selectList(namespace + ".getProductReview", product_idx);
+		
+	}
 
 	@Override
 	public void updateReview(ReviewBean reviewBean) {

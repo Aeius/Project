@@ -58,6 +58,10 @@
 		SELECT * FROM review WHERE review_idx = #{review_product_idx}
 	</select>
 	
+	<select id="getProductReview" resultType="com.itwillbs.domain.ReviewBean" >
+		SELECT * FROM review WHERE review_product_idx = #{product_idx}
+	</select>
+	
     <select id="getReviewListPage" resultType="com.itwillbs.domain.ReviewBean">
   	select * from review order by review_idx desc limit #{startRow},#{pageSize}
     </select>

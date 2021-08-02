@@ -41,6 +41,12 @@ public class ReviewServiceImpl implements ReviewService {
 		System.out.println("ReviewServiceImpl-getReview");
 		return reviewDAO.getReview(review_product_idx);
 	}
+	
+	@Override
+	public ArrayList<ReviewBean> getProductReview(int product_idx) {
+		System.out.println("ReviewServiceImpl-getProductReview");
+		return reviewDAO.getProductReview(product_idx);
+	}
 
 	@Override
 	public void updateReview(ReviewBean reviewBean) {

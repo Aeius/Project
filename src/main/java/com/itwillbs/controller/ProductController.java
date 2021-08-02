@@ -1,6 +1,8 @@
 package com.itwillbs.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.domain.MemberBean;
+import com.itwillbs.domain.PageBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.ReviewBean;
 import com.itwillbs.domain.WishListBean;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.ProductService;
+import com.itwillbs.service.ReviewService;
 import com.itwillbs.service.WishListService;
 
 @Controller
@@ -27,6 +32,9 @@ public class ProductController {
 	
 	@Inject 
 	private WishListService wishListService;
+	
+	@Inject
+	private ReviewService reviewService;
 
 //	가상주소  http://localhost:8080/myweb2/member/insert
 	
@@ -146,20 +154,26 @@ public class ProductController {
 	
 	//-------------------------------------------------------------- 상품 상세 페이지 --------------------------------------------------------
 	@RequestMapping(value = "/productDetail.sh", method = RequestMethod.GET)
-	public String getProductInfo(@RequestParam("product_idx") int product_idx, Model model, HttpSession session) {
+	public String getProductInfo(@RequestParam("product_idx") int product_idx, Model model, HttpSession session, HttpServletRequest request) {
 		ProductBean productBean = productService.getProductInfo(product_idx);
 		WishListBean wishListBean = new WishListBean();
 		wishListBean.setProduct_idx(product_idx);
 		wishListBean.setWishList_member_email((String)session.getAttribute("member_email"));
 		WishListBean wl = wishListService.checkWishList(wishListBean);
 		
+		ArrayList<ReviewBean> reviewList = reviewService.getProductReview(Integer.parseInt(request.getParameter("product_idx")));
+		model.addAttribute("reviewList", reviewList);
+		
+		// 상품정보를 담아 전달
 		model.addAttribute("productBean", productBean);
+		// 좋아요 여부 확인
 		model.addAttribute("wl", wl);
 		
 		
 		return "/dailyShop/product_board/product-detail";
 		
 	}
+	
 	
 	
 }
