@@ -85,63 +85,81 @@
             <!-- single slide item -->
             <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/1900test1.jpg'/>" alt="Men slide img" />
-              </div>
+                <img data-seq src="<c:url value='/resources/img/slider/slider_pick1.jpg'/>" alt="Men slide img" />
+              </div>   
               <div class="seq-title">
-               <span data-seq>조말론 특별 기획전</span>                
-                <h2 data-seq>Let jomalone hanldes it</h2>                
-                <p data-seq>어쩌고 저쩌고 어쩌고 저쩌고 저쩌고!</p>
-                <a data-seq href="../product_board/product.jsp" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+               <span data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">
+               What We Recommend for you</span>                
+                <h2 data-seq>당신의 향수를 찾아드립니다.</h2>                
+                <p data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">퍼퓸 테일러가 당신이 찾는 향수를 추천해 드립니다.</p>
+                <a data-seq href="<c:url value='/recoTest.sh'/>" style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.2 ); " class="aa-shop-now-btn aa-secondary-btn">
+                TEST START</a>
               </div>
+          
             </li>
             <!-- single slide item -->
             <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/1900test2.jpg'/>" alt="Wristwatch slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/slider_pick2.jpg'/>" alt="Wristwatch slide img" />
               </div>
               <div class="seq-title">
-                <span data-seq>Save Up to 40% Off</span>                
-                <h2 data-seq>Wristwatch Collection</h2>                
-                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <span data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">2021 3/4 Collector's Pick</span>                
+                <h2 data-seq>Penhaligon's Choice</h2>                
+                <p data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">프리미엄 컬렉션을 부티끄에서 만나보세요</p>
+                <a data-seq href="<c:url value='/productList.sh'/>"  style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.5 );"  class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
+              <!-- single slide item -->           
+              <li>
+              <div class="seq-model">
+                <img data-seq src="<c:url value='/resources/img/slider/slider_pick2_1.jpg'/>" alt="Wristwatch slide img" />
+              </div>
+              <div class="seq-title">
+               <span data-seq style="color: white; background-color:black ;background-color: rgba( 0, 0, 0, 0.4 );">
+               2021/08 Woman's Pick</span>                 
+                <h2 data-seq>Maison Margiela</h2>                
+              <p data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">
+                Maison Margiela의 일관된 디자인 철학, Replica line</p>
+                <a data-seq href="<c:url value='/productList.sh'/>"  style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.5 );"   class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+              </div>
+            </li>
+            
             <!-- single slide item -->
             <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/1900test3.jpg'/>" alt="Women Jeans slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/slider_pick4.jpg'/>" alt="Women Jeans slide img" />
               </div>
               <div class="seq-title">
-                <span data-seq>Save Up to 75% Off</span>                
-                <h2 data-seq>Jeans Collection</h2>                
-                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <span data-seq style="color: white; background-color:black ;background-color: rgba( 0, 0, 0, 0.4 );">2021/08 Man's Pick</span>                
+                <h2 data-seq>Mercedes Benz</h2>                
+                <p data-seq style="color: #353535;  background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );" >
+                여름에도 지나칠 수 없는 Luxury & Trendy</p>
+                <a data-seq href="<c:url value='/productList.sh'/>" style="border:1px solid #000;"  class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
-            <!-- single slide item -->           
-            <li>
-              <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/1900test4.jpg'/>" alt="Shoes slide img" />
-              </div>
-              <div class="seq-title">
-                <span data-seq>Save Up to 75% Off</span>                
-                <h2 data-seq>Exclusive Shoes</h2>                
-                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-              </div>
-            </li>
+          
             <!-- single slide item -->  
-             <li>
+ 
+              <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/5.jpg'/>" alt="Male Female slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/slider_pick3.jpg'/>" alt="Wristwatch slide img" />
               </div>
               <div class="seq-title">
-                <span data-seq>Save Up to 50% Off</span>                
-                <h2 data-seq>Best Collection</h2>                
-                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <span data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">
+                Taylor's guide for You
+                </span>                
+                <h2 data-seq>"When you [Wear] the Perfume"</h2>                
+                <p data-seq style="color: #fff; ">
+               올바르게 입는 니치향수로 무더위 극복하기</p>
+                <a data-seq href="<c:url value='/productList.sh'/>"  style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.2); "  class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
-            </li>                   
+            </li>
+            
+            
+            
+            
+            
+                      
           </ul>
         </div>
         <!-- slider navigation btn -->

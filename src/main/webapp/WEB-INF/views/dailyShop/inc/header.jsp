@@ -110,14 +110,16 @@
             <div class="aa-header-bottom-area">
               <!-- logo  -->
               <div class="aa-logo">
-                <!-- Text based logo -->
-                <a href="main.sh">
-                  <span class="fa fa-shopping-cart"></span>
-    <!---------------------------------------------------------------- 로고 제목 수정 가능 ------------------------------------------------------------->
-                  <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
-                </a>
-                <!-- img based logo -->
-                <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
+               
+
+   <!---------------------------------------------------------------- 로고 제목 수정 가능 ------------------------------------------------------------->
+               <!--  Text based logo -->
+<%--                 <a href="<c:url value='/main.sh'/>"> --%>
+<!--                   <span class="fa fa-shopping-cart"></span> -->
+<!--                    <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p> -->
+<!--                 </a> -->
+<!--                 img based logo -->
+                <a href="<c:url value='/main.sh'/>"> <img src="<c:url value='/resources/img/logo_proto_1.jpg'/>"  ></a>
               </div>
               <!-- / logo  -->
                <!-- ----------------------------------------------------------cart box ------------------------------------------------->
@@ -164,17 +166,18 @@
                   <li><a href="productDetail.sh">상세페이지</a></li>
                 </ul>
               </li>
-              <li><a href="../member/aboutus.jsp">about</a></li>
-              <li><a href="#">Furniture</a></li>            
+              <li><a href="<c:url value='/recoTest.sh'/>">Test</a></li>
+                    
               <!--  블로그 부분 삭제! -->
               <li><a href="notice.sh">Service</a></li>
-              <li><a href="#">Pages <span class="caret"></span></a>
-                <ul class="dropdown-menu">                
-                  <li><a href="productList.sh">Shop Page</a></li>
-                  <li><a href="productDetail.sh">Shop Single</a></li>                
-                  <li><a href="../404.jsp">404 Page</a></li>                
-                </ul>
-              </li>
+              
+<!--              <li><a href="#">Pages <span class="caret"></span></a> -->
+<!--                <ul class="dropdown-menu">                 -->
+<!--                  <li><a href="productList.sh">Shop Page</a></li> -->
+<!--                  <li><a href="productDetail.sh">Shop Single</a></li>                 -->
+<!--                  <li><a href="../404.jsp">404 Page</a></li>                 -->
+<!--                </ul> -->
+<!--              </li> -->
             </ul>
           </div><!--/.nav-collapse -->
         </div>

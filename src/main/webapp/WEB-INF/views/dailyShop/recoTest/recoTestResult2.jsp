@@ -70,6 +70,14 @@ https://www.tooplate.com/view/2114-pixie
   </head>
 
   <body>
+     <!-- wpf loader Two -->
+    <div id="wpf-loader-two">          
+      <div class="wpf-loader-two-inner">
+        <span>Loading</span>
+      </div>
+    </div> 
+    <!-- / wpf loader Two -->       
+  
       <!-- header -->
 <jsp:include page="../inc/header.jsp"></jsp:include>
   <!-- / menu -->
@@ -97,7 +105,7 @@ https://www.tooplate.com/view/2114-pixie
 			
 			  <h3 style="font-size: 2.7em !important; font-family:궁서체 !important; 
 			 text-align: center; font-color: #300026; margin-top:100px;  -->
-			 padding-bottom:100px;"> We Reccomand this;</h3>
+			 padding-bottom:100px;"> We Recommend this;</h3>
 
 			<section style="text-align: center; font-color: #300026; margin-top:100px;  
 			 padding-bottom:100px; margin-bottom:100px;">

@@ -151,11 +151,11 @@
   
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-    <img src="../img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+    <img src="<c:url value='/resources/img/banner_add/logo4.gif'/>" alt="fashion img">
     <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2>Account Page</h2>
+        <h2>Join</h2>
       </div>
      </div>
    </div>

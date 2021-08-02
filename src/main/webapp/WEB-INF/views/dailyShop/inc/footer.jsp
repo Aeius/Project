@@ -31,8 +31,8 @@
                   <div class="aa-footer-widget">
                     <h3>Contents</h3>
                     <ul class="aa-footer-nav">
-                      <li><a href="#">Perfume MBTI</a></li>
-                      <li><a href="#">About Us</a></li>
+                      <li><a href="<c:url value='/recoTest.sh'/>">Perfume MBTI</a></li>
+<!--                       <li><a href="#">About Us</a></li> -->
                     </ul>
                   </div>
                 </div>
