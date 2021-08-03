@@ -119,7 +119,7 @@
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${search.product_idx }">${search.product_name }</a></h4>
-                              <span class="aa-product-price">$ ${search.product_price }</span><span class="aa-product-price"><del>${search.product_price }</del></span>
+                              <span class="aa-product-price">￦ ${search.product_price }</span>
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">

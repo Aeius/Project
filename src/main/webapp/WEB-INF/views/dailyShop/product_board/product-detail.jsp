@@ -138,7 +138,7 @@
                     <div id="demo-1" class="simpleLens-gallery-container">
                       <div class="simpleLens-container">
                       <!-- 돋보기로 확대될 사진 넣는 곳 -->
-                        <div class="simpleLens-big-image-container"><a data-lens-image="<c:url value='/resources/upload/${productBean.product_main_image }'/>" class="simpleLens-lens-image"><img src="<c:url value='/resources/upload/${productBean.product_main_image }'/>" class="simpleLens-big-image"></a></div>
+                        <div class="simpleLens-big-image-container"><a data-lens-image="<c:url value='/resources/upload/${productBean.product_main_image }'/>" class="simpleLens-lens-image"><img src="<c:url value='/resources/upload/${productBean.product_main_image }'/>" class="simpleLens-big-image" width="350" height="400"></a></div>
                       </div>
                     </div>
                   </div>
@@ -292,10 +292,6 @@
 							
                             <p><textarea rows="10px" cols="55px" name="review_content" readonly="readonly">${reviewList.review_content}</textarea></p>
                         	
-                            <input type="button" class="aa-browse-btn" value="수정" onclick="updateReview (${reviewList.review_idx} )">
-                            <input type="button" class="aa-browse-btn" value="삭제" onclick="deleteReview(${reviewList.review_idx} )">
-                           
-                        
                           </div>
                           
                         </div>

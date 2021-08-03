@@ -121,9 +121,9 @@
 
  <!-- Cart view section -->
  <form action="checkout_finish.sh" method="post" name="payFinish">
- <input type="hidden" id="buyer_email" name="buyer_email" value="0">
- <input type="hidden" id="buyer_tel" name="buyer_tel" value="0">
- <input type="hidden" id="amount" name="amount" value="0">
+ <input type="hidden" id="buyer_email" name="buyer_email" value="">
+ <input type="hidden" id="buyer_tel" name="buyer_tel" value="">
+ <input type="hidden" id="amount" name="amount" value="">
 <%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
 <%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
 <%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>

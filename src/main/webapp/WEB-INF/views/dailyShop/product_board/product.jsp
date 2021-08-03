@@ -138,7 +138,7 @@
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${allList.product_idx }">${allList.product_name }</a></h4>
-                              <span class="aa-product-price">$ ${allList.product_price }</span>
+                              <span class="aa-product-price">￦ ${allList.product_price }</span>
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
@@ -188,7 +188,7 @@
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${powderyList.product_idx }"><img src="<c:url value='/resources/upload/${powderyList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${powderyList.product_idx }">${powderyList.product_name }</a></h4>
-                              <span class="aa-product-price">$ ${powderyList.product_price }</span>
+                              <span class="aa-product-price">￦ ${powderyList.product_price }</span>
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
@@ -223,42 +223,6 @@
                         </li>
                         </c:forEach>
                         <!------------------------------------  사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
-						<li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                       <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                        <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                         <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption> 
-                          </figure>                        
-                        </li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                      </div>   
@@ -273,7 +237,7 @@
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${floralList.product_idx }"><img src="<c:url value='/resources/upload/${floralList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${floralList.product_idx }">${floralList.product_name }</a></h4>
-                              <span class="aa-product-price">$ ${floralList.product_price }</span>
+                              <span class="aa-product-price">￦ ${floralList.product_price }</span>
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
@@ -308,42 +272,6 @@
                         </li>
                         </c:forEach>
                         <!------------------------------------  사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
-						<li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                       <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                        <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                         <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                      </div>   
@@ -358,7 +286,7 @@
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${woodyList.product_idx }"><img src="<c:url value='/resources/upload/${woodyList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${woodyList.product_idx }">${woodyList.product_name }</a></h4>
-                              <span class="aa-product-price">$ ${woodyList.product_price }</span>
+                              <span class="aa-product-price">￦ ${woodyList.product_price }</span>
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
@@ -392,42 +320,6 @@
                         </li>
                         </c:forEach>
                         <!------------------------------------  사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
-						<li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                       <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                        <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                         <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                      </div>   
@@ -442,7 +334,7 @@
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${aquaList.product_idx }"><img src="<c:url value='/resources/upload/${aquaList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${aquaList.product_idx }">${aquaList.product_name }</a></h4>
-                              <span class="aa-product-price">$ ${aquaList.product_price }</span>
+                              <span class="aa-product-price">￦ ${aquaList.product_price }</span>
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
@@ -476,42 +368,6 @@
                         </li>
                         </c:forEach>
                         <!------------------------------------  사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
-						<li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                       <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                        <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                         <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                     </div>
@@ -526,7 +382,7 @@
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${fruityList.product_idx }"><img src="<c:url value='/resources/upload/${fruityList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${fruityList.product_idx }">${fruityList.product_name }</a></h4>
-                              <span class="aa-product-price">$ ${fruityList.product_price }</span>
+                              <span class="aa-product-price">￦ ${fruityList.product_price }</span>
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
@@ -560,42 +416,6 @@
                         </li>
                         </c:forEach>
                         <!------------------------------------  사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
-						<li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                       <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                        <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                         <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                     </div>
@@ -610,7 +430,7 @@
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${sitrusList.product_idx }"><img src="<c:url value='/resources/upload/${sitrusList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${sitrusList.product_idx }">${sitrusList.product_name }</a></h4>
-                              <span class="aa-product-price">$ ${sitrusList.product_price }</span>
+                              <span class="aa-product-price">￦ ${sitrusList.product_price }</span>
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
@@ -644,42 +464,6 @@
                         </li>
                         </c:forEach>
                         <!------------------------------------  사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
-						<li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                       <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                        <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                         <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                      </div>   
@@ -695,7 +479,7 @@
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${spicesList.product_idx }"><img src="<c:url value='/resources/upload/${spicesList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${spicesList.product_idx }">${spicesList.product_name }</a></h4>
-                              <span class="aa-product-price">$ ${spicesList.product_price }</span>
+                              <span class="aa-product-price">￦ ${spicesList.product_price }</span>
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
@@ -729,42 +513,6 @@
                         </li>
                         </c:forEach>
                         <!------------------------------------  사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
-						<li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                       <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                        <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                         <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                      </div>   
@@ -779,7 +527,7 @@
                             <a class="aa-product-img" href="productDetail.sh?product_idx=${modernList.product_idx }"><img src="<c:url value='/resources/upload/${modernList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${modernList.product_idx }">${modernList.product_name }</a></h4>
-                              <span class="aa-product-price">$ ${modernList.product_price }</span>
+                              <span class="aa-product-price">￦ ${modernList.product_price }</span>
                             </figcaption>
                           </figure>                         
                           <div class="aa-product-hvr-content">
@@ -813,42 +561,6 @@
                         </li>
                         </c:forEach>
                         <!------------------------------------  사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
-						<li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                       <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                        <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
-                         <li>
-                          <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
-                              <figcaption>
-                               <h4 class="aa-product-title"><a></a></h4>
-                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
-                            </figcaption>
-                          </figure>                        
-                        </li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                      </div>                  
