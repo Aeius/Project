@@ -46,7 +46,7 @@
               <!-- AREA CHART -->
               <div class="box box-primary">
                 <div class="box-header">
-                  <h3 class="box-title">향수 MBTI 추천 TOP5 (데이터 미적용 / 테스트)</h3>
+                  <h3 class="box-title">향수 추천 통계</h3>
                 </div>
                 <div class="box-body chart-responsive">
                   <div class="chart" id="revenue-chart" style="height: 300px;"></div>
@@ -107,7 +107,23 @@
       $(function () {
         "use strict";
 
-        // LINE CHART
+   		// BAR CHART -> 향수 추천 통계
+        var bar2 = new Morris.Bar({
+            element: 'revenue-chart',
+            resize: true,
+            data: [ // 나타낼 데이터
+         	  	<c:forEach var="reco" items="${recoList }"> 
+                {category: "${reco.category }", man: ${reco.man }, woman: ${reco.woman }, non: ${reco.non}},
+              </c:forEach>
+            ],
+            barColors: ['#179D49', '#F02456', '#FFF00C'], // 색 지정
+            xkey: 'category', 
+            ykeys: ['man', 'woman', 'non'], // 막대기로 나타낼 데이터
+            labels: ['남', '여', '무관'], // 막대기 이름 표시
+            hideHover: 'auto'
+          });
+     
+        // LINE CHART -> 매출액 
         var line = new Morris.Line({
           element: 'line-chart',
           resize: true,
@@ -123,7 +139,7 @@
           hideHover: 'auto'
         });
 
-        //DONUT CHART
+        //DONUT CHART -> 카테고리별 상품 수
         var donut = new Morris.Donut({
           element: 'sales-chart',
           resize: true,
@@ -137,7 +153,7 @@
           hideHover: 'auto'
         });
         
-        //BAR CHART
+        //BAR CHART -> 판매량, 좋아요 수
         var bar = new Morris.Bar({
           element: 'bar-chart',
           resize: true,
@@ -154,21 +170,7 @@
           hideHover: 'auto'
         });
         
-        // recommend-chart => 향수 추천 결과 받아오기
-        var bar2 = new Morris.Bar({
-            element: 'revenue-chart',
-            resize: true,
-            data: [ // 나타낼 데이터
-         	  	<c:forEach var="bar2" items="${barList }"> 
-                {idx: "${bar2.product_name }", m: ${bar2.product_sellcount }, fm: ${bar2.product_likecount }, none: 400 },
-              </c:forEach>
-            ],
-            barColors: ['#179D49', '#F02456', '#39403B'], // 색 지정
-            xkey: 'idx', 
-            ykeys: ['m', 'fm', 'none'], // 막대기로 나타낼 데이터
-            labels: ['남', '여', '무관'], // 막대기 이름 표시
-            hideHover: 'auto'
-          });
+        
         
       });
     </script>

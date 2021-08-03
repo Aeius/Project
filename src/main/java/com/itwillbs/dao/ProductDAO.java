@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.RecoBean;
 
 public interface ProductDAO {
 	// powdery / floral / woody / aqua / fruity / sitrus / spices / modern
@@ -52,4 +53,5 @@ public interface ProductDAO {
 	
 	public ArrayList<CategoryBean> getDonutList();
 	
+	public ArrayList<RecoBean> getRecoList();
 }

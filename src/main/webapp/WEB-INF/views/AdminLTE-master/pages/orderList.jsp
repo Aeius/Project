@@ -6,6 +6,31 @@
 <html>
   <!-- head -->
   <jsp:include page="../inc/head.jsp" />
+  <head>
+  	<script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
+  	<script type="text/javascript">
+  	$(document).ready(function() {
+		$('.showBoxBtn').click(function() {
+			var idx = $(this).attr("id"); // 주문번호 받아오기
+			$('.showBox'+idx).html(
+				'<form action="orderStatusChange.ad" method="post">'
+				+ '<select name="status" >'
+				+ '<option value="">선택하세요</option>'
+				+ '<option value="배송준비">배송준비</option>'
+				+ '<option value="배송중">배송중</option>'
+				+ '<option value="배송완료">배송완료</option>'
+				+ '<option value="반품준비">반품준비</option>'
+				+ '<option value="반품완료">반품완료</option>'
+				+ '<option value="주문취소">주문취소</option>'
+				+ '</select>'
+				+ '<input type="hidden" name="idx" value="'+idx+'">'
+				+ '&nbsp;&nbsp;<input type="submit" value="변경">'
+				+ '</form>'
+			);
+		});
+	});
+  	</script>
+  </head>
   
   <body class="skin-blue">
     <!-- Site wrapper -->
@@ -51,20 +76,10 @@
                       		<td>${list.order_member_email }</td>
                       		<td>${list.order_status }</td>
                       		<td>${list.order_tracking_num }</td>
-                      		<td>
-		                    	<form action="orderStatusChange.ad" method="post">	
-  		                        <select name="status" >
-								    <option value="">선택하세요</option>
-								    <option value="배송준비">배송준비</option>
-								    <option value="배송중">배송중</option>
-								    <option value="배송완료">배송완료</option>
-								    <option value="반품준비">반품준비</option>
-								    <option value="반품완료">반품완료</option>
-								    <option value="주문취소">주문취소</option>
-								</select>	
-								<input type="hidden" name="idx" value="${list.order_idx }">
-                      			<input type="submit" value="변경">
-	                    		</form>	
+                      		<td width="20%">
+                      			<span class="showBox${list.order_idx }">
+	                      			<input type="button" value="변경" class="showBoxBtn" id="${list.order_idx }">
+                      			</span>
                       		</td>
                       	</tr>
                       </c:forEach>

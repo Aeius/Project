@@ -15,4 +15,17 @@
 		set category_count = category_count-1
 		where category_name=#{category_name}
 	</update>
+	
+	<update id="addManCount">
+		update recochart set man = man+1 where category=#{recoCategory}
+	</update>
+	
+	<update id="addWomanCount">
+		update recochart set woman = woman+1 where category=#{recoCategory}
+	</update>
+	
+	<update id="addNonCount">
+		update recochart set non = non+1 where category=#{recoCategory}
+	</update>
+	
 </mapper>

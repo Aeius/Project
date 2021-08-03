@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itwillbs.service.CategoryService;
+
 
 //import com.itwillbs.service.RecoTestService;
 
@@ -18,7 +20,8 @@ public class RecoTestController {
 //	@Inject
 //	private RecoTestService recoTestService;
 	
-	
+	@Inject
+	private CategoryService categoryService;
 	
 
 	//------------------------------------------------------------추천 테스트 확인용매핑 ------------------------------------------------------------
@@ -26,6 +29,7 @@ public class RecoTestController {
 	@RequestMapping(value = "/recoTest.sh", method = RequestMethod.GET)
 	public String recoTestStart(HttpSession session, Model model) {
 	//Recommend Test 시작 페이지입니다. get 방식 사용
+		
 		return "/dailyShop/recoTest/recoTestStart";
 	}
 	
@@ -338,7 +342,6 @@ public class RecoTestController {
 	int result_sweet = (int)session.getAttribute("result_sweet");
 	
 	
-	
 	switch(q5) {
 	
 	case "1":
@@ -463,14 +466,16 @@ public class RecoTestController {
 		
 	
 	}
-		
 	
+	System.out.printf("남:%d 여:%d 무:%d\n", result_man, result_woman, result_both);
+	System.out.printf("모던:%d 내츄럴:%d 스위트:%d 릴렉스:%d\n", result_modern, result_natural, result_sweet, result_relax);
 	
 		if(result_man>=1   //남자 modern이 가장 높은 경우
 				&& result_modern > result_sweet
 				&& result_modern > result_relax
 				&& result_modern > result_natural
 				) {	
+			categoryService.addManCount("modern"); // (차트) 남자 modern 카운트 +1
 			return "/dailyShop/recoTest/recoTestResult1"; //1번결과
 		}
 	
@@ -479,6 +484,7 @@ public class RecoTestController {
 			&& result_natural > result_relax
 			&& result_natural > result_modern
 			) {	
+		categoryService.addManCount("natural"); // (차트) 남자 natural 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult2"; //2번결과
 	}
 	
@@ -488,6 +494,7 @@ public class RecoTestController {
 			&& result_sweet > result_relax
 			&& result_sweet > result_natural
 			) {	
+		categoryService.addManCount("sweet"); // (차트) 남자 sweet 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult3"; //3번결과
 	}
 	
@@ -497,6 +504,7 @@ public class RecoTestController {
 			&& result_relax > result_sweet
 			&& result_relax > result_natural
 			) {	
+		categoryService.addManCount("relax"); // (차트) 남자 relax 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult4"; //4번결과
 	}
 	
@@ -511,6 +519,7 @@ public class RecoTestController {
 			&& result_modern > result_relax
 			&& result_modern > result_natural
 			) {	
+		categoryService.addWomanCount("modern"); // (차트) 여자 modern 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult5"; //5번결과
 	}
 	
@@ -521,6 +530,7 @@ public class RecoTestController {
 			&& result_natural > result_relax
 			&& result_natural > result_modern
 			) {	
+		categoryService.addWomanCount("natural"); // (차트) 여자 natural 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult6"; //6번결과
 	}
 	
@@ -530,6 +540,7 @@ public class RecoTestController {
 			&& result_sweet > result_relax
 			&& result_sweet > result_natural
 			) {	
+		categoryService.addWomanCount("sweet"); // (차트) 여자 sweet 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult7"; //7번결과
 	}
 	
@@ -539,6 +550,7 @@ public class RecoTestController {
 			&& result_relax > result_sweet
 			&& result_relax > result_natural
 			) {	
+		categoryService.addWomanCount("relax"); // (차트) 여자 relax 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult8"; //8번결과
 	}
 
@@ -550,6 +562,7 @@ public class RecoTestController {
 			&& result_modern > result_relax
 			&& result_modern > result_natural
 			) {	
+		categoryService.addNonCount("modern"); // (차트) 무관 modern 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult9"; //9번결과
 	}
 		
@@ -559,6 +572,7 @@ public class RecoTestController {
 			&& result_natural > result_relax
 			&& result_natural > result_modern
 			) {	
+		categoryService.addNonCount("natural"); // (차트) 무관 natural 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult10"; //10번결과
 	}
 	
@@ -568,6 +582,7 @@ public class RecoTestController {
 			&& result_sweet > result_relax
 			&& result_sweet > result_natural
 			) {	
+		categoryService.addNonCount("sweet"); // (차트) 무관 sweet 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult11"; //11번결과
 	}
 	
@@ -577,10 +592,11 @@ public class RecoTestController {
 			&& result_relax > result_sweet
 			&& result_relax > result_natural
 			) {	
+		categoryService.addNonCount("relax"); // (차트) 무관 relax 카운트 +1
 		return "/dailyShop/recoTest/recoTestResult12"; //12번결과
 	}
 	
-
+	
 	
 	return "/dailyShop/recoTest/recoTest";
 	}

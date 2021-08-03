@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 //import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,7 @@ import com.itwillbs.domain.NoticeBean;
 import com.itwillbs.domain.OrderBean;
 import com.itwillbs.domain.OrderDetailBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.RecoBean;
 import com.itwillbs.domain.ReviewBean;
 import com.itwillbs.domain.SubscribeBean;
 import com.itwillbs.service.AdminService;
@@ -545,6 +547,10 @@ public class AdminController {
 		if(result.equals("admin")) { //2번째
 			
 			// ---------- 원래 수행작업 ----------------------------------------
+			
+			// Bar Chart에 표시할 데이터 받아오기 (추천 통계)
+			ArrayList<RecoBean> recoList = productService.getRecoList();
+			model.addAttribute("recoList", recoList);
 			
 			// Donut Chart에 표시할 데이터 받아오기 (카테고리별 상품 갯수) 
 			ArrayList<CategoryBean> donutList = productService.getDonutList();

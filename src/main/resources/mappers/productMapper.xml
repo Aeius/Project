@@ -154,4 +154,8 @@
   	select * from category
   </select>  
   
+  <select id="getRecoList" resultType="com.itwillbs.domain.RecoBean">
+  	select * from recochart;
+  </select>  
+  
 </mapper>

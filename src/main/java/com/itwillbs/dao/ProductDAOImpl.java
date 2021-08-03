@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.RecoBean;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -152,6 +153,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public ArrayList<CategoryBean> getDonutList() {
 		return (ArrayList)sqlSession.selectList(namespace + ".getDonutList");
+	}
+
+	@Override
+	public ArrayList<RecoBean> getRecoList() {
+		return (ArrayList)sqlSession.selectList(namespace + ".getRecoList");
 	}
 	
 	

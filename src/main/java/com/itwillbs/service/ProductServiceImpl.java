@@ -11,6 +11,7 @@ import com.itwillbs.dao.ProductDAO;
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.RecoBean;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -158,6 +159,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ArrayList<CategoryBean> getDonutList() {
 		return productDAO.getDonutList();
+	}
+	@Override
+	public ArrayList<RecoBean> getRecoList() {
+		return productDAO.getRecoList();
 	}
 	
 	

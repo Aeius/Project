@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
 import com.itwillbs.domain.ProductBean;
+import com.itwillbs.domain.RecoBean;
 
 public interface ProductService {
 	// powdery / floral / woody / aqua / fruity / sitrus / spices / modern
@@ -51,5 +52,7 @@ public interface ProductService {
 	public ArrayList<ChartBean> getLineList();
 
 	public ArrayList<CategoryBean> getDonutList();
+
+	public ArrayList<RecoBean> getRecoList();
 
 }

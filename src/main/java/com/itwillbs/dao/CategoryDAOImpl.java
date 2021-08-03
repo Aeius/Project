@@ -28,6 +28,21 @@ public class CategoryDAOImpl implements CategoryDAO {
 			sqlSession.update(namespace + ".minusCount", category_name);
 		}
 	}
+
+	@Override
+	public void addManCount(String recoCategory) {
+		sqlSession.update(namespace + ".addManCount", recoCategory);
+	}
+
+	@Override
+	public void addWomanCount(String recoCategory) {
+		sqlSession.update(namespace + ".addWomanCount", recoCategory);
+	}
+
+	@Override
+	public void addNonCount(String recoCategory) {
+		sqlSession.update(namespace + ".addNonCount", recoCategory);
+	}
 	
 	
 }
