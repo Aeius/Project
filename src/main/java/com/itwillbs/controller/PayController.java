@@ -9,7 +9,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -28,18 +30,21 @@ import com.fasterxml.jackson.core.util.JsonParserDelegate;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.OrderBean;
+import com.itwillbs.domain.OrderListBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.service.MemberService;
+import com.itwillbs.service.OrderDetailService;
+import com.itwillbs.service.OrderListService;
 import com.itwillbs.service.ProductService;
 
 @Controller
 public class PayController {
 
 	@Inject
-	private ProductService productService;
+	private OrderListService orderListService;
 	
 	@Inject
-	private MemberService memberService;
+	private OrderDetailService orderDetailService;
 //	
 //	@RequestMapping(value = "/checkout2.sh", method = RequestMethod.GET)
 //	public String checkout(HttpServletRequest request , Model model) {
@@ -60,20 +65,54 @@ public class PayController {
 	public String checkout_finish(HttpServletRequest request , Model model) {
 		System.out.println("checkout_finish()");
 		
+//		document.getElementById('order_idx').value = 'p' + new Date().getTime(),
+//				document.getElementById('buyer_email').value = rsp.buyer_email;
+//		        document.getElementById('buyer_tel').value = rsp.buyer_tel;
+//		        document.getElementById('buyer_addr').value = rsp.buyer_addr;
+//		        document.getElementById('buyer_postcode').value = rsp.buyer_postcode;
+//		        document.getElementById('amount').value = rsp.paid_amount;
+		
 		System.out.println("결제 금액 : " + request.getParameter("amount"));
-//		order_price : rsp.paid_amount,
-//		order_member_email : rsp.buyer_email,
-//	    order_receiver_name : rsp.buyer_name,
-//	    order_receiver_phone : rsp.buyer_tel,
-//	    order_receiver_address : rsp.buyer_addr,
-//	    order_receiver_post : rsp.buyer_postcode
-//		OrderBean orderBean = new OrderBean();
-//		orderBean.setOrder_amount(Integer.parseInt(request.getParameter("order_price")));
-//		orderBean.setOrder_member_email(request.getParameter("order_member_email"));
-//		
-//		System.out.println(request.getParameter("order_member_email"));
-//		System.out.println(request.getParameter("order_price"));
-//		System.out.println(request.getParameter("order_receiver_name"));
+		System.out.println("주문번호 : " + request.getParameter("order_idx"));
+		System.out.println("주문자 이메일 : " + request.getParameter("buyer_email"));
+		System.out.println("주문자 연락처 : " + request.getParameter("buyer_tel"));
+		System.out.println("주문자 주소 : " + request.getParameter("buyer_addr"));
+		System.out.println("주문자 우편번호 : " + request.getParameter("buyer_postcode"));
+		System.out.println("주문한 상품 : " + request.getParameter("product_idx"));
+		System.out.println("주문상품의 갯수 : " + request.getParameter("product_quantity"));
+		
+		
+		OrderListBean orderListBean = new OrderListBean();
+		orderListBean.setOrder_idx(Integer.parseInt(request.getParameter("order_idx")));
+		orderListBean.setOrder_amount(Integer.parseInt(request.getParameter("amount")));
+		orderListBean.setOrder_member_email(request.getParameter("buyer_email"));
+		orderListBean.setOrder_receiver_phone(request.getParameter("buyer_tel"));
+		orderListBean.setOrder_receiver_address(request.getParameter("buyer_addr"));
+		orderListBean.setOrder_receiver_post(request.getParameter("buyer_postcode"));
+		
+//		orderListService.insertOrderList(orderListBean);
+		
+		String products = request.getParameter("product_idx");
+		String quantitys = request.getParameter("product_quantity");
+		
+		String[] product = products.split("/");
+		String[] quantity = quantitys.split("/");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+//		for(String pd : product) {
+//			map.put(pd, "");
+//		}
+//		for(int i = 0; i < quantity.length(); i++) {
+//			map.put([i], qt);
+//		}
+//		orderDetailService.insertOrderDetailList(map);
+		
+		
+		
+		
+		
+		
 		
 		return "/dailyShop/member/checkout_finish";
 	}

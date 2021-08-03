@@ -65,10 +65,11 @@
     	  console.log(rsp);
 		    if ( rsp.success ) {
 		    	
-// 		        document.getElementId('buyer_email').value = rsp.buyer_email;
-// 		        document.getElementId('buyer_tel').value = rsp.buyer_tel;
-		        
-// 		        var amount += ''+ rsp.paid_amount;
+		        document.getElementById('order_idx').value = new Date().getTime(),
+				document.getElementById('buyer_email').value = rsp.buyer_email;
+		        document.getElementById('buyer_tel').value = rsp.buyer_tel;
+		        document.getElementById('buyer_addr').value = rsp.buyer_addr;
+		        document.getElementById('buyer_postcode').value = rsp.buyer_postcode;
 		        document.getElementById('amount').value = rsp.paid_amount;
 		        
 		        
@@ -121,8 +122,11 @@
 
  <!-- Cart view section -->
  <form action="checkout_finish.sh" method="post" name="payFinish">
+ <input type="hidden" id="order_idx" name="order_idx" value="">
  <input type="hidden" id="buyer_email" name="buyer_email" value="">
  <input type="hidden" id="buyer_tel" name="buyer_tel" value="">
+ <input type="hidden" id="buyer_addr" name="buyer_addr" value="">
+ <input type="hidden" id="buyer_postcode" name="buyer_postcode" value="">
  <input type="hidden" id="amount" name="amount" value="">
 <%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
 <%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>

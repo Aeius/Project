@@ -6,6 +6,13 @@ public class OrderListBean {
     private int order_detail_order_idx;
     private int order_detail_product_idx;
     private String order_member_email;  
+    private int order_amount;
+    private String order_receiver_name;
+    private String order_receiver_phone;
+    private String order_receiver_post;
+    private String order_receiver_address;
+    
+    
     
     private String product_name;
     private int product_idx;
@@ -17,6 +24,38 @@ public class OrderListBean {
     private int review_order_idx;
     private String order_detail_return_check;
     
+    
+    
+	public String getOrder_receiver_name() {
+		return order_receiver_name;
+	}
+	public void setOrder_receiver_name(String order_receiver_name) {
+		this.order_receiver_name = order_receiver_name;
+	}
+	public String getOrder_receiver_phone() {
+		return order_receiver_phone;
+	}
+	public void setOrder_receiver_phone(String order_receiver_phone) {
+		this.order_receiver_phone = order_receiver_phone;
+	}
+	public String getOrder_receiver_post() {
+		return order_receiver_post;
+	}
+	public void setOrder_receiver_post(String order_receiver_post) {
+		this.order_receiver_post = order_receiver_post;
+	}
+	public String getOrder_receiver_address() {
+		return order_receiver_address;
+	}
+	public void setOrder_receiver_address(String order_receiver_address) {
+		this.order_receiver_address = order_receiver_address;
+	}
+	public int getOrder_amount() {
+		return order_amount;
+	}
+	public void setOrder_amount(int order_amount) {
+		this.order_amount = order_amount;
+	}
 	public int getOrder_idx() {
 		return order_idx;
 	}
