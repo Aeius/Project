@@ -61,12 +61,28 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.selectList(namespace+".getMemberList");
 	}
    
+   //이메일찾기
    @Override
    public String emailCheck(MemberBean mb) {
       System.out.println("MemberDAOImpl - emailCheck");
-      //이메일찾기
       return sqlSession.selectOne(namespace + ".emailCheck",mb);
    }
+   
+   //일치하는 패스워드 있는지 찾기
+   @Override
+	public String passwordCheck(MemberBean mb) {
+		System.out.println("MemberDAO - 비번 체크");
+		return sqlSession.selectOne(namespace +".passwordCheck", mb);
+	}
+  
+	//임시비번 DB등록
+	@Override
+	public void updateTempPassword(MemberBean mb) {
+		System.out.println("임시비번 tempPassword 를 DB에 업데이트 시도_DAOImpl");
+		sqlSession.update(namespace+".updateTempPassword", mb);
+	}
+   
+   
 
 //   고객 쿠폰 리스트 조회
    @Override
@@ -111,7 +127,15 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("MemberDAOImpl - getSubMemberList()");
 		return sqlSession.selectList(namespace+".getSubMemberList");
 	}
-   
+
+	@Override
+	public MemberBean getMemberByemail(String member_email) {
+		  return sqlSession.selectOne(namespace + ".getMemberByemail",member_email);
+	}
+
+
+
+	
    
    
 }

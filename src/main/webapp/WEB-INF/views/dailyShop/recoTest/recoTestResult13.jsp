@@ -8,36 +8,11 @@
 <style type="text/css">
 
 
-
-
-/* 	position: fixed; */
-
-
-/* .about-page .container .row .col-md-team2 #container_team2 section p{ */
-/* margin: 0 auto !important; */
-/* } */
-
-
-
-
-.about-page .container .col-md-team2 #container_team2{
-  background-image: url("resources/img/logo2.jpg");
-  display: inline;
-  float: left;
-  width: 100%;
-  height:80%;
-  background-repeat:no-repeat;
-  background-position:top right;
-	background-size: cover;
-	 background-attachment: fixed;
-}
-
-
-
 p {
 	line-height: 30px; 
 	font-size: 1.2em;
 }
+
 
 
 button{margin-top:100px;
@@ -57,6 +32,7 @@ button{margin-top:100px;
 button:hover{background-color:#000;
 			color:#fff;
 			background-color: rgba( 25, 25, 25, 0.6);}
+
 
 
 article{
@@ -100,8 +76,7 @@ https://www.tooplate.com/view/2114-pixie
         <span>Loading</span>
       </div>
     </div> 
-    <!-- / wpf loader Two -->       
-  
+    <!-- / wpf loader Two -->    
       <!-- header -->
 <jsp:include page="../inc/header.jsp"></jsp:include>
   <!-- / menu -->
@@ -122,30 +97,56 @@ https://www.tooplate.com/view/2114-pixie
 <!--           </div> -->
    
           <div class="col-md-team2">
-            <div id="container_team2" style="text-align: center;" >
-            <h4 style=" font-size: 3.2em; font-family: 궁서체 !important; text-align: left; font-color: #300026; margin-top:100px; 
-			float: left;padding-left: 200px; padding-bottom:100px; ">What's your Pick</h4>
+            <div id="container_team2_1" style="text-align: center; " >
+<!--             <h4 style=" font-size: 3.2em; font-family: 궁서체 !important; text-align: left; font-color: #300026; margin-top:100px;  -->
+<!-- 			float: left;padding-left: 200px; padding-bottom:100px; ">What's your Pick</h4> -->
 			
 			
-			<section style="float: left; padding-left: 200px; margin-bottom: 300px; ">
+			  <h3 style="font-size: 2.7em !important; font-family:궁서체 !important; 
+			 text-align: center; font-color: #300026; margin-top:100px;  -->
+			 padding-bottom:100px;"> We Recommend this;</h3>
 
-			   <br>
-				<form action="<c:url value='recoTestQ1.sh'/>" method="get">
-			  	<p style="text-align: left;">perfumeShip의 프리미엄 퍼퓸 테일러가<br>
-			  	당신에게 맞는 향수를 제안합니다.<br>
-			  	후회 없는 선택을 함께해 보세요 </p>
-			  	<br>
-			  	<br>
-			  	<br>
-			  	<br>
-			  	<button onclick="location.href='<c:url value='recoTestQ1.sh'/>'">Test Start</button>
-				</form>	
-
-
+			<section style="text-align: center; font-color: #300026; margin-top:100px;  
+			 padding-bottom:100px; margin-bottom:100px;">
 			
+		 <p style="text-align: center;">
+		</p>
+	  	<!-- 상품 상세 이미지는 여기에 -->		  	
+		<img src="resources/img/recoTest/result13.jpg" style= "width:400px; height: 400px;" >
+				  	
+	 	<br>
+	 	<br>
+	  	<br>
+	  	<p style="font-size: 1.7em; ">클린 리저브 블렌드 스킨 EDP</p>
+ 		<br>
+ 	 	<br>
+
+	  	<p style="font-style: italic;"> 
+	  	때묻지 않은 자연의 순수한 아름다움을 새롭게 표현한
+ 		'클린 리저브 컬렉션' </p> 
+	  	<br>
+	  	<br>
+	  	기존의 캐주얼 라인에서 더욱 고급스럽고 편안해진 향취입니다.<br>
+	  	투명한 바틀에서 느껴지는 프레시함과 나무 캡(뚜껑)에서 느껴지는 자연의 향기를 느껴 보세요.
+		<br>
+	  	<br>
+	  	
+		바닐라와 모란이 아늑한 느낌을 나타내고, <br>
+		오렌지 블로섬과 허니서클이 잔잔하게 마무리되는 향취입니다. 
+		<br>
+		맑고 깨끗한 향기를 느끼고 싶은 남녀에게 추천드립니다.
+		<br>
+		<br>
+		<br>
+		
+		<button onclick="location.href='<c:url value='recoTest.sh'/>'">다시하기</button>  	
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<button onclick="location.href='<c:url value=''/>'">제품 보러가기</button>	 
+			 
+	
 			   
 <!-- 			<article> -->
-<!-- 				</article> -->
+<!-- 		     </article> -->
 
 
 			<!-- 컨텐츠 -->

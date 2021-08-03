@@ -57,6 +57,15 @@ public class MemberServiceImpl implements MemberService {
       
       return memberDAO.getMember(id);
    }
+   
+	@Override
+	public MemberBean getMemberByemail(String member_email) {
+		  return memberDAO.getMemberByemail(member_email);
+	}
+   
+   
+   
+   
 
    @Override
    public void updateMember(MemberBean memberBean) {
@@ -83,6 +92,74 @@ public class MemberServiceImpl implements MemberService {
       return memberDAO.emailCheck(mb);
    }
    
+   //일치하는 계정이 있는지 확인함 (비밀번호 찾기)
+ 	@Override
+ 	public String passwordCheck(MemberBean mb) {
+ 		System.out.println("MemberServiceImpl - passwordCheck");
+ 		return memberDAO.passwordCheck(mb);
+ 	}
+ 	
+   
+ 	//임시비번 만들어서 update해주는 메소드
+ 	@Override
+ 	public void updateTempPassword(MemberBean mb) {
+ 		System.out.println("임시비번 tempPassword 를 DB에 업데이트 시도_serviceImpl");
+ 		memberDAO.updateTempPassword(mb);
+ 	}
+ 	
+ 	//임시 비밀번호를 발급해서 이메일로 보내주는 메서드
+	@Override
+	public void sendTempPassword(MemberBean mb) {
+
+		
+		 String setfrom = "javateamproject2021@gmail.com";
+	      String tomail = mb.getMember_email(); // 받는 사람 이메일
+	      String title = mb.getMember_name() + "님의 임시 비밀번호를 전달해 드립니다. "; // 제목
+	      String tempPass = mb.getMember_password();
+	      
+	      String content = "<p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\">"
+	      		+ "</p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">"
+	      		+ "안녕하세요 회원님,</span></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\">"
+	      		+ "<span style=\"font-family: dotum, sans-serif;\">회원님의 임시 비밀번호를&nbsp;</span></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">아래와 같이 전달해 드립니다.</span>"
+	      		+ "</p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\">"
+	      		+ "<b><span style=\"font-size: 9pt; font-family: dotum, sans-serif;\">"
+	      		+ ""
+	      		+ "임시 비밀번호:&nbsp;</span></b><span style=\"font-family: dotum, sans-serif; font-size: 9pt;\">"
+	      		+ "["+ tempPass +"]</span></p>"//임시비밀번호
+	      		+ "<p style=\"text-align: center; \" align=\"center\"><br></p>"
+	      		+ "<p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">"
+	      		+ "이 비밀번호로 로그인 하셔서</span></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">새로운 비밀번호로&nbsp;</span></p><p style=\"text-align: center; \" align=\"center\">"
+	      		+ "<span style=\"font-family: dotum, sans-serif;\">변경하여 주시기 바랍니다.</span></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\">"
+	      		+ "<span style=\"font-family: dotum, sans-serif;\"><b><a href=\"http://localhost:8080/myweb2/login.sh\" target=\"_self\" style=\"cursor: pointer; white-space: pre;\">"
+	      		+ "로그인 하러 가기</a><span id=\"husky_bookmark_end_1627962574111\"></span></b></span></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br>"
+	      		+ "</p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">※비밀번호 찾기 신청을&nbsp;"
+	      		+ "</span><span style=\"font-size: 10pt; font-family: dotum, sans-serif;\">하시지 않았다면</span></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">"
+	      		+ "<span id=\"husky_bookmark_start_1627962656513\"></span><a href=\"http://localhost:8080/myweb2/notice.sh\" target=\"_self\" style=\"cursor: pointer; white-space: pre;\">고객센터</a>"
+	      		+ "<span id=\"husky_bookmark_end_1627962656513\"></span>로 연락해 주세요.</span></p><p style=\"text-align: center; \" align=\"center\">"
+	      		+ "<br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\">"
+	      		+ "<span style=\"font-size: 10pt;\">&nbsp;</span><br></p>"; 
+
+	      try {
+	         MimeMessage message = mailSender.createMimeMessage();
+	         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+	         messageHelper.setFrom(setfrom); // 보내는사람 생략하거나 하면 정상작동을 안함
+	         messageHelper.setTo(tomail); // 받는사람 이메일
+	         messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	         messageHelper.setText(content, true); // 메일 내용
+
+	         mailSender.send(message);
+	      } catch (Exception e) {
+	         System.out.println("메일 발송 실패 - " + e.getMessage());
+	      }
+	      
+	      
+		
+		
+	}
+ 	
+ 	
+ 	
  //---------------------------------------------------------------  고객 쿠폰 리스트 조회 ------------------------------------------------------------
    @Override
    public ArrayList<CouponBean> getMemberCouponList(String member_email) {
@@ -239,6 +316,13 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.getSubMemberList();
 	}
 
+
+
+
+
+	
+	
+	
 //	@Override
 //	public void sendResubscribeMail(SubscribeBean subscribeBean) {
 //		String setfrom = "javateamproject2021@gmail.com";

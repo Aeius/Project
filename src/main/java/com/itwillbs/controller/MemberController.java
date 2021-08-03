@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -160,7 +159,7 @@ public class MemberController {
 		
 	}
 
-	//----------------------------------------------계정찾기 페이지로 이동--------------------------------------------------
+	//----------------------------------------------계정/비밀번호 찾기 페이지로 이동--------------------------------------------------
 	
 	@RequestMapping(value = "/find.sh", method = RequestMethod.GET)
 	public String find() {
@@ -193,7 +192,52 @@ public class MemberController {
 	//----------------------------------------------비밀번호 찾기---------------------------------------------------------
 	
 	
+	@RequestMapping(value = "/findPassword.sh", method = RequestMethod.POST)
+	public String findPassword(MemberBean mb, HttpServletRequest request, HttpServletResponse response, Model model) {
+		
+		//아이디, 이름, 연락처가 일치하는 비번이 있는지 체크하고 옴
+		String password= memberService.passwordCheck(mb);
+		System.out.println("memberController - 비번찾기 맵핑findPassword");
+		 
+		
+		if(password != null) {
+			//정보가 일치하는 계정이 있어서 이메일을 보낼 수 있음
+			//System.out.println("쿼리구문 입력 확인 - 비번찾기");
+			String member_email = request.getParameter("member_email");
+			mb = memberService.getMemberByemail(member_email);
+			//System.out.println("mb ---- " + mb);
 
+			
+			//----------비밀번호 찾기 이메일로 임시비번 발송 -----------
+			// 임시 비밀번호 생성
+			String tempPassword = "";
+			for (int i = 0; i < 10; i++) {
+				tempPassword += (char) ((Math.random() * 26) + 97);
+				}
+			System.out.println(tempPassword);
+			//임시 비번을 MemberBean에 setter로 넣어줌.
+		
+			mb.setMember_password(tempPassword);
+			System.out.println("member_password 삽입 성공");
+		
+			
+			//임시 비밀번호를 새로운 비밀번호로 update시킴
+			memberService.updateTempPassword(mb);
+			
+			//업데이트된 임시 비밀번호를 이메일로 발송함
+			memberService.sendTempPassword(mb);
+			
+		
+			model.addAttribute("msg","임시비밀번호를 이메일로 발급했습니다.");
+			return "/dailyShop/member/msg";
+
+		}else {
+			model.addAttribute("msg","입력하신 정보와 일치하는 계정이 없습니다.");
+			return "/dailyShop/member/msg";
+		}
+		
+		
+	}
 	
 	
 	

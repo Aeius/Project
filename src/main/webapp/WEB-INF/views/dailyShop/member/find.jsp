@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+       
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,14 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <title>Daily Shop | Home</title>
-    
+<script src="../script/jquery-3.6.0.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]  -->
-    
 
   </head>
   <body> 
@@ -38,11 +38,11 @@
   
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-    <img src="../img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+    <img src="<c:url value='/resources/img/banner_add/login3.gif"/'/>" alt="fashion img">
     <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2>Login Page</h2>
+        <h2>아이디 / 비밀번호 찾기</h2>
       </div>
      </div>
    </div>
@@ -66,7 +66,7 @@
                   <label for="name">이름<span>*</span></label>
                    <input type="text" placeholder="Username" name="member_name">
                    <label for="phone">연락처<span>*</span></label>
-                    <input type="text" placeholder="ex)010-1234-5678" name="member_phone">
+                    <input type="text" placeholder="ex)01012345678" name="member_phone">
                     <button type="submit" class="aa-browse-btn">아이디(Email)찾기</button>
                   </form>
                   
@@ -76,13 +76,13 @@
               <div class="col-md-6">
                 <div class="aa-myaccount-login">
                 <h4>비밀번호 찾기</h4>
-                 <form action="" class="aa-login-form">
+                 <form action="<c:url value='findPassword.sh' />" class="aa-login-form" method="post">
                   <label for="board_email">아이디<span>*</span></label>
-                   <input type="text" placeholder="UserID" name="board_email">
+                   <input type="text" placeholder="UserID(email)" name="member_email">
                    <label for="name">이름<span>*</span></label>
                    <input type="text" placeholder="Username" name="member_name">
                    <label for="phone">연락처<span>*</span></label>
-                    <input type="text" placeholder="ex) 010-1234-5678" name="member_phone">
+                    <input type="text" placeholder="ex) 01012345678" name="member_phone">
                     <button type="submit" class="aa-browse-btn">비밀번호 찾기</button>
                   </form>
                 </div>

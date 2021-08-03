@@ -131,7 +131,7 @@ https://www.tooplate.com/view/2114-pixie
 
 			   <br>
 				<form action="<c:url value='recoTestQ1.sh'/>" method="get">
-			  	<p style="text-align: left;">perfumeShip의 프리미엄 퍼퓸 테일러가<br>
+			  	<p style="text-align: left;">000의 프리미엄 퍼퓸 테일러가<br>
 			  	당신에게 맞는 향수를 제안합니다.<br>
 			  	후회 없는 선택을 함께해 보세요 </p>
 			  	<br>
