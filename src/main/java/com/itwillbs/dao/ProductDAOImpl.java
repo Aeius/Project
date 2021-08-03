@@ -159,7 +159,7 @@ public class ProductDAOImpl implements ProductDAO {
 	public ArrayList<RecoBean> getRecoList() {
 		return (ArrayList)sqlSession.selectList(namespace + ".getRecoList");
 	}
-	
+
 	
 	
 	

@@ -42,8 +42,7 @@
 
   </head>
   <body> 
-  <button >결제하기</button>
-  ...
+  
   <script>
   IMP.init("imp35099883"); 
   
@@ -65,16 +64,28 @@
     	  alert('결제 진행됨 데이터 전달');
     	  console.log(rsp);
 		    if ( rsp.success ) {
+		    	
+// 		        document.getElementId('buyer_email').value = rsp.buyer_email;
+// 		        document.getElementId('buyer_tel').value = rsp.buyer_tel;
+		        
+// 		        var amount += ''+ rsp.paid_amount;
+		        document.getElementById('amount').value = rsp.paid_amount;
+		        
+		        
 		    	var msg = '결제가 완료되었습니다.';
 		        msg += '고유ID : ' + rsp.imp_uid;
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        
+		        
 		    } else {
 		    	 var msg = '결제에 실패하였습니다.';
 		         msg += '에러내용 : ' + rsp.error_msg;
 		    }
+		    
 		    alert(msg);
+		    payFinish.submit();
 		});
 	}
 </script>
@@ -109,7 +120,15 @@
   <!-- / catg header banner section -->
 
  <!-- Cart view section -->
- <input type="hidden" id="member_email" value="${sessionScope.member_email }">
+ <form action="checkout_finish.sh" method="post" name="payFinish">
+ <input type="hidden" id="buyer_email" name="buyer_email" value="0">
+ <input type="hidden" id="buyer_tel" name="buyer_tel" value="0">
+ <input type="hidden" id="amount" name="amount" value="0">
+<%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
+<%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
+<%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
+<%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
+</form>
  <section id="checkout">
    <div class="container">
      <div class="row">
@@ -248,10 +267,12 @@
                         </tr>
                       </thead>
                       <tbody>
+<%--                       <c:forEach var="product" items="${product }"> --%>
                         <tr>
-                          <td id="product_name">향수1 <strong> x  수량</strong></td>
+                          <td id="product_name">향수1<strong> x  수량</strong></td>
                           <td>가격1</td>
                         </tr>
+<%--                       </c:forEach> --%>
                         <tr>
                           <td>향수2 <strong> x  수량</strong></td>
                           <td>가격2</td>
@@ -276,7 +297,7 @@
                         </tr>
                          <tr>
                           <th>총 가격</th>
-                          <td id="totalAmount">150</td>
+                          <td id="totalAmount">200</td>
                         </tr>
                       </tfoot>
                     </table>

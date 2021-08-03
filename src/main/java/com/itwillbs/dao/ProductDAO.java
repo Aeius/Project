@@ -54,4 +54,5 @@ public interface ProductDAO {
 	public ArrayList<CategoryBean> getDonutList();
 	
 	public ArrayList<RecoBean> getRecoList();
+
 }

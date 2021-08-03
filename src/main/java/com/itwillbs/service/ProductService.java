@@ -55,4 +55,5 @@ public interface ProductService {
 
 	public ArrayList<RecoBean> getRecoList();
 
+
 }
