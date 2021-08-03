@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwillbs.domain.BasketBean;
+import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.WishListBean;
 import com.itwillbs.service.BasketService;
+import com.itwillbs.service.MemberService;
 import com.itwillbs.service.WishListService;
 
 
@@ -26,6 +28,9 @@ public class AjaxController {
 	
 	@Inject
 	private BasketService basketService;
+	
+	@Inject
+	private MemberService memberService;
 	
 	//-------------------------------------------------------------- 찜(좋아요) 버튼 눌렀을 때 --------------------------------------------------------
 	@RequestMapping(value = "/pushWishList.sh", method = RequestMethod.GET)
@@ -218,6 +223,27 @@ public class AjaxController {
 		return entity;
 	}
 		
-
+	//-------------------------------------------------------------- 아이디 중복 확인 --------------------------------------------------------
+		@RequestMapping(value = "/checkId.sh", method = RequestMethod.GET)
+		public ResponseEntity<String> idcheck(HttpServletRequest request){
+			String result="";
+			ResponseEntity<String> entity=null;
+			try {
+				String member_email = request.getParameter("member_email");
+				MemberBean memberBean = memberService.getMember(member_email);
+				if(memberBean!=null) {
+					//아이디 중복
+					result="emailDup";
+				}else {
+					//아이디 사용가능
+					result="emailOk";
+				}
+				entity=new ResponseEntity<String>(result,HttpStatus.OK);
+			} catch (Exception e) {
+				System.out.println("오류 발생 -" + e.getMessage());
+				entity=new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			}
+			return entity;
+		}
 
 }

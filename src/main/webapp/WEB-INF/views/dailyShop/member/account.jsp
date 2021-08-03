@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,59 +16,270 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script src="../script/jquery-3.6.0.js"></script>
-<script type="text/javascript">
+    
+<script src='<c:url value="/resources/script/jquery-3.6.0.js" />'></script>
 
-	$(document).ready(function() {
-		
-		$('#fr').submit(function() {
+	
+	<script type="text/javascript">
+	// submit 버튼 동작을 위한 전역변수 선언
+	var checkPasswordResult = false, 
+	checkPasswordConfirmResult = false, 
+	checkEmailNullResult = false, 
+	checkNameNullResult = false, 
+	checkPhoneNullResult = false,
+	checkAddressNullResult = false;
+	checkAddressNull2Result = false;
+	checkAddressNull3Result = false;
+	checkAddressNull4Result = false;
 
+	function checkPassword(member_password) { // 패스워드 입력값 검증
+		// 8~16자리 영문자,숫자,특수문자(!@#$%) 조합 패턴 검사
+		var lengthRegex = /^[A-Za-z0-9!@#$%]{8,16}$/;
+		var engUpperCaseRegex = /[A-Z]/;
+		var engLowerCaseRegex = /[a-z]/;
+		var digitRegex = /[0-9]/;
+		var specRegex = /[!@#$%]/;
 		
-			if($('#member_email').val() == ""){
-				alert("이메일을 입력해주세요");
-				$('#member_email').focus();
-				return false;
+		var element = document.getElementById('checkPasswordResult');
+		
+		// 패스워드 구성요소에 대한 길이 및 종류 체크
+		if(lengthRegex.exec(member_password)) {
+// 			element.innerHTML = '길이 체크 통과!';
+			// 각 요소별 체크를 통해 카운팅 결과에 따른 안전,보통,위험,사용불가 로 출력
+			var safetyCount = 0;
+			if(engUpperCaseRegex.exec(member_password)) safetyCount++;
+			if(engLowerCaseRegex.exec(member_password)) safetyCount++;
+			if(digitRegex.exec(member_password)) safetyCount++;
+			if(specRegex.exec(member_password)) safetyCount++;
+			
+			switch (safetyCount) {
+				case 4: 
+					element.innerHTML = '안전';
+					element.style.color = 'green';
+					checkPasswordResult = true; // 전역변수값을 true 로 변경
+					break;
+				case 3: 
+					element.innerHTML = '보통';
+					element.style.color = 'orange';
+					checkPasswordResult = true; // 전역변수값을 true 로 변경
+					break;
+				case 2: 
+					element.innerHTML = '위험';
+					element.style.color = 'red';
+					checkPasswordResult = true; // 전역변수값을 true 로 변경
+					break;
+				case 1: 
+					element.innerHTML = '사용불가';
+					element.style.color = 'black';
+					checkPasswordResult = false; // 전역변수값을 false 로 변경
+					break;
 			}
+			
+		} else {
+			$('#member_password').focus();
+			element.innerHTML = '비밀번호는 8~16자리 영문자,숫자,특수문자 조합 입니다.';
+			element.style.color = 'black';
+			checkPasswordResult = false; // 전역변수값을 false 로 변경
+		}
 		
-			if($('#member_password').val() == ""){
-				alert("패스워드를 입력해주세요");
+	}
+
+	function checkPasswordConfirm(member_passwordCheck) { // 패스워드 일치 확인
+		// 패스워드 확인 항목 우측의 span 태그 ID 값을 지정하여 해당 태그 Element 가져오기
+		var element = document.getElementById('passwordConfirmResult');
+		
+		if(member_passwordCheck == $('#member_password').val()) { // 패스워드 확인 내용 일치 시
+			element.innerHTML = '패스워드 일치';
+			checkPasswordConfirmResult = true; // 전역변수값을 true 로 변경
+		} else {
+			$('#member_passwordCheck').focus();
+			element.innerHTML = '패스워드 불일치';
+			checkPasswordConfirmResult = false; // 전역변수값을 false 로 변경
+			
+		}
+		
+	}
+	
+	function checkForm() {
+
+		//---------------------------------------------------------- 이메일 -------------------------------------------------------------	
+		if($('#member_email').val() != "") { // 이메일 공백 아닐시
+			checkEmailNullResult = true; // 전역변수값을 true 로 변경
+			
+			var element = document.getElementById('emailNull');
+			element.innerHTML = ' ';
+			
+		} else {
+		// 이메일 확인 항목 span 태그 값을 지정하여 해당 태그 Element 가져오기
+			$('#member_email').focus();
+			var element = document.getElementById('emailNull');
+			element.innerHTML = ' 이메일을 입력해 주세요';
+			element.style.color = 'red';
+			checkEmailNullResult = false; // 전역변수값을 false 로 변경
+			return false;
+		}
+
+		//---------------------------------------------------------- 비밀번호 -------------------------------------------------------------	
+		if($('#member_password').val() == ""){ // 비밀번호 공백시 포커스 및 span 태그 내용 가져오기
 				$('#member_password').focus();
+				var element = document.getElementById('passwordNull');
+				element.innerHTML = ' 이메일을 입력해 주세요';
+				element.style.color = 'red';
 				return false;
-			}
+		} else{
+			var element = document.getElementById('passwordNull');
+			element.innerHTML = ' ';
+			
+		}
 		
-			
-			if($('#member_name').val() == ""){
-				alert("이름을 입력해주세요");
-				$('#member_name').focus();
-				return false;
-			}
-			
-			if($('#member_post').val() == "" && $('#member_address').val() == ""&& $('#member_extraAddress').val() == ""&& $('#member_extraAddress2').val() == ""){
-				alert("이메일을 입력해주세요");
-				$('#email').focus();
-				return false;
-			}
-			
-		});
+		if($('#member_passwordCheck').val() == ""){ // 비밀번호확인 공백시 포커스 및 span 태그 내용 가져오기
+			$('#member_passwordCheck').focus();
+			var element = document.getElementById('passwordCheckNull');
+			element.innerHTML = ' 이메일을 입력해 주세요';
+			element.style.color = 'red';
+			return false;
+		} else{
+			var element = document.getElementById('passwordCheckNull');
+			element.innerHTML = ' ';
+	
+		}
 		
-		// 아이디 중복 체크
-		// click() id="btn" 버튼을 클릭했을때
-		// ajax() idCheck.jsp 갈때 id상자의 val() id파라미터 넘기면
-		//                        아이디 중복여부 출력결과 가져옴
-		// html()  id="dup" 안에 출력결과 넣기
-		$('#btn').click(function () {
-			$.ajax('idCheck.jsp',{
-				data:{id:$('#id').val()},
+		//---------------------------------------------------------- 이름 -------------------------------------------------------------			
+		if($('#member_name').val() != "") { // 이름 공백 아닐시
+			
+			checkNameNullResult = true; // 전역변수값을 true 로 변경
+			var element = document.getElementById('nameNull');
+			element.innerHTML = ' ';
+		} else {
+			$('#member_name').focus();
+			// 이름 확인 항목 span 태그 값을 지정하여 해당 태그 Element 가져오기
+			var element = document.getElementById('nameNull');
+			element.innerHTML = ' 이름을 입력해 주세요';
+			element.style.color = 'red';
+			checkNameNullResult = false; // 전역변수값을 false 로 변경
+			return false;
+		}
+		
+		//---------------------------------------------------------- 전화번호 -------------------------------------------------------------		
+		if($('#member_phone').val() != "") { // 전화번호 공백 아닐시
+			
+			checkPhoneNullResult = true; // 전역변수값을 true 로 변경
+			var element = document.getElementById('phoneNull');
+			element.innerHTML = ' ';
+		} else {
+			$('#member_phone').focus();
+			// 전화번호 확인 항목 우측의 span 태그 ID 값을 지정하여 해당 태그 Element 가져오기
+			var element = document.getElementById('phoneNull');
+			element.innerHTML = ' 전화번호를 입력해 주세요';
+			element.style.color = 'red';
+			checkPhoneNullResult = false; // 전역변수값을 false 로 변경
+			return false;
+		}
+		
+		//---------------------------------------------------------- 주소검색 -------------------------------------------------------------	
+		if($('#member_post').val() != "") { // 우편번호 공백 아닐시
+
+			checkAddressNullResult = true; // 전역변수값을 true 로 변경
+			var element = document.getElementById('addressNull');
+			element.innerHTML = ' ';
+		} else {
+			$('#member_post').focus();
+			// 우편번호 확인 항목 우측의 span 태그 ID 값을 지정하여 해당 태그 Element 가져오기
+			var element = document.getElementById('addressNull');
+			element.innerHTML = ' 우편번호를 입력해 주세요';
+			element.style.color = 'red';
+			checkAddressNullResult = false; // 전역변수값을 false 로 변경
+			return false;
+		}
+		
+		if($('#member_address').val() != "") { // 주소 확인 내용 일치 시
+
+			checkAddressNull2Result = true; // 전역변수값을 true 로 변경
+			var element = document.getElementById('addressNull');
+			element.innerHTML = ' ';
+		} else {
+			$('#member_address').focus();
+			// 주소 확인 항목 우측의 span 태그 ID 값을 지정하여 해당 태그 Element 가져오기
+			var element = document.getElementById('addressNull');
+			element.innerHTML = ' 우편번호를 입력해 주세요';
+			element.style.color = 'red';
+			checkAddressNull2Result = false; // 전역변수값을 false 로 변경
+			return false;
+		}
+		
+		if($('#member_extraAddress').val() != "") { // 주소 확인 내용 일치 시
+
+			checkAddressNull3Result = true; // 전역변수값을 true 로 변경
+			var element = document.getElementById('addressNull');
+			element.innerHTML = ' ';
+		} else {
+			$('#member_extraAddress').focus();
+			// 주소 확인 항목 우측의 span 태그 ID 값을 지정하여 해당 태그 Element 가져오기
+			var element = document.getElementById('addressNull');
+			element.innerHTML = ' 우편번호를 입력해 주세요';
+			element.style.color = 'red';
+			checkAddressNull3Result = false; // 전역변수값을 false 로 변경
+			return false;
+		}
+		
+
+		if($('#member_extraAddress2').val() != "") { // 주소 확인 내용 일치 시
+
+			checkAddressNull4Result = true; // 전역변수값을 true 로 변경
+			var element = document.getElementById('addressNull');
+			element.innerHTML = ' ';
+		} else {
+			$('#member_extraAddress2').focus();
+			// 주소 확인 항목 우측의 span 태그 ID 값을 지정하여 해당 태그 Element 가져오기
+			var element = document.getElementById('addressNull');
+			element.innerHTML = ' 우편번호를 입력해 주세요';
+			element.style.color = 'red';
+			checkAddressNull4Result = false; // 전역변수값을 false 로 변경
+			return false;
+		}
+		
+		// 아이디와 패스워드 유효성 검사 및 패스워드 일치 확인이 완료되었을 경우에만 
+		// 회원가입을 수행하고 그렇지 않으면 메세지 출력 후 작업 중단
+		// => 아이디, 패스워드 유효성 검사 결과와 일치 확인 결과를 전역변수로 저장 작업 필요
+		
+		if(checkPasswordResult && 
+			checkPasswordConfirmResult && 
+			checkEmailNullResult && 
+			checkNameNullResult && 
+			checkPhoneNullResult && 
+			checkAddressNullResult &&
+			checkAddressNull2Result &&
+			checkAddressNull3Result &&
+			checkAddressNull4Result) {
+				return true;
+			} else {
+				alert('입력 항목을 확인하세요!');
+				return false;
+			}	
+	}
+	
+	// 아이디 중복 체크
+	$(document).ready(function() {
+		$('#dupEmailCheckBtn').click(function(){
+// 			alert("아이디중복체크 버튼 클릭");
+			$.ajax('<c:url value="/checkId.sh" />',{
+				data:{member_email:$('#member_email').val()},
 				success:function(rdata){
-					$('#dup').html(rdata).css('color','red');
-				}
+					if(rdata=="emailDup"){
+						rdata="이메일 중복 입니다.";
+					}else{
+						rdata="이메일 사용 가능합니다.";
+					}
 				
+					$('#dupResult').html(rdata).css('color','red');
+				}
 			});
 		});
-		
 	});
-</script>
+		
+</script>		
 
+   <!-- 다음 우편번호 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -172,36 +383,39 @@
               <div class="col-md-6">
                 <div class="aa-myaccount-register">                 
                  <h4>회원가입</h4>
-                 <form action='<c:url value="memberJoinPro.sh" />' id="fr" class="aa-login-form" method="post">
-                    <label for="">Email<span>*</span></label>
+                 <form action='<c:url value="memberJoinPro.sh" />' id="fr" class="aa-login-form" method="post" onsubmit="return checkForm()">
+                    <label for="">Email<span id="emailNull"> * </span></label>
                     <input type="email" id="member_email" name="member_email" placeholder="이메일을 입력해주세요">
-                    <input type="button" class="aa-browse-btn" value="중복확인">
-                    <label for=""><span>*</span></label><br>
+                    
+                    <input type="button" class="aa-browse-btn" id="dupEmailCheckBtn" value="중복확인">
+                    <label for=""><span id = "dupResult"></span></label><br>
                    
  					<button type="button" class="aa-browse-btn">인증번호 받기</button>
  					 <button type="button" class="aa-browse-btn">인증번호 확인</button>
                   
           			<input type="text" placeholder="인증번호를 입력해주세요">
 					
-                    <label for="">Password<span>*</span></label>
-                    <input type="password" id="member_password" name = "member_password" placeholder="비밀번호를 입력해주세요">
-                    <label for="">Password check<span>*</span></label>
-                    <input type="password" placeholder="비밀번호 확인">
-                    <label for="">이름<span>*</span></label>
-                    <input type="text" id="member_name" name = "member_name"  placeholder="이름">
-                    <label for="">전화번호<span>*</span></label>
-                    <input type="text" id="member_phone" name = "member_phone"  placeholder="전화번호">
-                 	
-                 	<input type="button" class="aa-browse-btn" value="주소검색" onclick="execDaumPostcode()">
-                    <label for=""><span>*</span> 주소를 입력해 주세요</label><br>
-<!--                     <button type="button" class="aa-browse-btn" onclick="execDaumPostcode()">주소검색</button> -->
-                    
-                    <input type="text" id="member_post" name ="member_post" placeholder="우편번호">
-                    
-                    <input type="text" id="member_address" name="member_address" placeholder="도로명주소">
+                    <label for="">Password<span id="passwordNull"> * </span></label>
+                    <input type="password" id="member_password" name = "member_password" placeholder="비밀번호를 입력해주세요"  onkeyup="checkPassword(this.value)">
+                     <label for=""><span id="checkPasswordResult"></span></label><br>
+                   
+                    <label for="">Password check<span id="passwordCheckNull" > * </span></label>
+                    <input type="password" id="member_passwordCheck" name = "member_passwordCheck" placeholder="비밀번호를 확인해주세요"  onkeyup="checkPasswordConfirm(this.value)">
+                    <label for=""><span id="passwordConfirmResult"></span></label><br>
                   
-                    <input type="text" id="member_extraAddress" name="member_extraAddress" placeholder="지번주소">
-                    <input type="text" id="member_extraAddress2" name="member_extraAddress2" placeholder="상세주소">
+                    <label for="">이름<span id="nameNull"> * </span></label>
+                    <input type="text" id="member_name" name = "member_name"  placeholder="이름" >
+                   
+                    <label for="">전화번호<span id="phoneNull"> * </span></label>
+                    <input type="text" id="member_phone" name = "member_phone"  placeholder="전화번호" >
+                 	
+              		<label for="">우편번호<span id="addressNull"> * </span></label><br>
+                 	<input type="button" class="aa-browse-btn" value="주소검색" onclick="execDaumPostcode()">
+                    
+                    <input type="text" id="member_post" name ="member_post" placeholder="우편번호"  >
+                    <input type="text" id="member_address" name="member_address" placeholder="도로명주소"  >
+                    <input type="text" id="member_extraAddress" name="member_extraAddress" placeholder="지번주소" >
+                    <input type="text" id="member_extraAddress2" name="member_extraAddress2" placeholder="상세주소"  >
                     <button type="submit" id="member_joinBtn" class="aa-browse-btn">가입</button>
                     <button type="reset" class="aa-browse-btn">취소</button>                    
                   </form>
