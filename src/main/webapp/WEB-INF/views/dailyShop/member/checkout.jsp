@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <title>Daily Shop | Home</title>
+    
+    
+     <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -35,6 +42,43 @@
 
   </head>
   <body> 
+  <button >결제하기</button>
+  ...
+  <script>
+  IMP.init("imp35099883"); 
+  
+    function requestPay() {
+      // IMP.request_pay(param, callback) 호출
+      IMP.request_pay({
+		    pg : 'kakaopay',
+		    pay_method : 'kakaopay',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : document.getElementById('product_name').innerText, //결제창에서 보여질 이름
+		    amount : document.getElementById('totalAmount').innerText, //실제 결제되는 가격
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울 강남구 도곡동',
+		    buyer_postcode : '123-456'
+		    //m_redirect_url : 'http://localhost:8080/myweb2/kakaoPaymove.sh'
+      }, function (rsp) { // callback
+    	  alert('결제 진행됨 데이터 전달');
+    	  console.log(rsp);
+		    if ( rsp.success ) {
+		    	var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		    } else {
+		    	 var msg = '결제에 실패하였습니다.';
+		         msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});
+	}
+</script>
+  
    <!-- wpf loader Two -->
     <div id="wpf-loader-two">          
       <div class="wpf-loader-two-inner">
@@ -65,6 +109,7 @@
   <!-- / catg header banner section -->
 
  <!-- Cart view section -->
+ <input type="hidden" id="member_email" value="${sessionScope.member_email }">
  <section id="checkout">
    <div class="container">
      <div class="row">
@@ -204,7 +249,7 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td>향수1 <strong> x  수량</strong></td>
+                          <td id="product_name">향수1 <strong> x  수량</strong></td>
                           <td>가격1</td>
                         </tr>
                         <tr>
@@ -231,7 +276,7 @@
                         </tr>
                          <tr>
                           <th>총 가격</th>
-                          <td>가격</td>
+                          <td id="totalAmount">150</td>
                         </tr>
                       </tfoot>
                     </table>
@@ -241,7 +286,7 @@
                     <label for="cashdelivery"><input type="radio" id="cashdelivery" name="optionsRadios"> 무통장 입금 </label>
                     <label for="paypal"><input type="radio" id="paypal" name="optionsRadios" checked> 카드 결제 </label>
                     <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" border="0" alt="PayPal Acceptance Mark">    
-                    <input type="submit" value="결제하기" class="aa-browse-btn">                
+                    <input type="button" value="결제하기" class="aa-browse-btn" onclick="requestPay()">                
                   </div>
                 </div>
               </div>

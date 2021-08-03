@@ -13,6 +13,12 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+  <repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -102,6 +108,8 @@
     <version>2.5.4</version>
 </dependency>
 
+
+
 <!-- json데이터 받는 프로그램 -->
 <!--   <dependency> -->
 <!--       <groupId>com.fasterxml.jackson.core</groupId> -->
@@ -114,6 +122,14 @@
       <artifactId>jackson-datatype-jsr310</artifactId>
       <version>2.9.4</version>
   </dependency>
+  
+
+<!-- dependencies 안에 추가합니다 -->
+<dependency>
+  <groupId>com.github.iamport</groupId>
+  <artifactId>iamport-rest-client-java</artifactId>
+  <version>0.2.14</version>
+</dependency>
 
 		<!-- AspectJ -->
 		<dependency>
