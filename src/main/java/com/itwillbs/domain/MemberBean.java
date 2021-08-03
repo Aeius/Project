@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 public class MemberBean {
 	private String member_email;
+	private String member_email2;
 	private int member_idx;
 	private String member_password;
 	private String member_name;
@@ -24,6 +25,12 @@ public class MemberBean {
 	}
 	public void setMember_email(String member_email) {
 		this.member_email = member_email;
+	}
+	public String getMember_email2() {
+		return member_email2;
+	}
+	public void setMember_email2(String member_email2) {
+		this.member_email2 = member_email2;
 	}
 	public int getMember_idx() {
 		return member_idx;

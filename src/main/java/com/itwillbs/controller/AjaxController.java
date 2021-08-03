@@ -230,6 +230,8 @@ public class AjaxController {
 			ResponseEntity<String> entity=null;
 			try {
 				String member_email = request.getParameter("member_email");
+				System.out.println(member_email);
+				
 				MemberBean memberBean = memberService.getMember(member_email);
 				if(memberBean!=null) {
 					//아이디 중복

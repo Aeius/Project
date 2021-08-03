@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -114,6 +115,15 @@ public class MemberController {
 		
 //		MemberService memberService=new MemberServiceImpl();
 		// 회원가입 메서드 호출
+		String mailAddress = memberBean.getMember_email();
+		String domain = memberBean.getMember_email2();
+		
+//		System.out.println(memberBean.getMember_email());
+//		System.out.println(memberBean.getMember_email2());
+		String member_email = mailAddress + domain;
+//		System.out.println(member_email);
+		
+		memberBean.setMember_email(member_email);
 		boolean isRegisted = memberService.insertMember(memberBean);
 		if(isRegisted) {
 			return "redirect:/welcomeMail.sh/" + memberBean.getMember_email();
@@ -135,7 +145,7 @@ public class MemberController {
 		MemberBean memberBean2 = memberService.userCheck(memberBean);
 		
 		if(memberBean2!=null) {
-			System.out.println("memberController - deleteMember");
+//			System.out.println("memberController - deleteMember");
 			memberService.deleteMember(memberBean);
 			
 			// 회원 탈퇴 후 세션값 초기화

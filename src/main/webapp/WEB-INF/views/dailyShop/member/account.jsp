@@ -18,19 +18,20 @@
     <![endif]-->
     
 <script src='<c:url value="/resources/script/jquery-3.6.0.js" />'></script>
-
 	
 	<script type="text/javascript">
 	// submit 버튼 동작을 위한 전역변수 선언
 	var checkPasswordResult = false, 
 	checkPasswordConfirmResult = false, 
 	checkEmailNullResult = false, 
+	checkEmailNull2Result = false, 
 	checkNameNullResult = false, 
-	checkPhoneNullResult = false,
-	checkAddressNullResult = false;
-	checkAddressNull2Result = false;
-	checkAddressNull3Result = false;
+	checkPhoneResult = false,
+	checkAddressNullResult = false,
+	checkAddressNull2Result = false,
+	checkAddressNull3Result = false,
 	checkAddressNull4Result = false;
+	
 
 	function checkPassword(member_password) { // 패스워드 입력값 검증
 		// 8~16자리 영문자,숫자,특수문자(!@#$%) 조합 패턴 검사
@@ -78,11 +79,12 @@
 		} else {
 			$('#member_password').focus();
 			element.innerHTML = '비밀번호는 8~16자리 영문자,숫자,특수문자 조합 입니다.';
-			element.style.color = 'black';
+			element.style.color = 'red';
 			checkPasswordResult = false; // 전역변수값을 false 로 변경
 		}
 		
 	}
+	
 
 	function checkPasswordConfirm(member_passwordCheck) { // 패스워드 일치 확인
 		// 패스워드 확인 항목 우측의 span 태그 ID 값을 지정하여 해당 태그 Element 가져오기
@@ -99,7 +101,35 @@
 		}
 		
 	}
+	function checkPhoneNum(member_phone) { // 휴대폰번호 검증
+		/*
+		 * 전화번호 검증에 사용할 정규표현식 작성
+		 * 1) 010 또는 011 로 시작
+		 * 2) 전화번호 사이는 - 기호 또는 공백이 포함될 수도 있고 포함되지 않을 수도 있음
+		 * 3) 두번째 자리는 3자리 또는 4자리 숫자
+		 * 4) 마지막 자리는 4자리 숫자로 끝
+		 */
+ 		var phoneRegex = /^(010|011)[0-9]{1,10}$/;
+		var regex = new RegExp(phoneRegex);
+
+		
+		// 전화번호 입력 항목 우측의 span 태그 ID 값을 통해 해당 요소(Element) 가져오기
+		var element = document.getElementById('phoneNull');
+		
+		// 입력받은 전화번호 값에 대한 정규표현식 패턴 검사
+		// => 생성된 RegExp 객체의 exec() 메서드를 호출하여 전화번호값을 파라미터로 전달
+		if(regex.exec(member_phone)) {
+			element.innerHTML = '사용 가능한 번호입니다';
+			checkPhoneResult = true; // 전역변수값을 true 로 변경
+		} else {
+			element.innerHTML = '사용 불가능한 번호입니다(010/011 휴대번호만 입력 가능합니다)';
+			checkPhoneResult = false; // 전역변수값을 false 로 변경
+		}
+		
+	}
 	
+
+	//---------------------------------------------------------- submit 이벤트 처리 -------------------------------------------------------------		
 	function checkForm() {
 
 		//---------------------------------------------------------- 이메일 -------------------------------------------------------------	
@@ -118,12 +148,29 @@
 			checkEmailNullResult = false; // 전역변수값을 false 로 변경
 			return false;
 		}
+		
+		if($('#member_email2').val() != "") { // 이메일 도메인 공백 아닐시
+			checkEmailNull2Result = true; // 전역변수값을 true 로 변경
+			
+			var element = document.getElementById('emailNull');
+			element.innerHTML = ' ';
+			
+		} else {
+		// 이메일 도메인 확인 항목 span 태그 값을 지정하여 해당 태그 Element 가져오기
+			$('#member_email2').focus();
+			var element = document.getElementById('emailNull');
+			element.innerHTML = ' 이메일 도메인을 선택해 주세요';
+			element.style.color = 'red';
+			checkEmailNull2Result = false; // 전역변수값을 false 로 변경
+			return false;
+		}
+		
 
 		//---------------------------------------------------------- 비밀번호 -------------------------------------------------------------	
 		if($('#member_password').val() == ""){ // 비밀번호 공백시 포커스 및 span 태그 내용 가져오기
 				$('#member_password').focus();
 				var element = document.getElementById('passwordNull');
-				element.innerHTML = ' 이메일을 입력해 주세요';
+				element.innerHTML = ' 비밀번호를 입력해 주세요';
 				element.style.color = 'red';
 				return false;
 		} else{
@@ -161,18 +208,12 @@
 		}
 		
 		//---------------------------------------------------------- 전화번호 -------------------------------------------------------------		
-		if($('#member_phone').val() != "") { // 전화번호 공백 아닐시
-			
-			checkPhoneNullResult = true; // 전역변수값을 true 로 변경
-			var element = document.getElementById('phoneNull');
-			element.innerHTML = ' ';
-		} else {
+		
+		if($('#member_phone').val() == ""){ // 전화번호 공백시 포커스 및 span 태그 내용 가져오기
 			$('#member_phone').focus();
-			// 전화번호 확인 항목 우측의 span 태그 ID 값을 지정하여 해당 태그 Element 가져오기
 			var element = document.getElementById('phoneNull');
 			element.innerHTML = ' 전화번호를 입력해 주세요';
 			element.style.color = 'red';
-			checkPhoneNullResult = false; // 전역변수값을 false 로 변경
 			return false;
 		}
 		
@@ -238,15 +279,16 @@
 			return false;
 		}
 		
-		// 아이디와 패스워드 유효성 검사 및 패스워드 일치 확인이 완료되었을 경우에만 
+		// 유효성 검사 및 모든항목 해당 이벤트 사항 일치 확인이 완료되었을 경우에만 
 		// 회원가입을 수행하고 그렇지 않으면 메세지 출력 후 작업 중단
-		// => 아이디, 패스워드 유효성 검사 결과와 일치 확인 결과를 전역변수로 저장 작업 필요
-		
+		// => 유효성 검사 결과와 일치 확인 결과를 전역변수로 저장 작업 필요
+
 		if(checkPasswordResult && 
 			checkPasswordConfirmResult && 
 			checkEmailNullResult && 
+			checkEmailNull2Result && 
 			checkNameNullResult && 
-			checkPhoneNullResult && 
+			checkPhoneResult && 
 			checkAddressNullResult &&
 			checkAddressNull2Result &&
 			checkAddressNull3Result &&
@@ -258,12 +300,22 @@
 			}	
 	}
 	
+	// 도메인 onchange 이벤트 처리
+	function domainSelect(domain) {
+// 		alert(domain);
+		// 선택된 도메인을 이메일 주소 입력 중 도메인 입력란에 표시
+ 		$('#member_email2').val(domain);
+	}
+	
 	// 아이디 중복 체크
+	
 	$(document).ready(function() {
 		$('#dupEmailCheckBtn').click(function(){
+		$('#dupResult').html("이메일 입력 또는 이메일 도메인 선택해주세요").css('color','red');
+		if($('#member_email2').val() != "" && $('#member_email').val() !=""){
 // 			alert("아이디중복체크 버튼 클릭");
 			$.ajax('<c:url value="/checkId.sh" />',{
-				data:{member_email:$('#member_email').val()},
+				data:{member_email:$('#member_email').val()+$('#member_email2').val()},
 				success:function(rdata){
 					if(rdata=="emailDup"){
 						rdata="이메일 중복 입니다.";
@@ -274,10 +326,11 @@
 					$('#dupResult').html(rdata).css('color','red');
 				}
 			});
+		}
 		});
 	});
 		
-</script>		
+</script>
 
    <!-- 다음 우편번호 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -385,10 +438,20 @@
                  <h4>회원가입</h4>
                  <form action='<c:url value="memberJoinPro.sh" />' id="fr" class="aa-login-form" method="post" onsubmit="return checkForm()">
                     <label for="">Email<span id="emailNull"> * </span></label>
-                    <input type="email" id="member_email" name="member_email" placeholder="이메일을 입력해주세요">
-                    
-                    <input type="button" class="aa-browse-btn" id="dupEmailCheckBtn" value="중복확인">
-                    <label for=""><span id = "dupResult"></span></label><br>
+                    <input type="text" id="member_email" name="member_email" placeholder="이메일을 입력해주세요" maxlength="20">
+                    <input type="text" id="member_email2" name="member_email2" placeholder="이메일 도메인을 선택해 주세요" readonly="readonly">
+                    <select name="selectDomain" onchange="domainSelect(this.value)">
+					<!-- 셀렉트박스 도메인 선택 시 해당 값을 이메일의 도메인 입력란에 표시 -->
+						<option value="">도메인선택</option>	
+						<option value="@naver.com">naver.com</option>
+						<option value="@hanmail.net">hanmail.net</option>
+						<option value="@daum.net">daum.net</option>
+						<option value="@nate.com">nate.com</option>
+						<option value="@gmail.com">gmail.com</option>
+						<option value="@hotmail.com">hotmail.com</option>			
+					</select>
+<!--                     <input type="button" class="aa-browse-btn" id="dupEmailCheckBtn" value="중복확인"> -->
+                    <label for=""><input type="button" class="aa-browse-btn" id="dupEmailCheckBtn" value="중복확인"><span id = "dupResult"> </span></label><br>
                    
  					<button type="button" class="aa-browse-btn">인증번호 받기</button>
  					 <button type="button" class="aa-browse-btn">인증번호 확인</button>
@@ -396,18 +459,19 @@
           			<input type="text" placeholder="인증번호를 입력해주세요">
 					
                     <label for="">Password<span id="passwordNull"> * </span></label>
-                    <input type="password" id="member_password" name = "member_password" placeholder="비밀번호를 입력해주세요"  onkeyup="checkPassword(this.value)">
+                    <input type="password" id="member_password" name = "member_password" placeholder="비밀번호를 입력해주세요" maxlength="16"  onkeyup="checkPassword(this.value)">
                      <label for=""><span id="checkPasswordResult"></span></label><br>
                    
                     <label for="">Password check<span id="passwordCheckNull" > * </span></label>
-                    <input type="password" id="member_passwordCheck" name = "member_passwordCheck" placeholder="비밀번호를 확인해주세요"  onkeyup="checkPasswordConfirm(this.value)">
+                    <input type="password" id="member_passwordCheck" name = "member_passwordCheck" placeholder="비밀번호를 확인해주세요" maxlength="16" onkeyup="checkPasswordConfirm(this.value)">
                     <label for=""><span id="passwordConfirmResult"></span></label><br>
                   
                     <label for="">이름<span id="nameNull"> * </span></label>
                     <input type="text" id="member_name" name = "member_name"  placeholder="이름" >
                    
                     <label for="">전화번호<span id="phoneNull"> * </span></label>
-                    <input type="text" id="member_phone" name = "member_phone"  placeholder="전화번호" >
+               
+                    <input type="text" id="member_phone" name = "member_phone" placeholder="전화번호를 입력해주세요" maxlength="11" onblur="checkPhoneNum(this.value)">
                  	
               		<label for="">우편번호<span id="addressNull"> * </span></label><br>
                  	<input type="button" class="aa-browse-btn" value="주소검색" onclick="execDaumPostcode()">
