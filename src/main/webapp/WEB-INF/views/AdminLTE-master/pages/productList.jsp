@@ -48,7 +48,10 @@
                       <c:forEach var="list" items="${allList }" varStatus="status">
 	                      <tr>
 	                        <td>${list.product_idx }</td>
-	                        <td>${list.product_name }</td>
+	                        <td>
+	                        <!-- 미니 이미지 -->
+	                        <img src='<c:url value="/resources/upload/${list.product_main_image }"/>' width="30px" >&nbsp;&nbsp;
+	                        ${list.product_name }</td>
 	                        <td>${list.product_size }ml</td>
 	                        <td>${list.product_price }원</td>
 	                        <td>${list.product_stock }개</td>

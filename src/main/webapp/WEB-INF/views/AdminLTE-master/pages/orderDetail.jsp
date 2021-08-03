@@ -36,6 +36,7 @@
             <!-- forEach문에서 변수 두개(orderProductList,orderProductInfo)를 사용할 경우 -->
             <!-- varStatus="status" → 변수2[status.index] 사용 -->
             	<div class="box-body">
+            	<img src='<c:url value="/resources/upload/${orderProductInfo[status.index].product_main_image }"/>' width="30px" >&nbsp;&nbsp;
               		${orderProductInfo[status.index].product_name } /
               		${orderProductInfo[status.index].product_size }ml /
               		정가 ${orderProductInfo[status.index].product_price }원 /

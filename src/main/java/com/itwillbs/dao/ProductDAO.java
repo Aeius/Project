@@ -54,5 +54,7 @@ public interface ProductDAO {
 	public ArrayList<CategoryBean> getDonutList();
 	
 	public ArrayList<RecoBean> getRecoList();
+	
+	public Integer getProductName(String product_name);
 
 }

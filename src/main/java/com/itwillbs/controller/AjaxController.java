@@ -17,6 +17,7 @@ import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.WishListBean;
 import com.itwillbs.service.BasketService;
 import com.itwillbs.service.MemberService;
+import com.itwillbs.service.ProductService;
 import com.itwillbs.service.WishListService;
 
 
@@ -31,6 +32,9 @@ public class AjaxController {
 	
 	@Inject
 	private MemberService memberService;
+	
+	@Inject
+	private ProductService productService;
 	
 	//-------------------------------------------------------------- 찜(좋아요) 버튼 눌렀을 때 --------------------------------------------------------
 	@RequestMapping(value = "/pushWishList.sh", method = RequestMethod.GET)
@@ -247,5 +251,30 @@ public class AjaxController {
 			}
 			return entity;
 		}
+	
+	//---------------------------------- 상품 이름 중복 확인 (관리자) --------------------------------------------------------
+	@RequestMapping(value = "/checkProductName.ad", method = RequestMethod.GET)
+	public ResponseEntity<String> checkProductName(HttpServletRequest request){
+		String result="";
+		ResponseEntity<String> entity=null;
+		try {
+			String product_full_name = request.getParameter("product_name");
+			// 공백 제거 -> Product테이블 공백제거된 상품이름과 비교
+			// 동일 이름의 띄어쓰기 다른 제품만 찾아냄
+			String product_name = product_full_name.replaceAll(" ", ""); 
+			Integer productCount = productService.getProductName(product_name);
+			if(productCount > 0) { //상품이름 중복
+//							System.out.println(productCount + "개 상품이름 중복 - " + product_name);
+				result="nameDup";
+			}else {
+				result="nameOk";
+			}
+			entity=new ResponseEntity<String>(result,HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println("오류 발생 -" + e.getMessage());
+			entity=new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 
 }

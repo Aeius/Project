@@ -165,7 +165,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.getRecoList();
 	}
 	
-	
+	@Override
+	public Integer getProductName(String product_name) {
+		return productDAO.getProductName(product_name);
+	}
 
 	
 

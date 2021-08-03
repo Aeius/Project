@@ -160,7 +160,9 @@ public class ProductDAOImpl implements ProductDAO {
 		return (ArrayList)sqlSession.selectList(namespace + ".getRecoList");
 	}
 
-	
-	
+	@Override
+	public Integer getProductName(String product_name) {
+		return sqlSession.selectOne(namespace + ".getProductName", product_name);
+	}
 	
 }

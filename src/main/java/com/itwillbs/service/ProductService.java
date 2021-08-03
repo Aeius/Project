@@ -55,5 +55,6 @@ public interface ProductService {
 
 	public ArrayList<RecoBean> getRecoList();
 
+	public Integer getProductName(String product_name); // 상품등록시 이름 중복 확인용
 
 }

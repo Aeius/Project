@@ -142,12 +142,12 @@
   </update>
   
   <select id="getBarList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product order by product_sellcount desc limit 0,5 ;
+  	select * from product order by product_sellcount desc limit 0,5
   </select>
   
   <select id="getLineList" resultType="com.itwillbs.domain.ChartBean">
   	select order_date, sum(order_amount) order_amount from orderlist
-	group by order_date order by order_date desc limit 0,7;
+	group by order_date order by order_date desc limit 0,7
   </select>
 	
   <select id="getDonutList" resultType="com.itwillbs.domain.CategoryBean">
@@ -155,7 +155,12 @@
   </select>  
   
   <select id="getRecoList" resultType="com.itwillbs.domain.RecoBean">
-  	select * from recochart;
+  	select * from recochart
   </select>  
+  
+  <select id="getProductName" resultType="java.lang.Integer">
+    select count(*) from product
+	where replace(product_name,' ','')=#{product_name}
+  </select>
   
 </mapper>

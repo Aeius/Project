@@ -57,7 +57,8 @@
                     <c:forEach var="list" items="${allList }" varStatus="status">
                       <tr>
                       	<td>${list.product_idx }</td>
-                        <td>${list.product_name }</td>
+                        <td><img src='<c:url value="/resources/upload/${list.product_main_image }"/>' width="30px" >&nbsp;&nbsp;
+              				${list.product_name }</td>
                         <td>${list.product_sellcount }개</td>
                         <td><fmt:formatNumber value="${list.product_sellcount * list.product_price}" pattern="#,###,###,###,###"/>원</td>
                       </tr>
