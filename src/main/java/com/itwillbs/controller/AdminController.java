@@ -353,7 +353,7 @@ public class AdminController {
 		// 세션 값가져오기
 		String member_email = (String) session.getAttribute("member_email");
 
-		return "/dailyShop/member/index";
+		return "redirect:/";
 	}
 
 	// ------------------ 회원관리 > 전체회원 ---------------------
@@ -401,8 +401,6 @@ public class AdminController {
 			} //3번째
 			
 			return result; // 4번째
-			
-			
 			
 		}
 		
@@ -513,9 +511,7 @@ public class AdminController {
 		int faq_idx = Integer.parseInt(request.getParameter("faq_idx"));
 		faqBoardService.deleteFaqBoard(faqBoardBean);
 
-		// 세션값 초기화
-		session.invalidate();
-		return "/AdminLTE-master/pages/faqList";
+		return "redirect:/faqList.ad";
 	}
 
 	// ------------------ 매출 조회 ---------------------

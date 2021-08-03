@@ -9,7 +9,7 @@
   
   <body class="skin-blue">
   
-<!--   admin 구분 :  로그인이 되어있지 않으면 로그인 페이지로 이동, 일반호 -->
+      <!--   admin 구분 :  로그인이 되어있지 않으면 로그인 페이지로 이동, 일반회원이면 홈페이지로 이동 -->
   <c:choose>
   	<c:when test="${empty sessionScope }">
   		<c:redirect url="/login.ad"></c:redirect>
