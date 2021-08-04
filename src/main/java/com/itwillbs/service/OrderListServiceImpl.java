@@ -67,6 +67,12 @@ public class OrderListServiceImpl implements OrderListService {
 		return orderListDAO.getReviewFind(review_email);
 	}
 
+	@Override
+	public void insertOrderList(OrderListBean orderListBean) {
+		orderListDAO.insertOrderList(orderListBean);
+		
+	}
+
 
 	
 //	@Override

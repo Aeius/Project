@@ -8,4 +8,6 @@ public interface OrderDetailService {
 
 	public ArrayList<OrderDetailBean> getOrderProductList(int order_idx);
 
+	public void insertOrderDetail(OrderDetailBean orderDetailBean);
+
 }

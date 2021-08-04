@@ -23,6 +23,8 @@ public interface OrderListDAO {
 
 	ArrayList<OrderListBean> getReviewFind(String review_email);
 
+	void insertOrderList(OrderListBean orderListBean);
+
 //	OrderListBean getReviewCheck(String review_email, int review_idx);
 
 //	OrderListBean getReviewCheck1(int review_idx);

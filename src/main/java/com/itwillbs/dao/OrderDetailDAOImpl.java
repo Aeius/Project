@@ -22,4 +22,9 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
 		return (ArrayList)sqlSession.selectList(namespace + ".getOrderProductList", order_idx);
 	}
 
+	@Override
+	public void insertOrderDetail(OrderDetailBean orderDetailBean) {
+		sqlSession.insert(namespace + ".insertOrderDetail", orderDetailBean);
+	}
+
 }

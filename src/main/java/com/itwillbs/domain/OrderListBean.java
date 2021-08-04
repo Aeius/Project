@@ -11,6 +11,11 @@ public class OrderListBean {
     private String order_receiver_phone;
     private String order_receiver_post;
     private String order_receiver_address;
+    private String order_receiver_extraAddress;
+    private String order_receiver_extraAddress2;
+    private String order_coupon;
+    private String order_point;
+    
     
     
     
@@ -26,6 +31,30 @@ public class OrderListBean {
     
     
     
+	public String getOrder_coupon() {
+		return order_coupon;
+	}
+	public void setOrder_coupon(String order_coupon) {
+		this.order_coupon = order_coupon;
+	}
+	public String getOrder_point() {
+		return order_point;
+	}
+	public void setOrder_point(String order_point) {
+		this.order_point = order_point;
+	}
+	public String getOrder_receiver_extraAddress() {
+		return order_receiver_extraAddress;
+	}
+	public void setOrder_receiver_extraAddress(String order_receiver_extraAddress) {
+		this.order_receiver_extraAddress = order_receiver_extraAddress;
+	}
+	public String getOrder_receiver_extraAddress2() {
+		return order_receiver_extraAddress2;
+	}
+	public void setOrder_receiver_extraAddress2(String order_receiver_extraAddress2) {
+		this.order_receiver_extraAddress2 = order_receiver_extraAddress2;
+	}
 	public String getOrder_receiver_name() {
 		return order_receiver_name;
 	}

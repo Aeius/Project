@@ -67,9 +67,14 @@
 		    	
 		        document.getElementById('order_idx').value = new Date().getTime(),
 				document.getElementById('buyer_email').value = rsp.buyer_email;
+		        document.getElementById('buyer_name').value = rsp.paid_amount;
 		        document.getElementById('buyer_tel').value = rsp.buyer_tel;
-		        document.getElementById('buyer_addr').value = rsp.buyer_addr;
 		        document.getElementById('buyer_postcode').value = rsp.buyer_postcode;
+		        document.getElementById('buyer_addr').value = rsp.buyer_addr;
+		        document.getElementById('buyer_extraAddr').value = rsp.paid_amount;
+		        document.getElementById('buyer_extraAddr2').value = rsp.paid_amount;
+		        document.getElementById('coupon').value = rsp.paid_amount;
+		        document.getElementById('point').value = rsp.paid_amount;
 		        document.getElementById('amount').value = rsp.paid_amount;
 		        
 		        
@@ -124,14 +129,15 @@
  <form action="checkout_finish.sh" method="post" name="payFinish">
  <input type="hidden" id="order_idx" name="order_idx" value="">
  <input type="hidden" id="buyer_email" name="buyer_email" value="">
+ <input type="hidden" id="buyer_name" name="buyer_name" value="">
  <input type="hidden" id="buyer_tel" name="buyer_tel" value="">
- <input type="hidden" id="buyer_addr" name="buyer_addr" value="">
  <input type="hidden" id="buyer_postcode" name="buyer_postcode" value="">
+ <input type="hidden" id="buyer_addr" name="buyer_addr" value="">
+ <input type="hidden" id="buyer_extraAddr" name="buyer_extraAddr" value="">
+ <input type="hidden" id="buyer_extraAddr2" name="buyer_extraAddr2" value="">
+ <input type="hidden" id="coupon" name="coupon" value="">
+ <input type="hidden" id="point" name="point" value="">
  <input type="hidden" id="amount" name="amount" value="">
-<%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
-<%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
-<%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
-<%--  <input type="hidden" id="member_email" value="${sessionScope.member_email }"> --%>
 </form>
  <section id="checkout">
    <div class="container">

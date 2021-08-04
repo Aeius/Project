@@ -60,6 +60,12 @@ public class OrderLsitDAOImpl implements OrderListDAO {
 		return (ArrayList)sqlSession.selectList(namespace+".getReviewFind",review_email);
 	}
 
+	@Override
+	public void insertOrderList(OrderListBean orderListBean) {
+		sqlSession.insert(namespace + ".insertOrderList", orderListBean);
+		
+	}
+
 
 
 

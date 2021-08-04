@@ -7,5 +7,7 @@ import com.itwillbs.domain.OrderDetailBean;
 public interface OrderDetailDAO {
 	
 	public ArrayList<OrderDetailBean> getOrderProductList(int order_idx);
+
+	public void insertOrderDetail(OrderDetailBean orderDetailBean);
 	
 }

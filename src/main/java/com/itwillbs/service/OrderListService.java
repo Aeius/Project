@@ -24,6 +24,8 @@ public interface OrderListService {
 
 	ArrayList<OrderListBean> getReviewFind(String review_email);
 
+	public void insertOrderList(OrderListBean orderListBean);
+
 //	public OrderListBean getReviewCheck1(int review_idx);
 
 }

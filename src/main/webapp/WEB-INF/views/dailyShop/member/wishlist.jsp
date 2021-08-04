@@ -69,7 +69,7 @@
                         <td><a class="aa-cart-title" href="productDetail.sh?product_idx=${myWishList.wishList_product_idx }">${myWishList.product_name}</a></td>
                         <td>${myWishList.product_price} 원</td>
                         <td>${myWishList.product_stock} 개</td>
-                        <td><a href="#" class="aa-add-to-cart-btn">장바구니에 담기</a></td>
+                        <td><a href="insertBasket.sh?product_idx=${myWishList.wishList_product_idx }&member_email=${sessionScope.member_email}&quantity=1" class="aa-add-to-cart-btn">장바구니에 담기</a></td>
                       </tr>
                       </c:forEach>
                       </tbody>

@@ -20,4 +20,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		return (ArrayList)orderDetailDAO.getOrderProductList(order_idx);
 	}
 
+	@Override
+	public void insertOrderDetail(OrderDetailBean orderDetailBean) {
+		orderDetailDAO.insertOrderDetail(orderDetailBean);
+	}
+
 }

@@ -8,4 +8,11 @@
 		select * from order_detail where order_detail_order_idx=#{order_idx}
 	</select>
 	
+	<insert id="insertOrderDetail">
+		insert into order_detail 
+		set 
+		order_detail_idx = #{order_detail_idx},
+		order_detail_product_idx = #{order_detail_product_idx},
+		order_detail_quantity = #{order_detail_quantity}
+	</insert>
 </mapper>

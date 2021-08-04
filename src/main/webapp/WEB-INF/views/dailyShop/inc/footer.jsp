@@ -20,7 +20,7 @@
                 <div class="aa-footer-widget">
                   <h3>Main Menu</h3>
                   <ul class="aa-footer-nav">
-                    <li><a href="/">Home</a></li>
+                    <li><a href="main.sh">Home</a></li>
                     <li><a href="notice.sh">Our Services</a></li>
                     <li><a href="productList.sh">Our Products</a></li>
                   </ul>
