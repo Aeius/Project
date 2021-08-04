@@ -79,11 +79,11 @@
  
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-   <img src="<c:url value='/resources/img/fashion/fashion-header-bg-8.jpg'/>" alt="fashion img">
+      <img src="<c:url value='/resources/img/banner_add/test_banner.png'/>" alt="banner_img">
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2>검색 결과</h2>
+        <h2 >검색 결과</h2>
 <!--         <ol class="breadcrumb"> -->
 <!--           <li><a href="index.html">Home</a></li>          -->
 <!--           <li class="active">Women</li> -->

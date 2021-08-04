@@ -112,7 +112,7 @@
  
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-   <img src="<c:url value='/resources/img/banner_add/test_banner.png'/>" alt="fashion img">
+   <img src="<c:url value='/resources/img/banner_add/test_banner.png'/>" alt="banner_img">
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">

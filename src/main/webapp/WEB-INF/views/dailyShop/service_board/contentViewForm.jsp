@@ -32,7 +32,7 @@
 
 	<!-- catg header banner section -->
 	<section id="aa-catg-head-banner">
-		<img src="<c:url value='/resources/img/fashion/fashion-header-bg-8.jpg'/>" alt="fashion img">
+		<img src="<c:url value='/resources/img/banner_add/logo4.gif'/>"  alt="fashion img">
 		<div class="aa-catg-head-banner-area">
 			<div class="container">
 				<div class="aa-catg-head-banner-content">
@@ -94,7 +94,9 @@
 					                    </tbody>
 					                  </table>
 					                  <button type="submit" class="aa-browse-btn">목록</button>
-					                
+					                   <br><br>
+					                    <br><br>
+					                </form>
 					            </div>
 					              <br><br>
 					          </div>

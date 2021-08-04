@@ -117,27 +117,31 @@ public class MemberServiceImpl implements MemberService {
 	      String title = mb.getMember_name() + "님의 임시 비밀번호를 전달해 드립니다. "; // 제목
 	      String tempPass = mb.getMember_password();
 	      
-	      String content = "<p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\">"
-	      		+ "</p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">"
-	      		+ "안녕하세요 회원님,</span></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\">"
-	      		+ "<span style=\"font-family: dotum, sans-serif;\">회원님의 임시 비밀번호를&nbsp;</span></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">아래와 같이 전달해 드립니다.</span>"
-	      		+ "</p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\">"
-	      		+ "<b><span style=\"font-size: 9pt; font-family: dotum, sans-serif;\">"
-	      		+ ""
-	      		+ "임시 비밀번호:&nbsp;</span></b><span style=\"font-family: dotum, sans-serif; font-size: 9pt;\">"
-	      		+ "["+ tempPass +"]</span></p>"//임시비밀번호
-	      		+ "<p style=\"text-align: center; \" align=\"center\"><br></p>"
-	      		+ "<p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">"
-	      		+ "이 비밀번호로 로그인 하셔서</span></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">새로운 비밀번호로&nbsp;</span></p><p style=\"text-align: center; \" align=\"center\">"
-	      		+ "<span style=\"font-family: dotum, sans-serif;\">변경하여 주시기 바랍니다.</span></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\">"
-	      		+ "<span style=\"font-family: dotum, sans-serif;\"><b><a href=\"http://localhost:8080/myweb2/login.sh\" target=\"_self\" style=\"cursor: pointer; white-space: pre;\">"
-	      		+ "로그인 하러 가기</a><span id=\"husky_bookmark_end_1627962574111\"></span></b></span></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br>"
-	      		+ "</p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">※비밀번호 찾기 신청을&nbsp;"
-	      		+ "</span><span style=\"font-size: 10pt; font-family: dotum, sans-serif;\">하시지 않았다면</span></p><p style=\"text-align: center; \" align=\"center\"><span style=\"font-family: dotum, sans-serif;\">"
-	      		+ "<span id=\"husky_bookmark_start_1627962656513\"></span><a href=\"http://localhost:8080/myweb2/notice.sh\" target=\"_self\" style=\"cursor: pointer; white-space: pre;\">고객센터</a>"
-	      		+ "<span id=\"husky_bookmark_end_1627962656513\"></span>로 연락해 주세요.</span></p><p style=\"text-align: center; \" align=\"center\">"
-	      		+ "<br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\"><br></p><p style=\"text-align: center; \" align=\"center\">"
-	      		+ "<span style=\"font-size: 10pt;\">&nbsp;</span><br></p>"; 
+	      String content = "<p align=\"center\" style=\"text-align: center; \">&nbsp;<span style=\"font-size: 10pt;\">&nbsp;</span></p><p align=\"center\" style=\"text-align: center; \">"
+	      		+ "<img src=\"https://postfiles.pstatic.net/MjAyMTA4MDRfMTA3/MDAxNjI4MDU3ODE4MDM3.dQGrbYYH-OB9Pi7lo8CDH97BbHOhbvmWRLB66QJkbcAg.0Xx2qYIHIMjO6hGspDI-Z5M7kCNLnBL7EgK54rpZl3og.JPEG.honamory/logo_proto_1.jpg?type=w966\" loading=\"lazy\"></p>"
+	      		+ "<p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p>"
+	      		+ "<p align=\"center\" style=\"text-align: center; \"><span style=\"font-family: dotum, sans-serif;\">안녕하세요 회원님,</span></p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p>"
+	      		+ "<p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \"><span style=\"font-family: dotum, sans-serif;\">회원님의 임시 비밀번호를&nbsp;</span></p><p align=\"center\" style=\"text-align: center; \">"
+	      		+ "<span style=\"font-family: dotum, sans-serif;\">아래와 같이 전달해 드립니다.</span></p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p>"
+	      		+ "<p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">"
+	      		+ "<b><span style=\"font-size: 9pt; font-family: dotum, sans-serif;\">임시 비밀번호:&nbsp;</span>"
+	      		+ "</b><span style=\"font-family: dotum, sans-serif; font-size: 9pt;\">["+tempPass+"]</span>" //임시비밀번호!! 
+	      		+ "</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">"
+	      		+ "&nbsp;</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">"
+	      		+ "<span style=\"font-family: dotum, sans-serif;\">이 비밀번호로 로그인 하셔서</span></p><p align=\"center\" style=\"text-align: center; \">"
+	      		+ "<span style=\"font-family: dotum, sans-serif;\">새로운 비밀번호로&nbsp;</span></p>"
+	      		+ "<p align=\"center\" style=\"text-align: center; \"><span style=\"font-family: dotum, sans-serif;\">변경하여 주시기 바랍니다.</span>"
+	      		+ "</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p>"
+	      		+ "<p align=\"center\" style=\"text-align: center; \"><span style=\"font-family: dotum, sans-serif;\">"
+	      		+ "<b><a href=\"http://localhost:8080/myweb2/login.sh\" target=\"_blank\" style=\"cursor: pointer; white-space: pre;\" rel=\"noreferrer noopener\">"
+	      		+ "로그인 하러 가기</a><span></span></b></span></p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p>"
+	      		+ "<p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">"
+	      		+ "<span style=\"font-family: dotum, sans-serif;\">※비밀번호 찾기 신청을&nbsp;</span><span style=\"font-size: 10pt; font-family: dotum, sans-serif;\">하시지 않았다면</span></p>"
+	      		+ "<p align=\"center\" style=\"text-align: center; \"><span style=\"font-family: dotum, sans-serif;\"><span></span><a href=\"http://localhost:8080/myweb2/notice.sh\" target=\"_blank\" style=\"cursor: pointer; white-space: pre;\" rel=\"noreferrer noopener\">"
+	      		+ "고객센터</a><span></span>로 연락해 주세요.</span></p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">"
+	      		+ "<span style=\"font-size: 10pt;\">&nbsp;</span>&nbsp;</p>\r\n"
+	      		+ "\r\n"
+	      		+ "";
 
 	      try {
 	         MimeMessage message = mailSender.createMimeMessage();

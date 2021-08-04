@@ -103,10 +103,11 @@
                 <img data-seq src="<c:url value='/resources/img/slider/slider_pick2.jpg'/>" alt="Wristwatch slide img" />
               </div>
               <div class="seq-title">
-                <span data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">2021 3/4 Collector's Pick</span>                
+                <span data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">
+                2021 3/4 Collector's Pick</span>                
                 <h2 data-seq>Penhaligon's Choice</h2>                
                 <p data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">프리미엄 컬렉션을 부티끄에서 만나보세요</p>
-                <a data-seq href="<c:url value='/productList.sh'/>"  style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.5 );"  class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <a data-seq href="<c:url value='/search.sh?search=펜할리곤스'/>"  style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.5 );"  class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
               <!-- single slide item -->           
@@ -120,7 +121,7 @@
                 <h2 data-seq>Maison Margiela</h2>                
               <p data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">
                 Maison Margiela의 일관된 디자인 철학, Replica line</p>
-                <a data-seq href="<c:url value='/productList.sh'/>"  style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.5 );"   class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <a data-seq href="<c:url value='/search.sh?search=메종'/>"  style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.5 );"   class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
             
@@ -134,7 +135,7 @@
                 <h2 data-seq>Mercedes Benz</h2>                
                 <p data-seq style="color: #353535;  background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );" >
                 여름에도 지나칠 수 없는 Luxury & Trendy</p>
-                <a data-seq href="<c:url value='/productList.sh'/>" style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.5 );"    class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <a data-seq href="<c:url value='/search.sh?search=벤츠'/>" style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.5 );"    class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
           
@@ -151,7 +152,7 @@
                 <h2 data-seq>"When you [Wear] the Perfume"</h2>                
                 <p data-seq style="color: #fff; ">
                올바르게 입는 니치향수로 무더위 극복하기</p>
-                <a data-seq href="<c:url value='/productList.sh'/>"  style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.2); "  class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <a data-seq href="<c:url value='/productList.sh'/>"  style=" font-color: white; border:1px solid #000; background-color: rgba( 255, 255, 255, 0.2); "  class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
             

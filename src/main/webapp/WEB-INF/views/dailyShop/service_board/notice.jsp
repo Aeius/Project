@@ -210,7 +210,7 @@
 						<div class="row">
 							<div class="col-md-8">
 								<div class="aa-contact-address-left">
-									<form class="comments-form contact-form" action="mailsend.sh" method="GET">
+									<form class="comments-form contact-form" action="mailsend.sh" method="GET" style="margin-bottom: 50px;">
 										<div class="row">
 								
 											<div class="col-md-6">
@@ -235,8 +235,11 @@
 										</div>
 
 									<input type="submit" value="메일 보내기" class="aa-secondary-btn">
-
+ 									<br>
+ 									<br>
+ 									 <br><br>
 									</form>
+									
 								</div>
 							</div>
 							<div class="col-md-4">
