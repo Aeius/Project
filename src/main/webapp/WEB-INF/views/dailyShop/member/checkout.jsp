@@ -79,6 +79,7 @@
   IMP.init("imp35099883"); 
   
     function requestPay() {
+    	//alert('결제할 금액 : '+document.getElementById('amount').innerText);
       // IMP.request_pay(param, callback) 호출
       IMP.request_pay({
 		    pg : 'kakaopay',
@@ -305,8 +306,8 @@
                       <tbody>
                       <c:forEach var="productList" items="${productList }">
                         <tr>
-                          <td id="product_name">${productList.product_name }</td>
-                          <td>${productList.product_price }</td>
+                          <td id="product_name">${productList.product_name } * ${productList.product_quantity }개</td> <!-- 개수 포함 -->
+                          <td>${productList.product_price * productList.product_quantity }</td> <!-- 가격 = 상품가격*상품개수 -->
                         </tr>
                           <input type="hidden" name="quantity" id="quantityList" value="${productList.product_quantity }">
                           <input type="hidden" name="product_idx" id="product_idx" value="${productList.product_idx }">
@@ -315,19 +316,25 @@
                       <tfoot>
                         <tr>
                           <th>합계</th>
-                          <td>원 금액</td>
+                          <td>
+                          <c:set var="total" value="0" /> <!-- 변수 선언 -->
+                          <c:forEach var="productBean" items="${productList }"> <!-- 주문상품만큼의 Bean 반복 -->
+                          	<c:set var="total" value="${total + productBean.product_price * productBean.product_quantity }"/> <!-- 상품가격 더하기 => 상품가격*상품개수 -->
+                       	  </c:forEach>
+                       	  <c:out value="${total }" /> <!-- 변수 출력 -->
+                          </td>
                         </tr>
                          <tr>
                           <th>쿠폰 할인</th>
-                          <td id="coupon">- 할인액</td>
+                          <td id="coupon">- 0</td> <!-- 적용한 쿠폰 불러오기 필요 (임시값 0) -->
                         </tr>
                         <tr>
                           <th>포인트 할인</th>
-                          <td id="point">- 할인액</td>
+                          <td id="point">- 0</td> <!-- 적용한 포인트 불러오기 필요 (임시값 0) -->
                         </tr>
                          <tr>
                           <th>총 가격</th>
-                          <td id="amount">${amount }</td>
+                          <td id="amount"><c:out value="${total }" /></td> <!-- 총 가격 = 합계 - 쿠폰할인 - 포인트할인 -->
                         </tr>
                       </tfoot>
                     </table>

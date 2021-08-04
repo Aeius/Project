@@ -38,7 +38,6 @@ public class PayController {
 	// ---------------------------- 결제 창으로 이동 --------------------------------------------
 	@RequestMapping(value = "/checkout.sh", method = RequestMethod.POST)
 	public String checkout(HttpServletRequest request , Model model, HttpSession session) {
-		
 		String email = (String)session.getAttribute("member_email");
 		MemberBean memberBean = memberService.getMember(email);
 		
@@ -62,7 +61,8 @@ public class PayController {
 		
 		model.addAttribute("member", memberBean);
 		model.addAttribute("productList", productList);
-		model.addAttribute("amount", request.getParameter("amount"));
+//		model.addAttribute("amount", request.getParameter("amount")); 
+		// => amount는 결제페이지 화면에서 jstl로 계산하니까 안받아와도 되지않을까요?
 		
 		return "/dailyShop/member/checkout";
 	}
