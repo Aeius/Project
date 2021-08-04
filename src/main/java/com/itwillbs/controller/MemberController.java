@@ -74,9 +74,47 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	//--------------------------------------------------------------- 내 정보 확인 전 비밀번호 입력 ------------------------------------------------------------
+	@RequestMapping(value = "/userCheck.sh", method = RequestMethod.GET)
+	public String passwordCheck() {
+		return "/dailyShop/member/passwordCheck";
+	}
+	
+	//---------------------------------------------------------------  비밀번호 확인 ------------------------------------------------------------
+	@RequestMapping(value = "/passwordCheck.sh", method = RequestMethod.POST)
+	public String passwordCheck(MemberBean memberBean, HttpSession session, Model model) {
+		
+		// 이메일 정보 가져오기
+		String member_email = (String)session.getAttribute("member_email");
+		memberBean.setMember_email(member_email);
+		
+		// user Check
+		MemberBean memberBean2 = memberService.userCheck(memberBean);
+		
+		// 비밀번호 일치하지 않을 때
+		if(memberBean2 == null) {
+			model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
+			return "/dailyShop/member/msg";
+		} else {
+			boolean passwordCheck = true;
+			session.setAttribute("passwordCheck", passwordCheck);
+		}
+		return "redirect:/myPage.sh";
+	}	
+	
 	//---------------------------------------------------------------  내 정보 & 수정 ------------------------------------------------------------
 	@RequestMapping(value = "/myPage.sh", method = RequestMethod.GET)
 	public String update(HttpSession session, Model model) {
+		
+		// 비밀번호 확인 안했을 때 비밀번호 확인 페이지로 이동
+		if(session.getAttribute("passwordCheck") == null) {
+			return "redirect:/userCheck.sh";
+		} else {
+			// 세션값 삭제
+			session.removeAttribute("passwordCheck");
+		}
+		System.out.println(session.getAttribute("passwordCheck"));
+		
 		String member_email = (String)session.getAttribute("member_email");
 		MemberBean memberBean = memberService.getMember(member_email);
 		model.addAttribute("member", memberBean);
@@ -85,16 +123,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/updatePro.sh", method = RequestMethod.POST)
 	public String updatePro(MemberBean memberBean, Model model) {
-		MemberBean memberBean2 = memberService.userCheck(memberBean);
-		if(memberBean2 != null) {
-			System.out.println("memberController - updateMember");
-			memberService.updateMember(memberBean);
-		}else {
-
-			model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
-			return "/dailyShop/member/msg";
-
-		}
+		memberService.updateMember(memberBean);
 		return "redirect:/myPage.sh";
 	}
 	
@@ -287,5 +316,7 @@ public class MemberController {
 		memberService.sendWelcomeMail(memberBean);
 		return "redirect:/main.sh";
 	}
+	
+
 
 }

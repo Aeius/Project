@@ -101,8 +101,6 @@ function execDaumPostcode() {
                  <form action="<c:url value='updatePro.sh'/>" class="aa-login-form" method="post">
                     <label for="">Email<span>*</span></label>
                     <input type="text" placeholder="이메일을 입력해주세요" value="${member.member_email}" readonly name="member_email"style="width: 60%;">
-                    <label for="">비밀번호<span>*</span></label>
-                    <input type="password" placeholder="비밀번호를 입력해주세요" name="member_password"style="width: 60%;">
                     <label for="">이름<span>*</span></label>
                     <input type="text" placeholder="이름" value="${member.member_name}" name="member_name"style="width: 60%;">
                     <label for="">전화번호<span>*</span></label>

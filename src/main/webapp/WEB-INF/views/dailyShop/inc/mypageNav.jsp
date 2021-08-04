@@ -20,7 +20,7 @@
           <li><a href="myWishList.sh">찜목록</a></li> 
           <li><a href="reviewList.sh">내 리뷰</a></li>    
           <li><a href="coupon.sh">혜택</a></li> 
-          <li><a href="myPage.sh">내 정보</a></li>    
+          <li><a href="userCheck.sh">내 정보</a></li>    
           <li><a href="subscribe.sh">구독 정보</a></li>   
         </ol>
       </div>

@@ -69,7 +69,7 @@
 						 
 						        <li class="hidden-xs"><a href="<c:url value='/basket.sh'/>">My Cart</a></li>
 						       <li class="hidden-xs"><a href="<c:url value='/myWishList.sh'/>">Wish list</a></li>
-				  <li><a href="<c:url value='/myPage.sh'/>">My page</a></li>
+				  <li><a href="<c:url value='/userCheck.sh'/>">My page</a></li>
 						 
 					</c:when>
 					
