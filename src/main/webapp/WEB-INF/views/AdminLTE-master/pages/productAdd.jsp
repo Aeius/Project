@@ -46,6 +46,11 @@
 				$('#product_detail_image').focus();
 				return false;
 			}
+			if($('#product_detail').val()==""){ // 상세 내용 미입력
+				alert("상세 내용을 입력하세요");
+				$('#product_detail').focus();
+				return false;
+			}
 			if($('input:checkbox[name="product_category"]:checked').length==0){ // 카테고리 미선택 
 				alert("카테고리를 선택해주세요");
 				return false;
@@ -62,15 +67,13 @@
    			},
 			success:function(rdata){
 				if(rdata == "nameDup") { // 동일이름 + 띄어쓰기
-					element.innerHTML = "동일한 상품명이 존재합니다. 용량이 다른 경우에만 등록해주세요. (권장)";
+					element.innerHTML = "동일한 상품명이 존재합니다.";
 					element.style.color = 'red';
 				} else {
 					element.innerHTML = "";
 				}
 			}
     	});
-    	
-		
 	}
   </script>
   </head>

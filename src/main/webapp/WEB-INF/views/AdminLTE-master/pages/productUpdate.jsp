@@ -6,6 +6,52 @@
 <html>
   <!-- head -->
   <jsp:include page="../inc/head.jsp" />
+  <head>
+  <script src='<c:url value="/resources/script/jquery-3.6.0.js" />'></script>
+  <script type="text/javascript">
+    // 입력제어
+	$(document).ready(function() {
+		$('#fr').submit(function() {
+			if($('#product_name').val()==""){ // 이름 미입력
+				alert("상품 이름을 입력하세요");
+				$('#product_name').focus();
+				return false;
+			}
+			if($('#product_size').val()=="" ){ // 용량 미입력
+				alert("상품 용량을 입력하세요");
+				$('#product_size').focus();
+				return false;
+			}
+			if($('#product_size').val()!=30 && $('#product_size').val()!=50){
+				alert("입력된 용량을 다시 확인해주세요 (30 또는 50)");
+				$('#product_size').focus();
+				return false;
+			}
+			if($('#product_price').val()==""){ // 가격 미입력
+				alert("상품 가격을 입력하세요");
+				$('#product_price').focus();
+				return false;
+			}
+			if($('#product_stock').val()==""){ // 재고 미입력
+				alert("상품 재고를 입력하세요");
+				$('#product_stock').focus();
+				return false;
+			}
+			if($('#product_detail').val()==""){ // 상세 내용 미입력
+				alert("상세 내용을 입력하세요");
+				$('#product_detail').focus();
+				return false;
+			}
+			if($('input:checkbox[name="product_category"]:checked').length==0){ // 카테고리 미선택 
+				alert("카테고리를 선택해주세요");
+				return false;
+			}
+			
+		});
+	});
+    
+  </script>
+  </head>
   
   <body class="skin-blue">
     <!-- Site wrapper -->
@@ -24,7 +70,7 @@
                   <h1 class="box-title">상품 수정하기</h1>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" action='<c:url value="/productUpdatePro.ad" />' method="post" enctype="multipart/form-data">
+                  <form role="form" id="fr" action='<c:url value="/productUpdatePro.ad" />' method="post" enctype="multipart/form-data">
                   <input type="hidden" name="product_idx" value="${productBean.product_idx }">
 					<!-- text input -->
                     <div class="form-group">
@@ -35,19 +81,19 @@
                     <!-- text input -->
                     <div class="form-group">
                       <label>상품 용량 입력</label>
-                      <input type="text" id="product_size" value="${productBean.product_size }" name="product_size" class="form-control" placeholder="상품 용량을 입력하세요 (숫자만 입력)"/>
+                      <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" id="product_size" value="${productBean.product_size }" name="product_size" class="form-control" placeholder="상품 용량을 입력하세요 (숫자만 입력)"/>
                     </div>
                     
                     <!-- text input -->
                     <div class="form-group">
                       <label>상품 가격 입력</label> 
-                      <input type="text" id="product_price" value="${productBean.product_price }" name="product_price" class="form-control" placeholder="상품 가격을 입력하세요 (숫자만 입력)"/>
+                      <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" id="product_price" value="${productBean.product_price }" name="product_price" class="form-control" placeholder="상품 가격을 입력하세요 (숫자만 입력)"/>
                     </div>
                     
                     <!-- text input -->
                     <div class="form-group">
                       <label>상품 재고 입력</label>
-                      <input type="text" id="product_stock" value="${productBean.product_stock }"  name="product_stock" class="form-control" placeholder="상품 재고를 입력하세요 (숫자만 입력)"/>
+                      <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" id="product_stock" value="${productBean.product_stock }"  name="product_stock" class="form-control" placeholder="상품 재고를 입력하세요 (숫자만 입력)"/>
                     </div>
                     
                     <!-- file -->
