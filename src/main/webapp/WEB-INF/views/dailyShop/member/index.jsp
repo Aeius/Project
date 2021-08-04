@@ -134,7 +134,7 @@
                 <h2 data-seq>Mercedes Benz</h2>                
                 <p data-seq style="color: #353535;  background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );" >
                 여름에도 지나칠 수 없는 Luxury & Trendy</p>
-                <a data-seq href="<c:url value='/productList.sh'/>" style="border:1px solid #000;"  class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <a data-seq href="<c:url value='/productList.sh'/>" style="border:1px solid #000; background-color: rgba( 255, 255, 255, 0.5 );"    class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
           
@@ -201,8 +201,8 @@
                             <a class="aa-product-img"  href="productDetail.sh?product_idx=${bestList.product_idx }"><img src="<c:url value='/resources/upload/${bestList.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
-                              <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${bestList.product_idx }">${bestList.product_name }</a></h4>
-                              <span class="aa-product-price">￦
+                              <h4 class="aa-product-title" style="font-size:13px;"><a href="productDetail.sh?product_idx=${bestList.product_idx }">${bestList.product_name }</a></h4>
+                              <span class="aa-product-price" style="font-size:13px;">￦
                               ${bestList.product_price }</span>
                          	  </figcaption>
                           </figure>                        

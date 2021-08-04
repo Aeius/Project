@@ -46,7 +46,14 @@ public class PayController {
 	
 	@Inject
 	private OrderDetailService orderDetailService;
-
+	
+	// ---------------------------- 결제 창으로 이동 --------------------------------------------
+	@RequestMapping(value = "/checkout.sh", method = RequestMethod.POST)
+	public String checkout(HttpServletRequest request , Model model) {
+		request.getParameter("product_idx");
+		request.getParameter("product_quantity");
+		return "";
+	}
 	//---------------------------- 결제 완료 후 결제 데이터 저장 --------------------------------
 	@RequestMapping(value = "/checkout_finish.sh", method = RequestMethod.POST)
 	public String checkout_finish(HttpServletRequest request , Model model) {

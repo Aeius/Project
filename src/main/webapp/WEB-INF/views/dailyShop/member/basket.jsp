@@ -181,7 +181,7 @@
 							<c:otherwise>
 								<div class="cart-view-table">
 									<div class="table-responsive">
-										<form action="<c:url value='/checkout.sh'/>">
+										<form action="<c:url value='/checkout.sh'/>" method="post" id="fr">
 										<input type="hidden" value="${sessionScope.member_email}" id="member_email">
 											<h2>장바구니</h2>
 											<table class="table">

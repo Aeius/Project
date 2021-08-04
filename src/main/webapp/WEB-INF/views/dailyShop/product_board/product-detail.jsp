@@ -112,11 +112,13 @@
  
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-   <img src="<c:url value='/resources/img/fashion/fashion-header-bg-8.jpg'/>" alt="fashion img">
+   <img src="<c:url value='/resources/img/banner_add/test_banner.png'/>" alt="fashion img">
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2></h2>
+        <h2 style="font-family: serif;">Product Detail</h2>
+        <h4 style ="font-family: serif; color: #EAEAEA; font-weight: bold;">Premium Niche Perfume Taylor</h4>
+        
       </div>
      </div>
    </div>
@@ -217,8 +219,40 @@
                 <div class="tab-pane fade in active2" id="information">
                 
                 <!-- 상품 구매 안내 부분 -->
-                 ${productBean.product_detail_image }
-                
+<%--                  ${productBean.product_detail_image } --%>
+                 
+                <br>
+				<br>
+				<p style="font-size:12px;">               
+				제품 주요 사양 : 모든 피부타입<br>
+				사용기한 또는 개봉 후 사용기간 : 대부분 사용기한 10개월 이상 남은 상품을 발송해 드립니다.<br>
+				<br>
+				<br>
+				사용 방법 : 귀 뒤, 손목 등 맥박이 뛰는 곳에 뿌려줍니다. <br>
+				전성분 : 에탄올,향료,정제수,부틸메톡시디벤조일메탄,에칠헥실메톡시신나메이트,비에이치티,벤질알코올,
+				<br>
+				벤질벤조에이트,부틸페닐메칠프로피오날,시트랄,시트로넬올,파네솔,제라니올,하이드록시시트로넬알,이소유제놀,리모넨,리날룰,메칠2-옥티노에이트,알파-이소메칠이오논
+				<br>
+				기능성 화장품 심사 필 유무 : 무<br>
+				<br>
+				<br> 
+				<br>
+				사용 시 주의사항 :
+				<br>
+				 1) 화장품 사용 시 또는 사용 후 직사광선에 의하여 사용부위가 붉은 반점, 부어오름 또는 가려움증 등의 이상 증상이나 부작용이 있는 경우 전문의 등과 상담할 것 
+				<br>
+				2) 상처가 있는 부위 등에는 사용을 자제할 것 3) 보관 및 취급 시의 주의사항 가) 어린이의 손이 닿지 않는 곳에 보관할 것 나) 직사광선을 피해서 보관할 것 4) 눈에 들어가지 않도록 주의할 것
+				<br>
+				화장품제조업자/화장품책임판매업자 :00000  / (주) 000000<br>
+				제조국 : 프랑스 / 이탈리아<br>
+				품질보증기준 : 공정거래위원회고시 품목별 소비자 분쟁 해결 기준에 따라 안내 받으실 수 있습니다.
+				<br>
+				
+				
+				A/S책임자와 전화번호 :00000000 / 0000000000
+				<br>                 
+                <br>
+                <br>
                 </div>
                 
                 <!-- 리뷰 -->

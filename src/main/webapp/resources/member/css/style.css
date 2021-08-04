@@ -40,7 +40,7 @@ body {
   background-color: #ffffff;
   font-family: "Lato", sans-serif;
   color: #333333;
-  font-size: 16px;
+  font-size: 14px;
   overflow-x: hidden;
 }
 
@@ -73,7 +73,7 @@ a:focus {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Raleway", sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 h2 {
@@ -1193,6 +1193,7 @@ img {
 }
 .aa-product-catg li .aa-product-price del {
   margin-left: 5px;
+  font-size: 16px;
 }
 .aa-product-catg li .aa-product-hvr-content {
   left: 0;
@@ -1795,7 +1796,7 @@ img {
   width: 100%;
 }
 #aa-catg-head-banner .aa-catg-head-banner-area {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
   bottom: 0;
   left: 0;
   position: absolute;
