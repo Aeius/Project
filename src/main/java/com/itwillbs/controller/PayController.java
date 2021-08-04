@@ -1,18 +1,6 @@
 package com.itwillbs.controller;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -22,15 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.util.BufferRecycler;
-import com.fasterxml.jackson.core.util.JsonParserDelegate;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.itwillbs.domain.MemberBean;
-import com.itwillbs.domain.OrderBean;
 import com.itwillbs.domain.OrderDetailBean;
 import com.itwillbs.domain.OrderListBean;
 import com.itwillbs.domain.ProductBean;
@@ -61,24 +42,26 @@ public class PayController {
 		String email = (String)session.getAttribute("member_email");
 		MemberBean memberBean = memberService.getMember(email);
 		
-		String[] products = request.getParameterValues("product_idx");
-		String[] quantitys = request.getParameterValues("basket_quantity");
-		String[] productNames = request.getParameterValues("product_name");
+		String[] product_idx = request.getParameterValues("product_idx");
+		String[] product_price = request.getParameterValues("product_price");
+		String[] product_name = request.getParameterValues("product_name");
+		String[] basket_quantity = request.getParameterValues("basket_quantity");
 		
-		ArrayList<String> productList = new ArrayList<String>();
-		ArrayList<String> quantityList = new ArrayList<String>();
-		ArrayList<String> productNameList = new ArrayList<String>();
-		for(int i = 0; i < products.length; i++) {
-			productList.add(products[i]);
-			productList.add(quantitys[i]);
-			productList.add(productNames[i]);
+		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
+		
+		for(int i = 0; i < product_idx.length; i++) {
+			ProductBean pb = new ProductBean();
+			pb.setProduct_idx(Integer.parseInt(product_idx[i]));
+			pb.setProduct_price(Integer.parseInt(product_price[i]));
+			pb.setProduct_name(product_name[i]);
+			pb.setProduct_quantity(basket_quantity[i]);
+			
+			productList.add(pb);
 			
 		}
 		
 		model.addAttribute("member", memberBean);
 		model.addAttribute("productList", productList);
-		model.addAttribute("quantityList", quantityList);
-		model.addAttribute("productNameList", productNameList);
 		model.addAttribute("amount", request.getParameter("amount"));
 		
 		return "/dailyShop/member/checkout";

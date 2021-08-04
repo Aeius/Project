@@ -146,8 +146,14 @@
   </select>
   
   <select id="getLineList" resultType="com.itwillbs.domain.ChartBean">
-  	select order_date, sum(order_amount) order_amount from orderlist
-	group by order_date order by order_date desc limit 0,7
+	select *
+	from (
+		select ds order_date, ifnull(sum(ol.order_amount),0) order_amount
+	    from dummy_date t left join orderlist ol 
+	    on (ol.order_date = t.ds)
+	    group by ds
+	) tt
+	where order_date between date_add(now(), INTERVAL -1 WEEK) AND NOW()
   </select>
 	
   <select id="getDonutList" resultType="com.itwillbs.domain.CategoryBean">

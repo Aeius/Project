@@ -13,7 +13,17 @@ public class ProductBean {
 	private int	product_likecount; 
 	private int	product_sellcount;
 	private boolean product_status;
+	private String product_quantity;
 	
+	
+	
+	
+	public String getProduct_quantity() {
+		return product_quantity;
+	}
+	public void setProduct_quantity(String product_quantity) {
+		this.product_quantity = product_quantity;
+	}
 	public boolean isProduct_status() {
 		return product_status;
 	}

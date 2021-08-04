@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,19 +26,50 @@
     
   <!--   다음 주소 검색 API -->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script type="text/javascript">
-  function execDaumPostcode() {
-      new daum.Postcode({
-          oncomplete: function(data) {
-              var roadAddr = data.roadAddress;
-              document.getElementById('postcode').value = data.zonecode;
-              document.getElementById('roadAddress').value = roadAddr;
-              var guideTextBox = document.getElementById("guide");
-              document.getElementById('detailAddress').focus();
-          }
-      }).open();
-  }
-  </script>
+<script>
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('member_post').value = data.zonecode;
+                document.getElementById("member_address").value = roadAddr;
+                document.getElementById("member_extraAddress").value = data.jibunAddress;
+                
+                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                if(roadAddr !== ''){
+                    document.getElementById("member_extraAddress2").value = extraRoadAddr;
+                } else {
+                    document.getElementById("member_extraAddress2").value = '';
+                }
+                
+            }
+        }).open();
+    }
+
+</script>
+
 
 
   </head>
@@ -57,8 +89,8 @@
 		    buyer_email : document.getElementById('buyer_email').value,
 		    buyer_name : document.getElementById('buyer_name').value,
 		    buyer_tel :  document.getElementById('buyer_tel').value,
-		    buyer_addr : document.getElementById('roadAddress').value + document.getElementById('detailAddress').value,
-		    buyer_postcode : document.getElementById('postcode').value
+		    buyer_addr : document.getElementById('member_address').value + document.getElementById('member_extraAddress').value + document.getElementById('member_extraAddress2').value,
+		    buyer_postcode : document.getElementById('member_post').value
 		    //m_redirect_url : 'http://localhost:8080/myweb2/kakaoPaymove.sh'
       }, function (rsp) { // callback
     	  alert('결제 진행됨 데이터 전달');
@@ -72,13 +104,14 @@
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        
+			    payFinish.submit();
 		    } else {
 		    	 var msg = '결제에 실패하였습니다.';
 		         msg += '에러내용 : ' + rsp.error_msg;
 		    }
 		    
 		    alert(msg);
-		    payFinish.submit();
 		});
 	}
 </script>
@@ -133,7 +166,7 @@
         <div class="checkout-area">
           <form action="checkout_finish.sh" method="post" name="payFinish">
           <input type="hidden" id="order_idx" name="order_idx" value="">
-          <input type="hidden" id="buyer_email" name="buyer_email" value="${sessionScope.member_email }">
+          <input type="hidden" id="buyer_email" name="buyer_email" value="${member.member_email }">
             <div class="row">
               <div class="col-md-8">
                 <div class="checkout-left">
@@ -152,10 +185,10 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="이름" id="buyer_name" name="buyer_name" >
+                                <input type="text" placeholder="이름" id="buyer_name" name="buyer_name" value="${member.member_name }">
                               </div>   
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="연락처" id="buyer_tel" name="buyer_tel">
+                                <input type="text" placeholder="연락처" id="buyer_tel" name="buyer_tel" value="${member.member_phone }">
                               </div>                          
                             </div>                            
                           </div>  
@@ -175,12 +208,12 @@
                         <div class="panel-body">
                           <div class="row">
                             <div class="col-md-12">
-                              <input type="checkbox" id="rememberme"> 주문자와 동일<br><br>
+                              <input type="checkbox" id="rememberme" checked> 주문자와 동일<br><br>
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="이름">
+                                <input type="text" id="buyer_name" name="buyer_name" placeholder="이름" value="${member.member_name }">
                               </div>
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="연락처">
+                                <input type="text" id="buyer_tel" name="buyer_tel" placeholder="연락처" value="${member.member_phone }">
                               </div>                              
                             </div>                            
                           </div>  
@@ -190,7 +223,7 @@
 	                            <div class="row">
 		                            <div class="col-md-6"> <!-- 첫번째 -->
 		                              <div class="aa-checkout-single-bill">
-		                                <input type="text" name="postcode" id="postcode" class="postcode" placeholder="우편번호" readonly>
+		                                <input type="text" name="member_post" id="member_post" class="member_post" value="${member.member_post }" placeholder="우편번호" readonly ">
 		                              </div>                             
 		                            </div>
 		                            <div class="col-md-6"> <!-- 두번째 -->
@@ -202,11 +235,14 @@
 	                          	<!-- 한줄 끝 -->
 	                          <!-- 한줄에 한 박스 -->
                               <div class="aa-checkout-single-bill">
-                                <input type="text" name="roadAddress" id="roadAddress" class="address" placeholder="도로명주소" readonly>
+                                <input type="text" name="member_address" id="member_address" class="member_address" value="${member.member_address }" placeholder="도로명주소" readonly>
                               </div>  
                               <!-- 한줄 끝 -->    
                               <div class="aa-checkout-single-bill">
-                                <input type="text" name="detailAddress" id="detailAddress" class="address" placeholder="상세주소">
+                                <input type="text" name="member_extraAddress" id="member_extraAddress" class="member_extraAddress" value="${member.member_extraAddress }" placeholder="지번주소">
+                              </div>                             
+                              <div class="aa-checkout-single-bill">
+                                <input type="text" name="member_extraAddress2" id="member_extraAddress2" class="member_extraAddress2" value="${member.member_extraAddress2 }" placeholder="상세주소">
                               </div>                             
                             </div>                           
                           </div>   
@@ -227,8 +263,9 @@
 <!--                           <input type="text" placeholder="쿠폰 선택하기 (텍스트->셀렉트박스)" class="aa-coupon-code"> -->
                           <select name="coupon"  class="aa-coupon-code" id="coupon">
                             	<option value="">쿠폰 선택</option>
-                            	<option value="">3000원 할인 쿠폰</option>
-                            	<option value="">1000원 할인 쿠폰</option>
+                            	<c:forEach items="${fn:split(member.member_coupon, '/') }" var="coupons">
+                            	<option value="${coupons }">${coupons }</option>
+                            	</c:forEach>
                             </select>
                           <input type="submit" value="쿠폰 적용" class="aa-browse-btn">
                         </div>
@@ -245,9 +282,9 @@
                       </div>
                       <div id="collapseTwo" class="panel-collapse collapse in">
                         <div class="panel-body">
-                          <input type="text" placeholder="사용할 포인트 입력" class="aa-coupon-code" id="point">
+                          <input type="text" placeholder="사용할 포인트 입력" class="aa-coupon-code" id="point" max="${member.member_point }">
                           <input type="submit" value="포인트 적용" class="aa-browse-btn">
-                          &nbsp;&nbsp;&nbsp;&nbsp;(현재 보유 포인트 : 0 P)
+                          &nbsp;&nbsp;&nbsp;&nbsp;(현재 보유 포인트 : ${member.member_point } P)
                         </div>
                       </div>
                     </div>
@@ -266,20 +303,14 @@
                         </tr>
                       </thead>
                       <tbody>
-<%--                       <c:forEach var="product" items="${product }"> --%>
+                      <c:forEach var="productList" items="${productList }">
                         <tr>
-                          <td id="product_name">향수1<strong> x  수량</strong></td>
-                          <td>가격1</td>
+                          <td id="product_name">${productList.product_name }</td>
+                          <td>${productList.product_price }</td>
                         </tr>
-<%--                       </c:forEach> --%>
-                        <tr>
-                          <td>향수2 <strong> x  수량</strong></td>
-                          <td>가격2</td>
-                        </tr>
-                        <tr>
-                          <td>향수3 <strong> x  수량</strong></td>
-                          <td>가격3</td>
-                        </tr>
+                          <input type="hidden" name="quantity" id="quantityList" value="${productList.product_quantity }">
+                          <input type="hidden" name="product_idx" id="product_idx" value="${productList.product_idx }">
+                       </c:forEach>
                       </tbody>
                       <tfoot>
                         <tr>
@@ -288,15 +319,15 @@
                         </tr>
                          <tr>
                           <th>쿠폰 할인</th>
-                          <td>- 할인액</td>
+                          <td id="coupon">- 할인액</td>
                         </tr>
                         <tr>
                           <th>포인트 할인</th>
-                          <td>- 할인액</td>
+                          <td id="point">- 할인액</td>
                         </tr>
                          <tr>
                           <th>총 가격</th>
-                          <td id="amount">100</td>
+                          <td id="amount">${amount }</td>
                         </tr>
                       </tfoot>
                     </table>

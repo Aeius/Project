@@ -51,8 +51,8 @@ public class BasketController {
 	}
 	
 	//-------------------------------------------------------------- 장바구니 담기 후 팝업창 주소 이동 --------------------------------------------------------
-	@RequestMapping(value = "/checkout.sh", method = RequestMethod.POST)
-	public String checkout(HttpServletRequest request) {
+	@RequestMapping(value = "/checkout.sh2", method = RequestMethod.POST)
+	public String checkout2(HttpServletRequest request) {
 		// basketBean 저장할 List 객체
 		List<BasketBean> basketList = new ArrayList<BasketBean>();
 		// 제품 정보 저장할 DTO 객체
