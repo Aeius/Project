@@ -1,5 +1,7 @@
 package com.itwillbs.domain;
 
+import java.util.List;
+
 public class BasketBean {
 	private String basket_email;
 	private int basket_product_idx;
@@ -10,6 +12,8 @@ public class BasketBean {
 	private String	product_main_image; 
 	private int product_price; 
 	private int	product_size;
+	
+	private List<BasketBean> basketBean;
 
 	// 기본 생성자
 	public BasketBean() {
@@ -71,5 +75,13 @@ public class BasketBean {
 	public void setProduct_size(int product_size) {
 		this.product_size = product_size;
 	}
+	public List<BasketBean> getBasketBean() {
+		return basketBean;
+	}
+	public void setBasketBean(List<BasketBean> basketBean) {
+		this.basketBean = basketBean;
+	}
+	
+	
 	
 }
