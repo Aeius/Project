@@ -169,6 +169,11 @@ public class ProductServiceImpl implements ProductService {
 	public Integer getProductName(String product_name) {
 		return productDAO.getProductName(product_name);
 	}
+	@Override
+	public void updateSellcount(String product_idx) {
+		productDAO.updateSellcount(product_idx);
+		
+	}
 
 	
 

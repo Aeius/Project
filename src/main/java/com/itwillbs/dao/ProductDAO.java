@@ -57,4 +57,6 @@ public interface ProductDAO {
 	
 	public Integer getProductName(String product_name);
 
+	public void updateSellcount(String product_idx);
+
 }

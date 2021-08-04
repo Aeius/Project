@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,7 +59,7 @@
               <div class="col-md-6">
                 <div class="aa-myaccount-login">
                 <h4>결제가 완료되었습니다</h4>
-                  <label for="board_email">주문 번호</label> : 202107160001
+                  <label for="board_email">주문 번호</label> : ${order_idx }
                     <br><br><button type="button" class="aa-browse-btn" onclick="location.href='./orderList.jsp'">주문내역 보기</button>
                 </div>
               </div>

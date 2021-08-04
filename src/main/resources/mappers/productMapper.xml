@@ -163,4 +163,10 @@
 	where replace(product_name,' ','')=#{product_name}
   </select>
   
+  <update id="updateSellcount">
+  	update product set product_sellcount = product_sellcount + 1 where product_idx = #{product_idx}
+  
+  </update>
+  
+  
 </mapper>

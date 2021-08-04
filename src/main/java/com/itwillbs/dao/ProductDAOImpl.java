@@ -164,5 +164,10 @@ public class ProductDAOImpl implements ProductDAO {
 	public Integer getProductName(String product_name) {
 		return sqlSession.selectOne(namespace + ".getProductName", product_name);
 	}
+
+	@Override
+	public void updateSellcount(String product_idx) {
+		sqlSession.update(namespace + ".updateSellcount" ,product_idx);
+	}
 	
 }

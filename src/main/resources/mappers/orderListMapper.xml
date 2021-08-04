@@ -75,19 +75,20 @@
 	
 	<insert id="insertOrderList">
 		insert into orderlist
-		set
-		order_idx = #{order_idx},
-		order_member_email = #{order_member_email},
-		order_receiver_name = #{order_receiver_name},
-		order_receiver_phone = #{order_receiver_phone},
-		order_receiver_post = #{order_receiver_post},
-		order_receiver_address = #{order_receiver_address},
-		order_receiver_extraAddress = #{order_receiver_extraAddress},
-		order_receiver_extraAddress2 = #{order_receiver_extraAddress2},
-		order_amount = #{order_amount},
-		order_coupon = #{order_coupon},
-		order_point = #{order_point},
-		order_status = #{order_status}
+		values(
+		#{order_idx},
+		#{order_member_email},
+		#{order_receiver_name},
+		#{order_receiver_phone},
+		#{order_receiver_post},
+		#{order_receiver_address},
+		#{order_receiver_extraAddress},
+		#{order_receiver_extraAddress2},
+		#{order_amount},
+		#{order_coupon},
+		#{order_point},
+		#{order_status}
+		)
 		
 	</insert>
 	

@@ -53,38 +53,25 @@
 		    pay_method : 'kakaopay',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : document.getElementById('product_name').innerText, //결제창에서 보여질 이름
-		    amount : document.getElementById('totalAmount').innerText, //실제 결제되는 가격
-		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
-		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울 강남구 도곡동',
-		    buyer_postcode : '123-456'
+		    amount : document.getElementById('amount').innerText, //실제 결제되는 가격
+		    buyer_email : document.getElementById('buyer_email').value,
+		    buyer_name : document.getElementById('buyer_name').value,
+		    buyer_tel :  document.getElementById('buyer_tel').value,
+		    buyer_addr : document.getElementById('roadAddress').value + document.getElementById('detailAddress').value,
+		    buyer_postcode : document.getElementById('postcode').value
 		    //m_redirect_url : 'http://localhost:8080/myweb2/kakaoPaymove.sh'
       }, function (rsp) { // callback
     	  alert('결제 진행됨 데이터 전달');
     	  console.log(rsp);
 		    if ( rsp.success ) {
-		    	
-		        document.getElementById('order_idx').value = new Date().getTime(),
-				document.getElementById('buyer_email').value = rsp.buyer_email;
-		        document.getElementById('buyer_name').value = rsp.paid_amount;
-		        document.getElementById('buyer_tel').value = rsp.buyer_tel;
-		        document.getElementById('buyer_postcode').value = rsp.buyer_postcode;
-		        document.getElementById('buyer_addr').value = rsp.buyer_addr;
-		        document.getElementById('buyer_extraAddr').value = rsp.paid_amount;
-		        document.getElementById('buyer_extraAddr2').value = rsp.paid_amount;
-		        document.getElementById('coupon').value = rsp.paid_amount;
-		        document.getElementById('point').value = rsp.paid_amount;
-		        document.getElementById('amount').value = rsp.paid_amount;
-		        
+		    	 
+		        document.getElementById('order_idx').value = new Date().getTime();
 		        
 		    	var msg = '결제가 완료되었습니다.';
 		        msg += '고유ID : ' + rsp.imp_uid;
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		        
-		        
 		    } else {
 		    	 var msg = '결제에 실패하였습니다.';
 		         msg += '에러내용 : ' + rsp.error_msg;
@@ -126,25 +113,27 @@
   <!-- / catg header banner section -->
 
  <!-- Cart view section -->
- <form action="checkout_finish.sh" method="post" name="payFinish">
- <input type="hidden" id="order_idx" name="order_idx" value="">
- <input type="hidden" id="buyer_email" name="buyer_email" value="">
- <input type="hidden" id="buyer_name" name="buyer_name" value="">
- <input type="hidden" id="buyer_tel" name="buyer_tel" value="">
- <input type="hidden" id="buyer_postcode" name="buyer_postcode" value="">
- <input type="hidden" id="buyer_addr" name="buyer_addr" value="">
- <input type="hidden" id="buyer_extraAddr" name="buyer_extraAddr" value="">
- <input type="hidden" id="buyer_extraAddr2" name="buyer_extraAddr2" value="">
- <input type="hidden" id="coupon" name="coupon" value="">
- <input type="hidden" id="point" name="point" value="">
- <input type="hidden" id="amount" name="amount" value="">
-</form>
+<!--  <form action="checkout_finish.sh" method="post" name="payFinish"> -->
+<!--  <input type="hidden" id="order_idx" name="order_idx" value=""> -->
+<!--  <input type="hidden" id="buyer_email" name="buyer_email" value=""> -->
+<!--  <input type="hidden" id="buyer_name" name="buyer_name" value=""> -->
+<!--  <input type="hidden" id="buyer_tel" name="buyer_tel" value=""> -->
+<!--  <input type="hidden" id="buyer_postcode" name="buyer_postcode" value=""> -->
+<!--  <input type="hidden" id="buyer_addr" name="buyer_addr" value=""> -->
+<!--  <input type="hidden" id="buyer_extraAddr" name="buyer_extraAddr" value=""> -->
+<!--  <input type="hidden" id="buyer_extraAddr2" name="buyer_extraAddr2" value=""> -->
+<!--  <input type="hidden" id="coupon" name="coupon" value=""> -->
+<!--  <input type="hidden" id="point" name="point" value=""> -->
+<!--  <input type="hidden" id="amount" name="amount" value=""> -->
+<!-- </form> -->
  <section id="checkout">
    <div class="container">
      <div class="row">
        <div class="col-md-12">
         <div class="checkout-area">
-          <form action="./naverPay.jsp">
+          <form action="checkout_finish.sh" method="post" name="payFinish">
+          <input type="hidden" id="order_idx" name="order_idx" value="">
+          <input type="hidden" id="buyer_email" name="buyer_email" value="${sessionScope.member_email }">
             <div class="row">
               <div class="col-md-8">
                 <div class="checkout-left">
@@ -163,10 +152,10 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="이름">
+                                <input type="text" placeholder="이름" id="buyer_name" name="buyer_name" >
                               </div>   
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="연락처">
+                                <input type="text" placeholder="연락처" id="buyer_tel" name="buyer_tel">
                               </div>                          
                             </div>                            
                           </div>  
@@ -236,7 +225,7 @@
                       <div id="collapseOne" class="panel-collapse collapse in">
                         <div class="panel-body">
 <!--                           <input type="text" placeholder="쿠폰 선택하기 (텍스트->셀렉트박스)" class="aa-coupon-code"> -->
-                          <select name="coupon"  class="aa-coupon-code">
+                          <select name="coupon"  class="aa-coupon-code" id="coupon">
                             	<option value="">쿠폰 선택</option>
                             	<option value="">3000원 할인 쿠폰</option>
                             	<option value="">1000원 할인 쿠폰</option>
@@ -256,7 +245,7 @@
                       </div>
                       <div id="collapseTwo" class="panel-collapse collapse in">
                         <div class="panel-body">
-                          <input type="text" placeholder="사용할 포인트 입력" class="aa-coupon-code">
+                          <input type="text" placeholder="사용할 포인트 입력" class="aa-coupon-code" id="point">
                           <input type="submit" value="포인트 적용" class="aa-browse-btn">
                           &nbsp;&nbsp;&nbsp;&nbsp;(현재 보유 포인트 : 0 P)
                         </div>
@@ -307,7 +296,7 @@
                         </tr>
                          <tr>
                           <th>총 가격</th>
-                          <td id="totalAmount">200</td>
+                          <td id="amount">100</td>
                         </tr>
                       </tfoot>
                     </table>

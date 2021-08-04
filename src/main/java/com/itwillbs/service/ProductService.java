@@ -57,4 +57,6 @@ public interface ProductService {
 
 	public Integer getProductName(String product_name); // 상품등록시 이름 중복 확인용
 
+	public void updateSellcount(String product_idx);
+
 }
