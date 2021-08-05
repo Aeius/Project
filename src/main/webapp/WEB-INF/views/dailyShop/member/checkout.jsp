@@ -264,6 +264,7 @@
 <!--                           <input type="text" placeholder="쿠폰 선택하기 (텍스트->셀렉트박스)" class="aa-coupon-code"> -->
                           <select name="coupon"  class="aa-coupon-code" id="coupon">
                             	<option value="">쿠폰 선택</option>
+                            	<option value="1"> 1번 쿠폰 </option>
                             	<c:forEach items="${fn:split(member.member_coupon, '/') }" var="coupons">
                             	<option value="${coupons }">${coupons }</option>
                             	</c:forEach>
@@ -283,7 +284,7 @@
                       </div>
                       <div id="collapseTwo" class="panel-collapse collapse in">
                         <div class="panel-body">
-                          <input type="text" placeholder="사용할 포인트 입력" class="aa-coupon-code" id="point" max="${member.member_point }">
+                          <input type="text" placeholder="사용할 포인트 입력" class="aa-coupon-code" id="point" name="point" max="${member.member_point }">
                           <input type="submit" value="포인트 적용" class="aa-browse-btn">
                           &nbsp;&nbsp;&nbsp;&nbsp;(현재 보유 포인트 : ${member.member_point } P)
                         </div>
@@ -309,7 +310,7 @@
                           <td id="product_name">${productList.product_name } * ${productList.product_quantity }개</td> <!-- 개수 포함 -->
                           <td>${productList.product_price * productList.product_quantity }</td> <!-- 가격 = 상품가격*상품개수 -->
                         </tr>
-                          <input type="hidden" name="quantity" id="quantityList" value="${productList.product_quantity }">
+                          <input type="hidden" name="product_quantity" id="product_quantity" value="${productList.product_quantity }">
                           <input type="hidden" name="product_idx" id="product_idx" value="${productList.product_idx }">
                        </c:forEach>
                       </tbody>
@@ -326,18 +327,19 @@
                         </tr>
                          <tr>
                           <th>쿠폰 할인</th>
-                          <td id="coupon">- 0</td> <!-- 적용한 쿠폰 불러오기 필요 (임시값 0) -->
+                          <td>- 0</td> <!-- 적용한 쿠폰 불러오기 필요 (임시값 0) -->
                         </tr>
                         <tr>
                           <th>포인트 할인</th>
-                          <td id="point">- 0</td> <!-- 적용한 포인트 불러오기 필요 (임시값 0) -->
+                          <td>- 0</td> <!-- 적용한 포인트 불러오기 필요 (임시값 0) -->
                         </tr>
                          <tr>
                           <th>총 가격</th>
-                          <td id="amount"><c:out value="${total }" /></td> <!-- 총 가격 = 합계 - 쿠폰할인 - 포인트할인 -->
+                          <td id="amount" name="amount"><c:out value="${total }" /></td> <!-- 총 가격 = 합계 - 쿠폰할인 - 포인트할인 -->
                         </tr>
                       </tfoot>
                     </table>
+					<input type="hidden" id="amount" name="amount"  value="<c:out value="${total }" />">                         
                   </div>
                   <h4>결제 방법 선택</h4>
                   <div class="aa-payment-method">                    

@@ -5,7 +5,16 @@ public class OrderDetailBean {
 	private int order_detail_order_idx;
 	private int order_detail_product_idx;
 	private int order_detail_product_quantity;
+	private String order_detail_return_check;
 	
+	
+	
+	public String getOrder_detail_return_check() {
+		return order_detail_return_check;
+	}
+	public void setOrder_detail_return_check(String order_detail_return_check) {
+		this.order_detail_return_check = order_detail_return_check;
+	}
 	public int getOrder_detail_order_idx() {
 		return order_detail_order_idx;
 	}

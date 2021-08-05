@@ -11,9 +11,10 @@
 	<insert id="insertOrderDetail">
 		insert into order_detail 
 		values(
-		#{order_detail_idx},
+		#{order_detail_order_idx},
 		#{order_detail_product_idx},
-		#{order_detail_quantity}
+		#{order_detail_product_quantity},
+		#{order_detail_return_check}
 		)
 	</insert>
 </mapper>

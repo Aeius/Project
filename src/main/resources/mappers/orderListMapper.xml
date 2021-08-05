@@ -75,8 +75,7 @@
 	
 	<insert id="insertOrderList">
 		insert into orderlist
-		values(
-		#{order_idx},
+		values (#{order_idx },
 		#{order_member_email},
 		#{order_receiver_name},
 		#{order_receiver_phone},
@@ -87,9 +86,11 @@
 		#{order_amount},
 		#{order_coupon},
 		#{order_point},
-		#{order_status}
+		#{order_status},
+		now(),
+		#{order_payment},
+		#{order_tracking_num}
 		)
-		
 	</insert>
 	
 </mapper>

@@ -90,17 +90,17 @@ public class PayController {
 		System.out.println("주문번호 : " + request.getParameter("order_idx").substring(5));
 		System.out.println("주문자 이메일 : " + request.getParameter("buyer_email"));
 		System.out.println("주문자 연락처 : " + request.getParameter("buyer_tel"));
-		System.out.println("주문자 주소 : " + request.getParameter("roadAddress"));
-		System.out.println("주문자 주소2 : " + request.getParameter("detailAddress"));
-		System.out.println("주문자 주소3 : " + request.getParameter("detailAddress"));
-		System.out.println("주문자 우편번호 : " + request.getParameter("postcode"));
+		System.out.println("주문자 우편번호 : " + request.getParameter("member_post"));
+		System.out.println("주문자 주소 : " + request.getParameter("member_address"));
+		System.out.println("주문자 주소2 : " + request.getParameter("member_extraAddress"));
+		System.out.println("주문자 주소3 : " + request.getParameter("member_extraAddress2"));
 		System.out.println("쿠폰 : " + request.getParameter("coupon"));
 		System.out.println("포인트  : " + request.getParameter("point"));
 		System.out.println("결제 금액 : " + request.getParameter("amount"));
 		
 		
 		System.out.println("주문한 상품 : " + request.getParameter("product_idx"));
-		System.out.println("주문상품의 갯수 : " + request.getParameter("basket_quantity"));
+		System.out.println("주문상품의 갯수 : " + request.getParameter("product_quantity"));
 		
 		int order_idx = Integer.parseInt(request.getParameter("order_idx").substring(5));
 		
@@ -110,40 +110,44 @@ public class PayController {
 		orderListBean.setOrder_member_email(request.getParameter("buyer_email"));
 		orderListBean.setOrder_receiver_name(request.getParameter("buyer_name"));
 		orderListBean.setOrder_receiver_phone(request.getParameter("buyer_tel"));
-		orderListBean.setOrder_receiver_post(request.getParameter("postcode"));
-		orderListBean.setOrder_receiver_address(request.getParameter("roadAddress"));
-		orderListBean.setOrder_receiver_extraAddress(request.getParameter("detailAddress"));
-		orderListBean.setOrder_receiver_extraAddress2(request.getParameter("buyer_extraAddr2"));
+		orderListBean.setOrder_receiver_post(request.getParameter("member_post"));
+		orderListBean.setOrder_receiver_address(request.getParameter("member_address"));
+		orderListBean.setOrder_receiver_extraAddress(request.getParameter("member_extraAddress"));
+		orderListBean.setOrder_receiver_extraAddress2(request.getParameter("member_extraAddress2"));
 		orderListBean.setOrder_coupon(request.getParameter("coupon"));
 		orderListBean.setOrder_point(request.getParameter("point"));
 		orderListBean.setOrder_amount(Integer.parseInt(request.getParameter("amount")));
+		orderListBean.setOrder_status("결제완료");
+//		orderListBean.setOrder_date(); // mapper에서 now() 사용
+		orderListBean.setOrder_payment("kakaopay");
+		orderListBean.setOrder_tracking_num(order_idx);
 		
 		
 		orderListService.insertOrderList(orderListBean); // orderlist 생성
+		System.out.println("insertOrderList - 성공!");
 		
-		String products = request.getParameter("product_idx"); // 상품 정보들 가져오기
-		String quantitys = request.getParameter("product_quantity"); // 선택한 상품들의 수량 가져오기
+		String[] products = request.getParameterValues("product_idx"); // 상품 정보들 가져오기
+		String[] quantitys = request.getParameterValues("product_quantity"); // 선택한 상품들의 수량 가져오기
 		
-		// 각각의 상품과 상품갯수 분리하여 배열에 저장
-		String[] product = products.split("/");
-		String[] quantity = quantitys.split("/");
 		
 		// 반복문을 통해 order_detail에 각 상품 등록
-		for(int i = 0; i < product.length; i++) {
+		for(int i = 0; i < products.length; i++) {
 			OrderDetailBean orderDetailBean = new OrderDetailBean();
 			orderDetailBean.setOrder_detail_order_idx(order_idx);
-			orderDetailBean.setOrder_detail_product_idx(Integer.parseInt(product[i]));
-			orderDetailBean.setOrder_detail_product_quantity(Integer.parseInt(quantity[i]));
-			orderDetailService.insertOrderDetail(orderDetailBean);
+			orderDetailBean.setOrder_detail_product_idx(Integer.parseInt(products[i]));
+			orderDetailBean.setOrder_detail_product_quantity(Integer.parseInt(quantitys[i]));
+			orderDetailBean.setOrder_detail_return_check("반품신청");
 			
-			productService.updateSellcount(product[i]);
+			orderDetailService.insertOrderDetail(orderDetailBean); // orderdetail 추가 
+			System.out.println("insertOrderDetail - 수행완료");
+			productService.updateSellcount(products[i]); // sellcount 증가
+			System.out.println("updateSellcount - 수행완료");
 //			memberService.updateCoupon(member_email, coupon)
 //			memberService.updatePoint(member_email, point)
 			
-			
 		}
 		
-		model.addAttribute("order_idx", request.getParameter("order_idx"));
+		model.addAttribute("order_idx", order_idx);
 		
 		return "/dailyShop/member/checkout_finish";
 	}
