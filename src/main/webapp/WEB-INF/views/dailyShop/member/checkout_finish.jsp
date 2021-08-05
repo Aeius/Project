@@ -60,7 +60,7 @@
                 <div class="aa-myaccount-login">
                 <h4>결제가 완료되었습니다</h4>
                   <label for="board_email">주문 번호</label> : ${order_idx }
-                    <br><br><button type="button" class="aa-browse-btn" onclick="location.href='./orderList.jsp'">주문내역 보기</button>
+                    <br><br><button type="button" class="aa-browse-btn" onclick="location.href='<c:url value='/orderList.sh'/>'">주문내역 보기</button>
                 </div>
               </div>
             </div>          
