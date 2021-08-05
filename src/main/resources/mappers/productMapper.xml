@@ -5,44 +5,44 @@
 <mapper namespace="com.itwillbs.mapper.ProductMapper">
 
   <select id="getProductAllList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product
+  	select * from product where and product_status = 1
   </select>
   
   <!-- 30ml -->
   <select id="getProductAllList30" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_size=30
+  	select * from product where product_size=30 and product_status = 1
   </select>
   
   <select id="getProductPowderyList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like'%파우더리%' AND product_size=30
+  	select * from product where product_category like'%파우더리%' AND product_size=30 and product_status = 1
   </select>
   
   <select id="getProductFloralList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like '%플로럴%' AND product_size=30
+  	select * from product where product_category like '%플로럴%' AND product_size=30 and product_status = 1
   </select>
   
   <select id="getProductWoodyList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like'%우디%' AND product_size=30
+  	select * from product where product_category like'%우디%' AND product_size=30 and product_status = 1
   </select>
   
   <select id="getProductAquaList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like '%아쿠아%' AND product_size=30
+  	select * from product where product_category like '%아쿠아%' AND product_size=30 and product_status = 1
   </select>
   
   <select id="getProductFruityList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like'%프루티%' AND product_size=30
+  	select * from product where product_category like'%프루티%' AND product_size=30 and product_status = 1
   </select>
   
   <select id="getProductSitrusList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like '%시트러스%' AND product_size=30
+  	select * from product where product_category like '%시트러스%' AND product_size=30 and product_status = 1
   </select>
   
   <select id="getProductSpicesList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like'%스파이시%' AND product_size=30
+  	select * from product where product_category like'%스파이시%' AND product_size=30 and product_status = 1
   </select>
   
   <select id="getProductModernList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like '%모던%' AND product_size=30
+  	select * from product where product_category like '%모던%' AND product_size=30 and product_status = 1
   </select>
   
   <!-- 50ml -->
@@ -51,50 +51,50 @@
   </select>
   
   <select id="getProductPowderyList50" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like'%파우더리%' AND product_size=50
+  	select * from product where product_category like'%파우더리%' AND product_size=50 and product_status = 1
   </select>
   
   <select id="getProductFloralList50" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like '%플로럴%' AND product_size=50
+  	select * from product where product_category like '%플로럴%' AND product_size=50 and product_status = 1
   </select>
   
   <select id="getProductWoodyList50" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like'%우디%' AND product_size=50
+  	select * from product where product_category like'%우디%' AND product_size=50 and product_status = 1
   </select>
   
   <select id="getProductAquaList50" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like '%아쿠아%' AND product_size=50
+  	select * from product where product_category like '%아쿠아%' AND product_size=50 and product_status = 1
   </select>
   
   <select id="getProductFruityList50" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like'%프루티%' AND product_size=50
+  	select * from product where product_category like'%프루티%' AND product_size=50 and product_status = 1
   </select>
   
   <select id="getProductSitrusList50" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like '%시트러스%' AND product_size=50
+  	select * from product where product_category like '%시트러스%' AND product_size=50 and product_status = 1
   </select>
   
   <select id="getProductSpicesList50" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like'%스파이시%' AND product_size=50
-  </select>
+  	select * from product where product_category like'%스파이시%' AND product_size=50 and product_status = 1
+  </select> 
   
   <select id="getProductModernList50" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category like '%모던%' AND product_size=50
+  	select * from product where product_category like '%모던%' AND product_size=50 and product_status = 1
   </select>
   
   <!-- 베스트 -->
   <select id="getProductBestList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product order by product_sellcount desc limit 0,8
+  	select * from product order by product_sellcount desc limit 0,8 and product_status = 1
   </select>
   
   <!-- 검색 -->
   <select id="getProductSearchList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_name like CONCAT('%', #{search}, '%')
+  	select * from product where product_name like CONCAT('%', #{search}, '%') and product_status = 1
   </select>
   
   <!-- 상세페이지 -->
   <select id="getProductInfo" parameterType="int" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_idx= #{product_idx}
+  	select * from product where product_idx= #{product_idx} and product_status = 1
   </select>
   
   <insert id="insertProduct">

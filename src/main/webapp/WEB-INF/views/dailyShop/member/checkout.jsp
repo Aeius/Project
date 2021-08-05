@@ -70,8 +70,6 @@
 
 </script>
 
-
-
   </head>
   <body> 
   
@@ -116,7 +114,7 @@
 		});
 	}
 </script>
-  
+
    <!-- wpf loader Two -->
     <div id="wpf-loader-two">          
       <div class="wpf-loader-two-inner">
@@ -269,7 +267,6 @@
                             	<option value="${coupons }">${coupons }</option>
                             	</c:forEach>
                             </select>
-                          <input type="submit" value="쿠폰 적용" class="aa-browse-btn">
                         </div>
                       </div>
                     </div>
@@ -284,8 +281,7 @@
                       </div>
                       <div id="collapseTwo" class="panel-collapse collapse in">
                         <div class="panel-body">
-                          <input type="text" placeholder="사용할 포인트 입력" class="aa-coupon-code" id="point" name="point" max="${member.member_point }">
-                          <input type="submit" value="포인트 적용" class="aa-browse-btn">
+                          <input type="text" placeholder="사용할 포인트 입력" class="aa-coupon-code" id="point" name="point" max="${member.member_point }" >
                           &nbsp;&nbsp;&nbsp;&nbsp;(현재 보유 포인트 : ${member.member_point } P)
                         </div>
                       </div>
@@ -317,7 +313,7 @@
                       <tfoot>
                         <tr>
                           <th>합계</th>
-                          <td>
+                          <td id="total">
                           <c:set var="total" value="0" /> <!-- 변수 선언 -->
                           <c:forEach var="productBean" items="${productList }"> <!-- 주문상품만큼의 Bean 반복 -->
                           	<c:set var="total" value="${total + productBean.product_price * productBean.product_quantity }"/> <!-- 상품가격 더하기 => 상품가격*상품개수 -->
@@ -331,7 +327,7 @@
                         </tr>
                         <tr>
                           <th>포인트 할인</th>
-                          <td>- 0</td> <!-- 적용한 포인트 불러오기 필요 (임시값 0) -->
+                          <td><div id="usePoint">- 0</div></td> <!-- 적용한 포인트 불러오기 필요 (임시값 0) -->
                         </tr>
                          <tr>
                           <th>총 가격</th>

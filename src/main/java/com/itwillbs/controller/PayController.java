@@ -136,7 +136,7 @@ public class PayController {
 		orderListBean.setOrder_receiver_extraAddress2(request.getParameter("member_extraAddress2"));
 		orderListBean.setOrder_coupon(Integer.parseInt(request.getParameter("coupon")));
 		orderListBean.setOrder_point(request.getParameter("point"));
-		orderListBean.setOrder_amount(Integer.parseInt(request.getParameter("amount")));
+		orderListBean.setOrder_amount(Integer.parseInt(request.getParameter("amount")) - Integer.parseInt(request.getParameter("point")));
 		orderListBean.setOrder_status("결제완료");
 //		orderListBean.setOrder_date(); // mapper에서 now() 사용
 		orderListBean.setOrder_payment("kakaopay");
