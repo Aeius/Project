@@ -85,6 +85,15 @@
   <select id="getCouponList" resultType="com.itwillbs.domain.CouponBean">
      select * from coupon
   </select>
+  
+  <insert id="insertCouponStatus">
+  	insert into coupon_status values (${coupon_email}, ${coupon_idx})
+  </insert>
+  
+  <update id="updatePoint">
+     UPDATE member SET member_point = member_point - ${member_point} where member_email = ${member_email}
+  </update>
+  
   <!-- CONCAT_WS(첫 번째 인자값, 데이터1, 데이터2, ...) : 첫 번째 인자값으로 구분해 데이터를 입력해주는 함수로 null 값에도 사용가능 -->
   <update id="updateMemberCoupon" parameterType="HashMap">
      UPDATE member SET member_coupon=CONCAT_WS('/',member_coupon,#{coupon_idx}) WHERE member_email=#{member_email}

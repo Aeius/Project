@@ -9,6 +9,17 @@ public class CouponBean {
 	private boolean coupon_status;
 	private Date coupon_date;
 	private Date coupon_expire;
+	private String coupon_email;
+	
+	
+
+	public String getCoupon_email() {
+		return coupon_email;
+	}
+
+	public void setCoupon_email(String coupon_email) {
+		this.coupon_email = coupon_email;
+	}
 
 	public int getCoupon_idx() {
 		return coupon_idx;

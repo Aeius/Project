@@ -327,6 +327,18 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberBean> getSubMemberList() {
 		return memberDAO.getSubMemberList();
 	}
+
+	//-------------------------------------------- 쿠폰 사용 처리 -------------------------------------------------
+	@Override
+	public void updateCoupon(CouponBean couponBean) {
+		memberDAO.updateCoupon(couponBean);
+		
+	}
+
+	@Override
+	public void updatePoint(MemberBean memberBean) {
+		memberDAO.updatePoint(memberBean);
+	}
 	
 //	@Override
 //	public void sendResubscribeMail(SubscribeBean subscribeBean) {

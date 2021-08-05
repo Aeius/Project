@@ -67,6 +67,8 @@ public class PayController {
 		
 		return "/dailyShop/member/checkout";
 	}
+	
+	
 	//---------------------------- 결제 완료 후 결제 데이터 저장 --------------------------------
 	@RequestMapping(value = "/checkout_finish.sh", method = RequestMethod.POST)
 	public String checkout_finish(HttpServletRequest request , Model model) {
@@ -104,11 +106,12 @@ public class PayController {
 		System.out.println("주문상품의 갯수 : " + request.getParameter("product_quantity"));
 		
 		int order_idx = Integer.parseInt(request.getParameter("order_idx").substring(5));
+		String member_email = request.getParameter("buyer_email");
 		
 		// orderlist 에 저장할 데이터들 bean 에 담기
 		OrderListBean orderListBean = new OrderListBean();
 		orderListBean.setOrder_idx(order_idx);
-		orderListBean.setOrder_member_email(request.getParameter("buyer_email"));
+		orderListBean.setOrder_member_email(member_email);
 		orderListBean.setOrder_receiver_name(request.getParameter("buyer_name"));
 		orderListBean.setOrder_receiver_phone(request.getParameter("buyer_tel"));
 		orderListBean.setOrder_receiver_post(request.getParameter("member_post"));
@@ -144,10 +147,16 @@ public class PayController {
 			productService.updateSellcount(products[i]); // sellcount 증가
 			System.out.println("updateSellcount - 수행완료");
 			
-//			memberService.updateCoupon(CouponBean);
-//			memberService.updatePoint(MemberBean);
 			
 		}
+		CouponBean couponBean = new CouponBean();
+		couponBean.setCoupon_email(member_email);
+		couponBean.setCoupon_idx(Integer.parseInt(request.getParameter("coupon")));
+		memberService.updateCoupon(couponBean); // 쿠폰 사용 처리
+		MemberBean memberBean = new MemberBean();
+		memberBean.setMember_email(member_email);
+		memberBean.setMember_point(Integer.parseInt(request.getParameter("point")));
+		memberService.updatePoint(memberBean); // 포인트 사용 처리
 		
 		model.addAttribute("order_idx", order_idx);
 		

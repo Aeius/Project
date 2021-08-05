@@ -133,4 +133,15 @@ public class MemberDAOImpl implements MemberDAO{
 		  return sqlSession.selectOne(namespace + ".getMemberByemail",member_email);
 	}
 
+	@Override
+	public void updateCoupon(CouponBean couponBean) {
+		sqlSession.insert(namespace+".insertCouponStatus", couponBean);
+		
+	}
+
+	@Override
+	public void updatePoint(MemberBean memberBean) {
+		sqlSession.update(namespace +".updatePoint",memberBean);
+	}
+
 }

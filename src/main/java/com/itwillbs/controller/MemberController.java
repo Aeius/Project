@@ -299,6 +299,8 @@ public class MemberController {
 		return "redirect:/coupon.sh";
 	}
 	
+	
+	
 	//---------------------------------------------------------------  가입 축하 메일 ------------------------------------------------------------
 	@RequestMapping(value = "/welcomeMail.sh/{member_email}", method = RequestMethod.GET)
 	public String welcomeMail(@PathVariable String member_email) {

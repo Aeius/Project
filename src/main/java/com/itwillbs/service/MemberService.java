@@ -44,6 +44,11 @@ public interface MemberService {
    //관리자 페이지 : 구독자만 관리
    public List<MemberBean> getSubMemberList();
 
+   public void updateCoupon(CouponBean couponBean);
+
+   public void updatePoint(MemberBean memberBean);
+
+   
 }
 
 //   public void sendResubscribeMail(SubscribeBean subscribeBean);

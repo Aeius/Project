@@ -42,4 +42,8 @@ public interface MemberDAO {
 
    public CouponBean getCouponInfo_CouponCode(String inputCouponCode);
 
+	public void updateCoupon(CouponBean couponBean);
+	
+	public void updatePoint(MemberBean memberBean);
+
 }
