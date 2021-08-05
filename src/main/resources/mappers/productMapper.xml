@@ -84,7 +84,7 @@
   
   <!-- 베스트 -->
   <select id="getProductBestList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product order by product_sellcount desc limit 0,8 and product_status = 1
+  	select * from product  where product_status = 1 order by product_sellcount desc limit 0,8
   </select>
   
   <!-- 검색 -->
