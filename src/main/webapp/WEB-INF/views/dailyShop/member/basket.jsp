@@ -210,8 +210,8 @@
 													<c:forEach var="basketList" items="${basketList}" varStatus="status">
 														<tr da>
 															<!-- 이미지 -->
-															<td><a href="#"><img src="#" alt="img"></a></td>
-															<%-- <td><a href="#"><img src="<c:url value='/resources/upload/${basketList.product_main_image}'/>" alt="img"></a></td> <!-- 이미지 --> --%>
+<!-- 															<td><a href="#"><img src="#" alt="img"></a></td> -->
+															<td><a href="#"><img src="<c:url value='/resources/upload/${basketList.product_main_image}'/>" alt="img"></a></td> <!-- 이미지 -->
 
 															<!-- 제품 정보(이름, 용량), 제품 번호 -->
 															<td><input type="hidden" name="product_idx" class="product_idx" value="${basketList.product_idx}">
