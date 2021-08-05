@@ -115,7 +115,7 @@
                         <input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
-                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${search.product_idx }"><img src="<c:url value='/resources/upload/${search.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${search.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${search.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
                               <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${search.product_idx }">${search.product_name }</a></h4>
@@ -158,7 +158,7 @@
 					<!------------------------------------  검색 결과가 적을 경우 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
 						<li>
                           <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
+	                          <a class="aa-product-img" style="background-color: white;"><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
                               <figcaption>
                                <h4 class="aa-product-title"><a></a></h4>
                               <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
@@ -167,7 +167,7 @@
                         </li>
                        <li>
                           <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
+	                          <a class="aa-product-img" style="background-color: white;"><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
                               <figcaption>
                                <h4 class="aa-product-title"><a></a></h4>
                               <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
@@ -176,7 +176,7 @@
                         </li>
                         <li>
                           <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
+	                          <a class="aa-product-img" style="background-color: white;"><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
                               <figcaption>
                                <h4 class="aa-product-title"><a></a></h4>
                               <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
@@ -185,7 +185,7 @@
                         </li>
                          <li>
                           <figure>
-	                          <a class="aa-product-img" ><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
+	                          <a class="aa-product-img" style="background-color: white;"><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
                               <figcaption>
                                <h4 class="aa-product-title"><a></a></h4>
                               <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
