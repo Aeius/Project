@@ -40,7 +40,7 @@
                         <th>발급일</th>
                         <th>만료일</th>
                         <th>상태</th>
-                        <th>관리 &nbsp; <input type="button" value="자동 관리버튼" onclick="location.href='<c:url value="/couponExpireInOnce.ad"/>'"></th>
+                        <th>관리 &nbsp; <input type="button" value="자동 관리버튼" onclick="location.href='<c:url value="/couponAutoManage.ad"/>'"></th>
                       </tr>
                     </thead>
                     <!-- 쿠폰 목록 나열 -->

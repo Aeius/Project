@@ -47,8 +47,8 @@
                         <td>${nb.notice_idx}</td>
                         <td>${nb.notice_subject}</td>
                         <td>
-                     <input type="button" value="보기 및 수정" onclick="location.href='<c:url value="/noticeInfo.ad?notice_idx=${nb.notice_idx}"/>'">
-					 <input type="button" value="삭제" onclick="location.href='<c:url value="/deleteNoticePro.ad?notice_idx=${nb.notice_idx}"/>'">					
+                        <input type="button" value="보기 및 수정" onclick="location.href='<c:url value="/noticeInfo.ad?notice_idx=${nb.notice_idx}"/>'">
+					 	<input type="button" value="삭제" onclick="location.href='<c:url value="/deleteNoticePro.ad?notice_idx=${nb.notice_idx}"/>'">					
                         </td>
                       </tr>
                       </c:forEach> 

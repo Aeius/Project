@@ -40,4 +40,6 @@ public interface AdminDAO {
 
 	public void couponExpireInOnce();
 
+	public ReviewBean getReview(int review_idx);
+
 }

@@ -85,6 +85,11 @@ public class AdminDAOImpl implements AdminDAO {
 	public void couponExpireInOnce() {
 		sqlSession.update(namespace + ".couponExpireInOnce");
 	}
+
+	@Override
+	public ReviewBean getReview(int review_idx) {
+		return sqlSession.selectOne(namespace + ".getReview", review_idx);
+	}
 	
 	
 }

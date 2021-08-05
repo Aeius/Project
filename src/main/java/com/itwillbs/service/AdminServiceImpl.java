@@ -85,5 +85,10 @@ public class AdminServiceImpl implements AdminService {
 		adminDAO.couponExpireInOnce();
 	}
 
+	@Override
+	public ReviewBean getReview(int review_idx) {
+		return adminDAO.getReview(review_idx);
+	}
+
 
 }

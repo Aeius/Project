@@ -34,9 +34,12 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+                        <th>리뷰 번호</th>
                         <th>상품명</th>
-                        <th>리뷰 내용</th>
+                        <th>리뷰 제목</th>
+                        <th>상품평점</th>
                         <th>작성자</th>
+                        <th>작성일</th>
                         <th>관리</th>
                       </tr>
                     </thead>
@@ -45,12 +48,13 @@
                     <tbody>
          			  <c:forEach var="review" items="${review}">
 	                      <tr>
+	                        <td>${review.review_idx}</td>
 	                        <td>${review.product_name}</td>
-	                        <td>${review.review_content}</td>
-	                        <td>${review.review_email}<td>
-	                        <td>
-	                        <input type="button" value="삭제" onclick="location.href='<c:url value="/deleteReview.ad?review_idx=${review.review_idx}"/>'">
-	                        </td>
+	                        <td><a href='<c:url value="reviewContent.ad?review_idx=${review.review_idx}"/>'>${review.review_subject}</a></td>
+	                        <td>${review.review_star}</td>
+	                        <td>${review.review_email}</td>
+	                        <td>${review.review_date}</td>
+	                        <td><input type="button" value="삭제" onclick="location.href='<c:url value="/deleteReview.ad?review_idx=${review.review_idx}"/>'"></td>
 	                      </tr>
  				      </c:forEach>
                     </tbody>
