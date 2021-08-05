@@ -26,7 +26,7 @@ public interface MemberDAO {
    public String passwordCheck(MemberBean mb);
    //비번찾기-일치하는 정보 있는지 DB에서 확인
    
-   public void updateTempPassword(MemberBean mb);
+   public void updatePassword(MemberBean mb);
    //임시비번 DB에 업데이트
 
    public String getMemberCouponList(String member_email);
@@ -41,10 +41,5 @@ public interface MemberDAO {
    public List<MemberBean> getSubMemberList();
 
    public CouponBean getCouponInfo_CouponCode(String inputCouponCode);
-
-   
-
-
-  
 
 }

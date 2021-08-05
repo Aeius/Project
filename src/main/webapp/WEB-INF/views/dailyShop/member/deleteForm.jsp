@@ -56,7 +56,7 @@
        <div class="col-md-12">
         <div class="aa-myaccount-area">         
             <div class="row">
-              <div class="col-md-6">
+               <div class="col-md-6" style="width: 40%; margin: 0px 30%;">
                 <div class="aa-myaccount-register">                 
                  <h4>회원탈퇴</h4>
                  <form action='<c:url value="deletePro.sh" />' id="fr" class="aa-login-form" method="post">

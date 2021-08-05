@@ -104,7 +104,7 @@ public class MemberServiceImpl implements MemberService {
  	@Override
  	public void updateTempPassword(MemberBean mb) {
  		System.out.println("임시비번 tempPassword 를 DB에 업데이트 시도_serviceImpl");
- 		memberDAO.updateTempPassword(mb);
+ 		memberDAO.updatePassword(mb);
  	}
  	
  	//임시 비밀번호를 발급해서 이메일로 보내주는 메서드
@@ -313,19 +313,20 @@ public class MemberServiceImpl implements MemberService {
          System.out.println("메일 발송 실패 - " + e.getMessage());
       }
    }
+   
+   
+// --------------------------------------------- 비밀번호 변경 -----------------------------------------------   
+    @Override
+	public void updatePassword(MemberBean memberBean) {
+		memberDAO.updatePassword(memberBean);
+	}
 
-    //관리자 페이지 : 구독자만 관리
+// --------------------------------------------- ??? -----------------------------------------------   
+	//관리자 페이지 : 구독자만 관리
 	@Override
 	public List<MemberBean> getSubMemberList() {
 		return memberDAO.getSubMemberList();
 	}
-
-
-
-
-
-	
-	
 	
 //	@Override
 //	public void sendResubscribeMail(SubscribeBean subscribeBean) {

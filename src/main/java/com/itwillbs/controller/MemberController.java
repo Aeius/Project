@@ -169,7 +169,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/deletePro.sh", method = RequestMethod.POST)
 	public String deletePro(MemberBean memberBean, HttpSession session, Model model) {
-		
 	
 		MemberBean memberBean2 = memberService.userCheck(memberBean);
 		
@@ -197,14 +196,12 @@ public class MemberController {
 		return "/dailyShop/member/find";
 	}
 	
-	
 	//----------------------------------------------아이디(이메일) 찾기-------------------------------------------------
 	
 	@RequestMapping(value = "/findEmail.sh", method = RequestMethod.POST)
 	public String findEmail(MemberBean mb, HttpSession session, Model model) {
 		String email= memberService.emailCheck(mb);
 		System.out.println("memberController - findEmail");
-		 
 		
 		if(email != null) {
 		//	session.setAttribute("member_email", mb.getMember_email());
@@ -217,7 +214,6 @@ public class MemberController {
 		}
 		return "/dailyShop/member/findEmailResult";
 	}
-	
 	
 	//----------------------------------------------비밀번호 찾기---------------------------------------------------------
 	
@@ -236,7 +232,6 @@ public class MemberController {
 			String member_email = request.getParameter("member_email");
 			mb = memberService.getMemberByemail(member_email);
 			//System.out.println("mb ---- " + mb);
-
 			
 			//----------비밀번호 찾기 이메일로 임시비번 발송 -----------
 			// 임시 비밀번호 생성
@@ -249,7 +244,6 @@ public class MemberController {
 		
 			mb.setMember_password(tempPassword);
 			System.out.println("member_password 삽입 성공");
-		
 			
 			//임시 비밀번호를 새로운 비밀번호로 update시킴
 			memberService.updateTempPassword(mb);
@@ -257,7 +251,6 @@ public class MemberController {
 			//업데이트된 임시 비밀번호를 이메일로 발송함
 			memberService.sendTempPassword(mb);
 			
-		
 			model.addAttribute("msg","임시비밀번호를 이메일로 발급했습니다.");
 			return "/dailyShop/member/msg";
 
@@ -266,11 +259,7 @@ public class MemberController {
 			return "/dailyShop/member/msg";
 		}
 		
-		
 	}
-	
-	
-	
 	
 	//-------------------------------------------------- 로그아웃-------------------------------------------------------
 	
@@ -318,6 +307,35 @@ public class MemberController {
 		return "redirect:/main.sh";
 	}
 	
-
+	//---------------------------------------------------------------  비밀번호 변경 ------------------------------------------------------------
+	@RequestMapping(value = "/changePassword.sh", method = RequestMethod.GET)
+	public String changePassword() {
+		
+		return "/dailyShop/member/changePassword";
+	}
+	
+	@RequestMapping(value = "/changePasswordPro.sh", method = RequestMethod.POST)
+	public String changePasswordPro(HttpSession session, HttpServletRequest request, MemberBean memberBean, Model model) {
+		// 입력한 고객 email 가져오기 
+		String member_email = (String)session.getAttribute("member_email");
+		memberBean.setMember_email(member_email);
+		
+		MemberBean memberBean2 = memberService.userCheck(memberBean);
+		
+		// 비밀번호 일치하지 않을 때
+		if(memberBean2 == null) {
+			model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
+			return "/dailyShop/member/msg";
+		} else {
+			String member_password_new = request.getParameter("member_password_new");
+			memberBean.setMember_password(member_password_new);
+			
+			memberService.updatePassword(memberBean);
+			
+			model.addAttribute("msg","비밀번호가 변경되었습니다.");
+			return "/dailyShop/member/msg";
+		}
+		
+	}
 
 }

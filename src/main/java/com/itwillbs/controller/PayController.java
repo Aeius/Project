@@ -136,7 +136,7 @@ public class PayController {
 			orderDetailBean.setOrder_detail_order_idx(order_idx);
 			orderDetailBean.setOrder_detail_product_idx(Integer.parseInt(products[i]));
 			orderDetailBean.setOrder_detail_product_quantity(Integer.parseInt(quantitys[i]));
-			orderDetailBean.setOrder_detail_return_check("반품신청");
+			orderDetailBean.setOrder_detail_return_check(" ");
 			
 			orderDetailService.insertOrderDetail(orderDetailBean); // orderdetail 추가 
 			System.out.println("insertOrderDetail - 수행완료");

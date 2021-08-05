@@ -77,9 +77,9 @@ public class MemberDAOImpl implements MemberDAO{
   
 	//임시비번 DB등록
 	@Override
-	public void updateTempPassword(MemberBean mb) {
+	public void updatePassword(MemberBean mb) {
 		System.out.println("임시비번 tempPassword 를 DB에 업데이트 시도_DAOImpl");
-		sqlSession.update(namespace+".updateTempPassword", mb);
+		sqlSession.update(namespace+".updatePassword", mb);
 	}
    
    
@@ -133,9 +133,4 @@ public class MemberDAOImpl implements MemberDAO{
 		  return sqlSession.selectOne(namespace + ".getMemberByemail",member_email);
 	}
 
-
-
-	
-   
-   
 }

@@ -65,6 +65,33 @@ function execDaumPostcode() {
         }
     }).open();
 }
+
+function checkPhoneNum(member_phone) { // 휴대폰번호 검증
+	/*
+	 * 전화번호 검증에 사용할 정규표현식 작성
+	 * 1) 010 또는 011 로 시작
+	 * 2) 전화번호 사이는 - 기호 또는 공백이 포함될 수도 있고 포함되지 않을 수도 있음
+	 * 3) 두번째 자리는 3자리 또는 4자리 숫자
+	 * 4) 마지막 자리는 4자리 숫자로 끝
+	 */
+	var phoneRegex = /^(010|011)[0-9]{1,10}$/;
+	var regex = new RegExp(phoneRegex);
+
+	
+	// 전화번호 입력 항목 우측의 span 태그 ID 값을 통해 해당 요소(Element) 가져오기
+	var element = document.getElementById('phoneNull');
+	
+	// 입력받은 전화번호 값에 대한 정규표현식 패턴 검사
+	// => 생성된 RegExp 객체의 exec() 메서드를 호출하여 전화번호값을 파라미터로 전달
+	if(regex.exec(member_phone)) {
+		element.innerHTML = '사용 가능한 번호입니다.';
+		checkPhoneResult = true; // 전역변수값을 true 로 변경
+	} else {
+		element.innerHTML = '사용 불가능한 번호입니다(010/011 휴대번호만 입력 가능합니다)';
+		checkPhoneResult = false; // 전역변수값을 false 로 변경
+	}
+	
+}
 </script> 
 
   </head>
@@ -94,20 +121,37 @@ function execDaumPostcode() {
   <section id="aa-product-category">
     <div class="container">
       <div class="row">
+
+			<div style="float: left;">
+			<aside class="aa-sidebar">
+            <!-- single sidebar -->
+            <div class="aa-sidebar-widget">
+            <br>
+             <h3>회원 정보</h3>
+              <ul class="aa-catg-nav">
+                <li><a href="<c:url value='/myPage.sh'/>">내 정보</a></li>
+                <li><a href="<c:url value='/changePassword.sh'/>">비밀번호 변경</a></li>
+                <li><a href="<c:url value='/delete.sh'/>">회원 탈퇴</a></li>
+              </ul>
+            </div>
+            </aside>
+			</div>
+			
         <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
           <div class="aa-myaccount-register">       
                     <br>
                  <h2>내 정보</h2>
                  <form action="<c:url value='updatePro.sh'/>" class="aa-login-form" method="post">
-                    <label for="">Email<span>*</span></label>
-                    <input type="text" placeholder="이메일을 입력해주세요" value="${member.member_email}" readonly name="member_email"style="width: 60%;">
-                    <label for="">이름<span>*</span></label>
-                    <input type="text" placeholder="이름" value="${member.member_name}" name="member_name"style="width: 60%;">
-                    <label for="">전화번호<span>*</span></label>
-                    <input type="text" placeholder="000-0000-0000" value="${member.member_phone}" name="member_phone"style="width: 60%;">
-                    <label for="">주소<span>*</span></label>
-                    <input type="text" id="member_post" name ="member_post" placeholder="우편번호" value="${member.member_post}" style="width: 15%;margin-right: 4px;">
-                    <input type="text" id="member_address" name="member_address" placeholder="도로명주소" value="${member.member_address}" style="width: 31%;margin-right: 7px;">
+                    <label for="">Email</label>
+                    <input type="text" value="${member.member_email}" readonly name="member_email"style="width: 60%;">
+                    <label for="">이름</label>
+                    <input type="text" placeholder="이름" value="${member.member_name}" name="member_name"style="width: 60%;" required>
+                    <label for="">전화번호</label>
+                    <input type="text" placeholder="000-0000-0000" value="${member.member_phone}" id="member_phone" name="member_phone"style="width: 60%;" maxlength="11" onblur="checkPhoneNum(this.value)" required>
+                    <div id="phoneNull" style="font-size: 14px; width: 60%"></div>
+                    <label for="">주소</label>
+                    <input type="text" id="member_post" name ="member_post" placeholder="우편번호" value="${member.member_post}" style="width: 15%;margin-right: 4px;" required>
+                    <input type="text" id="member_address" name="member_address" placeholder="도로명주소" value="${member.member_address}" style="width: 31%;margin-right: 7px;" required>
                     <button type="button" class="aa-browse-btn" style="float: inherit;" onclick="execDaumPostcode()">주소 검색</button>
                     <input type="text" id="member_extraAddress" name="member_extraAddress" placeholder="지번주소" value="${member.member_extraAddress}" style="width: 60%;">
                     <input type="text" id="member_extraAddress2" name="member_extraAddress2" placeholder="상세주소" value="${member.member_extraAddress2}" style="width: 60%;">
@@ -123,6 +167,9 @@ function execDaumPostcode() {
         <!-------------------------------------------- -사이드바 영역 --------------------------------------------------------------------- -->
   </section>
   <!-- / product category -->
+	<div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+	 
+	</div>
 
  <!-- / Cart view section -->
 

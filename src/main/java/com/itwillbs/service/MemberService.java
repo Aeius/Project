@@ -39,27 +39,11 @@ public interface MemberService {
    
    public void sendTempPassword(MemberBean mb);
    
+   public void updatePassword(MemberBean memberBean);
    
    //관리자 페이지 : 구독자만 관리
    public List<MemberBean> getSubMemberList();
 
-
-
-
 }
 
-
-
-
-
- 
-
-
-
-
-
-   
-
 //   public void sendResubscribeMail(SubscribeBean subscribeBean);
-
-

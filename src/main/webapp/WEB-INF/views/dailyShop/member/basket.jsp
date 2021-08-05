@@ -80,7 +80,8 @@
 			// 부모 tr 찾기
 			var tr = $(this).closest('tr');
 			// tr 안에 price 클래스 찾기
-		    var price = $(tr).find('.price').html().replace(/,/g, "");
+		    var price = $(tr).find('.product_price').val().replace(/,/g, "");
+// 			alert(price);
 			
 			// 수량 바꿀 때마다 DB 저장
 		    $.ajax({
@@ -218,8 +219,7 @@
 																<a class="aa-cart-title" href="<c:url value='/productDetail.sh?product_idx=${basketList.product_idx}'/>">${basketList.product_name} - ${basketList.product_size}ml</a></td>
 
 															<!-- 제품 가격 -->
-															<td class="price"><input type="hidden" name="product_price" value="${basketList.product_price}"> <fmt:formatNumber value="${basketList.product_price}" type="number"/></td>
-															
+															<td class="price"><input type="hidden" class="product_price" name="product_price" value="${basketList.product_price}"> <fmt:formatNumber value="${basketList.product_price}" type="number"/></td>
 															
 															<!-- 가격 계산 -->
 															<!-- jstl에서 + 기호는 숫자 연산만 가능. 문자열은 += 나 + 기호 없이 그냥 결합 가능 -->
