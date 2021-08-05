@@ -5,7 +5,7 @@
 <mapper namespace="com.itwillbs.mapper.ProductMapper">
 
   <select id="getProductAllList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where and product_status = 1
+  	select * from product where product_status = 1
   </select>
   
   <!-- 30ml -->
