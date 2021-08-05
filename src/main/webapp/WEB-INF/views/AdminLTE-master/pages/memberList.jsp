@@ -37,7 +37,6 @@
                       <tr>
                         <th>회원번호</th>
                         <th>이메일</th>
-                        <th>비밀번호</th>
                         <th>이름</th>
                         <th>연락처</th>
                         <th>우편번호</th>
@@ -56,7 +55,6 @@
                       <c:forEach var="memberBean" items="${memberBeanList }">
 						<tr><td>${memberBean.member_idx }</td>
 			    	      <td>${memberBean.member_email }</td>
-			    	      <td>${memberBean.member_password }</td>
 			    	      <td>${memberBean.member_name }</td>
 			              <td>${memberBean.member_phone }</td>
 			              <td>${memberBean.member_post }</td>
