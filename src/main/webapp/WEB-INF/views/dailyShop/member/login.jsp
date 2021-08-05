@@ -42,7 +42,8 @@
     <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2>Login</h2>
+        <h2 style ="font-family: serif;" >Login</h2>
+         <h4 style ="font-family: serif; color: #EAEAEA; font-weight: bold;">Premium Niche Perfume Taylor</h4>
       </div>
      </div>
    </div>
@@ -57,7 +58,8 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="aa-myaccount-login">
-                <h4>로그인</h4>
+                <h4 >Login</h4>
+               
                  <form action="<c:url value='loginPro.sh'/>" class="aa-login-form" method="post">
                   <label for="board_email">Email<span>*</span></label>
                    <input type="text" placeholder="email" name="member_email">

@@ -138,7 +138,7 @@ https://www.tooplate.com/view/2114-pixie
 		
 		<button onclick="location.href='<c:url value='recoTest.sh'/>'">다시하기</button>  	
 		&nbsp;&nbsp;&nbsp;&nbsp;
-		<button onclick="location.href='<c:url value=''/>'">제품 보러가기</button>	 
+		<button onclick="location.href='<c:url value='/search.sh?search=조말론 블랙베리'/>'">제품 보러가기</button>	 
 			 
 	
 			   

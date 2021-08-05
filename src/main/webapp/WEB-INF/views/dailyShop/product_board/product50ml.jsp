@@ -93,6 +93,7 @@
      <div class="container">
       <div class="aa-catg-head-banner-content">
         <h2 style="font-family: serif;">50ml</h2>
+        <h4 style ="font-family: serif; color: #EAEAEA; font-weight: bold;">Premium Niche Perfume Taylor</h4>
 <!--         <h4 style ="font-family: serif; color: #EAEAEA; font-weight: bold; font-size:8px important!; ">자주 사용하는 퍼퓸을 합리적인 가격으로</h4> -->
 <!--         <ol class="breadcrumb"> -->
 <!--           <li><a href="index.html">Home</a></li>          -->

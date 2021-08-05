@@ -84,6 +84,8 @@
      <div class="container">
       <div class="aa-catg-head-banner-content">
         <h2 >검색 결과</h2>
+        <h2 style ="font-family: serif;" >Search Result</h2>
+        <h4 style ="font-family: serif; color: #EAEAEA; font-weight: bold;">Premium Niche Perfume Taylor</h4>
 <!--         <ol class="breadcrumb"> -->
 <!--           <li><a href="index.html">Home</a></li>          -->
 <!--           <li class="active">Women</li> -->
@@ -118,8 +120,8 @@
                             <a class="aa-product-img"  href="productDetail.sh?product_idx=${search.product_idx }"><img src="<c:url value='/resources/upload/${search.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
-                              <h4 class="aa-product-title"><a href="productDetail.sh?product_idx=${search.product_idx }">${search.product_name }</a></h4>
-                              <span class="aa-product-price">￦ ${search.product_price }</span>
+                              <h4 class="aa-product-title" style="font-size:15px;"><a href="productDetail.sh?product_idx=${search.product_idx }">${search.product_name }</a></h4>
+                              <span class="aa-product-price" style="font-size:15px;">￦ ${search.product_price }</span>
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">

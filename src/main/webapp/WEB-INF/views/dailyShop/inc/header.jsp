@@ -75,7 +75,7 @@
 					
 					<c:when test="${empty sessionScope.member_email  }">   
                    <li class="hidden-xs"><a href="<c:url value='/login.sh'/>">Login</a></li>
-                   <li class="hidden-xs"><a href="<c:url value='/account.sh'/>">sign in</a></li>
+                   <li class="hidden-xs"><a href="<c:url value='/account.sh'/>">Sign in</a></li>
                    </c:when> 
                    
                    
@@ -127,7 +127,7 @@
              
               <!-------------------------------------------------------- search box------------------------------------------------- -->
               <div class="aa-search-box">
-                <form action="search.sh">
+                <form action="<c:url value='/search.sh'/>">
                   <input type="text" name="search" id="search" placeholder="검색기능 ">
                   <button type="submit"><span class="fa fa-search"></span></button>
                 </form>
@@ -158,17 +158,17 @@
           <div class="navbar-collapse collapse">
             <!-- Left nav -->
             <ul class="nav navbar-nav">
-              <li><a href="main.sh">Home</a></li>
-              <li><a href="productList.sh">Shop <span class="caret"></span></a>
+              <li><a href="<c:url value='/main.sh'/>">Home</a></li>
+              <li><a href="<c:url value='/productList.sh'/>">Shop <span class="caret"></span></a>
                 <ul class="dropdown-menu">                
-                  <li><a href="productList.sh">30ml</a></li>
-                  <li><a href="productList50.sh">50ml</a></li>
+                  <li><a href="<c:url value='/productList.sh'/>">30ml</a></li>
+                  <li><a href="<c:url value='/productList50.sh'/>">50ml</a></li>
                 </ul>
               </li>
               <li><a href="<c:url value='/recoTest.sh'/>">Test</a></li>
                     
               <!--  블로그 부분 삭제! -->
-              <li><a href="notice.sh">Service</a></li>
+              <li><a href="<c:url value='/notice.sh'/>">Service</a></li>
               
 <!--              <li><a href="#">Pages <span class="caret"></span></a> -->
 <!--                <ul class="dropdown-menu">                 -->

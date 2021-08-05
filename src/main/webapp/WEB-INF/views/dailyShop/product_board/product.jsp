@@ -93,6 +93,7 @@
      <div class="container">
       <div class="aa-catg-head-banner-content">
         <h2 style="font-family: serif;">30ml</h2>
+        <h4 style ="font-family: serif; color: #EAEAEA; font-weight: bold;">Premium Niche Perfume Taylor</h4>
 <!--         <ol class="breadcrumb"> -->
 <!--           <li><a href="index.html">Home</a></li>          -->
 <!--           <li class="active">Women</li> -->

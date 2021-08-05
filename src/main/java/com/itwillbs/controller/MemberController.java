@@ -67,7 +67,7 @@ public class MemberController {
 		if(mb2!=null) {
 			session.setAttribute("member_email", mb.getMember_email());
 		}else {
-			model.addAttribute("msg","입력하신 정보는 틀립니다.");
+			model.addAttribute("msg","Email이나 비밀번호가 일치하지 않습니다.");
 
 			return "/dailyShop/member/msg";
 
@@ -181,7 +181,7 @@ public class MemberController {
 			return "redirect:/index.sh";
 		}else {
 	
-			model.addAttribute("msg","입력하신 정보는 틀립니다.");
+			model.addAttribute("msg","입력하신 정보가 일치하지 않습니다.");
 	
 			return "dailyShop/member/msg";
 		}

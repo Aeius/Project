@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.MemberBean;
 import com.itwillbs.domain.OrderDetailBean;
 import com.itwillbs.domain.OrderListBean;
@@ -142,8 +143,9 @@ public class PayController {
 			System.out.println("insertOrderDetail - 수행완료");
 			productService.updateSellcount(products[i]); // sellcount 증가
 			System.out.println("updateSellcount - 수행완료");
-//			memberService.updateCoupon(member_email, coupon)
-//			memberService.updatePoint(member_email, point)
+			
+//			memberService.updateCoupon(CouponBean);
+//			memberService.updatePoint(MemberBean);
 			
 		}
 		
