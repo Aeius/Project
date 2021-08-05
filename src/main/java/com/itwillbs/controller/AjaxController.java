@@ -1,11 +1,17 @@
 package com.itwillbs.controller;
 
+import java.util.Random;
+
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +29,9 @@ import com.itwillbs.service.WishListService;
 
 @RestController
 public class AjaxController {
+	
+	 @Autowired
+	 private JavaMailSender mailSender;
 	
 	@Inject
 	private WishListService wishListService;
@@ -227,31 +236,103 @@ public class AjaxController {
 		return entity;
 	}
 		
-	//-------------------------------------------------------------- 아이디 중복 확인 --------------------------------------------------------
-		@RequestMapping(value = "/checkId.sh", method = RequestMethod.GET)
-		public ResponseEntity<String> idcheck(HttpServletRequest request){
-			String result="";
-			ResponseEntity<String> entity=null;
-			try {
-				String member_email = request.getParameter("member_email");
-				System.out.println(member_email);
-				
-				MemberBean memberBean = memberService.getMember(member_email);
-				if(memberBean!=null) {
-					//아이디 중복
-					result="emailDup";
-				}else {
-					//아이디 사용가능
-					result="emailOk";
-				}
-				entity=new ResponseEntity<String>(result,HttpStatus.OK);
-			} catch (Exception e) {
-				System.out.println("오류 발생 -" + e.getMessage());
-				entity=new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-			}
-			return entity;
-		}
-	
+	 //-------------------------------------------------------------- 아이디 중복 확인 --------------------------------------------------------
+    @RequestMapping(value = "/checkId.sh", method = RequestMethod.GET)
+    public ResponseEntity<String> idcheck(HttpServletRequest request){
+       String result="";
+       ResponseEntity<String> entity=null;
+       try {
+          String member_email = request.getParameter("member_email");
+          System.out.println(member_email);
+          
+          MemberBean memberBean = memberService.getMember(member_email);
+          if(memberBean!=null) {
+             //아이디 중복
+             result="emailDup";
+          }else {
+             //아이디 사용가능
+             result="emailOk";
+          }
+          entity=new ResponseEntity<String>(result,HttpStatus.OK);
+       } catch (Exception e) {
+          System.out.println("오류 발생 -" + e.getMessage());
+          entity=new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+       }
+       return entity;
+    }
+    
+ //-------------------------------------------------------------- 이메일 본인 확인 메일 전송 --------------------------------------------------------
+    @RequestMapping(value = "/sendCheckMail.sh", method = RequestMethod.GET)
+    public ResponseEntity<String> checkMail(HttpServletRequest request){
+       String result="";
+       ResponseEntity<String> entity=null;
+       
+       String member_email = request.getParameter("member_email");
+       System.out.println(member_email);
+       int checkNum = 0;
+       Random random = new Random();
+       checkNum = random.nextInt(88888)+11111;
+       StringBuffer buffer = new StringBuffer();
+       String confirmNum = buffer.append(checkNum).toString();
+       System.out.println(confirmNum);
+       
+       String setfrom = "javateamproject2021@gmail.com";
+       String tomail = member_email; // 받는 사람 이메일
+       String title = member_email + "님 이메일 인증번호 전송 메일입니다."; // 제목
+       String content = "홈페이지를 방문해주셔서 감사합니다."+
+             "<br><br>"+
+             "인증번호는 " + checkNum +"입니다." + 
+             "<br>" + 
+             "해당 인증번호를 인증번호 확인란에 입력해 주세요";
+       
+       try {
+           MimeMessage message = mailSender.createMimeMessage();
+             MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+             messageHelper.setFrom(setfrom); // 보내는사람 생략하거나 하면 정상작동을 안함
+             messageHelper.setTo(tomail); // 받는사람 이메일
+             messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+             messageHelper.setText(content, true); // 메일 내용
+
+             mailSender.send(message);
+          
+             result = confirmNum;
+           entity=new ResponseEntity<String>(result,HttpStatus.OK);
+       } catch (Exception e) {
+          System.out.println("오류 발생 -" + e.getMessage());
+          System.out.println("메일 발송 실패 - " + e.getMessage());
+          entity=new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+       }
+       return entity;
+    }
+    
+    //-------------------------------------------------------------- 이메일 인증 번호 확인 --------------------------------------------------------
+          @RequestMapping(value = "/mailCheckNumConfirm.sh", method = RequestMethod.GET)
+          public ResponseEntity<String> mailCheckNumConfirm(HttpServletRequest request){
+             String result="";
+             ResponseEntity<String> entity=null;
+             try {
+                
+                int user_authNum = Integer.parseInt(request.getParameter("user_authNum")); // 사용자가 입력한 번호
+                int authNum = Integer.parseInt(request.getParameter("authNum")); // 이메일에 전달 했던 번호
+                System.out.println(user_authNum + " " + authNum);
+                
+                     // 인증번호 비교
+                     if (authNum == user_authNum) {
+                    
+                        result = "checkOk";
+                     } else {
+                       result = "checkFail";
+                     }
+
+                entity=new ResponseEntity<String>(result,HttpStatus.OK);
+             } catch (Exception e) {
+                System.out.println("오류 발생 -" + e.getMessage());
+                entity=new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+             }
+             return entity;
+          }
+
 	//---------------------------------- 상품 이름 중복 확인 (관리자) --------------------------------------------------------
 	@RequestMapping(value = "/checkProductName.ad", method = RequestMethod.GET)
 	public ResponseEntity<String> checkProductName(HttpServletRequest request){

@@ -22,86 +22,113 @@
    
    <script type="text/javascript">
    // submit 버튼 동작을 위한 전역변수 선언
-   var checkPasswordResult = false, 
-   checkPasswordConfirmResult = false, 
-   checkEmailNullResult = false, 
-   checkEmailNull2Result = false, 
-   checkNameResult = false, 
-   checkPhoneResult = false,
-   checkAddressNullResult = false,
+   var 
+   checkEmailResult = false, // 이메일 유효성 검사
+   checkEmailNull2Result = false, // 이메일 입력 여부 검사
+   emailCheckDup = false, // 이메일 중복 검사
+   checkPasswordResult  = false,  // 비밀번호 유효성 검사
+   checkPasswordConfirmResult = false,  // 비밀번호 확인 검사
+   emailCheckConfirmResult = false, // 이메일 인증 번호 확인 검사
+   checkNameResult = false, // 이름 유효성 검사
+   checkPhoneResult = false, // 휴대폰 유효성 검사
+   checkAddressNullResult = false, // 주소 입력 여부 검사
    checkAddressNull2Result = false,
    checkAddressNull3Result = false,
    checkAddressNull4Result = false;
    
+   
+   function checkEmail(member_email) { // 이름 검증
+         /*
+          * 이메일 검증에 사용할 정규표현식 작성
+          * 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능
+          */
+          var emailRegex = /^[A-Za-z0-9_-]{5,20}$/;
+         var regex = new RegExp(emailRegex);
 
-   function checkPassword(member_password) { // 패스워드 입력값 검증
-      // 8~16자리 영문자,숫자,특수문자(!@#$%) 조합 패턴 검사
-      var lengthRegex = /^[A-Za-z0-9!@#$%]{8,16}$/;
-      var engUpperCaseRegex = /[A-Z]/;
-      var engLowerCaseRegex = /[a-z]/;
-      var digitRegex = /[0-9]/;
-      var specRegex = /[!@#$%]/;
-      
-      var element = document.getElementById('checkPasswordResult');
-      
-      // 패스워드 구성요소에 대한 길이 및 종류 체크
-      if(lengthRegex.exec(member_password)) {
-//          element.innerHTML = '길이 체크 통과!';
-         // 각 요소별 체크를 통해 카운팅 결과에 따른 안전,보통,위험,사용불가 로 출력
-         var safetyCount = 0;
-         if(engUpperCaseRegex.exec(member_password)) safetyCount++;
-         if(engLowerCaseRegex.exec(member_password)) safetyCount++;
-         if(digitRegex.exec(member_password)) safetyCount++;
-         if(specRegex.exec(member_password)) safetyCount++;
          
-         switch (safetyCount) {
-            case 4: 
-               element.innerHTML = '안전';
-               element.style.color = 'green';
-               checkPasswordResult = true; // 전역변수값을 true 로 변경
-               break;
-            case 3: 
-               element.innerHTML = '보통';
-               element.style.color = 'orange';
-               checkPasswordResult = true; // 전역변수값을 true 로 변경
-               break;
-            case 2: 
-               element.innerHTML = '위험';
-               element.style.color = 'red';
-               checkPasswordResult = true; // 전역변수값을 true 로 변경
-               break;
-            case 1: 
-               element.innerHTML = '사용불가';
-               element.style.color = 'black';
-               checkPasswordResult = false; // 전역변수값을 false 로 변경
-               break;
+         // 이메일 입력 항목 우측의 span 태그 ID 값을 통해 해당 요소(Element) 가져오기
+         var element = document.getElementById('emailNull');
+         
+         // 입력받은 이메일 값에 대한 정규표현식 패턴 검사
+         // => 생성된 RegExp 객체의 exec() 메서드를 호출하여 이메일값을 파라미터로 전달
+         if(regex.exec(member_email)) {
+            element.innerHTML = ' ☆사용 가능한 이메일입니다';
+            checkEmailResult = true; // 전역변수값을 true 로 변경
+         } else {
+            element.innerHTML = ' ☆5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다';
+            checkEmailResult = false; // 전역변수값을 false 로 변경
          }
          
-      } else {
-         $('#member_password').focus();
-         element.innerHTML = ' ☆비밀번호는 8~16자리 영문자,숫자,특수문자 조합 입니다.';
-         element.style.color = 'red';
-         checkPasswordResult = false; // 전역변수값을 false 로 변경
       }
-      
-   }
-   
-
-   function checkPasswordConfirm(member_passwordCheck) { // 패스워드 일치 확인
-      // 패스워드 확인 항목 우측의 span 태그 ID 값을 지정하여 해당 태그 Element 가져오기
-      var element = document.getElementById('passwordConfirmResult');
-      
-      if(member_passwordCheck == $('#member_password').val()) { // 패스워드 확인 내용 일치 시
-         element.innerHTML = '☆패스워드 일치';
-         checkPasswordConfirmResult = true; // 전역변수값을 true 로 변경
-      } else {
-         $('#member_passwordCheck').focus();
-         element.innerHTML = '☆패스워드 불일치';
-         checkPasswordConfirmResult = false; // 전역변수값을 false 로 변경
+ 
+   function checkPassword(member_password) { // 패스워드 입력값 검증
+         // 8~16자리 영문자,숫자,특수문자(!@#$%) 조합 패턴 검사
+         var lengthRegex = /^[A-Za-z0-9!@#$%]{8,16}$/;
+         var engUpperCaseRegex = /[A-Z]/;
+         var engLowerCaseRegex = /[a-z]/;
+         var digitRegex = /[0-9]/;
+         var specRegex = /[!@#$%]/;
+         
+         var element = document.getElementById('checkPasswordResult');
+         
+         // 패스워드 구성요소에 대한 길이 및 종류 체크
+         if(lengthRegex.exec(member_password)) {
+//             element.innerHTML = '길이 체크 통과!';
+            // 각 요소별 체크를 통해 카운팅 결과에 따른 안전,보통,위험,사용불가 로 출력
+            var safetyCount = 0;
+            if(engUpperCaseRegex.exec(member_password)) safetyCount++;
+            if(engLowerCaseRegex.exec(member_password)) safetyCount++;
+            if(digitRegex.exec(member_password)) safetyCount++;
+            if(specRegex.exec(member_password)) safetyCount++;
+            
+            switch (safetyCount) {
+               case 4: 
+                  element.innerHTML = '안전';
+                  element.style.color = 'green';
+                  checkPasswordResult = true; // 전역변수값을 true 로 변경
+                  break;
+               case 3: 
+                  element.innerHTML = '보통';
+                  element.style.color = 'orange';
+                  checkPasswordResult = true; // 전역변수값을 true 로 변경
+                  break;
+               case 2: 
+                  element.innerHTML = '위험';
+                  element.style.color = 'red';
+                  checkPasswordResult = true; // 전역변수값을 true 로 변경
+                  break;
+               case 1: 
+                  element.innerHTML = '사용불가';
+                  element.style.color = 'black';
+                  checkPasswordResult = false; // 전역변수값을 false 로 변경
+                  break;
+            }
+            
+         } else {
+            $('#member_password').focus();
+            element.innerHTML = ' ☆비밀번호는 8~16자리 영문자,숫자,특수문자 조합 입니다.';
+            element.style.color = 'red';
+            checkPasswordResult = false; // 전역변수값을 false 로 변경
+         }
          
       }
       
-   }
+
+      function checkPasswordConfirm(member_passwordCheck) { // 패스워드 일치 확인
+         // 패스워드 확인 항목 우측의 span 태그 ID 값을 지정하여 해당 태그 Element 가져오기
+         var element = document.getElementById('passwordConfirmResult');
+         
+         if(member_passwordCheck == $('#member_password').val()) { // 패스워드 확인 내용 일치 시
+            element.innerHTML = '☆패스워드 일치';
+            checkPasswordConfirmResult = true; // 전역변수값을 true 로 변경
+         } else {
+            $('#member_passwordCheck').focus();
+            element.innerHTML = '☆패스워드 불일치';
+            checkPasswordConfirmResult = false; // 전역변수값을 false 로 변경
+            
+         }
+         
+      }
    
    
    function checkName(member_name) { // 이름 검증
@@ -117,7 +144,7 @@
       var element = document.getElementById('nameNull');
       
       // 입력받은 전화번호 값에 대한 정규표현식 패턴 검사
-      // => 생성된 RegExp 객체의 exec() 메서드를 호출하여 전화번호값을 파라미터로 전달
+      // => 생성된 RegExp 객체의 exec() 메서드를 호출하여 이름값을 파라미터로 전달
       if(regex.exec(member_name)) {
          element.innerHTML = ' ☆사용 가능한 이름입니다';
          checkNameResult = true; // 전역변수값을 true 로 변경
@@ -157,46 +184,17 @@
    }
    
    
-   
-
    //---------------------------------------------------------- submit 이벤트 처리 -------------------------------------------------------------      
    function checkForm() {
-	   
-	 //--------------------이용약관 동의-------------------------
-		if(document.getElementById("policy1yes").checked==false){
-			alert("약관에 동의하셔야 가입하실 수 있습니다.")
-			document.getElementById("policy1yes").focus();
-			return false;}
-	      
-	 
-		if(document.getElementById("policy2yes").checked==false){
-			alert("약관에 동의하셔야 가입하실 수 있습니다.")
-			document.getElementById("policy2yes").focus();
-			return false;}
-	      
-	 
-	 
 
       //---------------------------------------------------------- 이메일 -------------------------------------------------------------   
-      
-      
-      
-      
-      if($('#member_email').val() != "") { // 이메일 공백 아닐시
-         checkEmailNullResult = true; // 전역변수값을 true 로 변경
-         
-         var element = document.getElementById('emailNull');
-         element.innerHTML = ' ';
-         
-      } else {
-      // 이메일 확인 항목 span 태그 값을 지정하여 해당 태그 Element 가져오기
-         $('#member_email').focus();
-         var element = document.getElementById('emailNull');
-         element.innerHTML = ' ☆이메일을 입력해 주세요';
-         element.style.color = 'red';
-         checkEmailNullResult = false; // 전역변수값을 false 로 변경
-         return false;
-      }
+      if($('#member_email').val() == ""){ // 이메일 공백시 포커스 및 span 태그 내용 가져오기
+            $('#member_email').focus();
+            var element = document.getElementById('emailNull');
+            element.innerHTML = ' ☆이메일을 입력해 주세요';
+            element.style.color = 'red';
+            return false;
+         }
       
       if($('#member_email2').val() != "") { // 이메일 도메인 공백 아닐시
          checkEmailNull2Result = true; // 전역변수값을 true 로 변경
@@ -214,6 +212,14 @@
          return false;
       }
       
+      //---------------------------------------------------------- 이메일 인증번호 -------------------------------------------------------------    
+      if($('#emailCheckNumInput').val() == ""){ // 비밀번호 공백시 포커스 및 span 태그 내용 가져오기
+          $('#emailCheckNumInput').focus();
+          var element = document.getElementById('emailCheckResult');
+          element.innerHTML = ' ☆인증번호를 입력해 주세요';
+          element.style.color = 'red';
+          return false;
+       }
 
       //---------------------------------------------------------- 비밀번호 -------------------------------------------------------------   
       if($('#member_password').val() == ""){ // 비밀번호 공백시 포커스 및 span 태그 내용 가져오기
@@ -239,7 +245,7 @@
          element.innerHTML = ' ';
    
       }
-      
+ 
       //---------------------------------------------------------- 이름 -------------------------------------------------------------         
       
       if($('#member_name').val() == ""){ // 전화번호 공백시 포커스 및 span 태그 내용 가져오기
@@ -326,10 +332,21 @@
       // 회원가입을 수행하고 그렇지 않으면 메세지 출력 후 작업 중단
       // => 유효성 검사 결과와 일치 확인 결과를 전역변수로 저장 작업 필요
 
-      if(checkPasswordResult && 
+      alert(checkEmailResult + "이메일 체크");
+      alert(checkEmailNull2Result + "이메일 널체크" );
+      alert(emailCheckDup+ "이메일 중복 체크");
+      alert(emailCheckConfirmResult+ "이메일 인증 확인 체크");
+      alert(checkPasswordResult+ "비밀번호 유효성 체크");
+      alert(checkPasswordConfirmResult+ "비밀번호 확인 체크");
+      alert(checkNameResult+ "이름 체크");
+      alert(checkPhoneResult+ "휴대폰 체크");
+
+       if(checkEmailResult && 
+         checkEmailNull2Result &&
+         emailCheckDup &&
+         emailCheckConfirmResult &&
+         checkPasswordResult && 
          checkPasswordConfirmResult && 
-         checkEmailNullResult && 
-         checkEmailNull2Result && 
          checkNameResult && 
          checkPhoneResult && 
          checkAddressNullResult &&
@@ -343,14 +360,15 @@
          }   
    }
    
-   // 도메인 onchange 이벤트 처리
+   //---------------------------------------------------------- 도메인 onchange 이벤트 처리 -------------------------------------------------------------    
    function domainSelect(domain) {
 //       alert(domain);
       // 선택된 도메인을 이메일 주소 입력 중 도메인 입력란에 표시
        $('#member_email2').val(domain);
    }
    
-   // 아이디 중복 체크
+   
+   //---------------------------------------------------------- 이메일 중복 체크 -------------------------------------------------------------   
    
    $(document).ready(function() {
       $('#dupEmailCheckBtn').click(function(){
@@ -359,11 +377,13 @@
 //          alert("아이디중복체크 버튼 클릭");
          $.ajax('<c:url value="/checkId.sh" />',{
             data:{member_email:$('#member_email').val()+$('#member_email2').val()},
-            success:function(rdata){
+            success:function(rdata){ // 리턴된 값 비교
                if(rdata=="emailDup"){
                   rdata="이메일 중복 입니다.";
+                  emailCheckDup = false;
                }else{
                   rdata="이메일 사용 가능합니다.";
+                  emailCheckDup = true;
                }
             
                $('#dupResult').html(rdata).css('color','red');
@@ -372,12 +392,54 @@
       }
       });
    });
-      
+   
+ //---------------------------------------------------------- 이메일 인증번호 전송 -------------------------------------------------------------   
+   
+   $(document).ready(function() {
+     
+         $('#emailCheckNum').click(function(){
+             if($('#member_email').val() != "" && $('#member_email2').val() != ""){
+              $('#emailCheckResult').html("이메일 전송 중입니다. 잠시만 기다려 주세요").css('color','red');
+              
+            $.ajax('<c:url value="/sendCheckMail.sh" />',{
+               data:{member_email:$('#member_email').val()+$('#member_email2').val()},
+               success:function(rdata){ // 리턴된 값 비교
+                    $('#emailCheckResult').html("인증번호 전송완료. 인증번호를 입력해주세요").css('color','red');
+                  
+                   authNum = rdata;
+                  $('#authNum').val(authNum); // 리턴된 난수 값 저장
+               }
+            });
+             }
+         });
+      });
+ 
+ 
+   //---------------------------------------------------------- 이메일 인증번호 확인 -------------------------------------------------------------    
+   $(document).ready(function() {
+      $('#emailCheckResult').html("인증번호를 입력해주세요").css('color','red');
+         $('#emailCheckNumConfirm').click(function(){
+          if($('#emailCheckNumInput').val() != "" && $('#authNum').val() != "" ){
+         $.ajax('<c:url value="/mailCheckNumConfirm.sh" />',{
+               data:{user_authNum:$('#emailCheckNumInput').val(), // 사용자가 입력한 인증번호
+                    authNum:$('#authNum').val()}, // 사용자에게 전달 했던 인증번호
+               success:function(rdata){ // 리턴된 값 비교
+                    
+                      if( rdata == "checkOk"){
+                         $('#emailCheckResult').html("인증완료").css('color','red');
+                         emailCheckConfirmResult = true; // 전역변수값을 true 로 변경
+                      }else{
+                         $('#emailCheckResult').html("인증실패").css('color','red');
+                         emailCheckConfirmResult = false; // 전역변수값을 false 로 변경
+                      }
+                  }
+            });
+            }
+         });
+      });
+  
 </script>
-<script type="text/javascript">
 
-
-</script>      
 
    <!-- 다음 우편번호 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -424,6 +486,7 @@
     }
 
 </script>
+
 
 
   </head>
@@ -691,10 +754,10 @@ PerfumeShip 웹사이트(이하 '본 사이트')에 오신 것을 환영합니�
                    	<br>	
                    	
                                   
-					 <h4>회원가입</h4>
-                    
+					  <h4>회원가입</h4>
+                 <form action='<c:url value="memberJoinPro.sh" />' id="fr" class="aa-login-form" method="post" onsubmit="return checkForm()">
                     <label for="">Email<span id="emailNull"> * </span></label>
-                    <input type="text" id="member_email" name="member_email" placeholder="이메일을 입력해주세요" maxlength="20">
+                    <input type="text" id="member_email" name="member_email" placeholder="이메일을 입력해주세요" maxlength="20" onblur="checkEmail(this.value)">
                     <input type="text" id="member_email2" name="member_email2" placeholder="이메일 도메인을 선택해 주세요" readonly="readonly">
                     <select name="selectDomain" onchange="domainSelect(this.value)">
                <!-- 셀렉트박스 도메인 선택 시 해당 값을 이메일의 도메인 입력란에 표시 -->
@@ -709,11 +772,14 @@ PerfumeShip 웹사이트(이하 '본 사이트')에 오신 것을 환영합니�
 <!--                     <input type="button" class="aa-browse-btn" id="dupEmailCheckBtn" value="중복확인"> -->
                     <label for=""><input type="button" class="aa-browse-btn" id="dupEmailCheckBtn" value="중복확인"><span id = "dupResult"> </span></label><br>
                    
-                <button type="button" class="aa-browse-btn">인증번호 받기</button>
-                 <button type="button" class="aa-browse-btn">인증번호 확인</button>
-                  
-                   <input type="text" placeholder="인증번호를 입력해주세요">
-               
+                <input type="button" class="aa-browse-btn" id="emailCheckNum" value="인증번호전송">
+                 <input type="button" class="aa-browse-btn" id="emailCheckNumConfirm" name="emailCheckNumConfirm" value="인증번호 확인">
+                 
+                 <input type="hidden" class="aa-browse-btn" id="authNum"> <!-- 이메일 인증 번호 전달한 값 저장 -->
+                   
+                   <input type="text" placeholder="인증번호를 입력해주세요" id="emailCheckNumInput" name="emailCheckNumInput">
+                    <label for=""><span id="emailCheckResult"></span></label><br>
+                    
                     <label for="">Password<span id="passwordNull"> * </span></label>
                     <input type="password" id="member_password" name = "member_password" placeholder="비밀번호를 입력해주세요" maxlength="16"  onkeyup="checkPassword(this.value)">
                      <label for=""><span id="checkPasswordResult"></span></label><br>
