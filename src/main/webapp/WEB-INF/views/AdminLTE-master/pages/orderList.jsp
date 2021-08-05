@@ -63,6 +63,7 @@
                       <tr>
                         <th>주문번호</th>
                         <th>주문자</th>
+                        <th>주문날짜</th>
                         <th>배송상황</th>
                         <th>송장번호</th>
                         <th>관리</th>
@@ -74,6 +75,7 @@
                       	<tr>
                       		<td onClick="location.href='orderDetail.ad?order_idx=${list.order_idx }'" style="cursor:pointer;">${list.order_idx }</td>
                       		<td>${list.order_member_email }</td>
+                      		<td>${list.order_date }</td>
                       		<td>${list.order_status }</td>
                       		<td>${list.order_tracking_num }</td>
                       		<td width="20%">
