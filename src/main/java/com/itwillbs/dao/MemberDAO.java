@@ -44,6 +44,9 @@ public interface MemberDAO {
 
 	public void updateCoupon(CouponBean couponBean);
 	
-	public void updatePoint(MemberBean memberBean);
+	public void usePoint(MemberBean memberBean);
+
+	public void addPoint(MemberBean memberBean);
+	
 
 }

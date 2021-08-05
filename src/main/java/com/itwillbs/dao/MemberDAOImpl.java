@@ -140,8 +140,14 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public void updatePoint(MemberBean memberBean) {
-		sqlSession.update(namespace +".updatePoint",memberBean);
+	public void usePoint(MemberBean memberBean) {
+		sqlSession.update(namespace +".usePoint",memberBean);
+	}
+
+	@Override
+	public void addPoint(MemberBean memberBean) {
+		sqlSession.update(namespace +".addPoint",memberBean);
+		
 	}
 
 }

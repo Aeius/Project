@@ -336,8 +336,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void updatePoint(MemberBean memberBean) {
-		memberDAO.updatePoint(memberBean);
+	public void usePoint(MemberBean memberBean) {
+		memberDAO.usePoint(memberBean);
+	}
+
+	@Override
+	public void addPoint(MemberBean memberBean) {
+		memberDAO.addPoint(memberBean);
+		
 	}
 	
 //	@Override

@@ -87,11 +87,15 @@
   </select>
   
   <insert id="insertCouponStatus">
-  	insert into coupon_status values (${coupon_email}, ${coupon_idx})
+  	insert into coupon_status set coupon_email = '${coupon_email}', coupon_idx = ${coupon_idx}, coupon_status = 1
   </insert>
   
-  <update id="updatePoint">
-     UPDATE member SET member_point = member_point - ${member_point} where member_email = ${member_email}
+  <update id="usePoint">
+     UPDATE member SET member_point = member_point - ${member_point} where member_email = '${member_email}'
+  </update>
+  
+  <update id="addPoint">
+     UPDATE member SET member_point = member_point + ${member_point} where member_email = '${member_email}'
   </update>
   
   <!-- CONCAT_WS(첫 번째 인자값, 데이터1, 데이터2, ...) : 첫 번째 인자값으로 구분해 데이터를 입력해주는 함수로 null 값에도 사용가능 -->

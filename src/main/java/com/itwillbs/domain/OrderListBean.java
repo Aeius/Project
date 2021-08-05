@@ -13,7 +13,7 @@ public class OrderListBean {
     private String order_receiver_address;
     private String order_receiver_extraAddress;
     private String order_receiver_extraAddress2;
-    private String order_coupon;
+    private int order_coupon;
     private String order_point;
     private String order_date;
     private String order_payment;
@@ -33,6 +33,12 @@ public class OrderListBean {
     
     
     
+	public int getOrder_coupon() {
+		return order_coupon;
+	}
+	public void setOrder_coupon(int order_coupon) {
+		this.order_coupon = order_coupon;
+	}
 	public String getOrder_date() {
 		return order_date;
 	}
@@ -50,12 +56,6 @@ public class OrderListBean {
 	}
 	public void setOrder_tracking_num(int order_tracking_num) {
 		this.order_tracking_num = order_tracking_num;
-	}
-	public String getOrder_coupon() {
-		return order_coupon;
-	}
-	public void setOrder_coupon(String order_coupon) {
-		this.order_coupon = order_coupon;
 	}
 	public String getOrder_point() {
 		return order_point;

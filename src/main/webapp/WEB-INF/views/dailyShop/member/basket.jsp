@@ -244,10 +244,11 @@
 																	<c:if test="${! empty couponList}">
 																	<c:forEach var="couponList" items="${couponList}">
 																	<option value="${couponList.coupon_price}" id="${couponList.coupon_idx}">${couponList.coupon_name} - <fmt:formatNumber value="${couponList.coupon_price}" type="number" />원 할인</option>
+																	<input type="hidden" name="coupon_idx" value="${couponList.coupon_idx}" id="selectedCoupon_idx">
+																	<input type="hidden" name="coupon_name" value="${couponList.coupon_name}" id="selectedCoupon_name">
 																	</c:forEach>
 																	</c:if>
 																</select> <input class="aa-cart-view-btn" type="submit" value="쿠폰 적용">
-																<input type="hidden" name="coupon_idx" value="" id="selectedCoupon_idx">
 															</div><!--  <input class="aa-cart-view-btn" type="submit" value="업데이트"> 수량 바꾸고 적용하는 버튼 -->
 														</td>
 													</tr>

@@ -46,6 +46,9 @@ public class PayController {
 		String[] product_price = request.getParameterValues("product_price");
 		String[] product_name = request.getParameterValues("product_name");
 		String[] basket_quantity = request.getParameterValues("basket_quantity");
+		String[] selectedCoupon_idx = request.getParameterValues("selectedCoupon_idx");
+		String[] selectedCoupon_name = request.getParameterValues("selectedCoupon_name");
+		
 		
 		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
 		
@@ -59,6 +62,19 @@ public class PayController {
 			productList.add(pb);
 			
 		}
+		
+//		ArrayList<CouponBean> productList = new ArrayList<ProductBean>();
+		
+//		for(int i = 0; i < product_idx.length; i++) {
+//			ProductBean pb = new ProductBean();
+//			pb.setProduct_idx(Integer.parseInt(product_idx[i]));
+//			pb.setProduct_price(Integer.parseInt(product_price[i]));
+//			pb.setProduct_name(product_name[i]);
+//			pb.setProduct_quantity(basket_quantity[i]);
+//			
+//			productList.add(pb);
+//			
+//		}
 		
 		model.addAttribute("member", memberBean);
 		model.addAttribute("productList", productList);
@@ -118,7 +134,7 @@ public class PayController {
 		orderListBean.setOrder_receiver_address(request.getParameter("member_address"));
 		orderListBean.setOrder_receiver_extraAddress(request.getParameter("member_extraAddress"));
 		orderListBean.setOrder_receiver_extraAddress2(request.getParameter("member_extraAddress2"));
-		orderListBean.setOrder_coupon(request.getParameter("coupon"));
+		orderListBean.setOrder_coupon(Integer.parseInt(request.getParameter("coupon")));
 		orderListBean.setOrder_point(request.getParameter("point"));
 		orderListBean.setOrder_amount(Integer.parseInt(request.getParameter("amount")));
 		orderListBean.setOrder_status("결제완료");
@@ -153,10 +169,16 @@ public class PayController {
 		couponBean.setCoupon_email(member_email);
 		couponBean.setCoupon_idx(Integer.parseInt(request.getParameter("coupon")));
 		memberService.updateCoupon(couponBean); // 쿠폰 사용 처리
+		
 		MemberBean memberBean = new MemberBean();
 		memberBean.setMember_email(member_email);
-		memberBean.setMember_point(Integer.parseInt(request.getParameter("point")));
-		memberService.updatePoint(memberBean); // 포인트 사용 처리
+		if(Integer.parseInt(request.getParameter("point")) == 0) { // 포인트를 사용하지 않을 경우
+			memberBean.setMember_point(Integer.parseInt(request.getParameter("amount")) / 100);
+			memberService.addPoint(memberBean); // 포인트 적립
+		} else {
+			memberBean.setMember_point(Integer.parseInt(request.getParameter("point")));
+			memberService.usePoint(memberBean); // 포인트 사용 처리
+		}
 		
 		model.addAttribute("order_idx", order_idx);
 		
