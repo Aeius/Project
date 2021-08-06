@@ -174,5 +174,8 @@
   
   </update>
   
+  <select id="getProductAllListAdmin" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product
+  </select>
   
 </mapper>

@@ -257,6 +257,7 @@ public class AjaxController {
        } catch (Exception e) {
           System.out.println("오류 발생 -" + e.getMessage());
           entity=new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+          
        }
        return entity;
     }

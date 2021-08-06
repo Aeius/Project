@@ -174,6 +174,10 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.updateSellcount(product_idx);
 		
 	}
+	@Override
+	public ArrayList<ProductBean> getProductAllListAdmin() {
+		return productDAO.getProductAllListAdmin();
+	}
 
 	
 

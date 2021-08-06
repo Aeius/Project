@@ -46,8 +46,8 @@ public class PayController {
 		String[] product_price = request.getParameterValues("product_price");
 		String[] product_name = request.getParameterValues("product_name");
 		String[] basket_quantity = request.getParameterValues("basket_quantity");
-		String[] selectedCoupon_idx = request.getParameterValues("selectedCoupon_idx");
-		String[] selectedCoupon_name = request.getParameterValues("selectedCoupon_name");
+//		String[] selectedCoupon_idx = request.getParameterValues("selectedCoupon_idx");
+//		String[] selectedCoupon_name = request.getParameterValues("selectedCoupon_name");
 		
 		
 		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
@@ -62,22 +62,21 @@ public class PayController {
 			productList.add(pb);
 			
 		}
-		
-//		ArrayList<CouponBean> productList = new ArrayList<ProductBean>();
-		
-//		for(int i = 0; i < product_idx.length; i++) {
-//			ProductBean pb = new ProductBean();
-//			pb.setProduct_idx(Integer.parseInt(product_idx[i]));
-//			pb.setProduct_price(Integer.parseInt(product_price[i]));
-//			pb.setProduct_name(product_name[i]);
-//			pb.setProduct_quantity(basket_quantity[i]);
+//		
+//		ArrayList<CouponBean> couponList = new ArrayList<CouponBean>();
+//		
+//		for(int i = 0; i < selectedCoupon_idx.length; i++) {
+//			CouponBean cb = new CouponBean();
+//			cb.setCoupon_idx(Integer.parseInt(selectedCoupon_idx[i]));
+//			cb.setCoupon_name((selectedCoupon_name[i]));
 //			
-//			productList.add(pb);
+//			couponList.add(cb);
 //			
 //		}
 		
 		model.addAttribute("member", memberBean);
 		model.addAttribute("productList", productList);
+//		model.addAttribute("couponList", couponList);
 //		model.addAttribute("amount", request.getParameter("amount")); 
 		// => amount는 결제페이지 화면에서 jstl로 계산하니까 안받아와도 되지않을까요?
 		

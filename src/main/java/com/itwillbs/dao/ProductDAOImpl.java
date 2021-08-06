@@ -169,5 +169,10 @@ public class ProductDAOImpl implements ProductDAO {
 	public void updateSellcount(String product_idx) {
 		sqlSession.update(namespace + ".updateSellcount" ,product_idx);
 	}
+
+	@Override
+	public ArrayList<ProductBean> getProductAllListAdmin() {
+		return (ArrayList)sqlSession.selectList(namespace + ".getProductAllListAdmin");
+	}
 	
 }

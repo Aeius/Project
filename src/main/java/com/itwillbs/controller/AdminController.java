@@ -143,7 +143,7 @@ public class AdminController {
 
 			// ---------- 원래 수행작업 ----------------------------------------
 
-			ArrayList<ProductBean> allList = productService.getProductAllList();
+			ArrayList<ProductBean> allList = productService.getProductAllListAdmin();
 			model.addAttribute("allList", allList);
 			return "/AdminLTE-master/pages/productList";
 

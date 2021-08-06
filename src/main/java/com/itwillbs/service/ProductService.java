@@ -59,4 +59,6 @@ public interface ProductService {
 
 	public void updateSellcount(String product_idx);
 
+	public ArrayList<ProductBean> getProductAllListAdmin();
+
 }
