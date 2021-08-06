@@ -155,7 +155,7 @@ function checkPhoneNum(member_phone) { // 휴대폰번호 검증
                     <button type="button" class="aa-browse-btn" style="float: inherit;" onclick="execDaumPostcode()">주소 검색</button>
                     <input type="text" id="member_extraAddress" name="member_extraAddress" placeholder="지번주소" value="${member.member_extraAddress}" style="width: 60%;">
                     <input type="text" id="member_extraAddress2" name="member_extraAddress2" placeholder="상세주소" value="${member.member_extraAddress2}" style="width: 60%;">
-                    <button type="submit" class="aa-browse-btn" style="display: inherit;float: initial;">수정!</button>   
+                    <button type="submit" class="aa-browse-btn" style="display: inherit;float: initial;">수정</button>   
                     <div>
                    	<br><br><br><br>
                     </div>                 

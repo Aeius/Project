@@ -188,53 +188,53 @@
 								</div>
 							</c:when>
 							<c:otherwise>
-								<div class="cart-view-table">
+								<div class="cart-view-table" style="background-color: white;">
 									<div class="table-responsive">
 										<form action="<c:url value='/checkout.sh'/>" id="basketProduct" method="post">
 										<input type="hidden" value="${sessionScope.member_email}" id="member_email">
 											<h2>장바구니</h2>
-											<table class="table">
+											<table class="table" style="border: none;">
 												<thead>
-													<tr>
+													<tr style="border: none;">
 <!-- 														<th></th> -->
-														<th colspan="2">제품 정보</th>
-														<th>제품 금액</th>
-														<th>수량</th>
-														<th>총 금액</th>
-														<th></th>
+														<th colspan="2" style="border: none;">제품 정보</th>
+														<th style="border: none;">제품 금액</th>
+														<th style="border: none;">수량</th>
+														<th style="border: none;">총 금액</th>
+														<th style="border: none;"></th>
 													</tr>
 												</thead>
 												<tbody>
 													<!-- 총 가격 계산할 변수 선언 -->
 													<c:set var = "total" value = "0" />
 													<c:forEach var="basketList" items="${basketList}" varStatus="status">
-														<tr da>
+														<tr style="border: none;">
 															<!-- 이미지 -->
 <!-- 															<td><a href="#"><img src="#" alt="img"></a></td> -->
-															<td><a href="#"><img src="<c:url value='/resources/upload/${basketList.product_main_image}'/>" alt="img"></a></td> <!-- 이미지 -->
+															<td style="border: none;"><a href="#"><img src="<c:url value='/resources/upload/${basketList.product_main_image}'/>" alt="img"></a></td> <!-- 이미지 -->
 
 															<!-- 제품 정보(이름, 용량), 제품 번호 -->
-															<td><input type="hidden" name="product_idx" class="product_idx" value="${basketList.product_idx}">
+															<td style="border: none;"><input type="hidden" name="product_idx" class="product_idx" value="${basketList.product_idx}">
 																<input type="hidden" name="product_name" class="product_idx" value="${basketList.product_name}">
 																<a class="aa-cart-title" href="<c:url value='/productDetail.sh?product_idx=${basketList.product_idx}'/>">${basketList.product_name} - ${basketList.product_size}ml</a></td>
 
 															<!-- 제품 가격 -->
-															<td class="price"><input type="hidden" class="product_price" name="product_price" value="${basketList.product_price}"> <fmt:formatNumber value="${basketList.product_price}" type="number"/></td>
+															<td class="price" style="border: none;"><input type="hidden" class="product_price" name="product_price" value="${basketList.product_price}"> <fmt:formatNumber value="${basketList.product_price}" type="number"/></td>
 															
 															<!-- 가격 계산 -->
 															<!-- jstl에서 + 기호는 숫자 연산만 가능. 문자열은 += 나 + 기호 없이 그냥 결합 가능 -->
 															<c:set var= "total" value="${total + (basketList.basket_quantity * basketList.product_price)}"/>
 															
 															<!-- 수량 -->
-															<td><input class="aa-cart-quantity" name="basket_quantity" type="number" value="${basketList.basket_quantity}" min="1"></td>
-															<td class="eachTotalPrice"><fmt:formatNumber value="${basketList.basket_quantity * basketList.product_price}" type="number"/></td>
+															<td style="border: none;"><input class="aa-cart-quantity" name="basket_quantity" type="number" value="${basketList.basket_quantity}" min="1"></td>
+															<td class="eachTotalPrice" style="border: none;"><fmt:formatNumber value="${basketList.basket_quantity * basketList.product_price}" type="number"/></td>
 
 															<!-- 삭제버튼 -->
-															<td><a class="remove" href="#" name="${basketList.product_idx}" id="${basketList.product_idx}"><fa class="fa fa-close"></fa></a></td>
+															<td style="border: none;"><a class="remove" href="#" name="${basketList.product_idx}" id="${basketList.product_idx}"><fa class="fa fa-close"></fa></a></td>
 														</tr>
 													</c:forEach>
 													<tr>
-														<td colspan="6" class="aa-cart-view-bottom">
+														<td colspan="6" class="aa-cart-view-bottom" style="border: none; padding: 50px 25%;">
 															<!-- 용량 컬럼을 추가해보려고 했는데 colspan="7" 으로 변경하면 밑 부분 표가 깨집니다 -->
 															<!-- _responsice.scss에 관련 스타일이 있는데 다른 태그들이랑 묶여 있어서 손대기 어려울듯.. -->
 															<div class="aa-cart-coupon">
