@@ -199,7 +199,11 @@
                         <input type="hidden" id="member_email" value="${sessionScope.member_email }">
                          <li>
                           <figure>
+<<<<<<< HEAD
                             <a class="aa-product-img"  href="productDetail.sh?product_idx=${bestList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${bestList.product_main_image }' />" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
+=======
+                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${bestList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${bestList.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
+>>>>>>> refs/remotes/origin/sehyun
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
                               <h4 class="aa-product-title" style="font-size:13px;"><a href="productDetail.sh?product_idx=${bestList.product_idx }">${bestList.product_name }</a></h4>
