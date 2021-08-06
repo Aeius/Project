@@ -15,14 +15,25 @@
 
 		if (coupon_name.value.replace(blank_pattern, '') == "") {
 			alert('쿠폰 코드를 입력하세요.');
+			$(coupon_name).focus();
 			return false;
 		}
 		if (coupon_date.value.replace(blank_pattern, '') == "") {
 			alert('쿠폰 유효기간 시작일을 선택하세요.');
+			$(coupon_date).focus();
+
 			return false;
 		}
 		if (coupon_expire.value.replace(blank_pattern, '') == "") {
 			alert('쿠폰 만료일을 선택하세요.');
+			$(coupon_expire).focus();
+
+			return false;
+		}
+		if (coupon_expire.value <= coupon_date.value){
+			alert('쿠폰 만료일을 다시 한번 확인하세요.');
+			$(coupon_expire).focus();
+
 			return false;
 		}
 	}
@@ -52,7 +63,7 @@
 						method="post" onsubmit="return couponNullCheck()">
 						<!-- text input -->
 						<div class="form-group">
-							<label>쿠폰 코드 입력</label> <input type="text" name="coupon_name"
+							<label>쿠폰 코드 입력</label> <input type="text" autofocus="autofocus" name="coupon_name"
 								id="coupon_name" class="form-control" maxlength="10"
 								placeholder="쿠폰 코드를 입력하세요. (10 문자)" />
 						</div>

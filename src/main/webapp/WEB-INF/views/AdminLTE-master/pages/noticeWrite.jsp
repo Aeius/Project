@@ -13,10 +13,12 @@ function noticeNullCheck(){
 	
 		if( notice_subject.value.replace( blank_pattern, '' ) == "" ){
 		    alert('제목을 입력해주세요');
+			$(notice_subject).focus();
 		    return false;
 		}
 		if( notice_content.value.replace( blank_pattern, '' ) == "" ){
 		    alert('내용을 입력해주세요');
+			$(notice_content).focus();
 		    return false;
 		}
 	}
@@ -46,7 +48,7 @@ function noticeNullCheck(){
                     <!-- text input -->
                     <div class="form-group">
                       <label>제목 입력</label>
-                      <input type="text" class="form-control" name="notice_subject" id="notice_subject" placeholder="제목을 입력하세요"/>
+                      <input type="text" autofocus="autofocus" class="form-control" name="notice_subject" id="notice_subject" placeholder="제목을 입력하세요"/>
                     </div>
                     <!-- textarea -->
                     <div class="form-group">
