@@ -6,6 +6,10 @@
 <script type="text/javascript">
 
 	function couponNullCheck() {
+		
+		
+		var len = $('#coupon_name').val().length;
+		
 
 		var coupon_name = document.getElementById('coupon_name');
 		var coupon_date = document.getElementById('coupon_date');
@@ -16,6 +20,12 @@
 		if (coupon_name.value.replace(blank_pattern, '') == "") {
 			alert('쿠폰 코드를 입력하세요.');
 			$(coupon_name).focus();
+			return false;
+		}
+		if (coupon_name.value.length < 10) {
+			alert('코드는 10자리 여야만 합니다.');
+			$('#coupon_name').focus();
+			$('#coupon_name')[0].setSelectionRange(len, len);			
 			return false;
 		}
 		if (coupon_date.value.replace(blank_pattern, '') == "") {
@@ -65,7 +75,7 @@
 						<div class="form-group">
 							<label>쿠폰 코드 입력</label> <input type="text" autofocus="autofocus" name="coupon_name"
 								id="coupon_name" class="form-control" maxlength="10"
-								placeholder="쿠폰 코드를 입력하세요. (10 문자)" />
+								placeholder="쿠폰 코드를 입력하세요. (10 자리)" />
 						</div>
 
 						<!-- radio -->
