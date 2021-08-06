@@ -103,7 +103,6 @@
 
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-    <img src="../img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
     <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
@@ -128,7 +127,7 @@
                     <label>현재 비밀번호 <input type="password" id="old_password" name="member_password" style="width: 62%; margin-left: 10%;"></label>
                     <label>새 비밀번호 <input type="password" id="new_password" name="member_password_new" style="width: 62%; margin-left: 14%;" maxlength="16" onkeyup="checkPassword(this.value)"></label>
                     <div id="checkPasswordResult" style="font-size: 14px; text-align:right;"></div>
-                    <label>새 비밀번호 확인<input type="password" id="new_password_check" style="width: 62%; margin-left: 5%;" maxlength="16" onkeyup="checkPasswordConfirm(this.value)"></label>
+                    <label>새 비밀번호 확인<input type="password" id="new_password_check" style="width: 62%; margin-left: 6%;" maxlength="16" onkeyup="checkPasswordConfirm(this.value)"></label>
                     <div id="passwordConfirmResult" style="font-size: 14px; text-align: right;"></div>
                     <div style="padding: 0 21%;">
                     <button type="submit" id="member_deleteBtn" class="aa-browse-btn">비밀번호 변경</button>
