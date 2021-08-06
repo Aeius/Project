@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <script type="text/javascript">
+
 	function couponNullCheck() {
 
 		var coupon_name = document.getElementById('coupon_name');
