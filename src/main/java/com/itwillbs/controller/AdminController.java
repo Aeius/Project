@@ -508,7 +508,8 @@ public class AdminController {
 	public String faqDelete(HttpServletRequest request, FaqBoardBean faqBoardBean, HttpSession session, Model model) {
 
 		// 번호 찾아서 해당 글 삭제
-		int faq_idx = Integer.parseInt(request.getParameter("faq_idx"));
+//		int faq_idx = Integer.parseInt(request.getParameter("faq_idx"));
+//		faqBoardBean.setFaq_idx(faq_idx);
 		faqBoardService.deleteFaqBoard(faqBoardBean);
 
 		return "redirect:/faqList.ad";
