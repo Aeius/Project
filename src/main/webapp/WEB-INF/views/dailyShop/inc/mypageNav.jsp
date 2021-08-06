@@ -13,15 +13,16 @@
     <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2>My Page</h2>
+        <h2  style="font-family: serif;">My Page</h2>
         <ol class="breadcrumb">
-          <li><a href="basket.sh">장바구니</a></li> 
-          <li><a href="orderList.sh">주문내역</a></li>
-          <li><a href="myWishList.sh">찜목록</a></li> 
-          <li><a href="reviewList.sh">내 리뷰</a></li>    
-          <li><a href="coupon.sh">쿠폰 & 포인트</a></li> 
-          <li><a href="userCheck.sh">회원 정보</a></li>    
-          <li><a href="subscribe.sh">구독 정보</a></li>   
+          <li><a href="<c:url value='/basket.sh'/>">장바구니</a></li> 
+          <li><a href="<c:url value='/orderList.sh'/>">주문내역</a></li>
+          <li><a href="<c:url value='/myWishList.sh'/>">찜목록</a></li> 
+          <li><a href="<c:url value='/reviewList.sh'/>">내 리뷰</a></li>    
+          <li><a href="<c:url value='/coupon.sh'/>">쿠폰 & 포인트</a></li> 
+          <li><a href="<c:url value='/userCheck.sh'/>">회원 정보</a></li>    
+          <li><a href="<c:url value='/subscribe.sh'/>">구독 정보</a></li> 
+          <!-- 현재 구독 정보 페이지는 subscribeComingSoon.jsp로 연결됩니다. -->  
         </ol>
       </div>
      </div>

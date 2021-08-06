@@ -83,7 +83,7 @@ h2 {
 							<div class="col-md-4">
 								<div class="aa-contact-address-right">
 									<address>
-										<h4>DailyShop</h4>
+										<h4>PerfumeShip</h4>
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing
 											elit. Rerum modi dolor facilis! Nihil error, eius.</p>
 										<p>
@@ -93,8 +93,7 @@ h2 {
 											<span class="fa fa-phone"></span>+ 021.343.7575
 										</p>
 										<p>
-											<span class="fa fa-envelope"></span>Email:
-											support@dailyshop.com
+											<span class="fa fa-envelope"></span>Email:javateamproject2021@gmail.com
 										</p>
 									</address>
 								</div>

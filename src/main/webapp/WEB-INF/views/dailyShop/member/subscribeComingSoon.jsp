@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,21 +34,25 @@
    <!-- header -->
 <jsp:include page="../inc/header.jsp"></jsp:include>
   <!-- / menu -->
+
+  
+    <!-- catg header banner section -->
+  <jsp:include page="../inc/mypageNav.jsp"></jsp:include>
+  <!-- / catg header banner section -->
+  
   
   
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-    <img src="<c:url value='/resources/img/banner_add/test_banner.png'/>" alt="banner_img">
     <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2>결제 완료</h2>
+<!--         <h2>Coming Soon - </h2> -->
       </div>
      </div>
    </div>
   </section>
   <!-- / catg header banner section -->
-
  <!-- Cart view section -->
  <section id="aa-myaccount">
    <div class="container">
@@ -56,11 +60,18 @@
        <div class="col-md-12">
         <div class="aa-myaccount-area">         
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6" style="width: 40%; margin: 0px 30%;">
                 <div class="aa-myaccount-login">
-                <h4>결제가 완료되었습니다</h4>
-                  <label for="board_email">주문 번호</label> : ${order_idx }
-                    <br><br><button type="button" class="aa-browse-btn" onclick="location.href='<c:url value='/orderList.sh'/>'">주문내역 보기</button>
+                
+                
+         				 <img src="<c:url value='/resources/img/commingsoon.jpg'/>"  style="float:left; margin: 0px auto; width: 500px; height: 500px;" >
+                
+                
+             
+             
+             
+                    <br><br><br>
+                
                 </div>
               </div>
             </div>          
@@ -70,11 +81,8 @@
    </div>
  </section>
  <!-- / Cart view section -->
-
   <!-- footer -->  
  <jsp:include page="../inc/footer.jsp"></jsp:include>
   <!-- / footer -->
-
-
   </body>
 </html>

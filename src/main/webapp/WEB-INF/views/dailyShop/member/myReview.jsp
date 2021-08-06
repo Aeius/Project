@@ -67,7 +67,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="aa-product-details-area">
-				<h2>내 리뷰</h2>
+				<h2>My Review</h2>
             <div class="aa-product-details-bottom">
               <!-- 상세정보 사진 부분 -->
                 

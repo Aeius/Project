@@ -37,7 +37,7 @@
 		<div class="aa-catg-head-banner-area">
 			<div class="container">
 				<div class="aa-catg-head-banner-content">
-					<h2>Service</h2>
+					<h2  style="font-family: serif;" >Service</h2>
 					<!--         <ol class="breadcrumb"> -->
 					<!--           <li><a href="index.html">Home</a></li>          -->
 					<!--           <li class="active">Women</li> -->
