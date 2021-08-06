@@ -83,7 +83,6 @@
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2 >검색 결과</h2>
         <h2 style ="font-family: serif;" >Search Result</h2>
         <h4 style ="font-family: serif; color: #EAEAEA; font-weight: bold;">Premium Niche Perfume Taylor</h4>
 <!--         <ol class="breadcrumb"> -->
