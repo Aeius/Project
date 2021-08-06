@@ -85,7 +85,7 @@
             <!-- single slide item -->
             <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/slider_pick1.jpg'/>" alt="Men slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/slider_pick1.jpg'/>" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'" />
               </div>   
               <div class="seq-title">
                <span data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">
@@ -100,7 +100,7 @@
             <!-- single slide item -->
             <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/slider_pick2.jpg'/>" alt="Wristwatch slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/slider_pick2.jpg'/>" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"/>
               </div>
               <div class="seq-title">
                 <span data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">
@@ -113,7 +113,7 @@
               <!-- single slide item -->           
               <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/slider_pick2_1.jpg'/>" alt="Wristwatch slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/slider_pick2_1.jpg'/>" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'" />
               </div>
               <div class="seq-title">
                <span data-seq style="color: white; background-color:black ;background-color: rgba( 0, 0, 0, 0.4 );">
@@ -128,7 +128,7 @@
             <!-- single slide item -->
             <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/slider_pick4.jpg'/>" alt="Women Jeans slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/slider_pick4.jpg'/>" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'" />
               </div>
               <div class="seq-title">
                 <span data-seq style="color: white; background-color:black ;background-color: rgba( 0, 0, 0, 0.4 );">2021/08 Man's Pick</span>                
@@ -143,7 +143,7 @@
  
               <li>
               <div class="seq-model">
-                <img data-seq src="<c:url value='/resources/img/slider/slider_pick3.jpg'/>" alt="Wristwatch slide img" />
+                <img data-seq src="<c:url value='/resources/img/slider/slider_pick3.jpg'/>" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'" />
               </div>
               <div class="seq-title">
                 <span data-seq style="color: #353535; background-color:#fff;background-color: rgba( 255, 255, 255, 0.4 );">
@@ -199,7 +199,7 @@
                         <input type="hidden" id="member_email" value="${sessionScope.member_email }">
                          <li>
                           <figure>
-                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${bestList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${bestList.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${bestList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${bestList.product_main_image }' />" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
                               <h4 class="aa-product-title" style="font-size:13px;"><a href="productDetail.sh?product_idx=${bestList.product_idx }">${bestList.product_name }</a></h4>

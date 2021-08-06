@@ -86,8 +86,8 @@
                             <a href="#">
                             
                             <!-- 리뷰 이미지 300px, 300px -->
-		                      <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image }" />'>
-                              <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image2 }" />'>
+		                      <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image }" />' onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'">
+                              <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image2 }" />' onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'">
                              
                             </a>
                           </div>

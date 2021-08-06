@@ -112,7 +112,7 @@
                 	
                 	
                      <!-- 다중 파일 업로드시 multiple="multiple" 추가 / name="file" 이어야함 accept : 확장자명 지정 -->
-                     <input multiple="multiple" type="file" class="form-control" id="review_image" name="review_image" value="${reviewBean.review_image }" accept=".jpg,.jpeg,.png,.gif">
+                     <input multiple="multiple" type="file" class="form-control" id="review_image" name="review_image" value="${reviewBean.review_image }" accept=".jpg,.jpeg,.png,.gif" alt='<c:url value="/resources/img/no_image.jpg"/>' width="300" height="300">
                     
                     <button type="submit" id="review_insertBtn" class="aa-browse-btn">리뷰수정</button>
                             

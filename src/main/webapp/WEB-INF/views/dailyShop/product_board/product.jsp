@@ -135,7 +135,7 @@
 						  </script>
                         <li>
                           <figure>
-                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${allList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${allList.product_main_image }' />" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img"  href="productDetail.sh?product_idx=${allList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${allList.product_main_image }' />" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
 <!--                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a> <!-- 장바구니 담기 버튼 활성화 -->
                               <figcaption>
                               <h4 class="aa-product-title" style="font-size:14px;"><a href="productDetail.sh?product_idx=${allList.product_idx }">${allList.product_name }</a></h4>
@@ -186,7 +186,7 @@
 						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="productDetail.sh?product_idx=${powderyList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${powderyList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail.sh?product_idx=${powderyList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${powderyList.product_main_image }'/>" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
                             <figcaption>
                               <h4 class="aa-product-title" style="font-size:14px;"><a href="productDetail.sh?product_idx=${powderyList.product_idx }">${powderyList.product_name }</a></h4>
                               <span class="aa-product-price" style="font-size:14px;">￦ ${powderyList.product_price }</span>
@@ -235,7 +235,7 @@
 						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="productDetail.sh?product_idx=${floralList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${floralList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail.sh?product_idx=${floralList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${floralList.product_main_image }'/>" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
                             <figcaption>
                               <h4 class="aa-product-title" style="font-size:14px;"><a href="productDetail.sh?product_idx=${floralList.product_idx }">${floralList.product_name }</a></h4>
                               <span class="aa-product-price" style="font-size:14px;">￦ ${floralList.product_price }</span>
@@ -284,7 +284,7 @@
 						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="productDetail.sh?product_idx=${woodyList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${woodyList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail.sh?product_idx=${woodyList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${woodyList.product_main_image }'/>" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
                             <figcaption>
                               <h4 class="aa-product-title" style="font-size:14px;"><a href="productDetail.sh?product_idx=${woodyList.product_idx }">${woodyList.product_name }</a></h4>
                               <span class="aa-product-price" style="font-size:14px;">￦ ${woodyList.product_price }</span>
@@ -332,7 +332,7 @@
                        <input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="productDetail.sh?product_idx=${aquaList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${aquaList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail.sh?product_idx=${aquaList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${aquaList.product_main_image }'/>" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
                             <figcaption>
                               <h4 class="aa-product-title" style="font-size:14px;"><a href="productDetail.sh?product_idx=${aquaList.product_idx }">${aquaList.product_name }</a></h4>
                               <span class="aa-product-price" style="font-size:14px;">￦ ${aquaList.product_price }</span>
@@ -380,7 +380,7 @@
                        <input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="productDetail.sh?product_idx=${fruityList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${fruityList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail.sh?product_idx=${fruityList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${fruityList.product_main_image }'/>" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
                             <figcaption>
                               <h4 class="aa-product-title" style="font-size:14px;"><a href="productDetail.sh?product_idx=${fruityList.product_idx }">${fruityList.product_name }</a></h4>
                               <span class="aa-product-price" style="font-size:14px;">￦ ${fruityList.product_price }</span>
@@ -428,7 +428,7 @@
 						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="productDetail.sh?product_idx=${sitrusList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${sitrusList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail.sh?product_idx=${sitrusList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${sitrusList.product_main_image }'/>" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
                             <figcaption>
                               <h4 class="aa-product-title" style="font-size:14px;"><a href="productDetail.sh?product_idx=${sitrusList.product_idx }">${sitrusList.product_name }</a></h4>
                               <span class="aa-product-price" style="font-size:14px;">￦ ${sitrusList.product_price }</span>
@@ -477,7 +477,7 @@
 						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="productDetail.sh?product_idx=${spicesList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${spicesList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail.sh?product_idx=${spicesList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${spicesList.product_main_image }'/>" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
                             <figcaption>
                               <h4 class="aa-product-title" style="font-size:14px;"><a href="productDetail.sh?product_idx=${spicesList.product_idx }">${spicesList.product_name }</a></h4>
                               <span class="aa-product-price" style="font-size:14px;">￦ ${spicesList.product_price }</span>
@@ -525,7 +525,7 @@
 						<input type="hidden" id="member_email" value="${sessionScope.member_email }">
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="productDetail.sh?product_idx=${modernList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${modernList.product_main_image }'/>" width="250" height="300" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="productDetail.sh?product_idx=${modernList.product_idx }" style="background-color: white;"><img src="<c:url value='/resources/upload/${modernList.product_main_image }'/>" width="250" height="300" onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'"></a>
                             <figcaption>
                               <h4 class="aa-product-title" style="font-size:14px;"><a href="productDetail.sh?product_idx=${modernList.product_idx }">${modernList.product_name }</a></h4>
                               <span class="aa-product-price" style="font-size:14px;">￦ ${modernList.product_price }</span>
