@@ -69,13 +69,13 @@
                     <button type="submit" class="btn btn-primary">쿠폰생성</button>
                   </div>
                   </form>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-      </div><!-- /.content-wrapper -->
+                </div><!— /.box-body —>
+              </div><!— /.box —>
+      </div><!— /.content-wrapper —>
       
-      <!-- ==========본문 끝========== -->
+      <!— ==========본문 끝========== —>
       <jsp:include page="../inc/footer.jsp" />
-    </div><!-- ./wrapper -->
+    </div><!— ./wrapper —>
 
     <jsp:include page="../inc/script.jsp" />
     

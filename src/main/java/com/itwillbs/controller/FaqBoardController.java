@@ -33,4 +33,12 @@ public class FaqBoardController {
 		return "/member/insertForm";
 	}
 	
+	
+	@RequestMapping (value = "/contact", method = RequestMethod.GET)
+	public String contact(HttpSession session, Model model) {
+		List<FaqBoardBean> fbb = faqBoardService.getFaqList();
+		model.addAttribute("faqList",fbb);
+		return "/dailyShop/service_board/contact";
+		}
+	
 }

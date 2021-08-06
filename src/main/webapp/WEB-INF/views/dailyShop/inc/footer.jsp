@@ -42,9 +42,9 @@
                   <div class="aa-footer-widget">
                     <h3>Service</h3>
                     <ul class="aa-footer-nav">
-                      <li><a href="<c:url value='/notice.sh'/>">QnA</a></li>
-                      <li><a href="<c:url value='/notice.sh'/>">FAQ</a></li>
-                      <li><a href="<c:url value='/notice.sh'/>">Notice</a></li>
+                      <li><a href="<c:url value='notice.sh'/>">Notice</a></li>
+                      <li><a href="<c:url value='FAQ'/>">FAQ</a></li>
+                      <li><a href="<c:url value='contact'/>">QnA</a></li>
                     </ul>
                   </div>
                 </div>
