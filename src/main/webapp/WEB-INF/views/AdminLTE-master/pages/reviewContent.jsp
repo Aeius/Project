@@ -31,6 +31,10 @@
                       <input type="text" value="${review.review_subject}" class="form-control" name="review_subject" id="review_subject" readonly="readonly"/>
                     </div>
                     <!-- textarea -->
+                     <div class="form-group">
+                      <label>리뷰 사진</label>
+                      <textarea class="form-control" rows="15" name="review_image" id="review_image" readonly="readonly">${review.review_image}</textarea>
+                    </div>
                     <div class="form-group">
                       <label>리뷰 내용</label>
                       <textarea class="form-control" rows="15" name="review_content" id="review_content" readonly="readonly">${review.review_content}</textarea>

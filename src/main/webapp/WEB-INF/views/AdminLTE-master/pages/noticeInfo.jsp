@@ -3,6 +3,25 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript">
+function noticeNullCheck(){
+
+	var notice_subject = document.getElementById('notice_subject');
+	var notice_content = document.getElementById('notice_content');
+	var blank_pattern = /^\s+|\s+$/g;
+	
+		if( notice_subject.value.replace( blank_pattern, '' ) == "" ){
+		    alert('제목을 입력해주세요');
+			$(notice_subject).focus();
+		    return false;
+		}
+		if( notice_content.value.replace( blank_pattern, '' ) == "" ){
+		    alert('내용을 입력해주세요');
+			$(notice_content).focus();
+		    return false;
+		}
+	}
+</script>
   <!-- head -->
   <jsp:include page="../inc/head.jsp" />
   
@@ -23,7 +42,7 @@
                   <h1 class="box-title">공지사항 수정하기</h1>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" action="<c:url value='/noticeUpdate.ad'/>" method="POST">
+                  <form role="form" action="<c:url value='/noticeUpdate.ad'/>" method="POST" onsubmit="return noticeNullCheck()">
                  	 <input type="hidden" name="notice_name" id="notice_name" value="관리자">
                     <!-- text input -->
                     <div class="form-group">
