@@ -38,6 +38,7 @@
 
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
+    <img src="../img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
     <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
@@ -60,7 +61,7 @@
                  <h4>회원탈퇴</h4>
                  <form action='<c:url value="deletePro.sh" />' id="fr" class="aa-login-form" method="post">
                     <label for="">Email<span></span></label>
-                    <input type="text" id="member_email" name="member_email" value="${sessionScope.member_email}">
+                    <input type="text" id="member_email" name="member_email" value="${sessionScope.member_email}" readonly="readonly">
 
                     <label for="">Password<span>*</span></label>
                     <input type="password" id="member_password" name = "member_password" placeholder="비밀번호를 입력해주세요.">

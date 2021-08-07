@@ -128,17 +128,6 @@ public class MemberController {
 		return "redirect:/myPage.sh";
 	}
 	
-	//----------------------------구독 페이지로 이동-----------------
-	
-	@RequestMapping(value = "/subscribe.sh", method = RequestMethod.GET)
-	public String subscribeComingSoon() {
-//		현재 구독 정보 페이지는 subscribeComingSoon.jsp로 연결됩니다. 
-		return "/dailyShop/member/subscribeComingSoon";
-	}
-	
-	
-	
-	
 	//---------------------------------------------------------------  회원가입 ------------------------------------------------------------
 	@RequestMapping(value = "/account.sh", method = RequestMethod.GET)
 	public String account() {

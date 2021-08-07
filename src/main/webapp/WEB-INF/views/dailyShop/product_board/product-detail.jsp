@@ -15,6 +15,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+ <link href='<c:url value="/resources/css/star-rating.css" />' rel="stylesheet" type="text/css">   
  <script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script> 
   <script type="text/javascript">
   $(document).ready(function(){	 
@@ -255,7 +256,7 @@
                 <br>
                 </div>
                 
-                <!-- 리뷰 -->
+                 <!-- 리뷰 -->
                 <div class="tab-pane fade in active3" id="review">
                  <div class="aa-product-review-area">
                  <!-- 총 리뷰 총수 -->
@@ -270,8 +271,8 @@
                             <a href="#">
                             
                             <!-- 리뷰 이미지 300px, 300px -->
-		                      <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image }" />' onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'">
-                              <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image2 }" />' onerror="this.src='<c:url value="/resources/img/no_image.jpg"/>'">
+		                      <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image }" />'>
+                              <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image2 }" />'>
                              
                             </a>
                           </div>
@@ -326,6 +327,9 @@
 							
                             <p><textarea rows="10px" cols="55px" name="review_content" readonly="readonly">${reviewList.review_content}</textarea></p>
                         	
+                          
+                           
+                        
                           </div>
                           
                         </div>

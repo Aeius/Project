@@ -90,16 +90,88 @@
                    <label for="name">평점</label>
                    
                    <div class="star-rating">
-							  <input type="radio" id="5-stars" name="review_star" value="5" />
+                   <c:set var ="review_star" value="${ reviewBean.review_star }"></c:set>
+                              <c:if test="${review_star eq 5}"> 
+							  <input type="radio" id="5-stars" name="review_star" value="5" checked="checked"/>
 							  <label for="5-stars" class="star">&#9733;</label>
-							  <input type="radio" id="4-stars" name="review_star" value="4" />
+							  <input type="radio" id="4-stars" name="review_star" value="4" checked="checked"/>
 							  <label for="4-stars" class="star">&#9733;</label>
-							  <input type="radio" id="3-stars" name="review_star" value="3" />
+							  <input type="radio" id="3-stars" name="review_star" value="3" checked="checked"/>
 							  <label for="3-stars" class="star">&#9733;</label>
-							  <input type="radio" id="2-stars" name="review_star" value="2" />
+							  <input type="radio" id="2-stars" name="review_star" value="2" checked="checked" />
 							  <label for="2-stars" class="star">&#9733;</label>
 							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
 							  <label for="1-star" class="star">&#9733;</label>
+							  </c:if>
+							  
+							  <c:if test="${review_star eq 4}"> 
+							  <input type="radio" id="4-stars" name="review_star" value="4" checked="checked"/>
+							  <label for="4-stars" class="star">&#9733;</label>
+							  <input type="radio" id="3-stars" name="review_star" value="3" checked="checked"/>
+							  <label for="3-stars" class="star">&#9733;</label>
+							  <input type="radio" id="2-stars" name="review_star" value="2" checked="checked" />
+							  <label for="2-stars" class="star">&#9733;</label>
+							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
+							  <label for="1-star" class="star">&#9733;</label>
+							  </c:if>
+							 
+							   <c:if test="${review_star eq 3}"> 
+							  <input type="radio" id="3-stars" name="review_star" value="3" checked="checked"/>
+							  <label for="3-stars" class="star">&#9733;</label>
+							  <input type="radio" id="2-stars" name="review_star" value="2" checked="checked" />
+							  <label for="2-stars" class="star">&#9733;</label>
+							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
+							  <label for="1-star" class="star">&#9733;</label>
+							   </c:if>
+							   
+							   <c:if test="${review_star eq 2}">
+							  <input type="radio" id="2-stars" name="review_star" value="2" checked="checked" />
+							  <label for="2-stars" class="star">&#9733;</label>
+							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
+							  <label for="1-star" class="star">&#9733;</label>
+							   </c:if>
+							   
+							  <c:if test="${review_star eq 1}">
+							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
+							  <label for="1-star" class="star">&#9733;</label>
+							  </c:if>
+
+<%--   							<c:set var ="review_star" value="${ reviewBean.review_star }"></c:set> --%>
+<%--                             <c:if test="${review_star eq 1}"> --%>
+<!-- 							  <label for="5-stars" class="star">&#9733;</label> -->
+<!-- 							  <label for="4-stars" class="star">&#9733;</label> -->
+<!-- 							  <label for="3-stars" class="star">&#9733;</label> -->
+<!-- 							  <label for="2-stars" class="star">&#9733;</label> -->
+<!-- 							  <input type="radio" id="1-star" name="review_star" value="1"/> -->
+<%-- 						   </c:if> --%>
+						   
+<%-- 						    <c:if test="${review_star eq 2}"> --%>
+							
+<!-- 							  <label for="4-stars" class="star">&#9733;</label> -->
+<!-- 							  <label for="3-stars" class="star">&#9733;</label> -->
+<!-- 							  <label for="2-stars" class="star">&#9733;</label> -->
+<!-- 							   <input type="radio" id="2-star" name="review_star" value="2"/> -->
+<%-- 						   </c:if> --%>
+<%-- 						    <c:if test="${review_star eq 3}"> --%>
+<!-- 							  <label for="5-stars" class="star">&#9733;</label> -->
+<!-- 							  <label for="4-stars" class="star">&#9733;</label> -->
+<!-- 							  <input type="radio" id="3-star" name="review_star" value="3"/> -->
+							  
+<%-- 						   </c:if> --%>
+
+<%-- 						   <c:if test="${review_star eq 4}"> --%>
+<!-- 							  <label for="5-stars" class="star">&#9733;</label> -->
+<!-- 						      <input type="radio" id="4-star" name="review_star" value="4"/> -->
+<%-- 						   </c:if> --%>
+							  
+					     <c:forEach var="review_star" items="${ratingOptions}" varStatus="status" begin="1" end="${reviewBean.review_star}">
+
+<!-- 							 별점 체크 되는 부분 곳 -->
+							  <input type="radio" id="1-star" name="review_star" checked="checked" />
+							  <label for="1-star" class="star">&#9733;</label>
+							
+							
+						</c:forEach>
                    </div>
          
                     <label for="name">작성자</label>
@@ -112,8 +184,10 @@
                 	
                 	
                      <!-- 다중 파일 업로드시 multiple="multiple" 추가 / name="file" 이어야함 accept : 확장자명 지정 -->
-                     <input multiple="multiple" type="file" class="form-control" id="review_image" name="review_image" value="${reviewBean.review_image }" accept=".jpg,.jpeg,.png,.gif" alt='<c:url value="/resources/img/no_image.jpg"/>' width="300" height="300">
-                    
+                     <input multiple="multiple" type="file" class="form-control" id="review_image" name="file" value="${reviewBean.review_image }" accept=".jpg,.jpeg,.png,.gif"> ${reviewBean.review_image }
+                	 <input multiple="multiple" type="file" class="form-control" id="review_image2" name="file" value="${reviewBean.review_image2 }" accept=".jpg,.jpeg,.png,.gif">${reviewBean.review_image2 }
+<%--                      <input type="hidden" name="oldfile" value="${reviewBean.review_image }"> ${reviewBean.review_image } --%>
+<%--                      <input type="hideen" name="oldfile1" value="${reviewBean.review_image2 }"> ${reviewBean.review_image2 } --%>
                     <button type="submit" id="review_insertBtn" class="aa-browse-btn">리뷰수정</button>
                             
                   </form>

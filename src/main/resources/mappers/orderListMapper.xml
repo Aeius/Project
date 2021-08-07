@@ -34,11 +34,17 @@
 	
 	
 	<select id="getOrderListCount" resultType="java.lang.Integer">
-  		SELECT count(*) FROM orderlist, order_detail, product
-			WHERE 
-			order_idx = order_detail_order_idx
-		    AND
-		    order_member_email = #{order_member_email};
+	  	SELECT 
+	  		count(*),
+			o.order_idx,p.product_idx, p.product_name, o.order_status,d.order_detail_return_check, coalesce(r.review_idx, 0) 'review_idx'
+		from orderlist o 
+			inner join order_detail d
+			on o.order_idx = d.order_detail_order_idx
+			inner join product p 
+			on d.order_detail_product_idx = p.product_idx
+			left outer join review r
+			on o.order_idx = r.review_order_idx and d.order_detail_product_idx = r.review_product_idx
+		where o.order_member_email = #{order_member_email}
   	</select>
 
 	<select id="getOrderMember" resultType="com.itwillbs.domain.OrderListBean" >

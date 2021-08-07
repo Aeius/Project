@@ -108,11 +108,11 @@
                   </table>
                   </form>
                   <!-- 페이징 처리 -->
-        		 <div class="aa-blog-archive-pagination" align="center">
+        		       <div class="aa-blog-archive-pagination" align="center">
                       <nav>
                         <ul class="pagination">
                           <li>
-                           <c:if test="${pb.startPage > pb.pageBlock }">
+                          <c:if test="${pb.startPage > pb.pageBlock }">
                             <a href='<c:url value="/orderList.sh?pageNum=${pb.startPage-pb.pageBlock }" />' aria-label="Previous">
                               <span aria-hidden="true">«</span>
                             </a>
@@ -130,10 +130,10 @@
                               <span aria-hidden="true">»</span>
                             </a>
                           </c:if>
-                          </li>
+                          </li> 
                         </ul>
                       </nav>
-                    </div>   
+                    </div> 
             </div>
           </div>
         </div>

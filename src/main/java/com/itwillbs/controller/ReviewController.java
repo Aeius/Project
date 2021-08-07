@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -117,60 +118,76 @@ public class ReviewController {
 		
 		System.out.println(review_idx);
 		ReviewBean reviewBean = reviewService.getReview(review_idx);
+		// 평점 별 개수 map에 저장해서 가져가는 부분
+		Map ratingOptions = new HashMap();
+		ratingOptions.put(0, "☆☆☆☆☆");
+		ratingOptions.put(1, "★☆☆☆☆");
+		ratingOptions.put(2, "★★☆☆☆");
+		ratingOptions.put(3, "★★★☆☆");
+		ratingOptions.put(4, "★★★★☆");
+		ratingOptions.put(5, "★★★★★");
+		
+		//Model 데이터 담아 가기
+		// 평점 별모양 정보 가져가기
+		model.addAttribute("ratingOptions", ratingOptions);
 		model.addAttribute("reviewBean", reviewBean);
 		return "/dailyShop/member/reviewUpdateForm";
 	}
 	
 	@RequestMapping(value = "/reviewUpdatePro.sh", method = RequestMethod.POST)
-	public String reviewUpdatePro(Model model, MultipartHttpServletRequest request, @RequestParam("review_image") MultipartFile[] file, HttpServletResponse response) throws Exception{
+	public String reviewUpdatePro(Model model, MultipartHttpServletRequest request, @RequestParam MultipartFile[] file, @RequestParam("review_idx") int review_idx,HttpServletResponse response) throws Exception{
 		// 랜덤문자열 생성  랜덤문자열_파일이름
 				
-				UUID uid = UUID.randomUUID(); // 랜덤문자열
-				String saveName = ""; // upload 폴더에 저장되는 파일명
-				System.out.println(saveName);
-				System.out.println(request.getParameter("review_idx"));
-				
-				
-				ReviewBean reviewBean=new ReviewBean();
+//				UUID uid = UUID.randomUUID(); // 랜덤문자열
+//				String saveName = ""; // upload 폴더에 저장되는 파일명
+//				System.out.println(saveName);
+//				System.out.println(request.getParameter("review_idx"));
+
+				ReviewBean reviewBean = reviewService.getReview(review_idx);
+//				int original_review_star = reviewBean.getReview_star();
+//				System.out.println(original_review_star);
 				reviewBean.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
 				reviewBean.setReview_email(request.getParameter("review_email"));
 				reviewBean.setReview_subject(request.getParameter("review_subject"));
 				reviewBean.setReview_content(request.getParameter("review_content"));
 				reviewBean.setReview_star(Integer.parseInt(request.getParameter("review_star")));
 				
-				System.out.println(Integer.parseInt(request.getParameter("review_idx")));
-				System.out.println(file.length);
-				System.out.println(reviewBean.getReview_image());
-				System.out.println(file.length);
+				
+//				// 리뷰 평점 기존 값과 수정 값 비교
+//				int update_review_star = reviewBean.getReview_star();
+//				System.out.println(update_review_star);
+//				if(original_review_star == update_review_star) {
+//					reviewBean.setReview_star(original_review_star);
+//				}else {
+//					reviewBean.setReview_star(update_review_star);
+//				}
+				
+//				System.out.println(reviewBean.getReview_image());
+//				System.out.println(reviewBean.getReview_image2());
+				
+//				System.out.println(Integer.parseInt(request.getParameter("review_idx")));
+//				System.out.println(file.length);
+//				System.out.println(file.length);
 				
 				// 파일 담기
-				for(int i=0; i<file.length; i++) { // 파일 갯수만큼 반복
-					// 저장되는 파일명 = 랜덤문자열_원래파일이름 => 같은 상품은 같은 랜덤문자열 
-															//=> for문 안에서 UUID 선언시 각 파일마다 랜덤문자열 달라짐
-				saveName = uid.toString() + "_" + file[i].getOriginalFilename(); 
-
-					// upload 폴더로 복사 => webapp > resources > upload 폴더 있어야함
-					File target = new File(uploadPath, saveName);
-					FileCopyUtils.copy(file[i].getBytes(), target);
-
-					// jsp 파일 폼 태그 순서대로 저장됨
-					if(i==0) { // 첫번째 파일 = 첫번째 이미지
-						reviewBean.setReview_image(saveName);
-					} else if(i==1) { // 두번째파일 = 두번째 이미지
-						reviewBean.setReview_image2(saveName);
+				UUID uid=UUID.randomUUID();
+				String saveName = "";
+				for (int i = 0; i < file.length; i++) {
+					if (file[i].getOriginalFilename() == "") { // 파일 미선택시
+						continue; // 변경안하고 넘어감 (기존 파일 유지)
+					} else { // 파일 선택시
+						saveName = uid.toString() + "_" + file[i].getOriginalFilename();
+						File target = new File(uploadPath, saveName);
+						FileCopyUtils.copy(file[i].getBytes(), target);
+						if (i == 0) { // 첫번째 파일 = 메인 이미지
+							reviewBean.setReview_image(saveName);
+							System.out.println(reviewBean.getReview_image());
+						} else if (i == 1) { // 두번째파일 = 디테일 이미지
+							reviewBean.setReview_image2(saveName);
+							System.out.println(reviewBean.getReview_image2());
+						}
 					}
 				}
-		
-		// 리뷰 수정창 닫고 수정 알림 부분
-//		response.setContentType("text/html; charset=UTF-8");
-//		PrintWriter out = response.getWriter();
-//		out.println("<script> "
-//				+ "alert('리뷰 수정 완료');"
-//				+ "window.opener.document.location.reload();"
-//				+ "window.close();"
-//				+ "</script>");
-//		out.flush();
-				
 				
 		reviewService.updateReview(reviewBean);
 		model.addAttribute("reviewBean", reviewBean);
@@ -180,10 +197,22 @@ public class ReviewController {
 	
 	// -----------------------------------리뷰 삭제---------------------------------------------------		
 	@RequestMapping(value = "/reviewDeletePro.sh", method = RequestMethod.GET)
-	public String reviewDeltePro(@RequestParam("review_idx") int review_idx, Model model,HttpSession session) {
+	public String reviewDeltePro(@RequestParam("review_idx") int review_idx, Model model,HttpSession session, HttpServletResponse response) {
 		
 		System.out.println(review_idx);
 		reviewService.deleteReview(review_idx);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			out.println("<script> "
+					+ "alert('리뷰 삭제 완료');"
+					+ "</script>");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return "redirect:/reviewList.sh";
 	}
