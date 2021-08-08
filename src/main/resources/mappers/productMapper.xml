@@ -47,7 +47,7 @@
   
   <!-- 50ml -->
   <select id="getProductAllList50" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_size=50
+  	select * from product where product_size=50 and product_status = 1
   </select>
   
   <select id="getProductPowderyList50" resultType="com.itwillbs.domain.ProductBean">
@@ -95,6 +95,10 @@
   <!-- 상세페이지 -->
   <select id="getProductInfo" parameterType="int" resultType="com.itwillbs.domain.ProductBean">
   	select * from product where product_idx= #{product_idx} and product_status = 1
+  </select>
+  
+  <select id="getProductInfoAdmin" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_idx= #{product_idx}
   </select>
   
   <insert id="insertProduct">
@@ -157,7 +161,12 @@
   </select>
 	
   <select id="getDonutList" resultType="com.itwillbs.domain.CategoryBean">
-  	select * from category
+  	select cg.category_name category_name, count(*) category_count
+	from product 
+	join category cg
+	where product_category like concat('%',cg.category_name,'%')
+		  and product_status=1
+	group by cg.category_name
   </select>  
   
   <select id="getRecoList" resultType="com.itwillbs.domain.RecoBean">

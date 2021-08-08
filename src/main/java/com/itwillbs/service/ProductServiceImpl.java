@@ -178,6 +178,10 @@ public class ProductServiceImpl implements ProductService {
 	public ArrayList<ProductBean> getProductAllListAdmin() {
 		return productDAO.getProductAllListAdmin();
 	}
+	@Override
+	public ProductBean getProductInfoAdmin(int product_idx) {
+		return productDAO.getProductInfoAdmin(product_idx);
+	}
 
 	
 

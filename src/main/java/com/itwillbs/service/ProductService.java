@@ -61,4 +61,6 @@ public interface ProductService {
 
 	public ArrayList<ProductBean> getProductAllListAdmin();
 
+	public ProductBean getProductInfoAdmin(int product_idx); // 판매상태 상관없이 제품 정보 가져옴
+
 }

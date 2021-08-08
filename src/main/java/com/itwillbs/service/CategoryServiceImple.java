@@ -13,16 +13,6 @@ public class CategoryServiceImple implements CategoryService {
 	private CategoryDAO categoryDAO;
 	
 	@Override
-	public void addCount(String[] category) {
-		categoryDAO.addCount(category);
-	}
-
-	@Override
-	public void minusCount(String[] preCategory) {
-		categoryDAO.minusCount(preCategory);
-	}
-
-	@Override
 	public void addManCount(String recoCategory) {
 		categoryDAO.addManCount(recoCategory);
 	}

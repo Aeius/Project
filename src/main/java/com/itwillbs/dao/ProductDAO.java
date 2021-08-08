@@ -60,5 +60,7 @@ public interface ProductDAO {
 	public void updateSellcount(String product_idx);
 	
 	public ArrayList<ProductBean> getProductAllListAdmin();
+	
+	public ProductBean getProductInfoAdmin(int product_idx);
 
 }

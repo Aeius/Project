@@ -2,10 +2,6 @@ package com.itwillbs.service;
 
 public interface CategoryService {
 
-	public void addCount(String[] category);
-
-	public void minusCount(String[] preCategory);
-
 	public void addManCount(String recoCategory); // 남자 추천 결과 
 
 	public void addWomanCount(String recoCategory); // 여자 추천 결과 +1

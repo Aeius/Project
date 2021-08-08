@@ -174,5 +174,10 @@ public class ProductDAOImpl implements ProductDAO {
 	public ArrayList<ProductBean> getProductAllListAdmin() {
 		return (ArrayList)sqlSession.selectList(namespace + ".getProductAllListAdmin");
 	}
+
+	@Override
+	public ProductBean getProductInfoAdmin(int product_idx) {
+		return sqlSession.selectOne(namespace + ".getProductInfoAdmin", product_idx);
+	}
 	
 }

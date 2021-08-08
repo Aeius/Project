@@ -105,7 +105,6 @@ public class AdminController {
 		// 체크박스 다중값 담기
 		String[] category = request.getParameterValues("product_category");
 		String selectedCategory = "";
-		categoryService.addCount(category); // (차트 표시용) 카테고리별 카운트 증가, 문자열 배열 전달
 		for (int i = 0; i < category.length; i++) { // 체크한 갯수만큼 반복
 			selectedCategory += category[i] + "/"; // => "/"기호로 구분해서 product_category 컬럼에 저장
 		}
@@ -180,7 +179,7 @@ public class AdminController {
 			// ---------- 원래 수행작업 ----------------------------------------
 
 			int product_idx = Integer.parseInt(request.getParameter("product_idx"));
-			ProductBean productBean = productService.getProductInfo(product_idx);
+			ProductBean productBean = productService.getProductInfoAdmin(product_idx);
 			model.addAttribute("productBean", productBean);
 			return "/AdminLTE-master/pages/productUpdate";
 
@@ -195,8 +194,7 @@ public class AdminController {
 			throws Exception {
 
 		int product_idx = Integer.parseInt(request.getParameter("product_idx"));
-		ProductBean productBean = productService.getProductInfo(product_idx); // 기존 정보 불러옴
-		String[] preCategory = productBean.getProduct_category().split("/"); // 기존 카테고리 저장
+		ProductBean productBean = productService.getProductInfoAdmin(product_idx); // 기존 정보 불러옴
 
 		productBean.setProduct_name(request.getParameter("product_name"));
 		productBean.setProduct_detail(request.getParameter("product_detail"));
@@ -229,10 +227,6 @@ public class AdminController {
 		}
 
 		productService.updateProduct(productBean);
-
-		// 차트 표시용 카테고리 카운트 업데이트
-		categoryService.minusCount(preCategory); // 기존 카테고리 -> 카테고리별 카운트 감소
-		categoryService.addCount(category); // 수정 카테고리-> 카테고리별 카운트 증가
 
 		return "redirect:/productList.ad";
 	}
@@ -279,7 +273,7 @@ public class AdminController {
 
 			ArrayList<ProductBean> orderProductInfo = new ArrayList<ProductBean>(); // 상품번호를 통해 해당 상품 정보를 가져옴
 			for (OrderDetailBean bean : orderProductList) {
-				ProductBean productBean = productService.getProductInfo(bean.getOrder_detail_product_idx()); // 상품 정보
+				ProductBean productBean = productService.getProductInfoAdmin(bean.getOrder_detail_product_idx()); // 상품 정보
 																												// 받아오기
 				orderProductInfo.add(productBean); // 리스트에 추가
 			}
