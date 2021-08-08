@@ -270,10 +270,10 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="이름" id="buyer_name" name="buyer_name" value="${member.member_name }">
+                                <input type="text" placeholder="이름" id="order_name" name="order_name" value="${member.member_name }">
                               </div>   
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="연락처" id="buyer_tel" name="buyer_tel" value="${member.member_phone }">
+                                <input type="text" placeholder="연락처" id="order_tel" name="order_tel" value="${member.member_phone }">
                               </div>                          
                             </div>                            
                           </div>  
