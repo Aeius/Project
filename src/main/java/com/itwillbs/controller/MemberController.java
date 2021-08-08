@@ -291,6 +291,7 @@ public class MemberController {
 		String member_email = (String)session.getAttribute("member_email");
 		// registMemberCoupon() 메서드 호출
 		boolean isRegisted = memberService.registMemberCoupon(inputCouponCode, member_email);
+		
 		// 리턴되는 결과에 따라 등록, 등록실패 판별 후 메세지 출력
 		if(!isRegisted) {
 			model.addAttribute("msg","쿠폰 등록 실패.");

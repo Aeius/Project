@@ -50,6 +50,8 @@ public interface MemberService {
 
    public void addPoint(MemberBean memberBean);
 
+public void updateMyCoupon(String string, String member_email);
+
 
    
 }

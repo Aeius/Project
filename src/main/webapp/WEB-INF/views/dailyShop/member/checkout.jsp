@@ -252,6 +252,8 @@
           <input type="hidden" id="order_idx" name="order_idx" value="">
           <input type="hidden" id="buyer_email" name="buyer_email" value="${member.member_email }">
           <input type="hidden" id="payAmount" name="payAmount"  value="" >
+          <input type="hidden" id="selectedCoupon_idx" name="selectedCoupon_idx" value="" >
+		  <input type="hidden" id="selectedCoupon_name" name="selectedCoupon_name" value="" >
             <div class="row">
               <div class="col-md-8">
                 <div class="checkout-left">
@@ -270,7 +272,7 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="이름" id="order_name" name="order_name" value="${member.member_name }">
+                                <input type="text" placeholder="이름" id="order_name" name="buyer_name" value="${member.member_name }">
                               </div>   
                               <div class="aa-checkout-single-bill">
                                 <input type="text" placeholder="연락처" id="order_tel" name="order_tel" value="${member.member_phone }">
@@ -350,9 +352,8 @@
 								<option value="0" id="nonSelectedCoupon">쿠폰 선택</option>
 								<c:if test="${! empty couponList}">
 								<c:forEach var="couponList" items="${couponList}">
-								<option value="${couponList.coupon_price}" id="${couponList.coupon_idx}">${couponList.coupon_name} - <fmt:formatNumber value="${couponList.coupon_price}" type="number" />원 할인</option>
-								<input type="hidden" name="selectedCoupon_idx" value="${couponList.coupon_idx}" id="selectedCoupon_idx">
-								<input type="hidden" name="selectedCoupon_name" value="${couponList.coupon_name}" id="selectedCoupon_name">
+								<option value="${couponList.coupon_price}" id="${couponList.coupon_idx}">${couponList.coupon_name} - <fmt:formatNumber value="${couponList.coupon_price}" type="number" />원 할인
+								</option>
 								</c:forEach>
 								</c:if>
 							</select>

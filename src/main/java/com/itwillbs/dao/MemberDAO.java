@@ -47,6 +47,10 @@ public interface MemberDAO {
 	public void usePoint(MemberBean memberBean);
 
 	public void addPoint(MemberBean memberBean);
+
+	public int isUsedCoupon(String member_email, int coupon_idx);
+
+	public void updateMyCoupon(String coupon_idx, String member_email);
 	
 
 }

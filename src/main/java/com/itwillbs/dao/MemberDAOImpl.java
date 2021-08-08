@@ -150,4 +150,25 @@ public class MemberDAOImpl implements MemberDAO{
 		
 	}
 
+	@Override
+	public int isUsedCoupon(String member_email, int coupon_idx) {
+		System.out.println("MemberDAOImpl - registMemberCoupon");
+	      String strCouponIdx = Integer.toString(coupon_idx);
+	      HashMap<String, Object> map = new HashMap<>();
+	      map.put("member_email", member_email);
+	      map.put("coupon_idx",strCouponIdx);
+	      System.out.println(map);
+	      return sqlSession.selectOne(namespace + ".isUsedCoupon", map);
+	}
+
+	@Override
+	public void updateMyCoupon(String coupon_idx, String member_email) {
+	      HashMap<String, Object> map = new HashMap<>();
+	      map.put("member_email", member_email);
+	      map.put("coupon_idx",coupon_idx);
+	      System.out.println(map);
+		sqlSession.update(namespace + ".updateMemberCoupon", map);
+		
+	}
+
 }

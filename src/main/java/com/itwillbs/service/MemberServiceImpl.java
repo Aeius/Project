@@ -172,7 +172,7 @@ public class MemberServiceImpl implements MemberService {
 	  // 쿠폰 리스트 가져오기
       String memberCouponList = memberDAO.getMemberCouponList(member_email);
       
-      if(memberCouponList != null) {
+      if(memberCouponList != null && !memberCouponList.equals(" ")) {
     	  // 고객 쿠폰 정보를 가져왔을 때 '/'로 분리
     	  String[] arrCouponList = memberCouponList.split("/");
     	  // 쿠폰 리스트를 담을 객체 생성
@@ -247,7 +247,13 @@ public class MemberServiceImpl implements MemberService {
 				if(memberCouponList == null) { // 고객 쿠폰 정보가 없음 = 등록된 쿠폰 없음
 					System.out.println("registMemberCoupon - 고객 쿠폰 없음");
 					memberDAO.registMemberCoupon(member_email, couponBean.getCoupon_idx());
-					isRegisted = true;
+					int isUsedCoupon =  memberDAO.isUsedCoupon(member_email, couponBean.getCoupon_idx());
+					if(isUsedCoupon == 0) {
+						System.out.println("사용하지 않은 쿠폰 등록");
+						isRegisted = true;
+						return isRegisted;
+					} 
+					System.out.println("사용한 쿠폰 등록");
 					return isRegisted;
 					
 				} else { // 고객 쿠폰 정보가 있음 = 등록된 쿠폰과 등록할 쿠폰 비교 필요
@@ -272,8 +278,16 @@ public class MemberServiceImpl implements MemberService {
 					} else {
 						// 중복 값이 0일 떄 = 중복 없음
 						System.out.println("중복쿠폰 없음 : " + duplicateCount);
-						memberDAO.registMemberCoupon(member_email, couponBean.getCoupon_idx());
-						isRegisted = true;
+						
+						int isUsedCoupon =  memberDAO.isUsedCoupon(member_email, couponBean.getCoupon_idx());
+						if(isUsedCoupon == 0) {
+							System.out.println("사용하지 않은 쿠폰 등록");
+							memberDAO.registMemberCoupon(member_email, couponBean.getCoupon_idx());
+							isRegisted = true;
+							return isRegisted;
+						} 
+						System.out.println("사용한 쿠폰 등록");
+						return isRegisted;
 					}
 				}
 			}
@@ -344,6 +358,11 @@ public class MemberServiceImpl implements MemberService {
 	public void addPoint(MemberBean memberBean) {
 		memberDAO.addPoint(memberBean);
 		
+	}
+
+	@Override
+	public void updateMyCoupon(String coupon_idx, String member_email) {
+		memberDAO.updateMyCoupon(coupon_idx, member_email);
 	}
 	
 //	@Override

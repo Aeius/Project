@@ -170,12 +170,29 @@ public class PayController {
 		couponBean.setCoupon_idx(Integer.parseInt(request.getParameter("selectedCoupon_idx")));
 		if(Integer.parseInt(request.getParameter("selectedCoupon_idx")) != 0) {  // 쿠폰 선택 여부 판별
 			memberService.updateCoupon(couponBean); // 쿠폰 사용 처리
+			// 쿠폰 사용후 출력되지 않게하기 위해서 member 테이블에 저장된 coupon 의 컬럼을 변경하는 작업
+			MemberBean memberBean = memberService.getMember(member_email);
+			String coupons = memberBean.getMember_coupon();
+			System.out.println("coupons 컬럼 내용 : " + coupons);
+			String[] arrCoupon = coupons.split("/");
+			coupons = ""; // coupons 초기화
+			for(int i = 0; i < arrCoupon.length; i++) { // 쿠폰들 조회
+				if(arrCoupon[i].equals(request.getParameter("selectedCoupon_idx")) ) { // 선택한 쿠폰의 경우
+					arrCoupon[i] = ""; // "" 널스트링으로 만들어버림
+					System.out.println("arrCoupon[i] 컬럼 내용 : " + arrCoupon[i]);
+				} else { // 사용한 쿠폰이 아닌 경우
+					coupons += arrCoupon[i] + "/";  // coupons에 다시 저장
+					System.out.println("coupons 컬럼 내용 : " + coupons.replaceAll("//", "/"));
+				}
+			}
+			memberBean.setMember_coupon(coupons.replaceAll("//", "/"));
+			memberService.updateMember(memberBean); // 삭제한 쿠폰을 제외한 나머지 쿠폰 목록을 저장
 		}
 		
 		MemberBean memberBean = new MemberBean();
 		memberBean.setMember_email(member_email);
-		if(Integer.parseInt(request.getParameter("point")) < 0) { // 포인트를 사용하지 않을 경우
-			memberBean.setMember_point(Integer.parseInt(request.getParameter("amount")) / 10);
+		if(Integer.parseInt(request.getParameter("point")) == 0) { // 포인트를 사용하지 않을 경우
+			memberBean.setMember_point(Integer.parseInt(request.getParameter("payAmount")) / 10);
 			memberService.addPoint(memberBean); // 포인트 적립
 			System.out.println("적립 포인트 : " + memberBean.getMember_point());
 		} else {

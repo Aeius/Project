@@ -45,7 +45,8 @@
       member_post = #{member_post}, 
       member_address = #{member_address},
       member_extraAddress = #{member_extraAddress}, 
-      member_extraAddress2 = #{member_extraAddress2} 
+      member_extraAddress2 = #{member_extraAddress2}, 
+      member_coupon = #{member_coupon}
    WHERE member_email = #{member_email}
   </update>
   
@@ -69,6 +70,9 @@
    	update member set member_password = #{member_password} where member_email = #{member_email}
    </select>
 
+	<select id="isUsedCoupon" resultType="Integer">
+		select COUNT(*) as isUsedCoupon from coupon_status where coupon_email = #{member_email} and coupon_idx = #{coupon_idx}
+	</select>
    
   <select id="getMemberCouponList" resultType="String">
      select member_coupon from member where member_email = #{member_email}
@@ -100,8 +104,10 @@
   
   <!-- CONCAT_WS(첫 번째 인자값, 데이터1, 데이터2, ...) : 첫 번째 인자값으로 구분해 데이터를 입력해주는 함수로 null 값에도 사용가능 -->
   <update id="updateMemberCoupon" parameterType="HashMap">
-     UPDATE member SET member_coupon=CONCAT_WS('/',member_coupon,#{coupon_idx}) WHERE member_email=#{member_email}
+     UPDATE member SET member_coupon=CONCAT_WS('/',#{coupon_idx},member_coupon) WHERE member_email=#{member_email}
   </update>
+  
+  
   
 <!-- 관리자 : 구독자만 -->
 <!-- 	구독자 회원의 모든 정보 -->
