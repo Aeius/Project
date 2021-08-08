@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +71,88 @@
 
 </script>
 
+<script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		var coupon_idx = $("#nonSelectedCoupon").val();
+		$('#selectedCoupon_idx').val(coupon_idx);
+		
+	
+// -------------------------------- 포인트 적용 --------------------------------
+		// 포인트 입력 시
+		$('#point').keyup(function() {
+			
+			// 쿠폰 할인 금액 가져오기
+			var coupon_value = $('#coupon').val();
+			// 쿠폰 정보 가져오기
+			var coupon_idx = parseInt($("#coupon option:selected").attr("id"));
+			// 할인 전 금액 가져오기(숫자 콤마 제거하고 가져오기)
+			var sum = parseInt($('#beforeTotal').val());
+			// 입력한 포인트 value 가져오기
+			var usePoint = $('#point').val(); 
+			// 할인 전 금액 - 쿠폰 = 총 결제 금액 구하기
+			var total = sum - coupon_value - usePoint;
+			
+		    if($("#point").val() == " "){ // 빈칸으로 놔둘 경우 0 값 적용
+	            $('#usePoint').html(-0);
+	        } 
+		    
+		    if (!$.isNumeric($("#point").val())) { // 숫자가 아닐 경우 
+	      	  alert('포인트에는 숫자만 입력할 수 있습니다.')
+	      		$('#point').val(0); // 입력한 값 0 으로 변경
+	      		$('#usePoint').html(-0); // 계산하는 쪽의 입력되는 값 -0 으로 변경
+	      		return;
+	        } 
+	        
+	        if(parseInt($('#myPoint').val()) < parseInt($("#point").val())) { // 가진포인트보다 입력한 포인트가 높을 경우
+	      	  alert('가진포인트보다 더많은 포인트를 사용할 수 없습니다.');
+	      		$('#point').val(0); // 입력한 값 0 으로 변경
+	      		$('#usePoint').html(-0); // 계산하는 쪽의 입력되는 값 -0 으로 변경
+	      		return;
+	        } 
+	        
+			// 쿠폰 금액 칸, 총 결제 금액 칸에 값 출력
+			$('#useCoupon').html(priceToString(-coupon_value));
+			$('#amount').html(priceToString(total));
+			$('#usePoint').html(-usePoint);
+// 			alert(coupon_idx);
+
+		});	
+		
+// -------------------------------- 쿠폰 적용 --------------------------------
+		// selectBox 선택시
+		$('select').on('change', function() {
+			// 쿠폰 할인 금액 가져오기
+			var coupon_value = $(this).val();
+			// 쿠폰 정보 가져오기
+			var coupon_idx = parseInt($("#coupon option:selected").attr("id"));
+			// 할인 전 금액 가져오기(숫자 콤마 제거하고 가져오기)
+			var sum = parseInt($('#beforeTotal').val());
+			// 입력한 포인트 value 가져오기
+			var usePoint = parseInt($('#point').val()); 
+			// 할인 전 금액 - 쿠폰 = 총 결제 금액 구하기
+			var total = sum - coupon_value - usePoint;
+			
+			// 쿠폰 금액 칸, 총 결제 금액 칸에 값 출력
+			$('#useCoupon').html(priceToString(-coupon_value));
+			$('#amount').html(priceToString(total));
+			$('#usePoint').html(priceToString(-usePoint));
+			$('#selectedCoupon_idx').val(coupon_idx);
+// 			alert(coupon_idx);
+    
+    });
+
+// -------------------------------- 숫자 콤마 --------------------------------		
+		function priceToString(price) {
+		    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		}
+		
+	});
+	
+	
+</script>
+
   </head>
   <body> 
   
@@ -97,6 +180,7 @@
 		    if ( rsp.success ) {
 		    	 
 		        document.getElementById('order_idx').value = new Date().getTime();
+		        document.getElementById('payAmount').value = rsp.paid_amount;
 		        
 		    	var msg = '결제가 완료되었습니다.';
 		        msg += '고유ID : ' + rsp.imp_uid;
@@ -113,6 +197,7 @@
 		    alert(msg);
 		});
 	}
+    
 </script>
 
    <!-- wpf loader Two -->
@@ -163,9 +248,10 @@
      <div class="row">
        <div class="col-md-12">
         <div class="checkout-area">
-          <form action="checkout_finish.sh" method="post" name="payFinish">
+          <form action="checkout_finish.sh" method="post" name="payFinish" id="payFinish">
           <input type="hidden" id="order_idx" name="order_idx" value="">
           <input type="hidden" id="buyer_email" name="buyer_email" value="${member.member_email }">
+          <input type="hidden" id="payAmount" name="payAmount"  value="" >
             <div class="row">
               <div class="col-md-8">
                 <div class="checkout-left">
@@ -260,13 +346,16 @@
                       <div id="collapseOne" class="panel-collapse collapse in">
                         <div class="panel-body">
 <!--                           <input type="text" placeholder="쿠폰 선택하기 (텍스트->셀렉트박스)" class="aa-coupon-code"> -->
-                          <select name="coupon"  class="aa-coupon-code" id="coupon">
-                            	<option value="">쿠폰 선택</option>
-                            	<option value="1"> 1번 쿠폰 </option>
-                            	<c:forEach items="${fn:split(member.member_coupon, '/') }" var="coupons">
-                            	<option value="${coupons }">${coupons }</option>
-                            	</c:forEach>
-                            </select>
+                          <select name="coupon" class="aa-coupon-code" id="coupon">
+								<option value="0" id="nonSelectedCoupon">쿠폰 선택</option>
+								<c:if test="${! empty couponList}">
+								<c:forEach var="couponList" items="${couponList}">
+								<option value="${couponList.coupon_price}" id="${couponList.coupon_idx}">${couponList.coupon_name} - <fmt:formatNumber value="${couponList.coupon_price}" type="number" />원 할인</option>
+								<input type="hidden" name="selectedCoupon_idx" value="${couponList.coupon_idx}" id="selectedCoupon_idx">
+								<input type="hidden" name="selectedCoupon_name" value="${couponList.coupon_name}" id="selectedCoupon_name">
+								</c:forEach>
+								</c:if>
+							</select>
                         </div>
                       </div>
                     </div>
@@ -281,7 +370,8 @@
                       </div>
                       <div id="collapseTwo" class="panel-collapse collapse in">
                         <div class="panel-body">
-                          <input type="text" placeholder="사용할 포인트 입력" class="aa-coupon-code" id="point" name="point" max="${member.member_point }" >
+                          <input type="text" placeholder="사용할 포인트 입력" class="aa-coupon-code" id="point" name="point" max="${member.member_point }"  value="0">
+                          <input type="hidden" class="aa-coupon-code" id="myPoint" name="myPoint" value="${member.member_point }">
                           &nbsp;&nbsp;&nbsp;&nbsp;(현재 보유 포인트 : ${member.member_point } P)
                         </div>
                       </div>
@@ -319,11 +409,12 @@
                           	<c:set var="total" value="${total + productBean.product_price * productBean.product_quantity }"/> <!-- 상품가격 더하기 => 상품가격*상품개수 -->
                        	  </c:forEach>
                        	  <c:out value="${total }" /> <!-- 변수 출력 -->
+		                  <input type="hidden" value =${total } id=beforeTotal >
                           </td>
                         </tr>
                          <tr>
                           <th>쿠폰 할인</th>
-                          <td>- 0</td> <!-- 적용한 쿠폰 불러오기 필요 (임시값 0) -->
+                          <td id=useCoupon>- 0</td> <!-- 적용한 쿠폰 불러오기 필요 (임시값 0) -->
                         </tr>
                         <tr>
                           <th>포인트 할인</th>
@@ -331,12 +422,12 @@
                         </tr>
                          <tr>
                           <th>총 가격</th>
-                          <td id="amount" name="amount"><c:out value="${total }" /></td> <!-- 총 가격 = 합계 - 쿠폰할인 - 포인트할인 -->
+                          <td><div id="amount">${total } </div></td> <!-- 총 가격 = 합계 - 쿠폰할인 - 포인트할인 -->
                         </tr>
                       </tfoot>
                     </table>
-					<input type="hidden" id="amount" name="amount"  value="<c:out value="${total }" />">                         
                   </div>
+                  <c:set var="payAmount" value="${total }"></c:set>
                   <h4>결제 방법 선택</h4>
                   <div class="aa-payment-method">                    
                     <label for="cashdelivery"><input type="radio" id="cashdelivery" name="optionsRadios"> 무통장 입금 </label>

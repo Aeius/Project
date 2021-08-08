@@ -519,6 +519,19 @@
 <jsp:include page="../inc/header.jsp"></jsp:include>
   <!-- / menu -->
   
+   <!-- catg header banner section -->
+  <section id="aa-catg-head-banner">
+ <img src="<c:url value='/resources/img/banner_add/test_banner.png'/>" alt="banner_img">
+    <div class="aa-catg-head-banner-area">
+     <div class="container">
+      <div class="aa-catg-head-banner-content">
+        <h2 style ="font-family: serif;">Welcome!</h2>
+        <h4 style ="font-family: serif; color: #EAEAEA; font-weight: bold;">Premium Niche Perfume Taylor</h4>
+      </div>
+     </div>
+   </div>
+  </section>
+  <!-- / catg header banner section -->
 
  <!-- Cart view section -->
  <section id="aa-myaccount">
