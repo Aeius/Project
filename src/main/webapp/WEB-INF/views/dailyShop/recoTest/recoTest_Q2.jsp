@@ -64,10 +64,15 @@ article{
 Tooplate 2114 Pixie
 https://www.tooplate.com/view/2114-pixie
 -->
-
   </head>
 
-  <body>
+<script type="text/javascript">
+ window.history.forward();
+ function noBack(){window.history.forward();}
+</script>
+
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+
       <!-- header -->
 <jsp:include page="../inc/header.jsp"></jsp:include>
   <!-- / menu -->

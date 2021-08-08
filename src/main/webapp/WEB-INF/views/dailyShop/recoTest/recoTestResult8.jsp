@@ -68,8 +68,12 @@ https://www.tooplate.com/view/2114-pixie
 -->
 
   </head>
-   
-  <body>
+   <script type="text/javascript">
+ window.history.forward();
+ function noBack(){window.history.forward();}
+</script>
+
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
      <!-- wpf loader Two -->
     <div id="wpf-loader-two">          
       <div class="wpf-loader-two-inner">
