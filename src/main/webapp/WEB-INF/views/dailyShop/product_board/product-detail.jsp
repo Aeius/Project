@@ -52,7 +52,13 @@
 				}
 			 });
 		 });
+	  
+	  $('#quantity').on('change',function(){
+		  var quan = $(this).val();
+		  $('#basket_quantity').val(quan);
 	  });
+	  
+ 	});
   </script>
     
  	<script src="<c:url value='/resources/script/jquery-3.6.0.js'/>"></script>
@@ -151,8 +157,6 @@
                   <div class="aa-product-view-content">
                   <!-- 제품명 -->
 <!--                   값 전달을 위해 hidden으로 가공 -->
-                  	<input type="hidden" id="product_idx" value="${productBean.product_idx}">
-                  	<input type="hidden" id="member_email" value="${sessionScope.member_email}">
                     <h3>${productBean.product_name}</h3>
                     <div class="aa-price-block">
                    <!-- 제품 가격  -->
@@ -178,9 +182,15 @@
                     <div class="aa-prod-quantity">
                     수량 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:<input class="aa-prod-category" type="number" value="1" min="1" id="quantity">
                     </div>
-            
+            		<form action="buyNow.sh" method="post" name="buyNow" id="buyNow">
+                  	<input type="hidden" id="product_idx" name="product_idx" value="${productBean.product_idx}">
+                  	<input type="hidden" id="member_email" name="member_email" value="${sessionScope.member_email}">
+            		<input type="hidden" id="product_price" name="product_price" value="${productBean.product_price }" >
+            		<input type="hidden" id="product_name" name="product_name" value="${productBean.product_name}" >
+            		<input type="hidden" id="basket_quantity" name="basket_quantity" value="1" >
+            		</form>
                     <div class="aa-prod-view-bottom">
-                      <a class="aa-add-to-cart-btn" href="#">바로구매</a>
+                      <input class="aa-add-to-cart-btn" value="바로구매" type="submit" form="buyNow">
                       <a class="aa-add-to-cart-btn" href="#" id="intoCart">장바구니 담기</a>
 <!--                       <a class="aa-add-to-cart-btn" href="#">장바구니 담기</a> -->
 <!--                       <input type="button" class="aa-add-to-cart-btn" value="" name="wishlistbtn" id="wishlistbtn"> -->

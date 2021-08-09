@@ -83,6 +83,38 @@ public class PayController {
 		
 		return "/dailyShop/member/checkout";
 	}
+	// ---------------------------- 바로구매 결제 창으로 이동 --------------------------------------------
+		@RequestMapping(value = "/buyNow.sh", method = RequestMethod.POST)
+		public String buyNow(HttpServletRequest request , Model model, HttpSession session) {
+			String member_email = (String)session.getAttribute("member_email");
+			MemberBean memberBean = memberService.getMember(member_email);
+			
+			int product_idx = Integer.parseInt(request.getParameter("product_idx"));
+			int product_price = Integer.parseInt(request.getParameter("product_price"));
+			String product_name = request.getParameter("product_name");
+			String basket_quantity = request.getParameter("basket_quantity");
+			
+			List<CouponBean> couponList = basketService.getMemberCouponList(member_email);
+			if(couponList != null) {
+				model.addAttribute("couponList", couponList);
+			}
+			
+			
+			ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
+			
+			ProductBean pb = new ProductBean();
+			pb.setProduct_idx(product_idx);
+			pb.setProduct_price(product_price);
+			pb.setProduct_name(product_name);
+			pb.setProduct_quantity(basket_quantity);
+			
+			productList.add(pb);
+			
+			model.addAttribute("member", memberBean);
+			model.addAttribute("productList", productList);
+			
+			return "/dailyShop/member/checkout";
+		}
 	
 	
 	//---------------------------- 결제 완료 후 결제 데이터 저장 --------------------------------
