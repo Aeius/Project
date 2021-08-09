@@ -103,7 +103,7 @@
                              
                              <c:set var="review_image2" value="${reviewList.review_image2 }"></c:set>
 		                    <c:if test="${empty review_image2}">
-		                      <img class="media-object" src='<c:url value="/resources/img/no_image.jpg }" />'>
+		                      <img class="media-object" src='<c:url value="/resources/img/no_image.jpg" />'>
 		                    </c:if>
                             </a>
                           </div>

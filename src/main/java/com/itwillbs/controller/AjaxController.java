@@ -274,7 +274,7 @@ public class AjaxController {
        Random random = new Random();
        checkNum = random.nextInt(88888)+11111;
        StringBuffer buffer = new StringBuffer();
-       String confirmNum = buffer.append(checkNum).toString();
+       String confirmNum = buffer.append(checkNum).toString(); // int값인 checkNum을 String 값으로 저장
        System.out.println(confirmNum);
        
        String setfrom = "javateamproject2021@gmail.com";

@@ -19,6 +19,18 @@
 
 	<!-- 별점 css -->
 	<link href='<c:url value="/resources/css/star-rating.css" />' rel="stylesheet" type="text/css">
+	<%-- <script src='<c:url value="/resources/script/jquery-3.6.0.js" />'></script> --%>
+<!-- <script type="text/javascript"> -->
+<!-- // $(document).ready(function() { -->
+<!-- // 	$('.star-rating label').click(function(){ -->
+<!-- // 		  $(this).parent().children('label').removeClass('on'); -->
+<!-- // 		  $(this).addClass('on').prevAll('label').addClass('on'); -->
+<!-- // 		  var reveiw_star = $(this).attr("value"); -->
+<!-- // 		  alert(review_star); -->
+<!-- // 		  return false; -->
+<!-- // 		}); -->
+<!-- // }); -->
+<!-- </script> -->
 	
   </head>
   <body> 
@@ -59,19 +71,7 @@
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
   
-  
-  <!-- catg header banner section -->
-  <section id="aa-catg-head-banner">
-    <img src="../img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
-    <div class="aa-catg-head-banner-area">
-     <div class="container">
-      <div class="aa-catg-head-banner-content">
-        <h2>Account Page</h2>
-      </div>
-     </div>
-   </div>
-  </section>
-  <!-- / catg header banner section -->
+
 
  <!-- Cart view section -->
  <section id="aa-myaccount">
@@ -86,83 +86,76 @@
                  
                  <form action='<c:url value="reviewUpdatePro.sh" />' id="fr" class="aa-login-form" method="post" enctype="multipart/form-data">
                  	<input type="hidden" name="review_idx" value="${reviewBean.review_idx}">
-	  				
+	  				<%-- 	  				<input type="text" name="review_start" value="${reviewBean.review_star}"> --%>
                    <label for="name">평점</label>
                    
                    <div class="star-rating">
                    <c:set var ="review_star" value="${ reviewBean.review_star }"></c:set>
                               <c:if test="${review_star eq 5}"> 
-							  <input type="radio" id="5-stars" name="review_star" value="5" checked="checked"/>
-							  <label for="5-stars" class="star">&#9733;</label>
-							  <input type="radio" id="4-stars" name="review_star" value="4" checked="checked"/>
+							  <input type="checkbox" id="5-stars" name="review_star" value="5" checked="checked"/>
+							  <label for="5-stars" class="star on">&#9733;</label>
+							  <input type="checkbox" id="4-stars" name="review_star" value="4" checked="checked"/>
 							  <label for="4-stars" class="star">&#9733;</label>
-							  <input type="radio" id="3-stars" name="review_star" value="3" checked="checked"/>
+							  <input type="checkbox" id="3-stars" name="review_star" value="3" checked="checked"/>
 							  <label for="3-stars" class="star">&#9733;</label>
-							  <input type="radio" id="2-stars" name="review_star" value="2" checked="checked" />
+							  <input type="checkbox" id="2-stars" name="review_star" value="2" checked="checked" />
 							  <label for="2-stars" class="star">&#9733;</label>
-							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
+							  <input type="checkbox" id="1-star" name="review_star" value="1" checked="checked" />
 							  <label for="1-star" class="star">&#9733;</label>
 							  </c:if>
 							  
 							  <c:if test="${review_star eq 4}"> 
-							  <input type="radio" id="4-stars" name="review_star" value="4" checked="checked"/>
+							  <input type="checkbox" id="5-stars" name="review_star" value="5" checked="checked"/>
+							  <label for="5-stars" class="star">&#9733;</label>
+							  <input type="checkbox" id="4-stars" name="review_star" value="4" checked="checked"/>
 							  <label for="4-stars" class="star">&#9733;</label>
-							  <input type="radio" id="3-stars" name="review_star" value="3" checked="checked"/>
+							  <input type="checkbox" id="3-stars" name="review_star" value="3" checked="checked"/>
 							  <label for="3-stars" class="star">&#9733;</label>
-							  <input type="radio" id="2-stars" name="review_star" value="2" checked="checked" />
+							  <input type="checkbox" id="2-stars" name="review_star" value="2" checked="checked" />
 							  <label for="2-stars" class="star">&#9733;</label>
-							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
+							  <input type="checkbox" id="1-star" name="review_star" value="1" checked="checked" />
 							  <label for="1-star" class="star">&#9733;</label>
 							  </c:if>
 							 
 							   <c:if test="${review_star eq 3}"> 
-							  <input type="radio" id="3-stars" name="review_star" value="3" checked="checked"/>
+							  <input type="checkbox" id="5-stars" name="review_star" value="5" checked="checked"/>
+							  <label for="5-stars" class="star">&#9733;</label>
+							  <input type="checkbox" id="4-stars" name="review_star" value="4" checked="checked"/>
+							  <label for="4-stars" class="star">&#9733;</label>
+							  <input type="checkbox" id="3-stars" name="review_star" value="3" checked="checked"/>
 							  <label for="3-stars" class="star">&#9733;</label>
-							  <input type="radio" id="2-stars" name="review_star" value="2" checked="checked" />
+							  <input type="checkbox" id="2-stars" name="review_star" value="2" checked="checked" />
 							  <label for="2-stars" class="star">&#9733;</label>
-							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
+							  <input type="checkbox" id="1-star" name="review_star" value="1" checked="checked" />
 							  <label for="1-star" class="star">&#9733;</label>
 							   </c:if>
 							   
 							   <c:if test="${review_star eq 2}">
-							  <input type="radio" id="2-stars" name="review_star" value="2" checked="checked" />
+							  <input type="checkbox" id="5-stars" name="review_star" value="5" checked="checked"/>
+							  <label for="5-stars" class="star">&#9733;</label>
+							  <input type="checkbox" id="4-stars" name="review_star" value="4" checked="checked"/>
+							  <label for="4-stars" class="star">&#9733;</label>
+							  <input type="checkbox" id="3-stars" name="review_star" value="3" checked="checked"/>
+							  <label for="3-stars" class="star">&#9733;</label>
+							  <input type="checkbox" id="2-stars" name="review_star" value="2" checked="checked" />
 							  <label for="2-stars" class="star">&#9733;</label>
-							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
+							  <input type="checkbox" id="1-star" name="review_star" value="1" checked="checked" />
 							  <label for="1-star" class="star">&#9733;</label>
 							   </c:if>
 							   
 							  <c:if test="${review_star eq 1}">
-							  <input type="radio" id="1-star" name="review_star" value="1" checked="checked" />
+							  <input type="checkbox" id="5-stars" name="review_star" value="5" checked="checked"/>
+							  <label for="5-stars" class="star">&#9733;</label>
+							  <input type="checkbox" id="4-stars" name="review_star" value="4" checked="checked"/>
+							  <label for="4-stars" class="star">&#9733;</label>
+							  <input type="checkbox" id="3-stars" name="review_star" value="3" checked="checked"/>
+							  <label for="3-stars" class="star">&#9733;</label>
+							  <input type="checkbox" id="2-stars" name="review_star" value="2" checked="checked" />
+							  <label for="2-stars" class="star">&#9733;</label>
+							  <input type="checkbox" id="1-star" name="review_star" value="1" checked="checked" />
 							  <label for="1-star" class="star">&#9733;</label>
 							  </c:if>
 
-<%--   							<c:set var ="review_star" value="${ reviewBean.review_star }"></c:set> --%>
-<%--                             <c:if test="${review_star eq 1}"> --%>
-<!-- 							  <label for="5-stars" class="star">&#9733;</label> -->
-<!-- 							  <label for="4-stars" class="star">&#9733;</label> -->
-<!-- 							  <label for="3-stars" class="star">&#9733;</label> -->
-<!-- 							  <label for="2-stars" class="star">&#9733;</label> -->
-<!-- 							  <input type="radio" id="1-star" name="review_star" value="1"/> -->
-<%-- 						   </c:if> --%>
-						   
-<%-- 						    <c:if test="${review_star eq 2}"> --%>
-							
-<!-- 							  <label for="4-stars" class="star">&#9733;</label> -->
-<!-- 							  <label for="3-stars" class="star">&#9733;</label> -->
-<!-- 							  <label for="2-stars" class="star">&#9733;</label> -->
-<!-- 							   <input type="radio" id="2-star" name="review_star" value="2"/> -->
-<%-- 						   </c:if> --%>
-<%-- 						    <c:if test="${review_star eq 3}"> --%>
-<!-- 							  <label for="5-stars" class="star">&#9733;</label> -->
-<!-- 							  <label for="4-stars" class="star">&#9733;</label> -->
-<!-- 							  <input type="radio" id="3-star" name="review_star" value="3"/> -->
-							  
-<%-- 						   </c:if> --%>
-
-<%-- 						   <c:if test="${review_star eq 4}"> --%>
-<!-- 							  <label for="5-stars" class="star">&#9733;</label> -->
-<!-- 						      <input type="radio" id="4-star" name="review_star" value="4"/> -->
-<%-- 						   </c:if> --%>
 							  
 					     <c:forEach var="review_star" items="${ratingOptions}" varStatus="status" begin="1" end="${reviewBean.review_star}">
 
@@ -186,8 +179,7 @@
                      <!-- 다중 파일 업로드시 multiple="multiple" 추가 / name="file" 이어야함 accept : 확장자명 지정 -->
                      <input multiple="multiple" type="file" class="form-control" id="review_image" name="file" value="${reviewBean.review_image }" accept=".jpg,.jpeg,.png,.gif"> ${reviewBean.review_image }
                 	 <input multiple="multiple" type="file" class="form-control" id="review_image2" name="file" value="${reviewBean.review_image2 }" accept=".jpg,.jpeg,.png,.gif">${reviewBean.review_image2 }
-<%--                      <input type="hidden" name="oldfile" value="${reviewBean.review_image }"> ${reviewBean.review_image } --%>
-<%--                      <input type="hideen" name="oldfile1" value="${reviewBean.review_image2 }"> ${reviewBean.review_image2 } --%>
+                	 
                     <button type="submit" id="review_insertBtn" class="aa-browse-btn">리뷰수정</button>
                             
                   </form>
