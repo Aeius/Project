@@ -26,6 +26,7 @@
 											<!-- 50MB = 1024*1024*50 = 52428800 -->
 		<beans:property name="maxUploadSize" value="52428800"></beans:property>
 	</beans:bean>
+	
 		<!-- upload 폴더 위치 설정 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="C:\\Users\\ITWILL\\git\\Project\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg>

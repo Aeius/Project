@@ -68,12 +68,10 @@ function execDaumPostcode() {
 
 function checkPhoneNum(member_phone) { // 휴대폰번호 검증
 	/*
-	 * 전화번호 검증에 사용할 정규표현식 작성
-	 * 1) 010 또는 011 로 시작
-	 * 2) 전화번호 사이는 - 기호 또는 공백이 포함될 수도 있고 포함되지 않을 수도 있음
-	 * 3) 두번째 자리는 3자리 또는 4자리 숫자
-	 * 4) 마지막 자리는 4자리 숫자로 끝
-	 */
+     * 전화번호 검증에 사용할 정규표현식 작성
+     * 1) 010 또는 011 로 시작
+     * 2) 0~9 숫자만 가능하며 11자리 까지 작성가능
+     */
 	var phoneRegex = /^(010|011)[0-9]{1,10}$/;
 	var regex = new RegExp(phoneRegex);
 
@@ -147,7 +145,7 @@ function checkPhoneNum(member_phone) { // 휴대폰번호 검증
                     <label for="">이름</label>
                     <input type="text" placeholder="이름" value="${member.member_name}" name="member_name"style="width: 60%;" required>
                     <label for="">전화번호</label>
-                    <input type="text" placeholder="000-0000-0000" value="${member.member_phone}" id="member_phone" name="member_phone"style="width: 60%;" maxlength="11" onblur="checkPhoneNum(this.value)" required>
+                    <input type="text" placeholder="01012345678" value="${member.member_phone}" id="member_phone" name="member_phone"style="width: 60%;" maxlength="11" onblur="checkPhoneNum(this.value)" required>
                     <div id="phoneNull" style="font-size: 14px; width: 60%"></div>
                     <label for="">주소</label>
                     <input type="text" id="member_post" name ="member_post" placeholder="우편번호" value="${member.member_post}" style="width: 15%;margin-right: 4px;" required>
