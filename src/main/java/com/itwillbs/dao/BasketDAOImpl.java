@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.BasketBean;
+import com.itwillbs.domain.MemberBean;
 
 @Repository
 public class BasketDAOImpl implements BasketDAO	{
@@ -56,6 +57,12 @@ public class BasketDAOImpl implements BasketDAO	{
 	@Override
 	public int updateBasketQuantity(BasketBean basketBean) {
 		return sqlSession.update(namespace + ".updateBasketQuantity", basketBean);
+	}
+
+	@Override
+	public void deleteBasketList(MemberBean memberBean) {
+		sqlSession.delete(namespace + ".deleteBasketList" , memberBean);
+		
 	}
 	
 	

@@ -3,6 +3,7 @@ package com.itwillbs.dao;
 import java.util.List;
 
 import com.itwillbs.domain.BasketBean;
+import com.itwillbs.domain.MemberBean;
 
 public interface BasketDAO {
 	
@@ -17,6 +18,8 @@ public interface BasketDAO {
 	public int deleteBasket(String member_email, String product_idx);
 
 	public int updateBasketQuantity(BasketBean basketBean);
+
+	public void deleteBasketList(MemberBean memberBean);
 
 
 }

@@ -11,6 +11,7 @@ import com.itwillbs.dao.BasketDAO;
 import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.domain.BasketBean;
 import com.itwillbs.domain.CouponBean;
+import com.itwillbs.domain.MemberBean;
 
 @Service
 public class BasketServiceImpl implements BasketService {
@@ -86,6 +87,11 @@ public class BasketServiceImpl implements BasketService {
 		}
 		
 		return couponInfoList;
+	}
+
+	@Override
+	public void deleteBasketList(MemberBean memberBean) {
+		basketDAO.deleteBasketList(memberBean);
 	}
 	
 	

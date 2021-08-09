@@ -205,7 +205,7 @@ public class PayController {
 			
 		}
 		// 쿠폰 사용 처리
-		if((request.getParameter("selectedCoupon_idx")) != ""){
+		if((request.getParameter("selectedCoupon_idx")) != "") {
 			CouponBean couponBean = new CouponBean();
 			couponBean.setCoupon_email(member_email);
 			couponBean.setCoupon_idx(Integer.parseInt(request.getParameter("selectedCoupon_idx")));
@@ -241,6 +241,11 @@ public class PayController {
 			memberBean.setMember_point(Integer.parseInt(request.getParameter("point")));
 			memberService.usePoint(memberBean); // 포인트 사용 처리
 			System.out.println("사용한 포인트 : " + memberBean.getMember_point());
+		}
+		
+		// 장바구니 비우기
+		if(products.length > 1) { // 단일 상품 구매가 아닐 경우에만
+			basketService.deleteBasketList(memberBean);
 		}
 		
 		model.addAttribute("order_idx", order_idx);

@@ -81,7 +81,7 @@
 	
 // -------------------------------- 포인트 적용 --------------------------------
 		// 포인트 입력 시
-		$('#point').keyup(function() {
+		$('#point').on('change',function() {
 			
 			// 쿠폰 할인 금액 가져오기
 			var coupon_value = $('#coupon').val();
@@ -175,18 +175,18 @@
 		    buyer_postcode : document.getElementById('member_post').value
 		    //m_redirect_url : 'http://localhost:8080/myweb2/kakaoPaymove.sh'
       }, function (rsp) { // callback
-    	  alert('결제 진행됨 데이터 전달');
+//     	  alert('결제 진행됨 데이터 전달');
     	  console.log(rsp);
 		    if ( rsp.success ) {
 		    	 
 		        document.getElementById('order_idx').value = new Date().getTime();
 		        document.getElementById('payAmount').value = rsp.paid_amount;
 		        
-		    	var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
+// 		    	var msg = '결제가 완료되었습니다.';
+// 		        msg += '고유ID : ' + rsp.imp_uid;
+// 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+// 		        msg += '결제 금액 : ' + rsp.paid_amount;
+// 		        msg += '카드 승인번호 : ' + rsp.apply_num;
 		        
 			    payFinish.submit();
 		    } else {
@@ -194,7 +194,7 @@
 		         msg += '에러내용 : ' + rsp.error_msg;
 		    }
 		    
-		    alert(msg);
+// 		    alert(msg);
 		});
 	}
     

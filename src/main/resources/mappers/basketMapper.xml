@@ -31,6 +31,9 @@
 	 	update basket set basket_quantity = #{basket_quantity} where basket_email=#{basket_email} and basket_product_idx=#{basket_product_idx}
 	 </update>
   
+  	<delete id="deleteBasketList">
+  		DELETE FROM basket WHERE basket_email = '${member_email}'
+  	</delete>
 
 </mapper>
 

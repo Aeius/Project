@@ -58,6 +58,7 @@
 		  $('#basket_quantity').val(quan);
 	  });
 	  
+	  
  	});
   </script>
     
@@ -65,6 +66,10 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('#intoCart').click(function() {
+			if($('#product_stock').val() == 0){
+				alert('재고가 부족합니다!');
+				return;
+			}
 			$.ajax('<c:url value="/checkSession.sh"/>', {
 				data:{member_email:$('#member_email').val()},
 				success:function(rdata){
@@ -97,6 +102,13 @@
 				}
 			});
 		});
+	  $('#buyNowBtn').click(function(){
+		  if($('#product_stock').val() == 0){
+				alert('재고가 부족합니다!');
+				return;
+			}
+		  $('#buyNow').submit();
+	  });
 	});
 </script>
   </head>
@@ -188,9 +200,10 @@
             		<input type="hidden" id="product_price" name="product_price" value="${productBean.product_price }" >
             		<input type="hidden" id="product_name" name="product_name" value="${productBean.product_name}" >
             		<input type="hidden" id="basket_quantity" name="basket_quantity" value="1" >
+            		<input type="hidden" id="product_stock" name="product_stock" value="${productBean.product_stock}" >
             		</form>
                     <div class="aa-prod-view-bottom">
-                      <input class="aa-add-to-cart-btn" value="바로구매" type="submit" form="buyNow">
+                      <a class="aa-add-to-cart-btn" href="#" id="buyNowBtn">바로구매</a>
                       <a class="aa-add-to-cart-btn" href="#" id="intoCart">장바구니 담기</a>
 <!--                       <a class="aa-add-to-cart-btn" href="#">장바구니 담기</a> -->
 <!--                       <input type="button" class="aa-add-to-cart-btn" value="" name="wishlistbtn" id="wishlistbtn"> -->
