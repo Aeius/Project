@@ -54,9 +54,9 @@
                   <div class="aa-footer-widget">
                     <h3>Contact Us</h3>
                     <address>
-                      <p> 25 Astor Pl, NY 10003, USA</p>
-                      <p><span class="fa fa-phone"></span>+1 212-982-4589</p>
-                      <p><span class="fa fa-envelope"></span>dailyshop@gmail.com</p>
+                      <p>109, Dongcheon-ro, Busanjin-gu, Busan, Republic of Korea</p>
+                      <p><span class="fa fa-phone"></span>+81 051.803.0909</p>
+                      <p><span class="fa fa-envelope"></span>javateamproject2021@gmail.com</p>
                     </address>
                     <div class="aa-footer-social">
                       <a href="#"><span class="fa fa-facebook"></span></a>
