@@ -106,7 +106,7 @@ public class NoticeController {
 		
 		model.addAttribute("nbList",nbList);
 		model.addAttribute("pb",pb);
-		model.addAttribute("member",memberBean);
+//		model.addAttribute("member",memberBean);
 		
 		
 		
