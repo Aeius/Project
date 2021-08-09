@@ -5,7 +5,7 @@
 <mapper namespace="com.itwillbs.mapper.OrderMapper">
 
 	<select id="getOrderAllList" resultType="com.itwillbs.domain.OrderBean">
-		select * from orderlist
+		select * from orderlist order by order_date desc;
 	</select>	
 	
 	<select id="getOrderInfo" resultType="com.itwillbs.domain.OrderBean">

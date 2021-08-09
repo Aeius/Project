@@ -85,7 +85,9 @@
     <!-- page script -->
     <script type="text/javascript">
       $(function () {
-        $("#example1").dataTable();
+        $("#example1").dataTable({
+        	"bSort": false
+        });
         $('#example2').dataTable({
           "bPaginate": true,
           "bLengthChange": false,
