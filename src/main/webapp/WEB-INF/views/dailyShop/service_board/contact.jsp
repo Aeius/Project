@@ -197,14 +197,15 @@
 									<div class="tab-pane fade in active" id="QNA">
 										<ul class="aa-product-catg">
 											<!-- ---------------------------------------------start single product item --------------------------------------------------------->
-											<div class="container">
+											<div class="container" content-ali>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="aa-contact-area">
 					<div class="aa-contact-top">
 
 						<h2>1:1 문의</h2>
-						<p>- 아래 사항을 입력하시어 문의해주시면 확인 후 메일로 답변드립니다.</p>
+							<p>고객님의 궁금하신 문의사항에 대하여 1:1 맞춤상담 내용을 보내실 수 있습니다.</p>
+										
 					</div>
 					<div class="aa-contact-address">
 						<div class="row">
@@ -245,18 +246,16 @@
 							<div class="col-md-4">
 								<div class="aa-contact-address-right">
 									<address>
-										<h4>DailyShop</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-											elit. Rerum modi dolor facilis! Nihil error, eius.</p>
+										<h4>PerfumeShip</h4>
 										<p>
-											<span class="fa fa-home"></span>Huntsville, AL 35813, USA
+											<span class="fa fa-home"></span>109, Dongcheon-ro, Busanjin-gu, Busan, Republic of Korea
 										</p>
 										<p>
-											<span class="fa fa-phone"></span>+ 021.343.7575
+											<span class="fa fa-phone"></span>+82 051.803.0909
 										</p>
 										<p>
 											<span class="fa fa-envelope"></span>Email:
-											support@dailyshop.com
+											javateamproject2021@gmail.com
 										</p>
 									</address>
 								</div>
