@@ -50,7 +50,7 @@
               <h3 class="box-title">결제 정보</h3>
             </div>
             <div class="box-body">
-              사용한 쿠폰 : ${orderBean.order_coupon }
+              사용한 쿠폰 : ${couponBean.coupon_name } - ${couponBean.coupon_price }원 할인
             </div>
             <div class="box-body">
               사용한 포인트 : ${orderBean.order_point }

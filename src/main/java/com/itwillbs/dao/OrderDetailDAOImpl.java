@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.OrderDetailBean;
 
 @Repository
@@ -25,6 +26,11 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
 	@Override
 	public void insertOrderDetail(OrderDetailBean orderDetailBean) {
 		sqlSession.insert(namespace + ".insertOrderDetail", orderDetailBean);
+	}
+
+	@Override
+	public CouponBean getCouponInfo(int coupon_idx) {
+		return sqlSession.selectOne(namespace + ".getCouponInfo", coupon_idx);
 	}
 
 }

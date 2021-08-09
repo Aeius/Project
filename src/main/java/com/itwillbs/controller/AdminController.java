@@ -64,9 +64,6 @@ public class AdminController {
 	@Inject
 	private FaqBoardService faqBoardService;
 
-	@Inject
-	private CategoryService categoryService;
-
 	@Resource(name = "uploadPath") // => servlet-context.xml 에 업로드 폴더 경로 지정된거 불러옴
 	private String uploadPath; // 파일 업로드 경로
 
@@ -267,20 +264,29 @@ public class AdminController {
 			int order_idx = Integer.parseInt(request.getParameter("order_idx"));
 
 			OrderBean orderBean = orderService.getOrderInfo(order_idx); // orderBean에 주문 정보 받아오기
-
+//			System.out.println(orderBean.getOrder_coupon()); 
+			int coupon_idx = orderBean.getOrder_coupon(); // 쿠폰 미사용시 0, 사용시 쿠폰idx 리턴
+			CouponBean couponBean = new CouponBean();
+			if(coupon_idx != 0) { // 쿠폰 사용 -> 이름 받아오기
+				couponBean = orderDetailService.getCouponInfo(coupon_idx);
+			} else {  // 쿠폰 미사용 
+				couponBean.setCoupon_name("사용 안함"); // 쿠폰 이름 설정
+				couponBean.setCoupon_price(0); // 쿠폰 할인액 설정
+			}
+			
 			// OrderDetailBean에 주문번호, 상품번호, 개수 받아오기 (같은 주문번호에 여러 상품 주문 가능 -> 리스트 사용)
 			ArrayList<OrderDetailBean> orderProductList = orderDetailService.getOrderProductList(order_idx);
 
 			ArrayList<ProductBean> orderProductInfo = new ArrayList<ProductBean>(); // 상품번호를 통해 해당 상품 정보를 가져옴
 			for (OrderDetailBean bean : orderProductList) {
-				ProductBean productBean = productService.getProductInfoAdmin(bean.getOrder_detail_product_idx()); // 상품 정보
-																												// 받아오기
+				ProductBean productBean = productService.getProductInfoAdmin(bean.getOrder_detail_product_idx()); // 상품 정보 받아오기
 				orderProductInfo.add(productBean); // 리스트에 추가
 			}
 
 			model.addAttribute("orderBean", orderBean);
 			model.addAttribute("orderProductList", orderProductList);
 			model.addAttribute("orderProductInfo", orderProductInfo);
+			model.addAttribute("couponBean", couponBean);
 
 			return "/AdminLTE-master/pages/orderDetail";
 

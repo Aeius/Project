@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.dao.OrderDetailDAO;
+import com.itwillbs.domain.CouponBean;
 import com.itwillbs.domain.OrderDetailBean;
 
 @Service
@@ -25,4 +26,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		orderDetailDAO.insertOrderDetail(orderDetailBean);
 	}
 
+	@Override
+	public CouponBean getCouponInfo(int coupon_idx) {
+		return orderDetailDAO.getCouponInfo(coupon_idx);
+	}
+	
 }

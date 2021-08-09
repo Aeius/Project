@@ -18,5 +18,8 @@
 		)
 	</insert>
 	
+	<select id="getCouponInfo" resultType="com.itwillbs.domain.CouponBean">
+		select * from coupon where coupon_idx=#{coupon_idx}
+	</select>
 	
 </mapper>
