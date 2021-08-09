@@ -5,19 +5,190 @@
 <mapper namespace="com.itwillbs.mapper.ProductMapper">
 
   <select id="getProductAllList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product
+  	select * from product where product_status = 1
   </select>
   
-  <select id="getProductSitrusList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category='시트러스'
+  <!-- 30ml -->
+  <select id="getProductAllList30" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_size=30 and product_status = 1
+  </select>
+  
+  <select id="getProductPowderyList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like'%파우더리%' AND product_size=30 and product_status = 1
+  </select>
+  
+  <select id="getProductFloralList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like '%플로럴%' AND product_size=30 and product_status = 1
+  </select>
+  
+  <select id="getProductWoodyList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like'%우디%' AND product_size=30 and product_status = 1
   </select>
   
   <select id="getProductAquaList" resultType="com.itwillbs.domain.ProductBean">
-  	select * from product where product_category='아쿠아'
+  	select * from product where product_category like '%아쿠아%' AND product_size=30 and product_status = 1
   </select>
   
-  <select id="getProductDetail" parameterType="int" resultType="com.itwillbs.domain.ProductBean">
+  <select id="getProductFruityList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like'%프루티%' AND product_size=30 and product_status = 1
+  </select>
+  
+  <select id="getProductSitrusList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like '%시트러스%' AND product_size=30 and product_status = 1
+  </select>
+  
+  <select id="getProductSpicesList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like'%스파이시%' AND product_size=30 and product_status = 1
+  </select>
+  
+  <select id="getProductModernList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like '%모던%' AND product_size=30 and product_status = 1
+  </select>
+  
+  <!-- 50ml -->
+  <select id="getProductAllList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_size=50 and product_status = 1
+  </select>
+  
+  <select id="getProductPowderyList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like'%파우더리%' AND product_size=50 and product_status = 1
+  </select>
+  
+  <select id="getProductFloralList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like '%플로럴%' AND product_size=50 and product_status = 1
+  </select>
+  
+  <select id="getProductWoodyList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like'%우디%' AND product_size=50 and product_status = 1
+  </select>
+  
+  <select id="getProductAquaList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like '%아쿠아%' AND product_size=50 and product_status = 1
+  </select>
+  
+  <select id="getProductFruityList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like'%프루티%' AND product_size=50 and product_status = 1
+  </select>
+  
+  <select id="getProductSitrusList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like '%시트러스%' AND product_size=50 and product_status = 1
+  </select>
+  
+  <select id="getProductSpicesList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like'%스파이시%' AND product_size=50 and product_status = 1
+  </select> 
+  
+  <select id="getProductModernList50" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_category like '%모던%' AND product_size=50 and product_status = 1
+  </select>
+  
+  <!-- 베스트 -->
+  <select id="getProductBestList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product  where product_status = 1 order by product_sellcount desc limit 0,8
+  </select>
+  
+  <!-- 검색 -->
+  <select id="getProductSearchList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_name like CONCAT('%', #{search}, '%') and product_status = 1
+  </select>
+  
+  <!-- 상세페이지 -->
+  <select id="getProductInfo" parameterType="int" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product where product_idx= #{product_idx} and product_status = 1
+  </select>
+  
+  <select id="getProductInfoAdmin" resultType="com.itwillbs.domain.ProductBean">
   	select * from product where product_idx= #{product_idx}
   </select>
+  
+  <insert id="insertProduct">
+  	insert into product(
+		product_name,
+		product_category,
+		product_detail,
+		product_main_image,
+		product_detail_image,
+		product_price,
+		product_size,
+		product_stock
+	)
+		values(
+		#{product_name},
+		#{product_category},
+		#{product_detail},
+		#{product_main_image},
+		#{product_detail_image},
+		#{product_price},
+		#{product_size},
+		#{product_stock}
+	)
+  </insert>
+  
+  <update id="setStatusRelease">
+  	update product set product_status=true where product_idx=#{product_idx}
+  </update>
+  
+  <update id="setStatusDiscontinue">
+ 	 update product set product_status=false where product_idx=#{product_idx}
+  </update>
+  
+  <update id="updateProduct">
+  	update product set 
+	  	product_name=#{product_name},
+	  	product_detail=#{product_detail},
+	  	product_price=#{product_price},
+	  	product_size=#{product_size},
+	  	product_stock=#{product_stock},
+	  	product_category=#{product_category},
+	  	product_main_image=#{product_main_image},
+	  	product_detail_image=#{product_detail_image}
+  	where product_idx=#{product_idx}
+  </update>
+  
+  <select id="getBarList" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product order by product_sellcount desc limit 0,5
+  </select>
+  
+  <select id="getLineList" resultType="com.itwillbs.domain.ChartBean">
+	select *
+	from (
+		select ds order_date, ifnull(sum(ol.order_amount),0) order_amount
+	    from dummy_date t left join orderlist ol 
+	    on (ol.order_date = t.ds)
+	    group by ds
+	) tt
+	where order_date between date_add(now(), INTERVAL -1 WEEK) AND NOW()
+  </select>
+	
+  <select id="getDonutList" resultType="com.itwillbs.domain.CategoryBean">
+  	select cg.category_name category_name, count(*) category_count
+	from product 
+	join category cg
+	where product_category like concat('%',cg.category_name,'%')
+		  and product_status=1
+	group by cg.category_name
+  </select>  
+  
+  <select id="getRecoList" resultType="com.itwillbs.domain.RecoBean">
+  	select * from recochart
+  </select>  
+  
+  <select id="getProductName" resultType="java.lang.Integer">
+    select count(*) from product
+	where replace(product_name,' ','')=#{product_name}
+  </select>
+  
+  <update id="updateSellcount">
+  	update product set product_sellcount = product_sellcount + 1 where product_idx = #{product_idx}
+  
+  </update>
+  
+  <select id="getProductAllListAdmin" resultType="com.itwillbs.domain.ProductBean">
+  	select * from product
+  </select>
+  
+  <update id="updateStock">
+  	update product set product_stock = product_stock - ${order_detail_product_quantity} where product_idx = ${order_detail_product_idx} 
+  </update>
   
 </mapper>

@@ -10,6 +10,7 @@
 	wishList_product_idx,
 	product_name,
 	product_price,
+	product_main_image,
 	product_stock
 	
 	FROM wishList, product
@@ -36,6 +37,22 @@
   
   <select id="checkWishList"  resultType="com.itwillbs.domain.WishListBean">
   	SELECT COUNT(*) as wishListCount FROM wishlist WHERE wishList_product_idx=#{product_idx} AND wishList_member_email=#{wishList_member_email}
+  </select>
+  
+  <select id="checkWishCount" resultType="com.itwillbs.domain.ProductBean">
+  	SELECT product_likecount from product where product_idx = #{product_idx}
+  </select>
+  
+  <select id="checkHeart" resultType="com.itwillbs.domain.WishListBean">
+	SELECT
+		wishlist_member_email,
+		wishlist_product_idx
+  	FROM
+		wishlist, member
+	WHERE
+		wishlist_member_email = member_email
+	AND
+		wishlist_member_email = #{member_email}
   </select>
   
 </mapper>

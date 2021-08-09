@@ -10,6 +10,19 @@
    <select id="getNoticeList" resultType="com.itwillbs.domain.NoticeBean">
   	select * from notice
   </select>
+  
+    <select id="getNoticeDetail" resultType="com.itwillbs.domain.NoticeBean">
+  	select * from notice where notice_idx=#{notice_idx}
+  </select>
+  
+<!--   작업중(notice list) -->
+   <select id="getNoticeList2" resultType="com.itwillbs.domain.NoticeBean">
+  	select * from notice order by notice_idx desc limit #{startRow},#{pageSize}
+  </select>
+  
+  <select id="getNoticeCount" resultType="java.lang.Integer">
+  	select count(*) from notice
+  </select>
 
 <!--   Notice 글쓰기 (관리자권한있어야함) -->
 <!--   <insert id="insertNotice"> -->
