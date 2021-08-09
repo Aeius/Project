@@ -28,7 +28,7 @@
 	</beans:bean>
 		<!-- upload 폴더 위치 설정 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\Users\ITWILL\git\Project\src\main\webapp\resources\upload"></beans:constructor-arg>
+		<beans:constructor-arg value="C:\\Users\\ITWILL\\git\\Project\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg>
 	</beans:bean>
 	
 	<context:component-scan base-package="com.itwillbs.myweb2" />

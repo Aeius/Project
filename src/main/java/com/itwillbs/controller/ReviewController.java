@@ -118,6 +118,18 @@ public class ReviewController {
 		
 		System.out.println(review_idx);
 		ReviewBean reviewBean = reviewService.getReview(review_idx);
+		// 평점 별 개수 map에 저장해서 가져가는 부분
+		Map ratingOptions = new HashMap();
+		ratingOptions.put(0, "☆☆☆☆☆");
+		ratingOptions.put(1, "★☆☆☆☆");
+		ratingOptions.put(2, "★★☆☆☆");
+		ratingOptions.put(3, "★★★☆☆");
+		ratingOptions.put(4, "★★★★☆");
+		ratingOptions.put(5, "★★★★★");
+
+		//Model 데이터 담아 가기
+		// 평점 별모양 정보 가져가기
+		model.addAttribute("ratingOptions", ratingOptions);
 
 		System.out.println(reviewBean.getReview_star());
 		model.addAttribute("reviewBean", reviewBean);

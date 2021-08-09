@@ -19,9 +19,9 @@
   cursor:pointer;
 }
 
-/* .star-rating :checked ~ label { */
-/*   color:#f90; */
-/* } */
+.star-rating :checked ~ label {
+  color:#f90;
+}
 
 .star-rating label:hover,
 .star-rating label:hover ~ label {

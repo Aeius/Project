@@ -84,9 +84,8 @@
 					                        <td>작성일</td><td><fmt:formatDate value="${noticeBean.notice_date}" type="both" pattern="yyyy.MM.dd"/></td>
 					                       </tr>
 					                        <tr>
-					                        <td >내용</td><td colspan="7">${noticeBean.notice_content}</td>
+					                        <td height="400">내용</td><td colspan="7" width="200" height="400">${noticeBean.notice_content}</td>
 					                        </tr>
-					                      
 					                    </thead>
 
 					                    <!-- 상품 목록 나열 -->

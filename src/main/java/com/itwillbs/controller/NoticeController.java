@@ -69,16 +69,16 @@ public class NoticeController {
 // ------------------------------ 상단 메뉴 모음 ------------------------------
 	@RequestMapping(value = "/notice.sh", method = RequestMethod.GET)
 	public String NoticeList(HttpServletRequest request,HttpSession session, Model model, MemberBean memberBean) {
-		String member_email = (String)session.getAttribute("member_email");
-		memberBean = memberService.getMember(member_email);
+//		String member_email = (String)session.getAttribute("member_email");
+//		memberBean = memberService.getMember(member_email);
 		
-		if(memberBean == null) {
-			model.addAttribute("msg", "로그인 후 이용해주십시오.");
-			return "/dailyShop/service_board/msg";
-		}
+//		if(memberBean == null) {
+//			model.addAttribute("msg", "로그인 후 이용해주십시오.");
+//			return "/dailyShop/service_board/msg";
+//		}
 		
-		System.out.println("드디어 ㅠ"+memberBean);
-		session.setAttribute(member_email, memberBean.getMember_email());
+//		System.out.println("드디어 ㅠ"+memberBean);
+//		session.setAttribute(member_email, memberBean.getMember_email());
 		
 		
 		List<FaqBoardBean> fbb = faqBoardService.getFaqList();
