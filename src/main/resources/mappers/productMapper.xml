@@ -187,4 +187,8 @@
   	select * from product
   </select>
   
+  <update id="updateStock">
+  	update product set product_stock = product_stock - ${order_detail_product_quantity} where product_idx = ${order_detail_product_idx} 
+  </update>
+  
 </mapper>

@@ -166,7 +166,11 @@ public class PayController {
 		orderListBean.setOrder_receiver_address(request.getParameter("member_address"));
 		orderListBean.setOrder_receiver_extraAddress(request.getParameter("member_extraAddress"));
 		orderListBean.setOrder_receiver_extraAddress2(request.getParameter("member_extraAddress2"));
-		orderListBean.setOrder_coupon(Integer.parseInt(request.getParameter("selectedCoupon_idx")));
+		if((request.getParameter("selectedCoupon_idx")) == "") {
+			orderListBean.setOrder_coupon(0);
+		} else {
+			orderListBean.setOrder_coupon(Integer.parseInt(request.getParameter("selectedCoupon_idx")));
+		}
 		orderListBean.setOrder_point(request.getParameter("point"));
 		orderListBean.setOrder_amount(Integer.parseInt(request.getParameter("payAmount")));
 		orderListBean.setOrder_status("결제완료");
@@ -181,7 +185,6 @@ public class PayController {
 		String[] products = request.getParameterValues("product_idx"); // 상품 정보들 가져오기
 		String[] quantitys = request.getParameterValues("product_quantity"); // 선택한 상품들의 수량 가져오기
 		
-		
 		// 반복문을 통해 order_detail에 각 상품 등록
 		for(int i = 0; i < products.length; i++) {
 			OrderDetailBean orderDetailBean = new OrderDetailBean();
@@ -189,38 +192,45 @@ public class PayController {
 			orderDetailBean.setOrder_detail_product_idx(Integer.parseInt(products[i]));
 			orderDetailBean.setOrder_detail_product_quantity(Integer.parseInt(quantitys[i]));
 			orderDetailBean.setOrder_detail_return_check(" ");
+			System.out.println("product_idx : " + orderDetailBean.getOrder_detail_product_idx());
+			System.out.println("quantity : " + orderDetailBean.getOrder_detail_product_quantity());
 			
 			orderDetailService.insertOrderDetail(orderDetailBean); // orderdetail 추가 
 			System.out.println("insertOrderDetail - 수행완료");
 			productService.updateSellcount(products[i]); // sellcount 증가
 			System.out.println("updateSellcount - 수행완료");
+			productService.updateStock(orderDetailBean);
+			System.out.println("updateStock - 수행 완료");
 			
 			
 		}
-		CouponBean couponBean = new CouponBean();
-		couponBean.setCoupon_email(member_email);
-		couponBean.setCoupon_idx(Integer.parseInt(request.getParameter("selectedCoupon_idx")));
-		if(Integer.parseInt(request.getParameter("selectedCoupon_idx")) != 0) {  // 쿠폰 선택 여부 판별
-			memberService.updateCoupon(couponBean); // 쿠폰 사용 처리
-			// 쿠폰 사용후 출력되지 않게하기 위해서 member 테이블에 저장된 coupon 의 컬럼을 변경하는 작업
-			MemberBean memberBean = memberService.getMember(member_email);
-			String coupons = memberBean.getMember_coupon();
-			System.out.println("coupons 컬럼 내용 : " + coupons);
-			String[] arrCoupon = coupons.split("/");
-			coupons = ""; // coupons 초기화
-			for(int i = 0; i < arrCoupon.length; i++) { // 쿠폰들 조회
-				if(arrCoupon[i].equals(request.getParameter("selectedCoupon_idx")) ) { // 선택한 쿠폰의 경우
-					arrCoupon[i] = ""; // "" 널스트링으로 만들어버림
-					System.out.println("arrCoupon[i] 컬럼 내용 : " + arrCoupon[i]);
-				} else { // 사용한 쿠폰이 아닌 경우
-					coupons += arrCoupon[i] + "/";  // coupons에 다시 저장
-					System.out.println("coupons 컬럼 내용 : " + coupons.replaceAll("//", "/"));
+		// 쿠폰 사용 처리
+		if((request.getParameter("selectedCoupon_idx")) != ""){
+			CouponBean couponBean = new CouponBean();
+			couponBean.setCoupon_email(member_email);
+			couponBean.setCoupon_idx(Integer.parseInt(request.getParameter("selectedCoupon_idx")));
+			if(Integer.parseInt(request.getParameter("selectedCoupon_idx")) != 0) {  // 쿠폰 선택 여부 판별
+				memberService.updateCoupon(couponBean); // 쿠폰 사용 처리
+				// 쿠폰 사용후 출력되지 않게하기 위해서 member 테이블에 저장된 coupon 의 컬럼을 변경하는 작업
+				MemberBean memberBean = memberService.getMember(member_email);
+				String coupons = memberBean.getMember_coupon();
+				System.out.println("coupons 컬럼 내용 : " + coupons);
+				String[] arrCoupon = coupons.split("/");
+				coupons = ""; // coupons 초기화
+				for(int i = 0; i < arrCoupon.length; i++) { // 쿠폰들 조회
+					if(arrCoupon[i].equals(request.getParameter("selectedCoupon_idx")) ) { // 선택한 쿠폰의 경우
+						arrCoupon[i] = ""; // "" 널스트링으로 만들어버림
+						System.out.println("arrCoupon[i] 컬럼 내용 : " + arrCoupon[i]);
+					} else { // 사용한 쿠폰이 아닌 경우
+						coupons += arrCoupon[i] + "/";  // coupons에 다시 저장
+						System.out.println("coupons 컬럼 내용 : " + coupons.replaceAll("//", "/"));
+					}
 				}
+				memberBean.setMember_coupon(coupons.replaceAll("//", "/"));
+				memberService.updateMember(memberBean); // 삭제한 쿠폰을 제외한 나머지 쿠폰 목록을 저장
 			}
-			memberBean.setMember_coupon(coupons.replaceAll("//", "/"));
-			memberService.updateMember(memberBean); // 삭제한 쿠폰을 제외한 나머지 쿠폰 목록을 저장
 		}
-		
+		// 포인트 사용 및 적립
 		MemberBean memberBean = new MemberBean();
 		memberBean.setMember_email(member_email);
 		if(Integer.parseInt(request.getParameter("point")) == 0) { // 포인트를 사용하지 않을 경우

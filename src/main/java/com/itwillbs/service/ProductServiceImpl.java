@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.dao.ProductDAO;
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
+import com.itwillbs.domain.OrderDetailBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.RecoBean;
 
@@ -181,6 +182,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductBean getProductInfoAdmin(int product_idx) {
 		return productDAO.getProductInfoAdmin(product_idx);
+	}
+	@Override
+	public void updateStock(OrderDetailBean orderDetailBean) {
+		productDAO.updateStock(orderDetailBean);
+		
 	}
 
 	

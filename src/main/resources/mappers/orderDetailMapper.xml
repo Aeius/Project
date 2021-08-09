@@ -17,4 +17,6 @@
 		#{order_detail_return_check}
 		)
 	</insert>
+	
+	
 </mapper>

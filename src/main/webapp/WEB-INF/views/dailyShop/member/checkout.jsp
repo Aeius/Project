@@ -252,8 +252,8 @@
           <input type="hidden" id="order_idx" name="order_idx" value="">
           <input type="hidden" id="buyer_email" name="buyer_email" value="${member.member_email }">
           <input type="hidden" id="payAmount" name="payAmount"  value="" >
-          <input type="hidden" id="selectedCoupon_idx" name="selectedCoupon_idx" value="" >
-		  <input type="hidden" id="selectedCoupon_name" name="selectedCoupon_name" value="" >
+          <input type="hidden" id="selectedCoupon_idx" name="selectedCoupon_idx" value="0" >
+		  <input type="hidden" id="selectedCoupon_name" name="selectedCoupon_name" value="0" >
             <div class="row">
               <div class="col-md-8">
                 <div class="checkout-left">
@@ -349,7 +349,7 @@
                         <div class="panel-body">
 <!--                           <input type="text" placeholder="쿠폰 선택하기 (텍스트->셀렉트박스)" class="aa-coupon-code"> -->
                           <select name="coupon" class="aa-coupon-code" id="coupon">
-								<option value="0" id="nonSelectedCoupon">쿠폰 선택</option>
+								<option value="0" id="0">쿠폰 선택</option>
 								<c:if test="${! empty couponList}">
 								<c:forEach var="couponList" items="${couponList}">
 								<option value="${couponList.coupon_price}" id="${couponList.coupon_idx}">${couponList.coupon_name} - <fmt:formatNumber value="${couponList.coupon_price}" type="number" />원 할인

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
+import com.itwillbs.domain.OrderDetailBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.RecoBean;
 
@@ -178,6 +179,12 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public ProductBean getProductInfoAdmin(int product_idx) {
 		return sqlSession.selectOne(namespace + ".getProductInfoAdmin", product_idx);
+	}
+
+	@Override
+	public void updateStock(OrderDetailBean orderDetailBean) {
+		sqlSession.update(namespace + ".updateStock", orderDetailBean);
+		
 	}
 	
 }

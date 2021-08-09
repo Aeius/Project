@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.itwillbs.domain.CategoryBean;
 import com.itwillbs.domain.ChartBean;
+import com.itwillbs.domain.OrderDetailBean;
 import com.itwillbs.domain.ProductBean;
 import com.itwillbs.domain.RecoBean;
 
@@ -62,5 +63,7 @@ public interface ProductService {
 	public ArrayList<ProductBean> getProductAllListAdmin();
 
 	public ProductBean getProductInfoAdmin(int product_idx); // 판매상태 상관없이 제품 정보 가져옴
+
+	public void updateStock(OrderDetailBean orderDetailBean);
 
 }
