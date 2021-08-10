@@ -226,6 +226,8 @@ public class ReviewController {
 	public String ReviewList(HttpSession session, Model model, HttpServletRequest request){
 		//PageBean 객체생성
 		PageBean pb=new PageBean();
+		String member_email = session.getAttribute("member_email") + "";
+		pb.setMember_email(member_email);
 //		pageNum pageSize 조합해서 시작하는 행번호 구하기
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null) {

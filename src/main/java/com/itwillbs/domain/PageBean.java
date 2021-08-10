@@ -15,7 +15,15 @@ public class PageBean {
 	private String search;
 	
 	private String Order_member_email;
+	private String member_email;
 	
+	
+	public String getMember_email() {
+		return member_email;
+	}
+	public void setMember_email(String member_email) {
+		this.member_email = member_email;
+	}
 	public String getOrder_member_email() {
 		return Order_member_email;
 	}

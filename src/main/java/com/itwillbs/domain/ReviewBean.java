@@ -24,6 +24,16 @@ public class ReviewBean {
 	private int product_idx;
 	private int review_order_idx;
 	
+	private String member_email;
+	
+	
+	
+	public String getMember_email() {
+		return member_email;
+	}
+	public void setMember_email(String member_email) {
+		this.member_email = member_email;
+	}
 	public int getReview_order_idx() {
 		return review_order_idx;
 	}

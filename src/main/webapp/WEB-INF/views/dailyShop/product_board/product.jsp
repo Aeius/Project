@@ -514,6 +514,16 @@
                         </li>
                         </c:forEach>
                         <!------------------------------------  사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
+                        <li>
+                          <figure>
+	                          <a class="aa-product-img" style="background-color: white;"><img src="<c:url value='/resources/img/공백.bmp' />" width="250" height="300" alt="polo shirt img"></a>
+                              <figcaption>
+                               <h4 class="aa-product-title"><a></a></h4>
+                              <span class="aa-product-price"></span><span class="aa-product-price"><del></del></span>
+                            </figcaption>
+                          </figure>                        
+                        </li>
+                       <li>
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                      </div>   
@@ -562,6 +572,7 @@
                         </li>
                         </c:forEach>
                         <!------------------------------------  사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
+                        
                         <!------------------------------------ 사진이 짤리는 현상 막기 위한 공백 ---------------------------------- -->
                       </ul>
                      </div>                  

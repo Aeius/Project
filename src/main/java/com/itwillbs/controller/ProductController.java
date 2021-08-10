@@ -161,6 +161,44 @@ public class ProductController {
 		wishListBean.setWishList_member_email((String)session.getAttribute("member_email"));
 		WishListBean wl = wishListService.checkWishList(wishListBean);
 		
+		
+		PageBean pb=new PageBean();
+//		pageNum pageSize 조합해서 시작하는 행번호 구하기
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			// pageNum 없으면 1페이지
+			pageNum="1";
+		}
+		pb.setPageNum(pageNum);
+		
+		//한화면에 보여줄 글개수
+		int pageSize=10;
+		pb.setPageSize(pageSize);
+		
+		// 게시판 글 가져오기 (시작하는 행번호에서 몇개 )
+		
+		// 전체 글개수 구하기 (PageBean에 저장시 페이지 관련 정보 계산)
+		pb.setCount(reviewService.getReviewListCount());
+
+//		String review_email = (String)session.getAttribute("member_email");
+//		System.out.println(review_email);
+		// member 정보 전체를 조회
+//		ArrayList<ReviewBean> reviewList = reviewService.getReviewList(review_email);
+		
+	
+		
+		// 평점 별 개수 map에 저장해서 가져가는 부분
+		Map ratingOptions = new HashMap();
+		ratingOptions.put(0, "☆☆☆☆☆");
+		ratingOptions.put(1, "★☆☆☆☆");
+		ratingOptions.put(2, "★★☆☆☆");
+		ratingOptions.put(3, "★★★☆☆");
+		ratingOptions.put(4, "★★★★☆");
+		ratingOptions.put(5, "★★★★★");
+		
+		//Model 데이터 담아 가기
+		// 평점 별모양 정보 가져가기
+		model.addAttribute("ratingOptions", ratingOptions);
 		ArrayList<ReviewBean> reviewList = reviewService.getProductReview(Integer.parseInt(request.getParameter("product_idx")));
 		model.addAttribute("reviewList", reviewList);
 		

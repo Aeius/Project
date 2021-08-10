@@ -294,9 +294,25 @@
                             <a href="#">
                             
                             <!-- 리뷰 이미지 300px, 300px -->
+                            <c:set var="review_image" value="${reviewList.review_image }"></c:set>
+		                    <c:if test="${not empty review_image}">
 		                      <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image }" />'>
+		                    </c:if>
+		                    
+		                    <c:set var="review_image" value="${reviewList.review_image }"></c:set>
+		                    <c:if test="${empty review_image}">
+		                      <img class="media-object" src='<c:url value="/resources/img/no_image.jpg" />'>
+		                    </c:if>
+		                    
+                              <c:set var="review_image2" value="${reviewList.review_image2 }"></c:set>
+		                    <c:if test="${not empty review_image2}">
                               <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image2 }" />'>
+                             </c:if>
                              
+                             <c:set var="review_image2" value="${reviewList.review_image2 }"></c:set>
+		                    <c:if test="${empty review_image2}">
+		                      <img class="media-object" src='<c:url value="/resources/img/no_image.jpg" />'>
+		                    </c:if>
                             </a>
                           </div>
                          
@@ -350,9 +366,6 @@
 							
                             <p><textarea rows="10px" cols="55px" name="review_content" readonly="readonly">${reviewList.review_content}</textarea></p>
                         	
-                          
-                           
-                        
                           </div>
                           
                         </div>
