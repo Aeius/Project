@@ -191,7 +191,7 @@ public class PayController {
 			orderDetailBean.setOrder_detail_order_idx(order_idx);
 			orderDetailBean.setOrder_detail_product_idx(Integer.parseInt(products[i]));
 			orderDetailBean.setOrder_detail_product_quantity(Integer.parseInt(quantitys[i]));
-			orderDetailBean.setOrder_detail_return_check(" ");
+			orderDetailBean.setOrder_detail_return_check("");
 			System.out.println("product_idx : " + orderDetailBean.getOrder_detail_product_idx());
 			System.out.println("quantity : " + orderDetailBean.getOrder_detail_product_quantity());
 			
