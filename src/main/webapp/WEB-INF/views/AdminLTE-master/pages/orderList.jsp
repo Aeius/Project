@@ -86,7 +86,8 @@
     <script type="text/javascript">
       $(function () {
         $("#example1").dataTable({
-        	"bSort": false
+//         	"bSort": false
+			"aaSorting" : [[2,'desc'],[0,'desc']], // 페이지 클릭시 초기 정렬 지정
         });
         $('#example2').dataTable({
           "bPaginate": true,

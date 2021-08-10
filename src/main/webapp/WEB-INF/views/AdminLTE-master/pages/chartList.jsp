@@ -48,8 +48,8 @@
                       <tr>
                       	<th>상품번호</th>
                         <th>상품명</th>
-                        <th>판매수량</th>
-                        <th>판매액</th>
+                        <th>판매수량(개)</th>
+                        <th>판매액(원)</th>
                       </tr>
                     </thead>
                     <!-- 상품 목록 나열 -->
@@ -59,8 +59,8 @@
                       	<td>${list.product_idx }</td>
                         <td><img src='<c:url value="/resources/upload/${list.product_main_image }"/>' width="30px" >&nbsp;&nbsp;
               				${list.product_name }</td>
-                        <td>${list.product_sellcount }개</td>
-                        <td><fmt:formatNumber value="${list.product_sellcount * list.product_price}" pattern="#,###,###,###,###"/>원</td>
+                        <td>${list.product_sellcount }</td>
+                        <td><fmt:formatNumber value="${list.product_sellcount * list.product_price}" pattern="#,###,###,###,###"/></td>
                       </tr>
                     </c:forEach>
                     </tbody>
@@ -79,7 +79,13 @@
     <!-- page script -->
     <script type="text/javascript">
       $(function () {
-        $("#example1").dataTable();
+        $("#example1").dataTable({
+        	"aaSorting" : [[2,'desc'],[3,'desc']], // 페이지 클릭시 초기 정렬 지정
+        	"aoColumnDefs": [
+       	      { "asSorting": [ "desc", "asc" ], "aTargets": [ 2 ] }, // 정렬 순서 내림차순 -> 오름차순
+       	      { "asSorting": [ "desc", "asc" ], "aTargets": [ 3 ] }
+       	    ]
+        });
         $('#example2').dataTable({
           "bPaginate": true,
           "bLengthChange": false,

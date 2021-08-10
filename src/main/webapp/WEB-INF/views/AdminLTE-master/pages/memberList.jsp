@@ -23,7 +23,7 @@
         <section class="content-header">
           <h1>회원 목록</h1>
         </section>
-1        
+        
 
         <!-- Main content -->
         <section class="content">
@@ -41,11 +41,11 @@
                         <th>연락처</th>
                         <th>우편번호</th>
                         <th>주소</th>
-                        <th>상세주소1</th>
-                        <th>싱세주소2</th>
+<!--                         <th>상세주소1</th> -->
+<!--                         <th>상세주소2</th> -->
                         <th>가입날짜</th>
-                        <th>쿠폰</th>
-                        <th>좋아요</th>
+                        <th width="5%">쿠폰</th>
+                        <th width="6%">좋아요</th>
                         <th>구독자</th>
                         <th>포인트</th>
                       </tr>
@@ -58,9 +58,10 @@
 			    	      <td>${memberBean.member_name }</td>
 			              <td>${memberBean.member_phone }</td>
 			              <td>${memberBean.member_post }</td>
-			              <td>${memberBean.member_address }</td>
-			              <td>${memberBeanb.member_extraAddress }</td>
-			              <td>${memberBean.member_extraAddress2 }</td>
+			              <!-- 주소 + 상세주소1 + 상세주소2 합침 -->
+			              <td>${memberBean.member_address }<br>
+			              ${memberBeanb.member_extraAddress } 
+			              ${memberBean.member_extraAddress2 }</td>
 			              <td>${memberBean.member_date }</td>
 			              <td>${memberBean.member_coupon }</td>
 			              <td>${memberBean.member_like }</td>
@@ -82,7 +83,9 @@
     <!-- page script -->
     <script type="text/javascript">
       $(function () {
-        $("#example1").dataTable();
+        $("#example1").dataTable({
+        	"aaSorting" : [[0,'desc']]
+        });
         $('#example2').dataTable({
           "bPaginate": true,
           "bLengthChange": false,

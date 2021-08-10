@@ -50,16 +50,16 @@
               <h3 class="box-title">결제 정보</h3>
             </div>
             <div class="box-body">
-              사용한 쿠폰 : ${couponBean.coupon_name } - ${couponBean.coupon_price }원 할인
+              <b>사용한 쿠폰</b> : ${couponBean.coupon_name } - ${couponBean.coupon_price }원 할인
             </div>
             <div class="box-body">
-              사용한 포인트 : ${orderBean.order_point }
+              <b>사용한 포인트</b> : ${orderBean.order_point }
             </div>
             <div class="box-body">
-              총 결제 금액 : ${orderBean.order_amount }
+              <b>총 결제 금액</b> : ${orderBean.order_amount }
             </div>
             <div class="box-body">
-              결제 수단 : ${orderBean.order_payment }
+              <b>결제 수단</b> : ${orderBean.order_payment }
             </div><!-- /.box-body -->
           </div><!-- /.box -->
           
@@ -68,7 +68,7 @@
               <h3 class="box-title">주문자 정보</h3>
             </div>
             <div class="box-body">
-              아이디 : ${orderBean.order_member_email }
+              <b>아이디</b> : ${orderBean.order_member_email }
             </div>
           </div><!-- /.box -->
           
@@ -77,14 +77,14 @@
               <h3 class="box-title">받는 사람 정보</h3>
             </div>
             <div class="box-body">
-              이름 : ${orderBean.order_receiver_name }
+              <b>이름</b> : ${orderBean.order_receiver_name }
             </div>
             <div class="box-body">
-              연락처 : ${orderBean.order_receiver_phone }
+              <b>연락처</b> : ${orderBean.order_receiver_phone }
             </div>
             <div class="box-body">
-              주소<br>
-              우)${orderBean.order_receiver_post }<br>
+              <b>주소</b><br> 
+              우편번호 ${orderBean.order_receiver_post }<br>
               ${orderBean.order_receiver_address }<br>
               ${orderBean.order_receiver_extraAddress } ${orderBean.order_receiver_extraAddress2 }
             </div><!-- /.box-body -->

@@ -35,10 +35,10 @@
                       <tr>
                         <th>상품번호</th>
                         <th>상품명</th>
-                        <th>용량</th>
-                        <th>가격</th>
-                        <th>재고</th>
-                        <th>좋아요 수</th>
+                        <th>용량(ml)</th>
+                        <th>가격(원)</th>
+                        <th>재고(개)</th>
+                        <th>좋아요(♥)</th>
                         <th>판매상태</th>
                         <th>관리</th>
                       </tr>
@@ -52,10 +52,10 @@
 	                        <!-- 미니 이미지 -->
 	                        <img src='<c:url value="/resources/upload/${list.product_main_image }"/>' width="30px" >&nbsp;&nbsp;
 	                        ${list.product_name }</td>
-	                        <td>${list.product_size }ml</td>
-	                        <td>${list.product_price }원</td>
-	                        <td>${list.product_stock }개</td>
-	                        <td>${list.product_likecount } ♥</td>
+	                        <td>${list.product_size }</td>
+	                        <td>${list.product_price }</td>
+	                        <td>${list.product_stock }</td>
+	                        <td>${list.product_likecount }</td>
 	                        <td>
 		                        <c:choose>
 		                        	<c:when test="${list.product_status eq true }">판매중</c:when>
@@ -90,7 +90,20 @@
     <!-- page script -->
     <script type="text/javascript">
       $(function () {
-        $("#example1").dataTable();
+        $("#example1").dataTable({
+        	"aaSorting" : [[0,'desc']],
+        	// 정렬 순서 지정 -> 테이블 열 순서
+        	"aoColumns": [   // 내림차순, 오름차순 순서로 정렬됨
+       		  { "asSorting": [ "desc", "asc" ] }, // 0열
+       	      { "asSorting": [ "desc", "asc" ] }, // 1열
+       	   	  { "asSorting": [ "desc", "asc" ] }, // 2열
+       	   	  { "asSorting": [ "desc", "asc" ] },
+       	      { "asSorting": [ "desc", "asc" ] },
+      	 	  { "asSorting": [ "desc", "asc" ] },
+      	      { "asSorting": [ "asc", "desc" ] },
+    	      null
+       	    ]
+        });
         $('#example2').dataTable({
           "bPaginate": true,
           "bLengthChange": false,

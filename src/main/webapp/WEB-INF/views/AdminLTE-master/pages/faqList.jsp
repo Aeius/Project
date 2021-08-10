@@ -74,7 +74,9 @@
     <!-- page script -->
     <script type="text/javascript">
       $(function () {
-        $("#example1").dataTable();
+        $("#example1").dataTable({
+        	"aaSorting" : [[0,'desc']]
+        });
         $('#example2').dataTable({
           "bPaginate": true,
           "bLengthChange": false,
