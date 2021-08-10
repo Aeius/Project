@@ -63,7 +63,10 @@
 					<%-- admin 으로 로그인 시 admin page 보임 --%>
 					
 					 <c:choose>
-					<c:when test="${sessionScope.member_email eq 'admin' }">
+					<c:when test="${sessionScope.member_email eq 'admin' 
+									|| sessionScope.member_email eq 'admin2'
+									|| sessionScope.member_email eq 'admin3'
+									|| sessionScope.member_email eq 'admin4'}">
 						<li><a href='<c:url value="/chart.ad" />'>Admin Page</a></li>
 						 <li class="hidden-xs"><a href="<c:url value='/logout.sh'/>">Logout</a></li>
 						 

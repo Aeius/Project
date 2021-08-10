@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -70,7 +71,7 @@ public class AdminController {
 	// ------------------ 상품등록 ---------------------
 	@RequestMapping(value = "/productAdd.ad", method = RequestMethod.GET)
 	public String productAdd(HttpSession session) {
-
+	
 		// -------------- 임시 어드민 확인 adminCheck() 4줄
 		String result = adminCheck(session); // 1번째
 		if (result.equals("admin")) { // 2번째
@@ -792,14 +793,17 @@ public class AdminController {
 		if (session.getAttribute("member_email") == null) {
 			// 세션 객체가 null 일 경우 로그인 페이지 이동 경로 문자열 리턴
 			return "redirect:/login.ad";
-		} else if (!session.getAttribute("member_email").equals("admin")) {
-			// 세션 객차가 admin 이 아닐 떄 오류메세지 출력페이지로 이동(pages/msg) 후
+		} else if (session.getAttribute("member_email").equals("admin")
+				|| session.getAttribute("member_email").equals("admin2")
+				|| session.getAttribute("member_email").equals("admin3")
+				|| session.getAttribute("member_email").equals("admin4")) {
 			// "잘못된 접근입니다." 출력 및 메인페이지로 이동
-			return "/AdminLTE-master/pages/msg";
+			// 세션 객차가 admin 이 아닐 떄 오류메세지 출력페이지로 이동(pages/msg) 후
+			return "admin";
 		} else {
 			// else 남은 것 - 세션객체가 admin 일 때 임의의 "admin" 값을 리턴
 			// 메서드 호출한 곳에서 임의의 문자열 "admin"을 판별하여 원래 수행작업을 수행함
-			return "admin";
+			return "/AdminLTE-master/pages/msg";
 		}
 	}
 
