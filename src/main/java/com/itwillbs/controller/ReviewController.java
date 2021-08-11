@@ -226,7 +226,7 @@ public class ReviewController {
 	public String ReviewList(HttpSession session, Model model, HttpServletRequest request){
 		//PageBean 객체생성
 		PageBean pb=new PageBean();
-		String member_email = session.getAttribute("member_email") + "";
+		String member_email = (String) session.getAttribute("member_email");
 		pb.setMember_email(member_email);
 //		pageNum pageSize 조합해서 시작하는 행번호 구하기
 		String pageNum=request.getParameter("pageNum");
@@ -244,8 +244,8 @@ public class ReviewController {
 		ArrayList<ReviewBean> reviewList = reviewService.getReviewListPage(pb);
 		
 		// 전체 글개수 구하기 (PageBean에 저장시 페이지 관련 정보 계산)
-		pb.setCount(reviewService.getReviewListCount());
-
+		pb.setCount(reviewService.getReviewListCount(member_email));
+		
 //		String review_email = (String)session.getAttribute("member_email");
 //		System.out.println(review_email);
 		// member 정보 전체를 조회
@@ -271,6 +271,8 @@ public class ReviewController {
 		
 		return "/dailyShop/member/myReview";
 	}
+	
+	
 
 }
 

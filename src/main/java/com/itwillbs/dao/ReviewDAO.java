@@ -23,7 +23,7 @@ public interface ReviewDAO {
 
 	public ArrayList<ReviewBean> getReviewListPage(PageBean pb);
 
-	public Integer getReviewListCount();
+	public Integer getReviewListCount(String member_email);
 
 	ArrayList<ReviewBean> getProductReview(int product_idx);
 

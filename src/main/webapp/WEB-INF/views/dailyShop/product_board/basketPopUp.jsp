@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PERFUMESHIP</title>
    <!-- Font awesome -->
     <link href="<c:url value='/resources/member/css/font-awesome.css'/>" rel="stylesheet">
     <!-- Bootstrap -->

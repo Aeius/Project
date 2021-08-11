@@ -160,7 +160,7 @@ public class ProductController {
 		wishListBean.setProduct_idx(product_idx);
 		wishListBean.setWishList_member_email((String)session.getAttribute("member_email"));
 		WishListBean wl = wishListService.checkWishList(wishListBean);
-		
+		String member_email = (String) session.getAttribute("member_email");
 		
 		PageBean pb=new PageBean();
 //		pageNum pageSize 조합해서 시작하는 행번호 구하기
@@ -178,7 +178,7 @@ public class ProductController {
 		// 게시판 글 가져오기 (시작하는 행번호에서 몇개 )
 		
 		// 전체 글개수 구하기 (PageBean에 저장시 페이지 관련 정보 계산)
-		pb.setCount(reviewService.getReviewListCount());
+		pb.setCount(reviewService.getReviewListCount(member_email));
 
 //		String review_email = (String)session.getAttribute("member_email");
 //		System.out.println(review_email);
@@ -206,7 +206,7 @@ public class ProductController {
 		model.addAttribute("productBean", productBean);
 		// 좋아요 여부 확인
 		model.addAttribute("wl", wl);
-		
+//		model.addAttribute("pb",pb);
 		
 		return "/dailyShop/product_board/product-detail";
 		

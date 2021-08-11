@@ -67,7 +67,7 @@
     </select>
 
 	<select id="getReviewListCount" resultType="java.lang.Integer">
-  	select count(*) from review
+  	select count(*) from review where review_email = #{member_email}
   	</select>
   
  	 <update id="updateReview">

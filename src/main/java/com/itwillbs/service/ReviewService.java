@@ -19,7 +19,7 @@ public interface ReviewService {
 
 	public ArrayList<ReviewBean> getReviewListPage(PageBean pb);
 
-	public Integer getReviewListCount();
+	public Integer getReviewListCount(String member_email);
 
 	ArrayList<ReviewBean> getProductReview(int product_idx);
 

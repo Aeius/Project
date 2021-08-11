@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PERFUMESHIP</title>
 
 <script type="text/javascript">
 		alert('리뷰수정완료');

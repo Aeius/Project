@@ -74,9 +74,9 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public Integer getReviewListCount() {
+	public Integer getReviewListCount(String member_email) {
 		System.out.println("ReviewServiceImpl-getReviewListCount");
-		return reviewDAO.getReviewListCount();
+		return reviewDAO.getReviewListCount(member_email);
 	}
 
 

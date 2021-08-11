@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Daily Shop | Home</title>
+    <title>PERFUMESHIP</title>
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,9 +91,9 @@
 		                      <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image }" />'>
 		                    </c:if>
 		                    
-		                    <c:set var="review_image" value="${reviewList.review_image }"></c:set>
+		                     <c:set var="review_image" value="${reviewList.review_image }"></c:set>
 		                    <c:if test="${empty review_image}">
-		                      <img class="media-object" src='<c:url value="/resources/img/no_image.jpg" />'>
+		                     	<img class="media-object" src='<c:url value="/resources/img/no_image.jpg" />'>
 		                    </c:if>
 		                    
                               <c:set var="review_image2" value="${reviewList.review_image2 }"></c:set>
@@ -101,10 +101,10 @@
                               <img class="media-object" src='<c:url value="/resources/upload/${reviewList.review_image2 }" />'>
                              </c:if>
                              
-                             <c:set var="review_image2" value="${reviewList.review_image2 }"></c:set>
+                              <c:set var="review_image2" value="${reviewList.review_image2 }"></c:set>
 		                    <c:if test="${empty review_image2}">
-		                      <img class="media-object" src='<c:url value="/resources/img/no_image.jpg" />'>
-		                    </c:if>
+                              <img class="media-object" src='<c:url value="/resources/img/no_image.jpg" />'>
+                             </c:if>
                             </a>
                           </div>
                          

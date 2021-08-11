@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PERFUMESHIP</title>
 </head>
 <body>
  <footer id="aa-footer">

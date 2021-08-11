@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PERFUMESHIP</title>
 </head>
 <body>
         <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">

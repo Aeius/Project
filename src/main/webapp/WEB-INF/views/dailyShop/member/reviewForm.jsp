@@ -122,7 +122,7 @@
                 	
                 	 <!-- 다중 파일 업로드시 multiple="multiple" 추가 / name="file" 이어야함 accept : 확장자명 지정 -->
                     <input multiple="multiple" type="file" class="form-control" id="review_image" name="review_image" value="파일 등록" accept=".jpg,.jpeg,.png,.gif">
-                    
+                    <p style="color: red">이미지 파일만 가능하며 2개이상 다중으로 선택 등록가능 합니다.</p>
                     
                     <button type="submit" id="review_insertBtn" class="aa-browse-btn">리뷰등록</button>
                             

@@ -133,7 +133,7 @@ public class MemberServiceImpl implements MemberService {
 	      		+ "<p align=\"center\" style=\"text-align: center; \"><span style=\"font-family: dotum, sans-serif;\">변경하여 주시기 바랍니다.</span>"
 	      		+ "</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p>"
 	      		+ "<p align=\"center\" style=\"text-align: center; \"><span style=\"font-family: dotum, sans-serif;\">"
-	      		+ "<b><a href=\"http://localhost:8080/myweb2/login.sh\" target=\"_blank\" style=\"cursor: pointer; white-space: pre;\" rel=\"noreferrer noopener\">"
+	      		+ "<b><a href=\"http://192.168.3.249:8080/myweb2/login.sh\" target=\"_blank\" style=\"cursor: pointer; white-space: pre;\" rel=\"noreferrer noopener\">"
 	      		+ "로그인 하러 가기</a><span></span></b></span></p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">&nbsp;</p>"
 	      		+ "<p align=\"center\" style=\"text-align: center; \">&nbsp;</p><p align=\"center\" style=\"text-align: center; \">"
 	      		+ "<span style=\"font-family: dotum, sans-serif;\">※비밀번호 찾기 신청을&nbsp;</span><span style=\"font-size: 10pt; font-family: dotum, sans-serif;\">하시지 않았다면</span></p>"
@@ -311,7 +311,7 @@ public class MemberServiceImpl implements MemberService {
             + "<span style=\"font-size: 12pt; font-family: arial, sans-serif;\"><span style=\"background-color: rgb(255, 255, 255); font-size: 12pt; color: rgb(0, 0, 0); font-family: arial, sans-serif;\"><br></span>"
             + "</span></p></div><div align=\"center\" style=\"text-align: center;\"><img src=\"https://image.flaticon.com/icons/png/512/1169/1169905.png\" alt=\"Coupons free icon\" style=\"width=\" height=\"240\"><br></div>"
             + "<div align=\"center\" style=\"text-align: center;\"><br></div><div align=\"center\" style=\"text-align: center;\">"
-            + "<form action=\"http://localhost:8080/myweb2/main.sh\" method=\"get\"><input type=\"submit\" value=\"쿠폰 등록하러가기\" style=\"border:1px solid #f4f4f4; padding: 7px 15px; border-radius:8px; background-color: rgb(81, 143, 187);color:white; cursor: pointer;\"></form></div>"; // 내용
+            + "<form action=\"http://192.168.3.249:8080/myweb2/main.sh\" method=\"get\"><input type=\"submit\" value=\"쿠폰 등록하러가기\" style=\"border:1px solid #f4f4f4; padding: 7px 15px; border-radius:8px; background-color: rgb(81, 143, 187);color:white; cursor: pointer;\"></form></div>"; // 내용
 
       try {
          MimeMessage message = mailSender.createMimeMessage();
