@@ -306,7 +306,7 @@ public class MemberServiceImpl implements MemberService {
             + "<p align=\"center\" style=\"font-family: 돋움, Dotum, Helvetica, Apple SD Gothic Neo, sans-serif; font-size: 12px;\"><span style=\"font-size: 10pt; font-family: arial, sans-serif;\">회원가입이 성공적으로 완료되었습니다.</span></p>"
             + "<p align=\"center\" style=\"font-family: 돋움, Dotum, Helvetica, Apple SD Gothic Neo, sans-serif; font-size: 12px;\"><span style=\"font-size: 10pt; font-family: arial, sans-serif;\">지금 바로 신규 회원 쿠폰을 등록해보세요!</span></p>"
             + "<p align=\"center\" style=\"font-family: 돋움, Dotum, Helvetica, Apple SD Gothic Neo, sans-serif; font-size: 12px;\"><span style=\"font-size: 12pt; font-family: arial, sans-serif;\">"
-            + "코드 번호 : <span style=\"background-color: rgb(255, 255, 255); font-size: 12pt; color: rgb(0, 0, 0); font-family: arial, sans-serif;\"><u>WELCOME2021</u></span></span></p>"
+            + "코드 번호 : <span style=\"background-color: rgb(255, 255, 255); font-size: 12pt; color: rgb(0, 0, 0); font-family: arial, sans-serif;\"><u>WELCOME123</u></span></span></p>"
             + "<p align=\"center\" style=\"font-family: 돋움, Dotum, Helvetica, Apple SD Gothic Neo, sans-serif; font-size: 12px;\">"
             + "<span style=\"font-size: 12pt; font-family: arial, sans-serif;\"><span style=\"background-color: rgb(255, 255, 255); font-size: 12pt; color: rgb(0, 0, 0); font-family: arial, sans-serif;\"><br></span>"
             + "</span></p></div><div align=\"center\" style=\"text-align: center;\"><img src=\"https://image.flaticon.com/icons/png/512/1169/1169905.png\" alt=\"Coupons free icon\" style=\"width=\" height=\"240\"><br></div>"

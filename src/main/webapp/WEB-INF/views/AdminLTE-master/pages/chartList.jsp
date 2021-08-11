@@ -14,9 +14,9 @@
   	<c:when test="${empty sessionScope }">
   		<c:redirect url="/login.ad"></c:redirect>
   	</c:when>
-  	<c:when test="${ sessionScope.member_email ne 'admin'  }">
-  		<c:redirect url="/main.sh"></c:redirect>
-  	</c:when>
+<%--   	<c:when test="${ sessionScope.member_email ne 'admin'  }"> --%>
+<%--   		<c:redirect url="/main.sh"></c:redirect> --%>
+<%--   	</c:when> --%>
   </c:choose>
   
     <!-- Site wrapper -->
