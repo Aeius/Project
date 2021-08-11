@@ -32,9 +32,24 @@
                     </div>
                     <!-- textarea -->
                      <div class="form-group">
-                      <label>리뷰 사진</label>
-                      <textarea class="form-control" rows="15" name="review_image" id="review_image" readonly="readonly">${review.review_image}</textarea>
-                    </div>
+                      <label>리뷰 사진</label><br>
+                      <div>
+                      	<table>
+                      		<tr>
+                      			<td>
+	                      <c:if test="${not empty review.review_image }">
+		                      <img src='<c:url value="/resources/upload/${review.review_image }"/>' height="200px" >
+	                      </c:if>
+                      			</td>
+                      			<td>
+	                      <c:if test="${not empty review.review_image2 }">
+		                      <img src='<c:url value="/resources/upload/${review.review_image2 }"/>'  height="200px">
+	                      </c:if>
+                      			</td>
+                      		</tr>
+                      	</table>
+                      </div>
+                     </div>
                     <div class="form-group">
                       <label>리뷰 내용</label>
                       <textarea class="form-control" rows="15" name="review_content" id="review_content" readonly="readonly">${review.review_content}</textarea>
