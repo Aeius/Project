@@ -74,9 +74,27 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public Integer getReviewListCount() {
+	public Integer getReviewListCount(String member_email) {
 		System.out.println("ReviewServiceImpl-getReviewListCount");
-		return reviewDAO.getReviewListCount();
+		return reviewDAO.getReviewListCount(member_email);
+	}
+
+	@Override
+	public ArrayList<ReviewBean> getProductReviewListPage(PageBean pb) {
+		// 페이지 관련 처리 pageNum, pageSize 담아옴
+		// currentPage startRow-1 endRow 계산
+		pb.setCurrentPage(Integer.parseInt(pb.getPageNum()));
+		pb.setStartRow((pb.getCurrentPage()-1)*pb.getPageSize()+1-1);
+//		pb.setEndPage(((pb.getCurrentPage()-1)*pb.getPageSize()+1)+pb.getPageSize()-1);
+		
+		System.out.println("ReviewServiceImpl-getProductReviewListPage");
+		return reviewDAO.getProductReviewListPage(pb);
+	}
+
+	@Override
+	public Integer getProductReviewCount(int product_idx) {
+		System.out.println("ReviewServiceImpl-getProductReviewCount");
+		return reviewDAO.getProductReviewCount(product_idx);
 	}
 
 

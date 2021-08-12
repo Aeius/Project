@@ -161,8 +161,10 @@ public class ProductController {
 		wishListBean.setWishList_member_email((String)session.getAttribute("member_email"));
 		WishListBean wl = wishListService.checkWishList(wishListBean);
 		
-		
+		// 리뷰 리스트 출력 및 페이징 처리
+//		String member_email = (String) session.getAttribute("member_email");
 		PageBean pb=new PageBean();
+		pb.setProduct_idx(product_idx);
 //		pageNum pageSize 조합해서 시작하는 행번호 구하기
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null) {
@@ -178,7 +180,7 @@ public class ProductController {
 		// 게시판 글 가져오기 (시작하는 행번호에서 몇개 )
 		
 		// 전체 글개수 구하기 (PageBean에 저장시 페이지 관련 정보 계산)
-		pb.setCount(reviewService.getReviewListCount());
+//		pb.setCount(reviewService.getReviewListCount());
 
 //		String review_email = (String)session.getAttribute("member_email");
 //		System.out.println(review_email);
@@ -199,14 +201,22 @@ public class ProductController {
 		//Model 데이터 담아 가기
 		// 평점 별모양 정보 가져가기
 		model.addAttribute("ratingOptions", ratingOptions);
-		ArrayList<ReviewBean> reviewList = reviewService.getProductReview(Integer.parseInt(request.getParameter("product_idx")));
+//		ArrayList<ReviewBean> reviewList = reviewService.getProductReview(Integer.parseInt(request.getParameter("product_idx")));
+		
+		// 상품리스트 리뷰 페이징 처리
+		ArrayList<ReviewBean> reviewList = reviewService.getProductReviewListPage(pb);
+		
+		// 상품리스트 리뷰 개수 확인
+		pb.setCount(reviewService.getProductReviewCount(product_idx));
+		
 		model.addAttribute("reviewList", reviewList);
 		
 		// 상품정보를 담아 전달
 		model.addAttribute("productBean", productBean);
 		// 좋아요 여부 확인
 		model.addAttribute("wl", wl);
-		
+		model.addAttribute("pb", pb);
+		model.addAttribute("product_idx", product_idx);
 		
 		return "/dailyShop/product_board/product-detail";
 		

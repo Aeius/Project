@@ -16,8 +16,15 @@ public class PageBean {
 	
 	private String Order_member_email;
 	private String member_email;
+	private int Product_idx;
 	
 	
+	public int getProduct_idx() {
+		return Product_idx;
+	}
+	public void setProduct_idx(int product_idx) {
+		Product_idx = product_idx;
+	}
 	public String getMember_email() {
 		return member_email;
 	}

@@ -62,12 +62,20 @@
 		SELECT * FROM review WHERE review_product_idx = #{product_idx}
 	</select>
 	
+	<select id="getProductReviewListPage" resultType="com.itwillbs.domain.ReviewBean" >
+		SELECT * FROM review WHERE review_product_idx = #{product_idx} order by review_idx desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getProductReviewCount" resultType="java.lang.Integer" >
+		SELECT count(*) review_product_idx FROM review WHERE review_product_idx = #{product_idx}
+	</select>
+	
     <select id="getReviewListPage" resultType="com.itwillbs.domain.ReviewBean">
   	select * from review where review_email = #{member_email} order by review_idx desc limit #{startRow},#{pageSize}
     </select>
 
 	<select id="getReviewListCount" resultType="java.lang.Integer">
-  	select count(*) from review
+  	select count(*) from review where review_email = #{member_email}
   	</select>
   
  	 <update id="updateReview">

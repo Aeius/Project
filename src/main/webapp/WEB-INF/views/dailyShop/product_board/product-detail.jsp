@@ -379,7 +379,7 @@
                         <ul class="pagination">
                           <li>
                           <c:if test="${pb.startPage > pb.pageBlock }">
-                            <a href='<c:url value="/reviewList.sh?pageNum=${pb.startPage-pb.pageBlock }" />' aria-label="Previous">
+                            <a href='<c:url value="/productDetail.sh?product_idx=${product_idx }&pageNum=${pb.startPage-pb.pageBlock }" />' aria-label="Previous">
                               <span aria-hidden="true">«</span>
                             </a>
                             </c:if>
@@ -387,12 +387,12 @@
                           </li>
                           
                           <c:forEach var="i" begin="${pb.startPage }" end="${pb.endPage }" step="1">
-                          	<li><a href='<c:url value="/reviewList.sh?pageNum=${i }" />'>${i }</a></li>
+                          	<li><a href='<c:url value="/productDetail.sh?product_idx=${product_idx }&pageNum=${i }" />'>${i }</a></li>
     					  </c:forEach>
 					
                           <li>
                           <c:if test="${pb.endPage < pb.pageCount }">
-                           <a href='<c:url value="/reviewList.sh?pageNum=${pb.startPage+pb.pageBlock }" />' aria-label="Next">
+                           <a href='<c:url value="/productDetail.sh?product_idx=${product_idx }&pageNum=${pb.startPage+pb.pageBlock }" />' aria-label="Next">
                               <span aria-hidden="true">»</span>
                             </a>
                           </c:if>

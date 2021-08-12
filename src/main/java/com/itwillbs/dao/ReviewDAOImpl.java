@@ -68,9 +68,21 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public Integer getReviewListCount() {
+	public Integer getReviewListCount(String member_email) {
 		System.out.println("ReviewDAOImpl-getReviewListCount");
-		return sqlSession.selectOne(namespace+".getReviewListCount");
+		return sqlSession.selectOne(namespace+".getReviewListCount",member_email);
+	}
+
+	@Override
+	public ArrayList<ReviewBean> getProductReviewListPage(PageBean pb) {
+		System.out.println("ReviewDAOImpl-getProductReviewListPage");
+		return (ArrayList) sqlSession.selectList(namespace + ".getProductReviewListPage", pb);
+	}
+
+	@Override
+	public Integer getProductReviewCount(int product_idx) {
+		System.out.println("ReviewDAOImpl-getProductReviewCount");
+		return sqlSession.selectOne(namespace+".getProductReviewCount",product_idx);
 	}
 	
 }
